@@ -4,7 +4,6 @@ import { GameCoroutine } from "../library/coroutine_manager";
 import { Entity } from "../library/entity";
 import { IGameState } from "Library";
 import { Mode } from "Library";
-import { C } from "./constants";
 
 export type DialogText = {
   speaker: string;

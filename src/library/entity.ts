@@ -48,7 +48,7 @@ export class Entity {
    */
   public sprite     : AugmentedSprite;
 
-  public hitInfo    : HitInfo = { hit: false };
+  public hitInfo    : HitInfo = { hit: false, collisions: [] };
 
   protected _collidable: boolean;
 
@@ -110,23 +110,10 @@ export class Entity {
   /**
    * Used for collision detection.
    */
-  public bounds(): RectGroup {
-    return new RectGroup([
-      new Rect({
-        x     : this.x,
-        y     : this.y,
-        width : this.width,
-        height: this.height
-      })
-    ]);
-  }
-
-  public boundsAbsolute(): Rect {
-    const position = this.positionAbsolute();
-
+  public collisionBounds(): Rect | RectGroup {
     return new Rect({
-      x     : position.x,
-      y     : position.y,
+      x     : 0,
+      y     : 0,
       width : this.width,
       height: this.height
     })
@@ -173,7 +160,13 @@ export class Entity {
   }
 
   dimensions(): Vector2 {
-    return new Vector2(this.width, this.height);
+    const bounds = this.collisionBounds();
+
+    if (bounds instanceof Rect) {
+      return new Vector2(bounds.x, bounds.y);
+    } else {
+      throw new Error("oh no grant doesnt handle this case!!!");
+    }
   }
 
   // Sprite wrapper stuff

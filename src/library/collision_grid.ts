@@ -6,7 +6,7 @@ import { DefaultGrid } from "./data_structures/default_grid";
 import { RectGroup } from "./geometry/rect_group";
 import { Line } from "./geometry/line";
 
-type CollisionResultRect = {
+export type CollisionResultRect = {
   firstRect    : Rect;
   secondRect   : Rect;
   firstEntity ?: Entity;
@@ -78,10 +78,10 @@ export class CollisionGrid {
     const cells: Cell[] = [];
 
     const lowX  = Math.floor(rect.x           / this._cellSize);
-    const highX = Math.ceil((rect.x + rect.w) / this._cellSize);
+    const highX = Math.ceil((rect.x + rect.width) / this._cellSize);
 
     const lowY  = Math.floor(rect.y           / this._cellSize);
-    const highY = Math.ceil((rect.y + rect.h) / this._cellSize);
+    const highY = Math.ceil((rect.y + rect.height) / this._cellSize);
 
     for (let x = lowX; x < highX; x++) {
       for (let y = lowY; y < highY; y++) {

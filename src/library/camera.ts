@@ -82,7 +82,7 @@ export class Camera {
       return desiredPosition;
     }
 
-    if (currentBounds.w < this._canvasWidth || currentBounds.h < this._canvasHeight) {
+    if (currentBounds.width < this._canvasWidth || currentBounds.height < this._canvasHeight) {
       throw new Error("There is a region on the map which is too small for the camera.");
     }
 
@@ -92,7 +92,7 @@ export class Camera {
       desiredPosition = desiredPosition.withX(currentBounds.left);
     }
 
-    if (desiredPosition.x + this.bounds().w > currentBounds.right) {
+    if (desiredPosition.x + this.bounds().width > currentBounds.right) {
       desiredPosition = desiredPosition.withX(currentBounds.right - this._canvasWidth);
     }
 
@@ -100,7 +100,7 @@ export class Camera {
       desiredPosition = desiredPosition.withY(currentBounds.top);
     }
 
-    if (desiredPosition.y + this.bounds().h > currentBounds.bottom) {
+    if (desiredPosition.y + this.bounds().height > currentBounds.bottom) {
       desiredPosition = desiredPosition.withY(currentBounds.bottom - this._canvasHeight);
     }
 

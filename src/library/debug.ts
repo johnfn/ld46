@@ -134,12 +134,12 @@ export class Debug {
    * 
    * If that's not what you want, pass persistent = true.
    */
-  public static DrawBounds(entity: Entity | Sprite | Graphics | RectGroup | Container, color = 0xff0000, persistent = false): Graphics[] {
+  public static DrawBounds(entity: Entity | Sprite | Graphics | RectGroup | Container | Rect, color = 0xff0000, persistent = false): Graphics[] {
     if (entity instanceof Entity) {
-      const group = entity.boundsAbsolute();
-
-      return Debug.DrawRect(group, color);
-    } else if (entity instanceof RectGroup) {
+      entity = entity.collisionBounds().add(entity.positionAbsolute());
+    } 
+    
+    if (entity instanceof RectGroup) {
       const results: Graphics[] = [];
 
       for (const rect of entity.getRects()) {

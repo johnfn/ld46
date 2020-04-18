@@ -3,7 +3,6 @@ import { Texture } from "pixi.js";
 import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { GameCoroutine } from "../library/coroutine_manager";
-import { Vector2 } from "../library/geometry/vector2";
 import { C } from "./constants";
 
 let flowers = 0;

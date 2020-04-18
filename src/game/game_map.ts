@@ -7,7 +7,6 @@ import { RectGroup } from "../library/geometry/rect_group";
 import { Assets } from "./assets";
 import { Texture } from "pixi.js";
 import { NormalFlower } from "./normal_flower";
-import { Vector2 } from "../library/geometry/vector2";
 import { C } from "./constants";
 
 export class GameMap extends Entity {
@@ -73,7 +72,7 @@ export class GameMap extends Entity {
     }
   }
 
-  bounds(): RectGroup {
+  collisionBounds(): RectGroup {
     const bounds = new Rect({ x: -1000, y: -1000, width: 5000, height: 5000 });
     const rects = this.artMap._data.getCollidersInRegionForLayer(
       bounds,
