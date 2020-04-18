@@ -5,12 +5,33 @@ import { IGameState } from "Library";
 import { HoverText } from "./hover_text";
 import { Assets } from "./assets";
 import { GameCoroutine } from "../library/coroutine_manager";
+import { Rect } from "../library/geometry/rect";
 
 class Vine extends Entity {
   constructor() {
     super({
-      name: "Vine",
-      texture: Assets.getResource("vine_live")[0]
+      name      : "Vine",
+      texture   : Assets.getResource("vine_live")[0],
+      collidable: true,
+    });
+  }
+
+  *growVine(): GameCoroutine {
+    this.visible = true;
+
+    while (this.height < 2000) {
+      this.height += 10;
+
+      yield "next";
+    }
+  }
+
+  public collisionBounds(): Rect {
+    return new Rect({
+      x     : 0,
+      y     : -this.height,
+      width : this.width,
+      height: this.height,
     });
   }
 }
@@ -21,7 +42,7 @@ export class VineFlower extends Entity {
   hoverText: HoverText;
   interacted = false;
 
-  vine: Entity;
+  vine: Vine;
 
   constructor(tex: Texture) {
     super({
@@ -40,27 +61,15 @@ export class VineFlower extends Entity {
     this.vine.visible = false;
   }
 
-  *growVine(): GameCoroutine {
-    this.vine.visible = true;
-
-    while (this.vine.height < 2000) {
-      this.vine.height += 10;
-
-      yield "next";
-    }
-  }
-
   update(state: IGameState) {
     if (state.player.position.distance(this.position) < this.interactionDistance) {
-      this.scale = C.Scale.multiply(1.2);
       this.hoverText.visible = true;
 
       if (state.keys.justDown.X && !this.interacted) {
         this.interacted = true;
-        this.startCoroutine("growVine", this.growVine());
+        this.startCoroutine("growVine", this.vine.growVine());
       }
     } else {
-      this.scale = C.Scale;
       this.hoverText.visible = false;
     }
   }

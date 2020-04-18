@@ -88,10 +88,7 @@ export class Player extends Entity {
       this.animState = this.jump;
     }
 
-    
-
     this.texture = this.animState[this.frame];
-
     
     Game.Instance.camera.centerOn(this.position);
 

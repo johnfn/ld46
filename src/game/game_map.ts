@@ -88,6 +88,8 @@ export class GameMap extends Entity {
       "Tile Layer 1"
     );
 
+    rects.subtract(this.positionAbsolute());
+
     return rects;
   }
 

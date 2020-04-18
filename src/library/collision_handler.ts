@@ -49,7 +49,7 @@ export class CollisionHandler {
     const collideableEntities = entities.values().filter(x => x.isCollideable());
 
     for (const entity of collideableEntities) {
-      const collisionRect = entity.collisionBounds().add(entity.position);
+      const collisionRect = entity.collisionBounds().add(entity.positionAbsolute());
 
       if (collisionRect.intersects(bounds)) {
         const rectOrRectGroup = collisionRect;
@@ -79,7 +79,7 @@ export class CollisionHandler {
 
       if (entity.velocity.x === 0 && entity.velocity.y === 0) { continue; }
 
-      let updatedBounds = entity.collisionBounds().add(entity.position);
+      let updatedBounds = entity.collisionBounds().add(entity.positionAbsolute());
 
       const xVelocity = new Vector2({ x: entity.velocity.x, y: 0 });
       const yVelocity = new Vector2({ x: 0, y: entity.velocity.y });
