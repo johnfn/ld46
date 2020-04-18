@@ -78,7 +78,7 @@ export class Entity {
   }
 
   startCoroutine(name: string, coroutine: GameCoroutine): CoroutineId {
-    return GameReference.coroutineManager.startCoroutine(name, coroutine);
+    return GameReference.coroutineManager.startCoroutine(name, coroutine, this);
   }
 
   stopCoroutine(id: CoroutineId): void {
