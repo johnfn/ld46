@@ -19,7 +19,6 @@ export class Player extends Entity {
   animState: Texture[]
 
   frame = 0;
-
   facing: "left" | "right" = "right";
 
   constructor() {
@@ -54,7 +53,7 @@ export class Player extends Entity {
     return new Rect({
       x     : 50,
       y     : 50,
-      width : this.width - 100,
+      width : 40,
       height: this.height - 80,
     })
   }
