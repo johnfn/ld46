@@ -292,7 +292,4 @@ export class Cinematics {
 
     state.mode = "Normal"; 
   }
-
-
-
 }
