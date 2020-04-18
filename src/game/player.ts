@@ -6,6 +6,7 @@ import { IGameState } from "Library";
 import { Texture } from "pixi.js";
 import { C } from "./constants";
 import { Rect } from "../library/geometry/rect";
+import { Vine } from "./vine_flower";
 
 export class Player extends Entity {
   speed = 10;
@@ -75,7 +76,25 @@ export class Player extends Entity {
       this.velocity = this.velocity.addX(this.speed);
     }
 
-    this.velocity = this.velocity.addY(1);
+    const touchingVine = this.hitInfo.interactions.find(x => x.otherEntity instanceof Vine);
+
+    if (touchingVine) {
+      // Climb ladder
+
+      this.velocity = this.velocity.withY(0);
+
+      if (state.keys.down.W) {
+        this.velocity = this.velocity.addY(-10);
+      }
+
+      if (state.keys.down.S) {
+        this.velocity = this.velocity.addY(10);
+      }
+    } else {
+      // gravity
+
+      this.velocity = this.velocity.addY(1);
+    }
 
     if (this.grounded) {
       if (this.velocity.x === 0) {

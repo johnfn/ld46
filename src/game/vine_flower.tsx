@@ -7,12 +7,12 @@ import { Assets } from "./assets";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { Rect } from "../library/geometry/rect";
 
-class Vine extends Entity {
+export class Vine extends Entity {
   constructor() {
     super({
-      name      : "Vine",
-      texture   : Assets.getResource("vine_live")[0],
-      collidable: true,
+      name        : "Vine",
+      texture     : Assets.getResource("vine_live")[0],
+      interactable: true,
     });
   }
 
@@ -27,12 +27,21 @@ class Vine extends Entity {
   }
 
   public collisionBounds(): Rect {
-    return new Rect({
-      x     : 0,
-      y     : -this.height,
-      width : this.width,
-      height: this.height,
-    });
+    if (this.visible) {
+      return new Rect({
+        x     : 0,
+        y     : -this.height * C.Scale.y,
+        width : this.width   * C.Scale.x,
+        height: this.height  * C.Scale.y,
+      });
+    } else {
+      return new Rect({
+        x: 0, 
+        y: 0,
+        width: 0,
+        height: 0
+      });
+    }
   }
 }
 
