@@ -1,6 +1,5 @@
 import { Game } from "./game";
 import { GameMap } from "./game_map";
-import { Vector2 } from "../library/geometry/vector2";
 import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { IGameState } from "Library";
@@ -10,6 +9,11 @@ export class Player extends Entity {
   speed = 25;
 
   idle: Texture[];
+  walk: Texture[];
+  jump: Texture[];
+  
+  animState: Texture[]
+
   frame = 0;
 
   constructor() {
@@ -19,16 +23,24 @@ export class Player extends Entity {
     });
 
     this.idle = Assets.getResource("char_idle");
+    this.walk = Assets.getResource("char_walk");
+    this.jump = Assets.getResource("char_jump");
+
+    this.animState = this.idle;
   }
 
   audio: HTMLAudioElement | null = null;
 
+  get grounded() {
+    return this.hitInfo.down
+  }
+
   update(state: IGameState): void {
     if (state.tick % 8 === 0) {
-      this.frame = (this.frame + 1) % this.idle.length;
+      this.frame = (this.frame + 1) % this.animState.length;
     }
 
-    this.texture = this.idle[this.frame];
+    this.texture = this.animState[this.frame];
 
     this.velocity = this.velocity.withX(0);
 
@@ -49,7 +61,7 @@ export class Player extends Entity {
     if (state.keys.justDown.Spacebar && this.hitInfo.down) {
       this.velocity = this.velocity.withY(-30);
     }
-
+    
     Game.Instance.camera.centerOn(this.position);
 
     for (const region of GameMap.Instance.musicRegions) {

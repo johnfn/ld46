@@ -38,6 +38,17 @@ export type AssetPath =
   | "char_walk (6).png"
   | "char_walk (7).png"
   | "char_walk (8).png"
+  | "char_walk (9).png"
+  | "char_walk (10).png"
+  | "char_walk (11).png"
+  | "char_jump (1).png"
+  | "char_jump (2).png"
+  | "char_jump (3).png"
+  | "char_jump (4).png"
+  | "char_jump (5).png"
+  | "char_jump (6).png"
+  | "char_jump (7).png"
+  | "char_jump (8).png"
   | "flower2_live (1).png"
   | "flower2_live (2).png"
   | "flower2_live (3).png"
@@ -98,6 +109,22 @@ export const AssetsToLoad = {
       "char_walk (6).png",
       "char_walk (7).png",
       "char_walk (8).png",
+      "char_walk (9).png",
+      "char_walk (10).png",
+      "char_walk (11).png",
+    ],
+  },
+  "char_jump": {
+    type: "Animation" as const,
+    paths: [
+      "char_jump (1).png",
+      "char_jump (2).png",
+      "char_jump (3).png",
+      "char_jump (4).png",
+      "char_jump (5).png",
+      "char_jump (6).png",
+      "char_jump (7).png",
+      "char_jump (8).png",
     ],
   },
   "flower2_live": {
