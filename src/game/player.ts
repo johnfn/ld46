@@ -19,6 +19,8 @@ export class Player extends Entity {
 
   frame = 0;
 
+  facing: "left" | "right" = "right";
+
   constructor() {
     super({
       name   : "Player",
@@ -59,8 +61,6 @@ export class Player extends Entity {
   update(state: IGameState): void {
     this.animate(state);
 
-    this.texture = this.animState[this.frame];
-
     this.velocity = this.velocity.withX(0);
 
     if (this.hitInfo.down || this.hitInfo.up) {
@@ -77,9 +77,21 @@ export class Player extends Entity {
 
     this.velocity = this.velocity.addY(1);
 
+    if (this.grounded) {
+      if (this.velocity.x === 0) {
+        this.animState = this.idle;
+      }
+    }
+    
     if (state.keys.justDown.Spacebar && this.hitInfo.down) {
       this.velocity = this.velocity.withY(-this.jumpHeight);
+      this.animState = this.jump;
     }
+
+    
+
+    this.texture = this.animState[this.frame];
+
     
     Game.Instance.camera.centerOn(this.position);
 
