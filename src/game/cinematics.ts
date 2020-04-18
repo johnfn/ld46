@@ -1,9 +1,9 @@
 import { CoroutineManager, GameCoroutine } from "../library/coroutine_manager";
 import { Game } from "./game";
 import { DialogOverlay } from "./dialog_overlay";
-import { DialogTexts } from "./dialog_text";
 import { TextEntity } from "../library/text_entity";
 import { IGameState } from "Library";
+import { DialogBox } from "./dialog_box";
 
 export class Cinematics {
   coroutineManager   : CoroutineManager;

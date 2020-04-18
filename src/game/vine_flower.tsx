@@ -6,6 +6,15 @@ import { HoverText } from "./hover_text";
 import { Assets } from "./assets";
 import { GameCoroutine } from "../library/coroutine_manager";
 
+class Vine extends Entity {
+  constructor() {
+    super({
+      name: "Vine",
+      texture: Assets.getResource("vine_live")[0]
+    });
+  }
+}
+
 export class VineFlower extends Entity {
   interactionDistance = 200;
   frame = 0;
@@ -24,7 +33,7 @@ export class VineFlower extends Entity {
     this.addChild(this.hoverText = new HoverText("x: interact"), 0, -80);
     this.hoverText.visible = false;
 
-    this.addChild(this.vine = new Entity({ name: "Vine", texture: Assets.getResource("vine_live")[0] }), 0, 0);
+    this.addChild(this.vine = new Vine());
 
     this.vine.sprite.anchor.set(0, 1); // grow upwards
     this.vine.height = 256;
