@@ -270,7 +270,7 @@ export class Cinematics {
     state.mode = "Normal"; 
   }
 
-  public *npc06(): GameCoroutine {
+  public *npc07(): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
