@@ -9,8 +9,8 @@ import { Line } from "./geometry/line";
 export type CollisionResultRect = {
   firstRect    : Rect;
   secondRect   : Rect;
-  firstEntity ?: Entity;
-  secondEntity?: Entity;
+  otherEntity ?: Entity;
+  thisEntity?: Entity;
   overlap      : Rect;
 };
 
@@ -102,10 +102,10 @@ export class CollisionGrid {
         if (overlap) {
           collisions.push({
             firstRect   : rectInCell,
-            firstEntity : entityInCell,
+            otherEntity : entityInCell,
 
             secondRect  : rect,
-            secondEntity: skipEntity,
+            thisEntity  : skipEntity,
 
             overlap,
           });
@@ -204,8 +204,8 @@ export class CollisionGrid {
             result.push({
               firstRect   : collider1.rect,
               secondRect  : collider2.rect,
-              firstEntity : collider1.entity,
-              secondEntity: collider2.entity,
+              otherEntity : collider1.entity,
+              thisEntity: collider2.entity,
               overlap     : intersection,
             })
           }

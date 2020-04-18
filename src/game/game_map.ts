@@ -82,11 +82,13 @@ export class GameMap extends Entity {
   }
 
   collisionBounds(): RectGroup {
-    const bounds = new Rect({ x: -1000, y: -1000, width: 10000, height: 10000 });
+    const bounds = new Rect({ x: -5000, y: -5000, width: 10000, height: 10000 });
     const rects = this.artMap._data.getCollidersInRegionForLayer(
       bounds,
       "Tile Layer 1"
     );
+
+    rects.subtract(this.positionAbsolute());
 
     return rects;
   }
