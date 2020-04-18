@@ -77,7 +77,7 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
       transparent    : false,
       resolution     : window.devicePixelRatio,
       autoDensity    : true,
-      backgroundColor: 0x000,
+      backgroundColor: 0x4e5759,
       view           : view as HTMLCanvasElement,
     });
 

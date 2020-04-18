@@ -22,11 +22,11 @@ export type AssetPath =
   | "owo.png"
   | "tileset.png"
   | "world.json"
-  | "flower_live_00.png"
-  | "flower_live_01.png"
-  | "flower_live_02.png"
-  | "flower_live_03.png"
-  | "flower_live_04.png"
+  | "flower_live (1).png"
+  | "flower_live (2).png"
+  | "flower_live (3).png"
+  | "flower_live (4).png"
+  | "flower_live (5).png"
 
 
 
@@ -46,11 +46,11 @@ export const AssetsToLoad = {
   "flower_live": {
     type: "Animation" as const,
     paths: [
-      "flower_live_00.png",
-      "flower_live_01.png",
-      "flower_live_02.png",
-      "flower_live_03.png",
-      "flower_live_04.png",
+      "flower_live (1).png",
+      "flower_live (2).png",
+      "flower_live (3).png",
+      "flower_live (4).png",
+      "flower_live (5).png",
     ],
   },
 };
