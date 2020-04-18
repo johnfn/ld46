@@ -48,20 +48,27 @@ export class Entity {
    */
   public sprite     : AugmentedSprite;
 
-  public hitInfo    : HitInfo = { hit: false, collisions: [] };
+  public hitInfo    : HitInfo = { hit: false, collisions: [], interactions: [] };
 
-  protected _collidable: boolean;
+  protected _collidable  : boolean;
+  protected _interactable: boolean;
 
   constructor(props: {
-    name        : string;
-    collidable ?: boolean;
-    texture    ?: Texture;
+    name          : string;
+    collidable   ?: boolean;
+    texture      ?: Texture;
+    interactable ?: boolean;
   }) {
     this.sprite        = new AugmentedSprite(props.texture);;
     this.name          = props.name;
     this.sprite.entity = this;
 
-    this._collidable  = props.collidable ?? false;
+    this._collidable   = props.collidable   ?? false;
+    this._interactable = props.interactable ?? false;
+
+    if (props.interactable && props.collidable) {
+      throw new Error("Cant be both interactable and collideable");
+    }
 
     this.startUpdating();
 
@@ -161,6 +168,10 @@ export class Entity {
 
   isCollideable(): boolean {
     return this._collidable;
+  }
+
+  isInteractable(): boolean {
+    return this._interactable;
   }
 
   dimensions(): Vector2 {
