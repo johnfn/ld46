@@ -18,6 +18,7 @@ export type AssetPath =
   | "loop1.mp3"
   | "loop2.mp3"
   | "map.json"
+  | "music/Sanctuary.mp3"
   | "music.json"
   | "owo.png"
   | "parallax bg/bigcloud01.png"
@@ -31,6 +32,12 @@ export type AssetPath =
   | "tileset.png"
   | "vine_flower_source.png"
   | "world.json"
+  | "char_climb (1).png"
+  | "char_climb (2).png"
+  | "char_climb (3).png"
+  | "char_climb (4).png"
+  | "char_climb (5).png"
+  | "char_climb (6).png"
   | "char_idle (1).png"
   | "char_idle (2).png"
   | "char_idle (3).png"
@@ -91,6 +98,7 @@ export const AssetsToLoad = {
   "loop1"                 : { type: "Audio"       as const, path: "loop1.mp3"                  },
   "loop2"                 : { type: "Audio"       as const, path: "loop2.mp3"                  },
   "map"                   : { type: "TileMap"     as const, path: "map.json"                   },
+  "music/Sanctuary"       : { type: "Audio"       as const, path: "music/Sanctuary.mp3"        },
   "music"                 : { type: "TileMap"     as const, path: "music.json"                 },
   "owo"                   : { type: "Image"       as const, path: "owo.png"                    },
   "parallax bg/bigcloud01": { type: "Image"       as const, path: "parallax bg/bigcloud01.png" },
@@ -107,6 +115,17 @@ export const AssetsToLoad = {
 
   /* Animations */
 
+  "char_climb": {
+    type: "Animation" as const,
+    paths: [
+      "char_climb (1).png",
+      "char_climb (2).png",
+      "char_climb (3).png",
+      "char_climb (4).png",
+      "char_climb (5).png",
+      "char_climb (6).png",
+    ],
+  },
   "char_idle": {
     type: "Animation" as const,
     paths: [
