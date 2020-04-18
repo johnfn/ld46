@@ -11,6 +11,11 @@ export class Player extends Entity {
   jumpHeight = 20;
 
   idle: Texture[];
+  walk: Texture[];
+  jump: Texture[];
+  
+  animState: Texture[]
+
   frame = 0;
 
   constructor() {
@@ -20,18 +25,30 @@ export class Player extends Entity {
     });
 
     this.idle = Assets.getResource("char_idle");
-
     this.scale = C.Scale;
+
+    this.walk = Assets.getResource("char_walk");
+    this.jump = Assets.getResource("char_jump");
+
+    this.animState = this.idle;
   }
 
   audio: HTMLAudioElement | null = null;
 
-  update(state: IGameState): void {
-    if (state.tick % 8 === 0) {
-      this.frame = (this.frame + 1) % this.idle.length;
-    }
+  get grounded() {
+    return this.hitInfo.down
+  }
 
-    this.texture = this.idle[this.frame];
+  animate(state: IGameState) {
+    if (state.tick % 8 === 0) {
+      this.frame = (this.frame + 1) % this.animState.length;
+    }
+  }
+
+  update(state: IGameState): void {
+    this.animate(state);
+
+    this.texture = this.animState[this.frame];
 
     this.velocity = this.velocity.withX(0);
 
@@ -52,7 +69,7 @@ export class Player extends Entity {
     if (state.keys.justDown.Spacebar && this.hitInfo.down) {
       this.velocity = this.velocity.withY(-this.jumpHeight);
     }
-
+    
     Game.Instance.camera.centerOn(this.position);
 
     for (const region of GameMap.Instance.musicRegions) {
