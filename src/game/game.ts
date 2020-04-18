@@ -31,17 +31,17 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
     this.fixedCameraStage.addChild(new DialogBox());
 
     if (DebugFlags["Play Music"].on) {
-      const audio = new Audio('music/mystery loop 1.mp3');
+      const audio = Assets.getResource("loop1");
 
       audio.play();
       audio.loop = true;
     }
 
-    if (DebugFlags["Show Initial Dialog"].on) {
+    // if (DebugFlags["Show Initial Dialog"].on) {
       // this.coroutineManager.startCoroutine(
       //   "Initial Dialog",
       //   DialogBox.StartDialog(DialogTexts.IntroText)
       // );
-    }
+    // }
   };
 }
