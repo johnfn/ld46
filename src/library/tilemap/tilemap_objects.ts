@@ -160,30 +160,30 @@ export class TiledTilemapObjects {
         tileProperties: allProperties,
       };
 
-      const tileType = allProperties.type as string;
+      const tileName = allProperties.name as string;
 
-      if (tileType === undefined) {
+      if (tileName === undefined) {
         throw new Error("Custom object needs a tile type");
       }
 
       const associatedObject = this._customObjects.find(obj => {
         if (obj.type === "single") {
-          return obj.name === tileType;
+          return obj.name === tileName;
         }
 
         if (obj.type === "group") {
-          return obj.names.includes(tileType);
+          return obj.names.includes(tileName);
         }
 
         return false;
       });
 
       if (associatedObject === undefined) {
-        throw new Error(`Unhandled tile type: ${ tileType }`);
+        throw new Error(`Unhandled tile type: ${ tileName }`);
       }
 
       if (associatedObject.type === "single") {
-        if (associatedObject.name === tileType) {
+        if (associatedObject.name === tileName) {
           const spriteTex = TextureCache.GetTextureForTile({ assets: this._assets, tile }); 
 
           newObj = associatedObject.getInstanceType(spriteTex, allProperties, layer.name);
@@ -191,9 +191,9 @@ export class TiledTilemapObjects {
       } else if (associatedObject.type === "group") {
         // add to the list of grouped objects, which we will process later.
 
-        if (associatedObject.names.includes(tileType)) {
+        if (associatedObject.names.includes(tileName)) {
           objectsToGroup.push({
-            name: tileType,
+            name: tileName,
             tile: tile,
             // TODO: We're making an assumption that the size of the objects
             // are all the same. I think this is safe tho?

@@ -5,6 +5,8 @@ import { Entity } from "../library/entity";
 import { TilemapRegion } from "../library/tilemap/tilemap_data";
 import { RectGroup } from "../library/geometry/rect_group";
 import { Assets } from "./assets";
+import { Texture } from "pixi.js";
+import { NormalFlower } from "./normal_flower";
 
 export class GameMap extends Entity {
   artMap         : TiledTilemap;
@@ -26,15 +28,13 @@ export class GameMap extends Entity {
       json         : Assets.getResource("map"),
       renderer     : Game.Instance.renderer,
       customObjects: [
-        // {
-        //   type     : "single",
-        //   name     : "fridge",
-        //   getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
-        //     return new GenericItem(tex,
-        //       tileProperties["description"] as string
-        //     );
-        //   }
-        // },
+        {
+          type     : "single",
+          name     : "flower",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
+            return new NormalFlower();
+          }
+        },
     ],
       assets: Assets
     });

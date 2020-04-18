@@ -49,7 +49,61 @@
          "draworder":"topdown",
          "id":2,
          "name":"Object Layer 1",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":44,
+                 "height":256,
+                 "id":48,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"flower"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":1280,
+                 "y":1536
+                }, 
+                {
+                 "gid":44,
+                 "height":256,
+                 "id":49,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"flower"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":1024,
+                 "y":1536
+                }, 
+                {
+                 "gid":44,
+                 "height":256,
+                 "id":50,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"flower"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":768,
+                 "y":1536
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -57,7 +111,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":48,
+ "nextobjectid":51,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

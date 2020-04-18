@@ -22,6 +22,7 @@ export type AssetPath =
   | "owo.png"
   | "tileset.png"
   | "world.json"
+  | "flower_live_00.png"
   | "flower_live_01.png"
   | "flower_live_02.png"
   | "flower_live_03.png"
@@ -45,7 +46,7 @@ export const AssetsToLoad = {
   "flower_live": {
     type: "Animation" as const,
     paths: [
-      "undefined",
+      "flower_live_00.png",
       "flower_live_01.png",
       "flower_live_02.png",
       "flower_live_03.png",
