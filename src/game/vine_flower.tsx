@@ -74,7 +74,9 @@ export class VineFlower extends Entity {
     if (state.player.position.distance(this.position) < this.interactionDistance) {
       this.hoverText.visible = true;
 
-      if (state.keys.justDown.X && !this.interacted) {
+      if (state.keys.justDown.X && !this.interacted && state.spiritUnused >= 1) {
+        state.spiritUnused -= 1;
+
         this.interacted = true;
         this.startCoroutine("growVine", this.vine.growVine());
       }

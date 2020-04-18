@@ -4,8 +4,10 @@ import { IGameState, Mode } from "Library";
 import { Overlay } from "./overlay";
 
 export class GameState extends BaseGameState implements IGameState {
-  mode    : Mode = "Normal";
-  player !: Player;
-  overlay!: Overlay;
-  tick   = 0;
+  mode          : Mode = "Normal";
+  player       !: Player;
+  overlay      !: Overlay;
+  tick         = 0;
+  spiritTotal  = 3;
+  spiritUnused = 3;
 }
