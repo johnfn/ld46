@@ -146,6 +146,8 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
       if (entity.sprite.parent) {
         entity.sprite.parent.removeChild(entity.sprite);
       }
+
+      this.coroutineManager.stopCoroutinesOwnedBy(entity);
     }
 
     this.state.toBeDestroyed = [];

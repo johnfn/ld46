@@ -2,8 +2,8 @@ import { Game } from "./game";
 import { GameMap } from "./game_map";
 import { Vector2 } from "../library/geometry/vector2";
 import { Assets } from "./assets";
-import { GameState } from "./state";
 import { Entity } from "../library/entity";
+import { IGameState } from "Library";
 
 export class Player extends Entity {
   speed = 25;
@@ -19,7 +19,7 @@ export class Player extends Entity {
 
   audio: HTMLAudioElement | null = null;
 
-  update(state: GameState): void {
+  update(state: IGameState): void {
     this.velocity = this.velocity.withX(0);
 
     if (this.hitInfo.down) {
