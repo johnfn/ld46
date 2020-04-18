@@ -55,8 +55,6 @@ export class Cinematics {
   public *fadeScreenToPercentage(props: { percentage: number; time: number; state: IGameState }): GameCoroutine {
     const { percentage, time, state } = props;
 
-    debugger;
-
     yield* this.linearTween({
       set   : x => state.overlay.alpha = x,
       start : state.overlay.alpha,

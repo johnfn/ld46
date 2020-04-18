@@ -26,9 +26,20 @@ export type AssetPath =
   | "parallax bg/bigcloud03.png"
   | "parallax bg/bigcloud04.png"
   | "parallax bg/bigcloud05.png"
+  | "parallax bg/city1.png"
   | "parallax bg/mist1.png"
   | "parallax bg/sky1.png"
   | "parallax bg/skyline1.png"
+  | "sound effects/Distant Gears.mp3"
+  | "sound effects/step grass 1.mp3"
+  | "sound effects/step grass 2.mp3"
+  | "sound effects/step grass 3.mp3"
+  | "sound effects/step stone 1.mp3"
+  | "sound effects/step stone 2.mp3"
+  | "sound effects/step stone 3.mp3"
+  | "sound effects/step wood 1.mp3"
+  | "sound effects/step wood 2.mp3"
+  | "sound effects/step wood 3.mp3"
   | "tileset.png"
   | "vine_flower_source.png"
   | "world.json"
@@ -89,29 +100,43 @@ export type AssetPath =
   | "vine_live (3).png"
   | "vine_live (4).png"
   | "vine_live (5).png"
+  | "vine_live (6).png"
+  | "vine_live (7).png"
+  | "vine_live (8).png"
 
 
 
 export const AssetsToLoad = {
-  "dialog_box"            : { type: "Image"       as const, path: "dialog_box.png"             },
-  "interactions"          : { type: "TileMap"     as const, path: "interactions.json"          },
-  "loop1"                 : { type: "Audio"       as const, path: "loop1.mp3"                  },
-  "loop2"                 : { type: "Audio"       as const, path: "loop2.mp3"                  },
-  "map"                   : { type: "TileMap"     as const, path: "map.json"                   },
-  "music/Sanctuary"       : { type: "Audio"       as const, path: "music/Sanctuary.mp3"        },
-  "music"                 : { type: "TileMap"     as const, path: "music.json"                 },
-  "owo"                   : { type: "Image"       as const, path: "owo.png"                    },
-  "parallax bg/bigcloud01": { type: "Image"       as const, path: "parallax bg/bigcloud01.png" },
-  "parallax bg/bigcloud02": { type: "Image"       as const, path: "parallax bg/bigcloud02.png" },
-  "parallax bg/bigcloud03": { type: "Image"       as const, path: "parallax bg/bigcloud03.png" },
-  "parallax bg/bigcloud04": { type: "Image"       as const, path: "parallax bg/bigcloud04.png" },
-  "parallax bg/bigcloud05": { type: "Image"       as const, path: "parallax bg/bigcloud05.png" },
-  "parallax bg/mist1"     : { type: "Image"       as const, path: "parallax bg/mist1.png"      },
-  "parallax bg/sky1"      : { type: "Image"       as const, path: "parallax bg/sky1.png"       },
-  "parallax bg/skyline1"  : { type: "Image"       as const, path: "parallax bg/skyline1.png"   },
-  "tileset"               : { type: "Image"       as const, path: "tileset.png"                },
-  "vine_flower_source"    : { type: "Image"       as const, path: "vine_flower_source.png"     },
-  "world"                 : { type: "TileWorld"   as const, path: "world.json"                 },
+  "dialog_box"                 : { type: "Image"       as const, path: "dialog_box.png"                  },
+  "interactions"               : { type: "TileMap"     as const, path: "interactions.json"               },
+  "loop1"                      : { type: "Audio"       as const, path: "loop1.mp3"                       },
+  "loop2"                      : { type: "Audio"       as const, path: "loop2.mp3"                       },
+  "map"                        : { type: "TileMap"     as const, path: "map.json"                        },
+  "music/Sanctuary"            : { type: "Audio"       as const, path: "music/Sanctuary.mp3"             },
+  "music"                      : { type: "TileMap"     as const, path: "music.json"                      },
+  "owo"                        : { type: "Image"       as const, path: "owo.png"                         },
+  "parallax bg/bigcloud01"     : { type: "Image"       as const, path: "parallax bg/bigcloud01.png"      },
+  "parallax bg/bigcloud02"     : { type: "Image"       as const, path: "parallax bg/bigcloud02.png"      },
+  "parallax bg/bigcloud03"     : { type: "Image"       as const, path: "parallax bg/bigcloud03.png"      },
+  "parallax bg/bigcloud04"     : { type: "Image"       as const, path: "parallax bg/bigcloud04.png"      },
+  "parallax bg/bigcloud05"     : { type: "Image"       as const, path: "parallax bg/bigcloud05.png"      },
+  "parallax bg/city1"          : { type: "Image"       as const, path: "parallax bg/city1.png"           },
+  "parallax bg/mist1"          : { type: "Image"       as const, path: "parallax bg/mist1.png"           },
+  "parallax bg/sky1"           : { type: "Image"       as const, path: "parallax bg/sky1.png"            },
+  "parallax bg/skyline1"       : { type: "Image"       as const, path: "parallax bg/skyline1.png"        },
+  "sound effects/Distant Gears": { type: "Audio"       as const, path: "sound effects/Distant Gears.mp3" },
+  "sound effects/step grass 1" : { type: "Audio"       as const, path: "sound effects/step grass 1.mp3"  },
+  "sound effects/step grass 2" : { type: "Audio"       as const, path: "sound effects/step grass 2.mp3"  },
+  "sound effects/step grass 3" : { type: "Audio"       as const, path: "sound effects/step grass 3.mp3"  },
+  "sound effects/step stone 1" : { type: "Audio"       as const, path: "sound effects/step stone 1.mp3"  },
+  "sound effects/step stone 2" : { type: "Audio"       as const, path: "sound effects/step stone 2.mp3"  },
+  "sound effects/step stone 3" : { type: "Audio"       as const, path: "sound effects/step stone 3.mp3"  },
+  "sound effects/step wood 1"  : { type: "Audio"       as const, path: "sound effects/step wood 1.mp3"   },
+  "sound effects/step wood 2"  : { type: "Audio"       as const, path: "sound effects/step wood 2.mp3"   },
+  "sound effects/step wood 3"  : { type: "Audio"       as const, path: "sound effects/step wood 3.mp3"   },
+  "tileset"                    : { type: "Image"       as const, path: "tileset.png"                     },
+  "vine_flower_source"         : { type: "Image"       as const, path: "vine_flower_source.png"          },
+  "world"                      : { type: "TileWorld"   as const, path: "world.json"                      },
 
   /* Animations */
 
@@ -210,6 +235,9 @@ export const AssetsToLoad = {
       "vine_live (3).png",
       "vine_live (4).png",
       "vine_live (5).png",
+      "vine_live (6).png",
+      "vine_live (7).png",
+      "vine_live (8).png",
     ],
   },
 };
