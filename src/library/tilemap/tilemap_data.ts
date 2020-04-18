@@ -343,8 +343,8 @@ export class TilemapData {
       colliders = colliders.map(c => new Rect({ 
         x     : c.x * this._scale.x,
         y     : c.y * this._scale.y,
-        width : c.w * this._scale.x,
-        height: c.h * this._scale.y,
+        width : c.width * this._scale.x,
+        height: c.height * this._scale.y,
       }))
     }
 

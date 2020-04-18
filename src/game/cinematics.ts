@@ -3,7 +3,6 @@ import { Game } from "./game";
 import { DialogOverlay } from "./dialog_overlay";
 import { DialogTexts } from "./dialog_text";
 import { TextEntity } from "../library/text_entity";
-import { C } from "./constants";
 
 export class Cinematics {
   coroutineManager: CoroutineManager;

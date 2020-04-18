@@ -74,8 +74,8 @@ export class TiledTilemap {
       if (layer.type !== "tiles") { continue; }
 
       const renderTexture = RenderTexture.create({
-        width : region.w,
-        height: region.h,
+        width : region.width,
+        height: region.height,
       });
 
       const tileWidth  = this._tileWidth;

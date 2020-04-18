@@ -1,15 +1,16 @@
 import { Entity } from "./entity";
 import { Vector2 } from "./geometry/vector2";
-import { CollisionGrid } from "./collision_grid";
+import { CollisionGrid, CollisionResultRect } from "./collision_grid";
 import { HashSet } from "./data_structures/hash";
 import { Rect } from "./geometry/rect";
 
 export type HitInfo = { 
-  hit   : boolean; 
-  left ?: boolean;
-  right?: boolean;
-  up   ?: boolean;
-  down ?: boolean;
+  hit        : boolean; 
+  left      ?: boolean;
+  right     ?: boolean;
+  up        ?: boolean;
+  down      ?: boolean;
+  collisions : CollisionResultRect[];
 };
 
 export class CollisionHandler {
@@ -48,8 +49,16 @@ export class CollisionHandler {
     const collideableEntities = entities.values().filter(x => x.isCollideable());
 
     for (const entity of collideableEntities) {
-      if (entity.bounds().intersects(bounds)) {
-        grid.addRectGroup(entity.bounds(), entity);
+      const collisionRect = entity.collisionBounds().add(entity.position);
+
+      if (collisionRect.intersects(bounds)) {
+        const rectOrRectGroup = collisionRect;
+
+        if (rectOrRectGroup instanceof Rect) {
+          grid.add(rectOrRectGroup, entity);
+        } else {
+          grid.addRectGroup(rectOrRectGroup, entity);
+        }
       }
     }
 
@@ -63,11 +72,14 @@ export class CollisionHandler {
     const { entities, grid } = props;
 
     for (const entity of entities.values()) {
-      entity.hitInfo = { hit: false };
+      const hitInfo: HitInfo = { 
+        hit: false, 
+        collisions: [],
+      };
 
       if (entity.velocity.x === 0 && entity.velocity.y === 0) { continue; }
 
-      let updatedBounds = entity.bounds();
+      let updatedBounds = entity.collisionBounds().add(entity.position);
 
       const xVelocity = new Vector2({ x: entity.velocity.x, y: 0 });
       const yVelocity = new Vector2({ x: 0, y: entity.velocity.y });
@@ -79,10 +91,16 @@ export class CollisionHandler {
       delta = delta.add(xVelocity);
       updatedBounds = updatedBounds.add(xVelocity);
 
-      if (grid.getRectGroupCollisions(updatedBounds, entity).length > 0) {
-        entity.hitInfo.hit = true;
-        entity.hitInfo.right = entity.velocity.x > 0;
-        entity.hitInfo.left  = entity.velocity.x < 0;
+      const xCollisions =
+        updatedBounds instanceof Rect 
+          ? grid.getRectCollisions(updatedBounds, entity) 
+          : grid.getRectGroupCollisions(updatedBounds, entity);
+
+      if (xCollisions.length > 0) {
+        hitInfo.hit        = true;
+        hitInfo.right      = entity.velocity.x > 0;
+        hitInfo.left       = entity.velocity.x < 0;
+        hitInfo.collisions = [...hitInfo.collisions, ...xCollisions];
 
         delta = delta.subtract(xVelocity);
         updatedBounds = updatedBounds.subtract(xVelocity);
@@ -93,14 +111,23 @@ export class CollisionHandler {
       delta = delta.add(yVelocity);
       updatedBounds = updatedBounds.add(yVelocity);
 
-      if (grid.getRectGroupCollisions(updatedBounds, entity).length > 0) {
-        entity.hitInfo.hit  = true;
-        entity.hitInfo.up   = entity.velocity.y < 0;
-        entity.hitInfo.down = entity.velocity.y > 0;
+      const yCollisions =
+        updatedBounds instanceof Rect 
+          ? grid.getRectCollisions(updatedBounds, entity) 
+          : grid.getRectGroupCollisions(updatedBounds, entity);
+
+
+      if (yCollisions.length > 0) {
+        hitInfo.hit        = true;
+        hitInfo.up         = entity.velocity.y < 0;
+        hitInfo.down       = entity.velocity.y > 0;
+        hitInfo.collisions = [...hitInfo.collisions, ...yCollisions];
 
         delta = delta.subtract(yVelocity);
         updatedBounds = updatedBounds.subtract(yVelocity);
       }
+
+      entity.hitInfo = hitInfo;
 
       entity.x = entity.x + delta.x;
       entity.y = entity.y + delta.y;

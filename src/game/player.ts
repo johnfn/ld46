@@ -5,6 +5,7 @@ import { Entity } from "../library/entity";
 import { IGameState } from "Library";
 import { Texture } from "pixi.js";
 import { C } from "./constants";
+import { Rect } from "../library/geometry/rect";
 
 export class Player extends Entity {
   speed = 10;
@@ -43,6 +44,15 @@ export class Player extends Entity {
     if (state.tick % 8 === 0) {
       this.frame = (this.frame + 1) % this.animState.length;
     }
+  }
+
+  public collisionBounds(): Rect {
+    return new Rect({
+      x     : 50,
+      y     : 50,
+      width : this.width - 100,
+      height: this.height - 80,
+    })
   }
 
   update(state: IGameState): void {

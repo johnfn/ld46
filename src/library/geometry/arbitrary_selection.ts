@@ -105,10 +105,10 @@ export class ArbitrarySelection {
       // -------------------------
 
       const newRects = [
-        { x: rect.x                               , y: rect.y                               , width: rect.w                                                   , height: subrectToRemove.y - rect.y }, // A
-        { x: rect.x                               , y: subrectToRemove.y                    , width: subrectToRemove.x - rect.x                               , height: subrectToRemove.h }, // B
-        { x: subrectToRemove.x + subrectToRemove.w, y: subrectToRemove.y                    , width: rect.x + rect.w - (subrectToRemove.w + subrectToRemove.x), height: subrectToRemove.h }, // C
-        { x: rect.x                               , y: subrectToRemove.y + subrectToRemove.h, width: rect.w                                                   , height: rect.y + rect.h - (subrectToRemove.y + subrectToRemove.h) }, // D
+        { x: rect.x                               , y: rect.y                               , width: rect.width                                                   , height: subrectToRemove.y - rect.y }, // A
+        { x: rect.x                               , y: subrectToRemove.y                    , width: subrectToRemove.x - rect.x                               , height: subrectToRemove.height }, // B
+        { x: subrectToRemove.x + subrectToRemove.width, y: subrectToRemove.y                    , width: rect.x + rect.width - (subrectToRemove.width + subrectToRemove.x), height: subrectToRemove.height }, // C
+        { x: rect.x                               , y: subrectToRemove.y + subrectToRemove.height, width: rect.width                                                   , height: rect.y + rect.height - (subrectToRemove.y + subrectToRemove.height) }, // D
       ].filter(r => r.width > 0 && r.height > 0)
        .map(r => new Rect(r));
 
