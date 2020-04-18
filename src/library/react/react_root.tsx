@@ -59,14 +59,14 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
         }}>
           { this.props.game && this.props.game.stage && IS_DEBUG &&
             <div style={{ paddingLeft: '8px', }}>
-              <div style={{ fontFamily: "arial", marginBottom: '8px', fontSize: '14px', width: '400px', backgroundColor: '#eee', padding: '8px' }}>
+              <div style={{ fontFamily: "arial", marginBottom: '8px', fontSize: '14px', width: '300px', backgroundColor: '#eee', padding: '8px' }}>
                 Note: This debugging panel is only shown in development, or production with ?debug=true.
               </div>
               <div style={{ fontWeight: 600, fontFamily: 'arial', paddingBottom: '8px', fontSize: '18px' }}>Debug Options</div>
               <DebugFlagButtons flags={ this.props.debugFlags } />
               <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>Debug Hierarchy</div>
-              <Hierarchy root={this.props.game.stage} />
-              <Hierarchy root={this.props.game.fixedCameraStage} />
+              <Hierarchy root={this.props.game.stage} gameState={this.props.game.state} />
+              <Hierarchy root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} />
             </div> 
           }
         </div>

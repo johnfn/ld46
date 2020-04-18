@@ -27,7 +27,6 @@ class AugmentedSprite extends Sprite {
 //   shouldUpdate(state: GameState) {
 //     return this.activeModes.includes(state.mode);
 //   }
-
 // }
 
 // TODO: probably make less of these methods abstract?
@@ -37,7 +36,7 @@ export class Entity {
    */
   public name     : string;
 
-  public activeModes: Mode[] = [];
+  public activeModes: Mode[] = ["Normal"];
 
   public id       = getUniqueID();
 
@@ -202,8 +201,6 @@ export class Entity {
     }
 
     this.queuedUpdates = [];
-
-    this.update(state);
   }
 
   addOnClick(listener: (state: IGameState) => void) {

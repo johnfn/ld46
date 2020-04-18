@@ -3,8 +3,12 @@ import React from 'react';
 import { Container, Graphics } from 'pixi.js';
 import { Entity } from '../entity';
 import { Debug } from '../debug';
+import { IGameState } from 'Library';
 
-type HierarchyProps = { root: Entity | Container };
+type HierarchyProps = { 
+  root     : Entity | Container;
+  gameState: IGameState;
+};
 
 export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean }> {
   constructor(props: HierarchyProps) {
@@ -82,13 +86,17 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
           onMouseLeave={this.mouseOut}
           onClick={this.click}
         >
-          { root.name } (depth: { root.zIndex })
+          <div>
+            { root.name } (depth: { root.zIndex }) { root instanceof Entity && (
+                root.activeModes.includes(this.props.gameState.mode) ? "Active" : "Inactive"
+            )}
+          </div>
         </div>
         {
           root instanceof Entity &&
           root.children().length > 0 &&
             root.children().map(child => {
-              return <Hierarchy root={ child } />
+              return <Hierarchy root={ child } gameState={ this.props.gameState } />
             })
         }
       </div>

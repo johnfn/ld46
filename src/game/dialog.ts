@@ -113,13 +113,13 @@ export class DialogBox extends Entity {
     this.dialogText.setText(textToShow);
     this.speakerText.setText(speaker);
 
-    if (speaker === "Chief Nabisco") {
-      this.profilePic.texture = Assets.getResource("oberon_portrait");
-    } else if (speaker === "Detective Pringle") {
-      this.profilePic.texture = Assets.getResource("miranda_portrait");
-    } else if (speaker === "Tasukete") {
-      this.profilePic.texture = Assets.getResource("tasukete_portrait");
-    }
+    // if (speaker === "Chief Nabisco") {
+    //   this.profilePic.texture = Assets.getResource("oberon_portrait");
+    // } else if (speaker === "Detective Pringle") {
+    //   this.profilePic.texture = Assets.getResource("miranda_portrait");
+    // } else if (speaker === "Tasukete") {
+    //   this.profilePic.texture = Assets.getResource("tasukete_portrait");
+    // }
   }
 
   update(state: BaseGameState): void { }

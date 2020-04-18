@@ -17,7 +17,7 @@ type IndividualResourceObj = AnimationResource | NormalResource;
 
 type ResourceReturn<T extends string> =
   T extends "Image"       ? Texture :
-  T extends "Audio"       ? 123 :
+  T extends "Audio"       ? HTMLAudioElement :
   T extends "TileMap"     ? TiledJSON :
   T extends "TileWorld"   ? object :
   T extends "Spritesheet" ? unknown :
@@ -90,7 +90,7 @@ export class TypesafeLoader<Resources extends AllResourcesType> {
     const resource = AssetsToLoad[resourceName] as IndividualResourceObj;
 
     if (resource.type === "Audio") {
-      throw new Error("Unhandled");
+      return new Audio(resource.path) as any;
     } else if (resource.type === "Animation") {
       return resource.paths.map(path => this.loader.resources[path].texture) as any;
     } else if (resource.type === "Image") {

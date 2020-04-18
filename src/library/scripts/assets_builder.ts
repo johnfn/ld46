@@ -99,7 +99,7 @@ export const AssetsToLoad = {
     return output;
   }
 
-  const longestTruncatedFileLength = Util.MaxBy(allFiles, x => x.lastIndexOf(".") - 1)!.lastIndexOf(".") - 1;
+  const longestTruncatedFileLength = Util.MaxBy(allFiles, x => x.lastIndexOf("."))!.lastIndexOf(".");
   const longestFileLength = Util.MaxBy(allFiles, x => x.length)!.length;
   const longestAssetType = "'TileWorld'".length;
 

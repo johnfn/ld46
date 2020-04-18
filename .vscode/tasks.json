@@ -9,7 +9,7 @@
       "runOptions": {
         "runOn": "folderOpen"
       },
-      "command": "ts-node --project /Users/johnfn/code/ld-starter/src/library/scripts/tsconfig.json /Users/johnfn/code/ld-starter/src/library/scripts/assets_builder.ts /Users/johnfn/code/ld-starter/src/game/config.json"
+      "command": "ts-node --project ${workspaceFolder}/src/library/scripts/tsconfig.json ${workspaceFolder}/src/library/scripts/assets_builder.ts ${workspaceFolder}/src/game/config.json"
     },
 
     {

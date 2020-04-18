@@ -3,8 +3,6 @@ import { TiledTilemap } from "../library/tilemap/tilemap";
 import { Rect } from "../library/geometry/rect";
 import { Entity } from "../library/entity";
 import { TilemapRegion } from "../library/tilemap/tilemap_data";
-import { GenericItem } from "./generic_item";
-import { Texture } from "pixi.js";
 import { RectGroup } from "../library/geometry/rect_group";
 import { Assets } from "./assets";
 
@@ -28,99 +26,15 @@ export class GameMap extends Entity {
       json         : Assets.getResource("map"),
       renderer     : Game.Instance.renderer,
       customObjects: [
-        {
-          type     : "single",
-          name     : "fridge",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
-            return new GenericItem(tex,
-              tileProperties["description"] as string
-            );
-          }
-        },
-
-        {
-          type     : "single",
-          name     : "toilet",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
-            return new GenericItem(tex, 
-              tileProperties["description"] as string
-            );
-          }
-        },
-
-        {
-          type     : "single",
-          name     : "tv",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
-            return new GenericItem(tex, 
-              tileProperties["description"] as string
-            );
-          }
-        },
-        {
-          type     : "single",
-          name     : "bookshelf",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
-            return new GenericItem(tex, 
-              tileProperties["description"] as string
-            );
-          }
-        },
-        {
-          type     : "single",
-          name     : "photo frame",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
-            return new GenericItem(tex, 
-              tileProperties["description"] as string
-            );
-          }
-        },
-        {
-          type     : "single",
-          name     : "sofa",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
-            return new GenericItem(tex, 
-              tileProperties["description"] as string
-            );
-          }
-        },
-
-        {
-          type     : "single",
-          name     : "table",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
-            return new GenericItem(tex, 
-              tileProperties["description"] as string
-            );
-          }
-        },
-        {
-          type     : "single",
-          name     : "bed",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
-            return new GenericItem(tex, 
-              tileProperties["description"] as string
-            );
-          }
-        },
-        {
-          type     : "single",
-          name     : "lamp",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
-            return new GenericItem(tex, 
-              tileProperties["description"] as string
-            );
-          }
-        },
-        {
-          type     : "single",
-          name     : "laptop",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
-            return new GenericItem(tex, 
-              tileProperties["description"] as string
-            );
-          }
-        },
+        // {
+        //   type     : "single",
+        //   name     : "fridge",
+        //   getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
+        //     return new GenericItem(tex,
+        //       tileProperties["description"] as string
+        //     );
+        //   }
+        // },
     ],
       assets: Assets
     });

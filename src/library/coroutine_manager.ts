@@ -23,12 +23,7 @@ export class CoroutineManager {
   private lastCoroutineId: CoroutineId = -1;
   private activeCoroutines: { [key: number]: ActiveCoroutine } = [];
 
-  startCoroutine(props: {
-    name : string; 
-    co   : GameCoroutine;
-  }): CoroutineId {
-    const { name, co } = props;
-
+  startCoroutine(name: string, co: GameCoroutine): CoroutineId {
     for (const activeCo of Object.values(this.activeCoroutines)) {
       if (activeCo.name === name) {
         throw new Error(`Two coroutines with the name ${ name }. Tell grant about this!!!`);
@@ -45,8 +40,6 @@ export class CoroutineManager {
   }
 
   public stopCoroutine(id: CoroutineId): void {
-    const co = this.activeCoroutines[id];
-
     delete this.activeCoroutines[id];
   }
 

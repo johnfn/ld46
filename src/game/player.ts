@@ -6,19 +6,15 @@ import { GameState } from "./state";
 import { Entity } from "../library/entity";
 
 export class Player extends Entity {
-  speed = 8;
-  index = 0;
-  frames: PIXI.Texture[];
+  speed = 25;
 
   constructor() {
     super({
       name   : "Player!",
-      texture: Assets.getResource("miranda"),
+      texture: Assets.getResource("owo"),
     });
 
-    this.frames = Assets.getResource("miranda_walk");
-
-    this.scale = new Vector2({ x: 0.25, y: 0.25 });
+    this.scale = new Vector2({ x: 4, y: 4 });
   }
 
   audio: HTMLAudioElement | null = null;
@@ -40,12 +36,6 @@ export class Player extends Entity {
 
     if (state.keys.down.D) {
       this.velocity = this.velocity.addX(this.speed);
-    }
-
-    if (!this.velocity.equals(Vector2.Zero)) {
-      this.index += 1;
-
-      this.texture = this.frames[Math.floor(this.index / 8) % this.frames.length]
     }
 
     Game.Instance.camera.centerOn(this.position);
