@@ -1,6 +1,5 @@
 import { Texture } from "pixi.js";
 
-import { Vector2 } from "../library/geometry/vector2";
 import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { GameCoroutine } from "../library/coroutine_manager";
@@ -8,7 +7,7 @@ import { GameCoroutine } from "../library/coroutine_manager";
 let flowers = 0;
 
 export class NormalFlower extends Entity {
-  interactionDistance = 500;
+  interactionDistance = 800;
   frame = 0;
   frames: Texture[];
 
@@ -19,7 +18,6 @@ export class NormalFlower extends Entity {
     });
 
     this.frames = Assets.getResource("flower_live");
-    this.scale = new Vector2({ x: 1, y: 1 });
 
     this.startCoroutine(`flower-update-${ ++flowers }`, this.flowerUpdate());
   }

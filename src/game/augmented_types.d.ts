@@ -1,4 +1,5 @@
 import { Player } from "./player";
+import { Overlay } from "./overlay";
 
 declare module "Library" {
   export interface ModeList {
@@ -6,6 +7,7 @@ declare module "Library" {
   }
 
   export interface IGameState {
-    player: Player;
+    player : Player;
+    overlay: Overlay;
   }
 }

@@ -10,6 +10,7 @@ export class Player extends Entity {
   speed = 25;
 
   idle: Texture[];
+  frame = 0;
 
   constructor() {
     super({
@@ -18,13 +19,17 @@ export class Player extends Entity {
     });
 
     this.idle = Assets.getResource("char_idle");
-
-    this.scale = new Vector2({ x: 4, y: 4 });
   }
 
   audio: HTMLAudioElement | null = null;
 
   update(state: IGameState): void {
+    if (state.tick % 8 === 0) {
+      this.frame = (this.frame + 1) % this.idle.length;
+    }
+
+    this.texture = this.idle[this.frame];
+
     this.velocity = this.velocity.withX(0);
 
     if (this.hitInfo.down) {

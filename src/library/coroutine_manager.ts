@@ -1,6 +1,7 @@
 import { KeyInfoType } from "./keyboard";
 import { IGameState } from "Library";
 import { Entity } from "./entity";
+import { Game } from "../game/game";
 
 /**
  * const state: GameState = yield CoroutineResult;
@@ -16,7 +17,7 @@ type ActiveCoroutine = {
     | { waiting: true; type: "frames"  ; frames: number }
     | { waiting: true; type: "untilKey"; untilKey: keyof KeyInfoType }
   name    : string;
-  owner   : Entity;
+  owner   : Entity | Game;
 };
 
 export type CoroutineId = number;
@@ -25,7 +26,7 @@ export class CoroutineManager {
   private lastCoroutineId: CoroutineId = -1;
   private activeCoroutines: { [key: number]: ActiveCoroutine } = [];
 
-  startCoroutine(name: string, co: GameCoroutine, owner: Entity): CoroutineId {
+  startCoroutine(name: string, co: GameCoroutine, owner: Entity | Game): CoroutineId {
     for (const activeCo of Object.values(this.activeCoroutines)) {
       if (activeCo.name === name) {
         throw new Error(`Two coroutines with the name ${ name }. Tell grant about this!!!`);

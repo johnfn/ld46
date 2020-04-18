@@ -132,6 +132,8 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
   gameLoop = () => {
     const { entities } = this.state;
 
+    this.state.tick++;
+
     Debug.Clear();
 
     this.state.keys.update();
