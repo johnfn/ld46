@@ -5,6 +5,8 @@ import { BaseGame } from '../base_game';
 import { Hierarchy } from './hierarchy';
 import { DebugFlagButtons, DebugFlagsType } from './debug_flag_buttons';
 import { IS_DEBUG } from '../environment';
+import { Entity } from '../entity';
+import { Container } from 'pixi.js';
 
 type ReactWrapperProps = {
   game      : BaseGame<{}>;
@@ -12,6 +14,7 @@ type ReactWrapperProps = {
 };
 
 type ReactWrapperState = {
+  selected: Entity | Container | null;
 };
 
 export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWrapperState> {
@@ -22,6 +25,7 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
     super(props);
 
     this.state = { 
+      selected: null,
     };
 
     setInterval(() => this.monitorHierarchyUpdates(), 50);
@@ -40,6 +44,37 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
     if (this.mounted) {
       this.forceUpdate();
     }
+  };
+
+  setSelected = (obj: Entity | Container) => {
+    this.setState({
+      selected: obj,
+    });
+  };
+
+  renderSelected = () => {
+    if (this.state.selected === null) { return null; }
+
+    if (this.state.selected instanceof Container) {
+      return (
+        <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>Stage</div>
+      );
+    }
+
+    return (
+      <div>
+        <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>{ this.state.selected.name }</div>
+        <div>
+          x: { this.state.selected.x }, y: { this.state.selected.y }
+        </div>
+        <div>
+          width: { this.state.selected.width }, height: { this.state.selected.height }
+        </div>
+        <div>
+          visible: { this.state.selected.visible ? "true" : "false" }
+        </div>
+      </div>
+    );
   };
 
   render() {
@@ -64,9 +99,12 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
               </div>
               <div style={{ fontWeight: 600, fontFamily: 'arial', paddingBottom: '8px', fontSize: '18px' }}>Debug Options</div>
               <DebugFlagButtons flags={ this.props.debugFlags } />
+
+              { this.renderSelected() }
+
               <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>Debug Hierarchy</div>
-              <Hierarchy root={this.props.game.stage} gameState={this.props.game.state} />
-              <Hierarchy root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} />
+              <Hierarchy setSelected={ this.setSelected } root={this.props.game.stage} gameState={this.props.game.state} />
+              <Hierarchy setSelected={ this.setSelected } root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} />
             </div> 
           }
         </div>

@@ -8,6 +8,7 @@ import { Assets } from "./assets";
 import { Texture } from "pixi.js";
 import { NormalFlower } from "./normal_flower";
 import { C } from "./constants";
+import { VineFlower } from "./vine_flower";
 
 export class GameMap extends Entity {
   artMap         : TiledTilemap;
@@ -35,6 +36,14 @@ export class GameMap extends Entity {
           name     : "flower",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
             return new NormalFlower();
+          }
+        },
+
+        {
+          type     : "single",
+          name     : "vineflower",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
+            return new VineFlower(tex);
           }
         },
     ],

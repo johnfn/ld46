@@ -48,6 +48,7 @@ export class TiledTilemap {
       customObjects: customObjects,
       map          : this,
       assets       : Assets,
+      scale        : this._scale,
     });
   }
 
