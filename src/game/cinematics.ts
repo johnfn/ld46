@@ -3,14 +3,27 @@ import { Game } from "./game";
 import { DialogOverlay } from "./dialog_overlay";
 import { DialogTexts } from "./dialog_text";
 import { TextEntity } from "../library/text_entity";
+import { IGameState } from "Library";
 
 export class Cinematics {
-  coroutineManager: CoroutineManager;
-  game            : Game;
+  coroutineManager   : CoroutineManager;
+  game               : Game;
+  spaceToContinueText: TextEntity;
 
   constructor(coroutineManager: CoroutineManager, game: Game) {
     this.coroutineManager = coroutineManager;
     this.game = game;
+    this.spaceToContinueText = new TextEntity({
+      text: "Space to continue",
+      fontSize: 15,
+      width: 800,
+    });
+
+    this.game.fixedCameraStage.addChild(this.spaceToContinueText);
+    this.spaceToContinueText.x = 400;
+    this.spaceToContinueText.y = 600;
+
+    this.spaceToContinueText.visible = false;
   }
 
   public *linearTween(props: {
@@ -20,6 +33,11 @@ export class Cinematics {
     frames: number;
   }): GameCoroutine {
     const { set, start, stop, frames } = props;
+
+    if (frames === 0) {
+      set(stop);
+      return;
+    }
 
     set(start);
     yield "next";
@@ -34,33 +52,40 @@ export class Cinematics {
     set(stop);
   }
 
-  public *openingCinematic(): GameCoroutine {
-    const text = new TextEntity({
-      text: "Space to continue",
-      fontSize: 15,
-      width: 800,
+  public *fadeScreenToPercentage(props: { percentage: number; time: number; state: IGameState }): GameCoroutine {
+    const { percentage, time, state } = props;
+
+    debugger;
+
+    yield* this.linearTween({
+      set   : x => state.overlay.alpha = x,
+      start : state.overlay.alpha,
+      stop  : percentage / 100,
+      frames: time,
     });
+  }
 
-    this.game.fixedCameraStage.addChild(text);
-    text.x = 400;
-    text.y = 600;
-
+  public *openingCinematic(): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog";
 
-    state.overlay.alpha = 1;
+    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state });
 
-    yield* DialogOverlay.StartDialog(DialogTexts.IntroText);
+    this.spaceToContinueText.visible = true;
 
-    text.visible = false;
+    yield* DialogOverlay.StartDialog([
+      { speaker: "Herald", text: "...", },
+      { speaker: "Herald", text: ".........", },
+      { speaker: "Herald", text: "...huh?", },
+      { speaker: "Herald", text: "Where am I?", },
+      { speaker: "Herald", text: "...who am I?", },
+      { speaker: "Herald", text: "And why does my body feel like it’s been asleep for, like, two thousand years?", },
+    ]);
 
-    yield* this.linearTween({
-      set   : x => state.overlay.alpha = x,
-      start : 1,
-      stop  : 0,
-      frames: 90,
-    });
+    this.spaceToContinueText.visible = false;
+
+    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state });
 
     state.mode = "Normal";
   }
