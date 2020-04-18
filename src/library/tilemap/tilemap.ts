@@ -7,6 +7,7 @@ import { TiledTilemapObjects, TilemapCustomObjects, ObjectInfo } from './tilemap
 import { TilemapData, TilemapRegion } from './tilemap_data';
 import { Assets } from '../../game/assets';
 import { TypesafeLoader } from '../typesafe_loader';
+import { Vector2 } from '../geometry/vector2';
 
 export type MapLayer = {
   layerName  : string;
@@ -22,22 +23,25 @@ export class TiledTilemap {
   private _renderer   : Renderer;
   private _objects    : TiledTilemapObjects;
   private _assets     : TypesafeLoader<any>;
+  private _scale      : Vector2;
 
   _data : TilemapData;
 
-  constructor({ json: data, renderer, pathToTilemap, customObjects, assets }: { 
+  constructor({ json: data, renderer, pathToTilemap, customObjects, assets, scale }: { 
     // this is required to calculate the relative paths of the tileset images.
     json         : TiledJSON; 
     renderer     : Renderer; 
+    scale        : Vector2;
     pathToTilemap: string;
     customObjects: TilemapCustomObjects[];
     assets       : TypesafeLoader<any>;
   }) {
-    this._data       = new TilemapData({ data, pathToTilemap });
+    this._data       = new TilemapData({ data, pathToTilemap, scale });
     this._renderer   = renderer;
     this._tileWidth  = this._data.getTileWidth();
     this._tileHeight = this._data.getTileHeight();
     this._assets     = assets;
+    this._scale      = scale;
 
     this._objects    = new TiledTilemapObjects({
       layers       : this._data.getAllObjectLayers(),
@@ -73,6 +77,7 @@ export class TiledTilemap {
         width : region.w,
         height: region.h,
       });
+
       const tileWidth  = this._tileWidth;
       const tileHeight = this._tileHeight;
 
@@ -107,8 +112,10 @@ export class TiledTilemap {
         name   : layerName,
       });
 
-      layerEntity.x = region.x;
-      layerEntity.y = region.y;
+      layerEntity.x = region.x * this._scale.x;
+      layerEntity.y = region.y * this._scale.y;
+
+      layerEntity.scale = this._scale;
 
       tileLayers.push({
         entity     : layerEntity,

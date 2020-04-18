@@ -4,9 +4,11 @@ import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { IGameState } from "Library";
 import { Texture } from "pixi.js";
+import { C } from "./constants";
 
 export class Player extends Entity {
-  speed = 25;
+  speed = 10;
+  jumpHeight = 20;
 
   idle: Texture[];
   walk: Texture[];
@@ -23,6 +25,8 @@ export class Player extends Entity {
     });
 
     this.idle = Assets.getResource("char_idle");
+    this.scale = C.Scale;
+
     this.walk = Assets.getResource("char_walk");
     this.jump = Assets.getResource("char_jump");
 
@@ -35,16 +39,20 @@ export class Player extends Entity {
     return this.hitInfo.down
   }
 
-  update(state: IGameState): void {
+  animate(state: IGameState) {
     if (state.tick % 8 === 0) {
       this.frame = (this.frame + 1) % this.animState.length;
     }
+  }
+
+  update(state: IGameState): void {
+    this.animate(state);
 
     this.texture = this.animState[this.frame];
 
     this.velocity = this.velocity.withX(0);
 
-    if (this.hitInfo.down) {
+    if (this.hitInfo.down || this.hitInfo.up) {
       this.velocity = this.velocity.withY(0);
     }
 
@@ -59,7 +67,7 @@ export class Player extends Entity {
     this.velocity = this.velocity.addY(1);
 
     if (state.keys.justDown.Spacebar && this.hitInfo.down) {
-      this.velocity = this.velocity.withY(-30);
+      this.velocity = this.velocity.withY(-this.jumpHeight);
     }
     
     Game.Instance.camera.centerOn(this.position);

@@ -31,6 +31,7 @@ export class Vector2 {
   }
 
   public static Zero: Vector2 = new Vector2(0, 0);
+  public static One: Vector2 = new Vector2(1, 1);
 
   static IsVector2(x: any): x is Vector2 {
     return x instanceof Vector2;

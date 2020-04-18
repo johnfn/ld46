@@ -2,6 +2,8 @@ import { CoroutineManager, GameCoroutine } from "../library/coroutine_manager";
 import { Game } from "./game";
 import { DialogOverlay } from "./dialog_overlay";
 import { DialogTexts } from "./dialog_text";
+import { TextEntity } from "../library/text_entity";
+import { C } from "./constants";
 
 export class Cinematics {
   coroutineManager: CoroutineManager;
@@ -34,6 +36,16 @@ export class Cinematics {
   }
 
   public *openingCinematic(): GameCoroutine {
+    const text = new TextEntity({
+      text: "Space to continue",
+      fontSize: 15,
+      width: 800,
+    });
+
+    this.game.fixedCameraStage.addChild(text);
+    text.x = 400;
+    text.y = 800;
+
     let state = yield "next";
 
     state.mode = "Dialog";

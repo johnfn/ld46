@@ -94,6 +94,7 @@ export class DialogBox extends Entity {
       }
 
       state = yield { untilKeyPress: "Spacebar" };
+      state = yield "next"; // make sure spacebar isnt justDown
 
       state.mode = "Normal";
 

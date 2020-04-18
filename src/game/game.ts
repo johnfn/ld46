@@ -8,7 +8,6 @@ import { GameState } from "./state";
 import { C } from "./constants";
 import { Overlay } from "./overlay";
 import { Cinematics } from "./cinematics";
-import { DialogTexts } from "./dialog_text";
 import { DialogOverlay } from "./dialog_overlay";
 
 export class Game extends BaseGame<typeof AssetsToLoad> {
@@ -22,7 +21,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
       canvasHeight: C.CanvasHeight,
       tileWidth   : 256,
       tileHeight  : 256,
-      scale       : 0.25,
+      scale       : 1,
       assets      : Assets,
       debugFlags  : DebugFlags,
       state       : new GameState()
@@ -47,12 +46,12 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
       audio.loop = true;
     }
 
-    // if (DebugFlags["Show Initial Dialog"].on) {
+    if (DebugFlags["Initial Cinematic"].on) {
       this.coroutineManager.startCoroutine(
         "Initial Cinematic",
         this.cinematics.openingCinematic(),
         this
       );
-    // }
+    }
   };
 }

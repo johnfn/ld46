@@ -2,6 +2,7 @@ import { TiledJSON, Tileset, Tile, TiledLayerTypes, TiledTileLayerJSON, TiledObj
 import { Grid } from "../data_structures/grid";
 import { Rect } from "../geometry/rect";
 import { RectGroup } from "../geometry/rect_group";
+import { Vector2 } from "../geometry/vector2";
 
 export type TilemapRegion = {
   rect      : Rect;
@@ -21,8 +22,9 @@ export class TilemapData {
   private _data      : TiledJSON;
   private _tileWidth : number;
   private _tileHeight: number;
-  private _layers: { [tilesetName: string]: TilemapLayer };
+  private _layers    : { [tilesetName: string]: TilemapLayer };
   private _tilesets  : Tileset[];
+  private _scale     : Vector2;
 
   // (should be private, but cant be for organization reasons)
   _gidHasCollision: { [id: number]: boolean } = {};
@@ -30,6 +32,7 @@ export class TilemapData {
   constructor(props: { 
     data         : TiledJSON;
     pathToTilemap: string;
+    scale        : Vector2;
   }) {
     const { data, pathToTilemap } = props;
 
@@ -39,6 +42,7 @@ export class TilemapData {
     this._gidHasCollision = this.buildCollisionInfoForTiles()
     this._tilesets        = this.loadTilesets(pathToTilemap, this._data);
     this._layers          = this.loadTileLayers();
+    this._scale           = props.scale;
   }
 
   isGidCollider(gid: number): boolean {
@@ -314,7 +318,7 @@ export class TilemapData {
     const highX = Math.ceil(region.right  / this._tileWidth);
     const highY = Math.ceil(region.bottom / this._tileHeight);
 
-    const colliders: Rect[] = [];
+    let colliders: Rect[] = [];
 
     for (let x = lowX; x <= highX; x++) {
       for (let y = lowY; y <= highY; y++) {
@@ -335,7 +339,15 @@ export class TilemapData {
       }
     }
 
+    if (!this._scale.equals(Vector2.One)) {
+      colliders = colliders.map(c => new Rect({ 
+        x     : c.x * this._scale.x,
+        y     : c.y * this._scale.y,
+        width : c.w * this._scale.x,
+        height: c.h * this._scale.y,
+      }))
+    }
+
     return new RectGroup(colliders);
   }
-  
 }
