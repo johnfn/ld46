@@ -88,14 +88,10 @@ export class Cinematics {
     state.mode = "Normal"; // Set game state back to normal so the player can play the game
   }
 
-  public *openingBud(): GameCoroutine {
+  public *openingBud1(): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state });
-
-    this.spaceToContinueText.visible = true; 
 
     yield* DialogBox.StartDialog([ 
       { speaker: "Bud", text: "Sigh… Another day, another lonely diary entry.", },
@@ -111,16 +107,46 @@ export class Cinematics {
       { speaker: "Bud", text: "What a silly book! Why would I want to do that?", },
     ]);
 
-    this.spaceToContinueText.visible = false; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); 
-
     state.mode = "Normal"; 
   }
 
+  public *openingBud2(): GameCoroutine {
+    let state = yield "next";
 
+    state.mode = "Dialog"; 
 
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "HOLY CANOPIES! AM I DREAMING???", },
+      { speaker: "Bud", text: "I WISH I COULD PINCH MYSELF!! I’VE BEEN WAITING FOR THIS MOMENT FOR SO LONG!", },
+      { speaker: "Bud", text: "So… this is real? You’re really awake?", },
+      // here there’s a yes or no choice. we can program that in later
+      { speaker: "Bud", text: "Wait… you don’t look as excited as I am.", },
+      { speaker: "Bud", text: "Could it be…? Nah, that’s impossible.", },
+      { speaker: "Bud", text: "You remember me, right?", },
+      { speaker: "Bud", text: "…", },
+      { speaker: "Bud", text: "… You really don’t remember? No way.", },
+      { speaker: "Bud", text: "We were friends for life! From the battlefield to the dinner table!", },
+      { speaker: "Bud", text: "… Nothing, huh?", },
+      { speaker: "Bud", text: "Wow. This really sucks.", },
+      { speaker: "Bud", text: "Do you even remember who you are?", },
+      // heres’s another yes or no choice except both choices yield the same thing
+      { speaker: "Bud", text: "Whoa. That’s kinda trippy.", },
+      { speaker: "Bud", text: "Well, let me be of assistance!", },
+      { speaker: "Bud", text: "I’m Bud, your spirit partner! We’ve had a spirit link for… gosh, as long as I can remember.", },
+      { speaker: "Bud", text: "People from all over knew us and loved us. But you were the main guy, of course.", },
+      { speaker: "Bud", text: "Your name was one that the world remembered fondly…", },
+      // player enters name! idk how to do placeholder text 
+      { speaker: "Bud", text: "PLACEHOLDER, savior of the Pastoria Forest!", },
+      { speaker: "Bud", text: "But… heh. I guess the Pastoria Forest is long, long gone.", },
+      { speaker: "Bud", text: "It’s been gone for about five hundred years, in fact.", },
+      { speaker: "Bud", text: "But that’s why you’re here! You’ll make things right again!", },
+      // another choice where both options lead to the same thing
+      { speaker: "Bud", text: "Well…", },
+      { speaker: "Bud", text: "Actually, let’s take a look around. You can see it for yourself.", },
+    ]);
 
+    state.mode = "Normal"; 
+  }
 
 
 
@@ -130,10 +156,6 @@ export class Cinematics {
     let state = yield "next";
 
     state.mode = "Dialog"; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state });
-
-    this.spaceToContinueText.visible = true; 
 
     yield* DialogBox.StartDialog([ 
       { speaker: "NPC", text: "Huh? I sense something…", },
@@ -146,10 +168,6 @@ export class Cinematics {
       { speaker: "NPC", text: "…But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
     ]);
 
-    this.spaceToContinueText.visible = false; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); 
-
     state.mode = "Normal"; 
   }
 
@@ -157,10 +175,6 @@ export class Cinematics {
     let state = yield "next";
 
     state.mode = "Dialog"; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state });
-
-    this.spaceToContinueText.visible = true; 
 
     yield* DialogBox.StartDialog([ 
       { speaker: "NPC", text: "Has it been five hundred years since the Time Warrior was put to sleep yet?", },
@@ -170,10 +184,6 @@ export class Cinematics {
       { speaker: "NPC", text: "Probably just some moss.", },
     ]);
 
-    this.spaceToContinueText.visible = false; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); 
-
     state.mode = "Normal"; 
   }
 
@@ -182,20 +192,12 @@ export class Cinematics {
 
     state.mode = "Dialog"; 
 
-    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state });
-
-    this.spaceToContinueText.visible = true; 
-
     yield* DialogBox.StartDialog([ 
       { speaker: "NPC", text: "Time Warrior? Could it be?", },
       { speaker: "NPC", text: "Ever since our woods were cut down and Pastoria Metalworks opened, it’s been so hard to sense anything.", },
       { speaker: "NPC", text: "All the other dryad spirits and I have been wandering near-blind for so long…", },
       { speaker: "NPC", text: "But for the first time in ages, we have hope! Go get ‘em!", },
     ]);
-
-    this.spaceToContinueText.visible = false; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); 
 
     state.mode = "Normal"; 
   }
@@ -205,20 +207,12 @@ export class Cinematics {
 
     state.mode = "Dialog"; 
 
-    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state });
-
-    this.spaceToContinueText.visible = true; 
-
     yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "Boo-hoo… boo-hoo… sniff", },
+      { speaker: "NPC", text: "Boo-hoo… boo-hoo… *sniff*", },
       { speaker: "NPC", text: "There’s no use wishing. It won’t be long before the Tinker Men destroy all that remains of Pastoria Forest.", },
       { speaker: "NPC", text: "And when the forest disappears, so will we…", },
       { speaker: "NPC", text: "A-boo-hoo-hoo…", },      
     ]);
-
-    this.spaceToContinueText.visible = false; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); 
 
     state.mode = "Normal"; 
   }
@@ -228,10 +222,6 @@ export class Cinematics {
 
     state.mode = "Dialog"; 
 
-    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state });
-
-    this.spaceToContinueText.visible = true; 
-
     yield* DialogBox.StartDialog([ 
       { speaker: "NPC", text: "I sure do miss the Tree of Sprights.", },
       { speaker: "NPC", text: "Lounging around in the shade, swinging from its branches…", },
@@ -240,10 +230,6 @@ export class Cinematics {
       { speaker: "NPC", text: "But as long as its Energy Fruit still sits at the top, I know it’ll be okay!", },        
     ]);
 
-    this.spaceToContinueText.visible = false; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); 
-
     state.mode = "Normal"; 
   }
 
@@ -251,10 +237,6 @@ export class Cinematics {
     let state = yield "next";
 
     state.mode = "Dialog"; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state });
-
-    this.spaceToContinueText.visible = true; 
 
     yield* DialogBox.StartDialog([ 
       { speaker: "NPC", text: "Myah! I’m tired of waiting!", },
@@ -263,21 +245,13 @@ export class Cinematics {
       { speaker: "NPC", text: "He’d better wake up soon and bring our forest back! Myah!", },            
     ]);
 
-    this.spaceToContinueText.visible = false; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); 
-
     state.mode = "Normal"; 
   }
 
-  public *npc06(): GameCoroutine {
+  public *npc07(): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state });
-
-    this.spaceToContinueText.visible = true; 
 
     yield* DialogBox.StartDialog([ 
       { speaker: "NPC", text: "Time Warrior… if you can hear me…", },
@@ -285,10 +259,6 @@ export class Cinematics {
       { speaker: "NPC", text: "The spirit of our race rests in your hands. I know you’ll keep it alive!", },
       { speaker: "Bud", text: "Hey, that’s the theme for the game jam!", },               
     ]);
-
-    this.spaceToContinueText.visible = false; 
-
-    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); 
 
     state.mode = "Normal"; 
   }
