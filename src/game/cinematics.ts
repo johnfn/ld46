@@ -14,7 +14,7 @@ export class Cinematics {
     this.coroutineManager = coroutineManager;
     this.game = game;
     this.spaceToContinueText = new TextEntity({
-      text: "Space to continue",
+      text: "Press space to continue",
       fontSize: 15,
       width: 800,
     });
@@ -78,7 +78,37 @@ export class Cinematics {
       { speaker: "Herald", text: "...huh?", }, // etc
       { speaker: "Herald", text: "Where am I?", },
       { speaker: "Herald", text: "...who am I?", },
-      { speaker: "Herald", text: "And why does my body feel like it’s been asleep for, like, FOREVER years?", },
+      { speaker: "Herald", text: "And why does my body feel like it’s been asleep for, like, five hundred years?", },
+    ]);
+
+    this.spaceToContinueText.visible = false; // hide space to continue text
+
+    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); // Fade the screen to 0% faded over 90 frames. 
+
+    state.mode = "Normal"; // Set game state back to normal so the player can play the game
+  }
+
+  public *openingBud(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state });
+
+    this.spaceToContinueText.visible = true; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Sigh… Another day, another lonely diary entry.", },
+      { speaker: "Bud", text: "Dear diary…", },
+      { speaker: "Bud", text: "I hope you’re doing well today!", },
+      { speaker: "Bud", text: "Me? Oh, thanks for asking!", },
+      { speaker: "Bud", text: "It’s been the same as every other day, I suppose.", },
+      { speaker: "Bud", text: "Wake up, brush my wings, and stand guard over the sprite!", },
+      { speaker: "Bud", text: "I can’t complain. I have stability and routine. What more could I want?", },
+      { speaker: "Bud", text: "…I sure do hope he wakes up someday, though.", },
+      { speaker: "Bud", text: "Huh? What’s that?", },
+      { speaker: "Bud", text: "You want me to turn around?", },
+      { speaker: "Bud", text: "What a silly book! Why would I want to do that?", },
     ]);
 
     this.spaceToContinueText.visible = false; // hide space to continue text
