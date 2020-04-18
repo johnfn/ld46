@@ -10,7 +10,7 @@ export class Player extends Entity {
 
   constructor() {
     super({
-      name   : "Player!",
+      name   : "Player",
       texture: Assets.getResource("owo"),
     });
 
