@@ -38,6 +38,9 @@ export type AssetPath =
   | "char_idle (6).png"
   | "char_idle (7).png"
   | "char_idle (8).png"
+  | "char_idle (9).png"
+  | "char_idle (10).png"
+  | "char_idle (11).png"
   | "char_jump (1).png"
   | "char_jump (2).png"
   | "char_jump (3).png"
@@ -112,6 +115,9 @@ export const AssetsToLoad = {
       "char_idle (6).png",
       "char_idle (7).png",
       "char_idle (8).png",
+      "char_idle (9).png",
+      "char_idle (10).png",
+      "char_idle (11).png",
     ],
   },
   "char_jump": {
