@@ -1,13 +1,14 @@
 import { Game } from "./game";
 import { GameMap } from "./game_map";
-import { Vector2 } from "../library/geometry/vector2";
 import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { IGameState } from "Library";
 import { Texture } from "pixi.js";
+import { C } from "./constants";
 
 export class Player extends Entity {
-  speed = 25;
+  speed = 10;
+  jumpHeight = 20;
 
   idle: Texture[];
   frame = 0;
@@ -19,6 +20,8 @@ export class Player extends Entity {
     });
 
     this.idle = Assets.getResource("char_idle");
+
+    this.scale = C.Scale;
   }
 
   audio: HTMLAudioElement | null = null;
@@ -32,7 +35,7 @@ export class Player extends Entity {
 
     this.velocity = this.velocity.withX(0);
 
-    if (this.hitInfo.down) {
+    if (this.hitInfo.down || this.hitInfo.up) {
       this.velocity = this.velocity.withY(0);
     }
 
@@ -47,7 +50,7 @@ export class Player extends Entity {
     this.velocity = this.velocity.addY(1);
 
     if (state.keys.justDown.Spacebar && this.hitInfo.down) {
-      this.velocity = this.velocity.withY(-30);
+      this.velocity = this.velocity.withY(-this.jumpHeight);
     }
 
     Game.Instance.camera.centerOn(this.position);

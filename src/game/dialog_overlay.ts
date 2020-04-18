@@ -27,12 +27,12 @@ export class DialogOverlay extends Entity {
 
     this.visible = false;
     
-    this.x = 100;
-    this.y = 550;
+    this.x = 0;
+    this.y = 0;
 
     DialogOverlay.Instance = this;
 
-    this.dialogText = new TextEntity({ text: "dialog overlay text", width: 900, height: 400, fontSize: 15 * C.Scale});
+    this.dialogText = new TextEntity({ text: "dialog overlay text", width: 900, height: 400, fontSize: 15 });
     this.dialogText.y = 120;
     this.dialogText.x = 380;
 
@@ -41,7 +41,7 @@ export class DialogOverlay extends Entity {
 
   *startDialog(dialog: DialogText): GameCoroutine {
     this.visible = true;
-    this.activeDialogText = dialog;
+    this.activeDialogText = dialog.slice();
 
     let state: IGameState;
 
@@ -53,6 +53,8 @@ export class DialogOverlay extends Entity {
     while (this.activeDialogText.length > 0) {
       const fullText = this.activeDialogText[0];
       let textToShow = "";
+
+      console.log(fullText);
 
       while (textToShow.length < fullText.text.length) {
         textToShow += fullText.text[textToShow.length];
@@ -71,11 +73,14 @@ export class DialogOverlay extends Entity {
       }
 
       state = yield { untilKeyPress: "Spacebar" };
-
-      state.mode = oldMode;
+      state = yield "next"; // make sure spacebar isnt justDown
 
       this.activeDialogText.shift();
+
+      textToShow = "";
     }
+
+    state.mode = oldMode;
 
     this.visible = false;
   }

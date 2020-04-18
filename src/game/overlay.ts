@@ -8,11 +8,13 @@ export class Overlay extends Entity {
       name: "overlay",
     });
 
+    this.alpha = 0;
+
     const graphic = new Graphics();
     this.sprite.addChild(graphic);
 
     graphic.beginFill(0x000000);
-    graphic.drawRect(0, 0, C.CanvasWidth * C.Scale, C.CanvasHeight * C.Scale);
+    graphic.drawRect(0, 0, C.CanvasWidth, C.CanvasHeight);
     graphic.endFill();
 
     this.sprite.addChild(graphic);

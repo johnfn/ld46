@@ -20,6 +20,14 @@ export type AssetPath =
   | "map.json"
   | "music.json"
   | "owo.png"
+  | "parallax bg/bigcloud01.png"
+  | "parallax bg/bigcloud02.png"
+  | "parallax bg/bigcloud03.png"
+  | "parallax bg/bigcloud04.png"
+  | "parallax bg/bigcloud05.png"
+  | "parallax bg/mist1.png"
+  | "parallax bg/sky1.png"
+  | "parallax bg/skyline1.png"
   | "tileset.png"
   | "world.json"
   | "char_idle (1).png"
@@ -30,6 +38,14 @@ export type AssetPath =
   | "char_idle (6).png"
   | "char_idle (7).png"
   | "char_idle (8).png"
+  | "char_jump (1).png"
+  | "char_jump (2).png"
+  | "char_jump (3).png"
+  | "char_jump (4).png"
+  | "char_jump (5).png"
+  | "char_jump (6).png"
+  | "char_jump (7).png"
+  | "char_jump (8).png"
   | "char_walk (1).png"
   | "char_walk (2).png"
   | "char_walk (3).png"
@@ -62,15 +78,23 @@ export type AssetPath =
 
 
 export const AssetsToLoad = {
-  "dialog_box"      : { type: "Image"       as const, path: "dialog_box.png"       },
-  "interactions"    : { type: "TileMap"     as const, path: "interactions.json"    },
-  "loop1"           : { type: "Audio"       as const, path: "loop1.mp3"            },
-  "loop2"           : { type: "Audio"       as const, path: "loop2.mp3"            },
-  "map"             : { type: "TileMap"     as const, path: "map.json"             },
-  "music"           : { type: "TileMap"     as const, path: "music.json"           },
-  "owo"             : { type: "Image"       as const, path: "owo.png"              },
-  "tileset"         : { type: "Image"       as const, path: "tileset.png"          },
-  "world"           : { type: "TileWorld"   as const, path: "world.json"           },
+  "dialog_box"            : { type: "Image"       as const, path: "dialog_box.png"             },
+  "interactions"          : { type: "TileMap"     as const, path: "interactions.json"          },
+  "loop1"                 : { type: "Audio"       as const, path: "loop1.mp3"                  },
+  "loop2"                 : { type: "Audio"       as const, path: "loop2.mp3"                  },
+  "map"                   : { type: "TileMap"     as const, path: "map.json"                   },
+  "music"                 : { type: "TileMap"     as const, path: "music.json"                 },
+  "owo"                   : { type: "Image"       as const, path: "owo.png"                    },
+  "parallax bg/bigcloud01": { type: "Image"       as const, path: "parallax bg/bigcloud01.png" },
+  "parallax bg/bigcloud02": { type: "Image"       as const, path: "parallax bg/bigcloud02.png" },
+  "parallax bg/bigcloud03": { type: "Image"       as const, path: "parallax bg/bigcloud03.png" },
+  "parallax bg/bigcloud04": { type: "Image"       as const, path: "parallax bg/bigcloud04.png" },
+  "parallax bg/bigcloud05": { type: "Image"       as const, path: "parallax bg/bigcloud05.png" },
+  "parallax bg/mist1"     : { type: "Image"       as const, path: "parallax bg/mist1.png"      },
+  "parallax bg/sky1"      : { type: "Image"       as const, path: "parallax bg/sky1.png"       },
+  "parallax bg/skyline1"  : { type: "Image"       as const, path: "parallax bg/skyline1.png"   },
+  "tileset"               : { type: "Image"       as const, path: "tileset.png"                },
+  "world"                 : { type: "TileWorld"   as const, path: "world.json"                 },
 
   /* Animations */
 
@@ -85,6 +109,19 @@ export const AssetsToLoad = {
       "char_idle (6).png",
       "char_idle (7).png",
       "char_idle (8).png",
+    ],
+  },
+  "char_jump": {
+    type: "Animation" as const,
+    paths: [
+      "char_jump (1).png",
+      "char_jump (2).png",
+      "char_jump (3).png",
+      "char_jump (4).png",
+      "char_jump (5).png",
+      "char_jump (6).png",
+      "char_jump (7).png",
+      "char_jump (8).png",
     ],
   },
   "char_walk": {

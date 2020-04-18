@@ -2,6 +2,7 @@ import { Loader, Texture } from 'pixi.js'
 import { AssetsToLoad } from '../game/assets';
 import { TilemapData } from './tilemap/tilemap_data';
 import { TiledJSON } from './tilemap/tilemap_types';
+import { C } from '../game/constants';
 
 type AnimationResource = {
   type : "Animation";
@@ -69,7 +70,11 @@ export class TypesafeLoader<Resources extends AllResourcesType> {
       const pathToTilemap = resource.substring(0, resource.lastIndexOf("/"))
 
       if (AssetsToLoad[castedResource].type === "TileMap") {
-        const tilemapData = new TilemapData({ data: this.getResource(castedResource) as TiledJSON, pathToTilemap });
+        const tilemapData = new TilemapData({ 
+          data: this.getResource(castedResource) as TiledJSON, 
+          pathToTilemap, 
+          scale: C.Scale,
+        });
 
         allTilemapDependencyPaths = allTilemapDependencyPaths.concat(
           tilemapData.getTilesets().map(tileset => tileset.imageUrlRelativeToGame)

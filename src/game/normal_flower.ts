@@ -3,6 +3,8 @@ import { Texture } from "pixi.js";
 import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { GameCoroutine } from "../library/coroutine_manager";
+import { Vector2 } from "../library/geometry/vector2";
+import { C } from "./constants";
 
 let flowers = 0;
 
@@ -20,6 +22,8 @@ export class NormalFlower extends Entity {
     this.frames = Assets.getResource("flower_live");
 
     this.startCoroutine(`flower-update-${ ++flowers }`, this.flowerUpdate());
+
+    this.scale = C.Scale;
   }
 
   *flowerUpdate(): GameCoroutine {

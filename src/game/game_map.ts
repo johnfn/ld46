@@ -7,6 +7,8 @@ import { RectGroup } from "../library/geometry/rect_group";
 import { Assets } from "./assets";
 import { Texture } from "pixi.js";
 import { NormalFlower } from "./normal_flower";
+import { Vector2 } from "../library/geometry/vector2";
+import { C } from "./constants";
 
 export class GameMap extends Entity {
   artMap         : TiledTilemap;
@@ -25,6 +27,7 @@ export class GameMap extends Entity {
 
     this.artMap = new TiledTilemap({
       pathToTilemap: "",
+      scale        : C.Scale,
       json         : Assets.getResource("map"),
       renderer     : Game.Instance.renderer,
       customObjects: [
@@ -41,6 +44,7 @@ export class GameMap extends Entity {
 
     this.musicRegionsMap = new TiledTilemap({
       pathToTilemap: "",
+      scale        : C.Scale,
       json         : Assets.getResource("music"),
       renderer     : Game.Instance.renderer,
       customObjects: [{
@@ -66,7 +70,6 @@ export class GameMap extends Entity {
 
     for (const layer of layers) {
       this.addChild(layer.entity);
-
     }
   }
 
