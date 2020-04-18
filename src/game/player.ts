@@ -36,7 +36,7 @@ export class Player extends Entity {
 
     this.velocity = this.velocity.addY(1);
 
-    if (state.keys.justDown.Spacebar) {
+    if (state.keys.justDown.Spacebar && this.hitInfo.down) {
       this.velocity = this.velocity.withY(-30);
     }
 
