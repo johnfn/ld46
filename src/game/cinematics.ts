@@ -43,7 +43,7 @@ export class Cinematics {
 
     this.game.fixedCameraStage.addChild(text);
     text.x = 400;
-    text.y = 800;
+    text.y = 600;
 
     let state = yield "next";
 

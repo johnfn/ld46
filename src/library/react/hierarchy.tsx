@@ -6,8 +6,9 @@ import { Debug } from '../debug';
 import { IGameState } from 'Library';
 
 type HierarchyProps = { 
-  root     : Entity | Container;
-  gameState: IGameState;
+  root       : Entity | Container;
+  setSelected: (obj: Entity | Container) => void;
+  gameState  : IGameState;
 };
 
 export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean }> {
@@ -66,6 +67,8 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
   };
 
   click = () => {
+    this.props.setSelected(this.props.root);
+
     console.log(this.props.root);
   };
 
@@ -96,7 +99,7 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
           root instanceof Entity &&
           root.children().length > 0 &&
             root.children().map(child => {
-              return <Hierarchy root={ child } gameState={ this.props.gameState } />
+              return <Hierarchy setSelected={this.props.setSelected } root={ child } gameState={ this.props.gameState } />
             })
         }
       </div>
