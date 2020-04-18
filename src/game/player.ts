@@ -4,15 +4,20 @@ import { Vector2 } from "../library/geometry/vector2";
 import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { IGameState } from "Library";
+import { Texture } from "pixi.js";
 
 export class Player extends Entity {
   speed = 25;
+
+  idle: Texture[];
 
   constructor() {
     super({
       name   : "Player",
       texture: Assets.getResource("owo"),
     });
+
+    this.idle = Assets.getResource("char_idle");
 
     this.scale = new Vector2({ x: 4, y: 4 });
   }
