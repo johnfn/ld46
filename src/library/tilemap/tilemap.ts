@@ -113,8 +113,8 @@ export class TiledTilemap {
         name   : layerName,
       });
 
-      layerEntity.x = region.x * this._scale.x;
-      layerEntity.y = region.y * this._scale.y;
+      layerEntity.x = region.x * this._scale.x - layer.offset.x * this._scale.x;
+      layerEntity.y = region.y * this._scale.y - layer.offset.y * this._scale.y;
 
       layerEntity.scale = this._scale;
 

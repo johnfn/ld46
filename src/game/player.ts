@@ -32,6 +32,7 @@ export class Player extends Entity {
     this.jump = Assets.getResource("char_jump");
 
     this.animState = this.idle;
+    this.x = 200;
   }
 
   audio: HTMLAudioElement | null = null;

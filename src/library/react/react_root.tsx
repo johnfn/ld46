@@ -15,6 +15,7 @@ type ReactWrapperProps = {
 
 type ReactWrapperState = {
   selected: Entity | Container | null;
+  moused: Entity | Container | null;
 };
 
 export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWrapperState> {
@@ -25,7 +26,8 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
     super(props);
 
     this.state = { 
-      selected: null,
+      selected: this.props.game.stage,
+      moused  : null,
     };
 
     setInterval(() => this.monitorHierarchyUpdates(), 50);
@@ -52,10 +54,19 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
     });
   };
 
-  renderSelected = () => {
-    if (this.state.selected === null) { return null; }
+  setMoused = (obj: Entity | Container | null) => {
+    this.setState({
+      moused: obj,
+    });
+  };
 
-    if (this.state.selected instanceof Container) {
+
+  renderSelected = () => {
+    const target = this.state.moused || this.state.selected;
+
+    if (target === null) { return null; }
+
+    if (target instanceof Container) {
       return (
         <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>Stage</div>
       );
@@ -63,15 +74,15 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
 
     return (
       <div>
-        <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>{ this.state.selected.name }</div>
+        <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>{ target.name }</div>
         <div>
-          x: { this.state.selected.x }, y: { this.state.selected.y }
+          x: { target.x }, y: { target.y }
         </div>
         <div>
-          width: { this.state.selected.width }, height: { this.state.selected.height }
+          width: { target.width }, height: { target.height }
         </div>
         <div>
-          visible: { this.state.selected.visible ? "true" : "false" }
+          visible: { target.visible ? "true" : "false" }
         </div>
       </div>
     );
@@ -103,8 +114,8 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
               { this.renderSelected() }
 
               <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>Debug Hierarchy</div>
-              <Hierarchy setSelected={ this.setSelected } root={this.props.game.stage} gameState={this.props.game.state} />
-              <Hierarchy setSelected={ this.setSelected } root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} />
+              <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.stage} gameState={this.props.game.state} />
+              <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} />
             </div> 
           }
         </div>

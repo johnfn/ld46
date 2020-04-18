@@ -12,7 +12,7 @@ import { VineFlower } from "./vine_flower";
 
 export class GameMap extends Entity {
   artMap         : TiledTilemap;
-  musicRegionsMap: TiledTilemap;
+  // musicRegionsMap: TiledTilemap;
   musicRegions   : TilemapRegion[] = [];
 
   public static Instance: GameMap;
@@ -50,20 +50,20 @@ export class GameMap extends Entity {
       assets: Assets
     });
 
-    this.musicRegionsMap = new TiledTilemap({
-      pathToTilemap: "",
-      scale        : C.Scale,
-      json         : Assets.getResource("music"),
-      renderer     : Game.Instance.renderer,
-      customObjects: [{
-        type     : "rect",
-        layerName: "Music Layer",
-        process  : (rect: TilemapRegion) => {
-          this.musicRegions.push(rect);
-        }
-      }],
-      assets: Assets,
-    });
+    // this.musicRegionsMap = new TiledTilemap({
+    //   pathToTilemap: "",
+    //   scale        : C.Scale,
+    //   json         : Assets.getResource("music"),
+    //   renderer     : Game.Instance.renderer,
+    //   customObjects: [{
+    //     type     : "rect",
+    //     layerName: "Music Layer",
+    //     process  : (rect: TilemapRegion) => {
+    //       this.musicRegions.push(rect);
+    //     }
+    //   }],
+    //   assets: Assets,
+    // });
 
     this.loadMap();
   }
@@ -72,8 +72,8 @@ export class GameMap extends Entity {
     const layers = this.artMap.loadLayersInRect(new Rect({
       x     : -(256 * 10),
       y     : -(256 * 10),
-      width :  6000,
-      height:  6000,
+      width :  9000,
+      height:  9000,
     }));
 
     for (const layer of layers) {
@@ -82,7 +82,7 @@ export class GameMap extends Entity {
   }
 
   collisionBounds(): RectGroup {
-    const bounds = new Rect({ x: -1000, y: -1000, width: 5000, height: 5000 });
+    const bounds = new Rect({ x: -1000, y: -1000, width: 10000, height: 10000 });
     const rects = this.artMap._data.getCollidersInRegionForLayer(
       bounds,
       "Tile Layer 1"
