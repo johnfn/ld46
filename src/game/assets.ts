@@ -22,19 +22,36 @@ export type AssetPath =
   | "owo.png"
   | "tileset.png"
   | "world.json"
+  | "flower_live_01.png"
+  | "flower_live_02.png"
+  | "flower_live_03.png"
+  | "flower_live_04.png"
 
 
 
 export const AssetsToLoad = {
-  "dialog_box"  : { type: "Image"       as const, path: "dialog_box.png"    },
-  "interactions": { type: "TileMap"     as const, path: "interactions.json" },
-  "loop1"       : { type: "Audio"       as const, path: "loop1.mp3"         },
-  "loop2"       : { type: "Audio"       as const, path: "loop2.mp3"         },
-  "map"         : { type: "TileMap"     as const, path: "map.json"          },
-  "music"       : { type: "TileMap"     as const, path: "music.json"        },
-  "owo"         : { type: "Image"       as const, path: "owo.png"           },
-  "tileset"     : { type: "Image"       as const, path: "tileset.png"       },
-  "world"       : { type: "TileWorld"   as const, path: "world.json"        },
+  "dialog_box"    : { type: "Image"       as const, path: "dialog_box.png"     },
+  "interactions"  : { type: "TileMap"     as const, path: "interactions.json"  },
+  "loop1"         : { type: "Audio"       as const, path: "loop1.mp3"          },
+  "loop2"         : { type: "Audio"       as const, path: "loop2.mp3"          },
+  "map"           : { type: "TileMap"     as const, path: "map.json"           },
+  "music"         : { type: "TileMap"     as const, path: "music.json"         },
+  "owo"           : { type: "Image"       as const, path: "owo.png"            },
+  "tileset"       : { type: "Image"       as const, path: "tileset.png"        },
+  "world"         : { type: "TileWorld"   as const, path: "world.json"         },
+
+  /* Animations */
+
+  "flower_live": {
+    type: "Animation" as const,
+    paths: [
+      "undefined",
+      "flower_live_01.png",
+      "flower_live_02.png",
+      "flower_live_03.png",
+      "flower_live_04.png",
+    ],
+  },
 };
 
 export const Assets = new TypesafeLoader(AssetsToLoad);
