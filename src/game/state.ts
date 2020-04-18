@@ -5,4 +5,5 @@ import { IGameState, Mode } from "Library";
 export class GameState extends BaseGameState implements IGameState {
   mode   : Mode = "Normal";
   player!: Player;
+  tick   = 0;
 }

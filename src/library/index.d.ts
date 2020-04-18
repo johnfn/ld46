@@ -12,6 +12,7 @@ declare module "Library" {
   export interface IGameState {
     keys          : KeyboardState;
     renderer      : Renderer;
+    tick          : number;
     entities      : HashSet<Entity>;
     toBeDestroyed : Entity[];
     stage         : Entity;
