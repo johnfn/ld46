@@ -8,6 +8,7 @@ import { IGameState } from 'Library';
 type HierarchyProps = { 
   root       : Entity | Container;
   setSelected: (obj: Entity | Container) => void;
+  setMoused  : (obj: Entity | Container | null) => void;
   gameState  : IGameState;
 };
 
@@ -54,6 +55,7 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
     }
 
     this.hoverTarget = this.props.root;
+    this.props.setMoused(this.props.root);
   };
 
   mouseOut = () => {
@@ -64,6 +66,7 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
     }
 
     this.hoverTarget = null;
+    this.props.setMoused(null);
   };
 
   click = () => {
@@ -99,7 +102,7 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
           root instanceof Entity &&
           root.children().length > 0 &&
             root.children().map(child => {
-              return <Hierarchy setSelected={this.props.setSelected } root={ child } gameState={ this.props.gameState } />
+              return <Hierarchy setMoused={this.props.setMoused} setSelected={this.props.setSelected } root={ child } gameState={ this.props.gameState } />
             })
         }
       </div>

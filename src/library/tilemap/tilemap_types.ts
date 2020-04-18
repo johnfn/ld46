@@ -14,6 +14,8 @@ export interface TiledTileLayerJSON {
   opacity: number;
   startx: number;
   starty: number;
+  offsetx: number;
+  offsety: number;
   type: "tilelayer";
   visible: boolean;
   width: number;

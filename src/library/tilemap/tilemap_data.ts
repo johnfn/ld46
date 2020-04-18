@@ -13,9 +13,11 @@ export type TilemapLayer =
   | {
     type: "tiles";
     grid: Grid<Tile>;
+    offset: Vector2;
   } | {
     type : "rects";
     rects: TilemapRegion[];
+    offset: Vector2;
   }
 
 export class TilemapData {
@@ -169,6 +171,7 @@ export class TilemapData {
         result[layer.name] = { 
           type: "tiles",
           grid,
+          offset: new Vector2(layer.offsetx, layer.offsety),
         };
       } else if (layer.type === "objectgroup") {
         result[layer.name] = this.loadRectLayer(layer);
@@ -199,6 +202,7 @@ export class TilemapData {
     return {
       type : "rects",
       rects: rects,
+      offset: Vector2.Zero,
     };
   }
 
@@ -219,16 +223,23 @@ export class TilemapData {
         const relTileX = (i % chunk.width);
         const relTileY = Math.floor(i / chunk.width);
 
-        const absTileX = relTileX + chunk.x;
-        const absTileY = relTileY + chunk.y;
+        const offsetX = layer.offsetx / this._tileWidth;
+        const offsetY = layer.offsety / this._tileHeight;
+
+        if (offsetX !== Math.floor(offsetX) || offsetY !== Math.floor(offsetY)) {
+          throw new Error("AAAAAAAAAAAAAAAAAAAAAAAAA");
+        }
+
+        const absTileX = relTileX + chunk.x + offsetX;
+        const absTileY = relTileY + chunk.y + offsetY;
 
         const { spritesheet, tileProperties } = this.gidInfo(gid);
 
         // TODO: Merge instance properties and tileset properties...
 
         result.set(absTileX, absTileY, {
-          x             : absTileX * this._tileWidth,
-          y             : absTileY * this._tileHeight,
+          x             : absTileX * this._tileWidth  + layer.offsetx,
+          y             : absTileY * this._tileHeight + layer.offsety,
           tile          : spritesheet,
           isCollider    : this.isGidCollider(gid),
           tileProperties: tileProperties,

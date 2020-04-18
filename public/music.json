@@ -4,11 +4,11 @@
         {
          "draworder":"topdown",
          "id":2,
-         "name":"Music Layer",
+         "name":"Music Regions",
          "objects":[
                 {
-                 "height":1024,
-                 "id":2,
+                 "height":2048,
+                 "id":1,
                  "name":"",
                  "properties":[
                         {
@@ -19,26 +19,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":1664,
+                 "width":3840,
                  "x":0,
                  "y":0
-                }, 
-                {
-                 "height":960,
-                 "id":3,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"file",
-                         "type":"string",
-                         "value":"loop2.mp3"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":1664,
-                 "x":0,
-                 "y":1024
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -47,26 +30,13 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":5,
+ "nextobjectid":2,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",
- "tileheight":64,
- "tilesets":[
-        {
-         "columns":10,
-         "firstgid":1,
-         "image":"tileset.png",
-         "imageheight":640,
-         "imagewidth":640,
-         "margin":0,
-         "name":"DemoTileset",
-         "spacing":0,
-         "tilecount":100,
-         "tileheight":64,
-         "tilewidth":64
-        }],
- "tilewidth":64,
+ "tileheight":256,
+ "tilesets":[],
+ "tilewidth":256,
  "type":"map",
  "version":1.2,
  "width":32
