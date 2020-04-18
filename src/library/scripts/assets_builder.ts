@@ -58,15 +58,28 @@ const buildAssetsFile = () => {
   for (const file of allFiles) {
     const match = /(.+)_(\d+)\.(png|gif)$/.exec(file);
 
-    if (match === null) {
-      normalFiles.push(file);
+    if (match !== null) {
+      const [fullString, prefix, frame, extension] = match;
+
+      animationBundles[prefix] = (animationBundles[prefix] || []);
+      animationBundles[prefix][Number(frame)] = file;
+
       continue;
     }
 
-    const [fullString, prefix, frame, extension] = match;
+    const match2 = /(.+) \((\d+)\)\.(png|gif)$/.exec(file);
 
-    animationBundles[prefix] = (animationBundles[prefix] || []);
-    animationBundles[prefix][Number(frame)] = file;
+    if (match2 !== null) {
+      const [fullString, prefix, frame, extension] = match2;
+
+      animationBundles[prefix] = (animationBundles[prefix] || []);
+      animationBundles[prefix][Number(frame)] = file;
+
+      continue;
+    }
+
+    normalFiles.push(file);
+    continue;
   }
 
   const allKeys = normalFiles.concat(Util.FlattenByOne(Object.keys(animationBundles).map(key => animationBundles[key])));
@@ -136,6 +149,8 @@ export const AssetsToLoad = {
       output += `    paths: [\n`;
 
       for (const frame of animationBundles[animationName]) {
+        if (frame === undefined) { continue; }
+
         output += `      "${ frame }",\n`;
       }
 

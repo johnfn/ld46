@@ -22,35 +22,109 @@ export type AssetPath =
   | "owo.png"
   | "tileset.png"
   | "world.json"
-  | "flower_live (1).png"
-  | "flower_live (2).png"
-  | "flower_live (3).png"
-  | "flower_live (4).png"
+  | "char_idle (1).png"
+  | "char_idle (2).png"
+  | "char_idle (3).png"
+  | "char_idle (4).png"
+  | "char_idle (5).png"
+  | "char_idle (6).png"
+  | "char_idle (7).png"
+  | "char_idle (8).png"
+  | "char_walk (1).png"
+  | "char_walk (2).png"
+  | "char_walk (3).png"
+  | "char_walk (4).png"
+  | "char_walk (5).png"
+  | "char_walk (6).png"
+  | "char_walk (7).png"
+  | "char_walk (8).png"
+  | "flower2_live (1).png"
+  | "flower2_live (2).png"
+  | "flower2_live (3).png"
+  | "flower2_live (4).png"
+  | "flower2_live (5).png"
+  | "flower_live_00.png"
+  | "flower_live_01.png"
+  | "flower_live_02.png"
+  | "flower_live_03.png"
+  | "flower_live_04.png"
   | "flower_live (5).png"
+  | "vine_live (1).png"
+  | "vine_live (2).png"
+  | "vine_live (3).png"
+  | "vine_live (4).png"
+  | "vine_live (5).png"
 
 
 
 export const AssetsToLoad = {
-  "dialog_box"    : { type: "Image"       as const, path: "dialog_box.png"     },
-  "interactions"  : { type: "TileMap"     as const, path: "interactions.json"  },
-  "loop1"         : { type: "Audio"       as const, path: "loop1.mp3"          },
-  "loop2"         : { type: "Audio"       as const, path: "loop2.mp3"          },
-  "map"           : { type: "TileMap"     as const, path: "map.json"           },
-  "music"         : { type: "TileMap"     as const, path: "music.json"         },
-  "owo"           : { type: "Image"       as const, path: "owo.png"            },
-  "tileset"       : { type: "Image"       as const, path: "tileset.png"        },
-  "world"         : { type: "TileWorld"   as const, path: "world.json"         },
+  "dialog_box"      : { type: "Image"       as const, path: "dialog_box.png"       },
+  "interactions"    : { type: "TileMap"     as const, path: "interactions.json"    },
+  "loop1"           : { type: "Audio"       as const, path: "loop1.mp3"            },
+  "loop2"           : { type: "Audio"       as const, path: "loop2.mp3"            },
+  "map"             : { type: "TileMap"     as const, path: "map.json"             },
+  "music"           : { type: "TileMap"     as const, path: "music.json"           },
+  "owo"             : { type: "Image"       as const, path: "owo.png"              },
+  "tileset"         : { type: "Image"       as const, path: "tileset.png"          },
+  "world"           : { type: "TileWorld"   as const, path: "world.json"           },
 
   /* Animations */
 
+  "char_idle": {
+    type: "Animation" as const,
+    paths: [
+      "char_idle (1).png",
+      "char_idle (2).png",
+      "char_idle (3).png",
+      "char_idle (4).png",
+      "char_idle (5).png",
+      "char_idle (6).png",
+      "char_idle (7).png",
+      "char_idle (8).png",
+    ],
+  },
+  "char_walk": {
+    type: "Animation" as const,
+    paths: [
+      "char_walk (1).png",
+      "char_walk (2).png",
+      "char_walk (3).png",
+      "char_walk (4).png",
+      "char_walk (5).png",
+      "char_walk (6).png",
+      "char_walk (7).png",
+      "char_walk (8).png",
+    ],
+  },
+  "flower2_live": {
+    type: "Animation" as const,
+    paths: [
+      "flower2_live (1).png",
+      "flower2_live (2).png",
+      "flower2_live (3).png",
+      "flower2_live (4).png",
+      "flower2_live (5).png",
+    ],
+  },
   "flower_live": {
     type: "Animation" as const,
     paths: [
-      "flower_live (1).png",
-      "flower_live (2).png",
-      "flower_live (3).png",
-      "flower_live (4).png",
+      "flower_live_00.png",
+      "flower_live_01.png",
+      "flower_live_02.png",
+      "flower_live_03.png",
+      "flower_live_04.png",
       "flower_live (5).png",
+    ],
+  },
+  "vine_live": {
+    type: "Animation" as const,
+    paths: [
+      "vine_live (1).png",
+      "vine_live (2).png",
+      "vine_live (3).png",
+      "vine_live (4).png",
+      "vine_live (5).png",
     ],
   },
 };
