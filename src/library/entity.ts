@@ -7,6 +7,7 @@ import { BaseGameState } from "./base_state";
 import { GameReference } from "./base_game";
 import { CoroutineId, GameCoroutine } from "./coroutine_manager";
 import { IGameState, Mode } from "Library";
+import { HitInfo } from "./collision_handler";
 
 export enum EntityType {
   NormalEntity,
@@ -46,6 +47,8 @@ export class Entity {
    * The PIXI Sprite that this Entity wraps.
    */
   public sprite     : AugmentedSprite;
+
+  public hitInfo    : HitInfo = { hit: false };
 
   protected _collidable: boolean;
 

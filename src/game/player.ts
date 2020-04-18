@@ -20,14 +20,10 @@ export class Player extends Entity {
   audio: HTMLAudioElement | null = null;
 
   update(state: GameState): void {
-    this.velocity = Vector2.Zero;
+    this.velocity = this.velocity.withX(0);
 
-    if (state.keys.down.W) {
-      this.velocity = this.velocity.addY(-this.speed);
-    }
-
-    if (state.keys.down.S) {
-      this.velocity = this.velocity.addY(this.speed);
+    if (this.hitInfo.down) {
+      this.velocity = this.velocity.withY(0);
     }
 
     if (state.keys.down.A) {
@@ -36,6 +32,12 @@ export class Player extends Entity {
 
     if (state.keys.down.D) {
       this.velocity = this.velocity.addX(this.speed);
+    }
+
+    this.velocity = this.velocity.addY(1);
+
+    if (state.keys.justDown.Spacebar) {
+      this.velocity = this.velocity.withY(-30);
     }
 
     Game.Instance.camera.centerOn(this.position);

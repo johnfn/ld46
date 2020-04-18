@@ -4,6 +4,14 @@ import { CollisionGrid } from "./collision_grid";
 import { HashSet } from "./data_structures/hash";
 import { Rect } from "./geometry/rect";
 
+export type HitInfo = { 
+  hit   : boolean; 
+  left ?: boolean;
+  right?: boolean;
+  up   ?: boolean;
+  down ?: boolean;
+};
+
 export class CollisionHandler {
   private _canvasWidth : number;
   private _canvasHeight: number;
@@ -55,6 +63,8 @@ export class CollisionHandler {
     const { entities, grid } = props;
 
     for (const entity of entities.values()) {
+      entity.hitInfo = { hit: false };
+
       if (entity.velocity.x === 0 && entity.velocity.y === 0) { continue; }
 
       let updatedBounds = entity.bounds();
@@ -70,6 +80,10 @@ export class CollisionHandler {
       updatedBounds = updatedBounds.add(xVelocity);
 
       if (grid.getRectGroupCollisions(updatedBounds, entity).length > 0) {
+        entity.hitInfo.hit = true;
+        entity.hitInfo.right = entity.velocity.x > 0;
+        entity.hitInfo.left  = entity.velocity.x < 0;
+
         delta = delta.subtract(xVelocity);
         updatedBounds = updatedBounds.subtract(xVelocity);
       }
@@ -80,6 +94,10 @@ export class CollisionHandler {
       updatedBounds = updatedBounds.add(yVelocity);
 
       if (grid.getRectGroupCollisions(updatedBounds, entity).length > 0) {
+        entity.hitInfo.hit  = true;
+        entity.hitInfo.up   = entity.velocity.y < 0;
+        entity.hitInfo.down = entity.velocity.y > 0;
+
         delta = delta.subtract(yVelocity);
         updatedBounds = updatedBounds.subtract(yVelocity);
       }
