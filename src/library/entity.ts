@@ -69,8 +69,11 @@ export class Entity {
     this.sprite.anchor.set(0);
   }
 
-  addChild(child: Entity) {
+  addChild(child: Entity, x: number | null = null, y: number | null = null) {
     this.sprite.addChild(child.sprite);
+
+    if (x !== null) child.x = x;
+    if (y !== null) child.y = y;
   }
 
   removeChild(child: Entity) {

@@ -61,6 +61,7 @@ export type AssetPath =
   | "char_walk (9).png"
   | "char_walk (10).png"
   | "char_walk (11).png"
+  | "char_walk (12).png"
   | "flower2_live (1).png"
   | "flower2_live (2).png"
   | "flower2_live (3).png"
@@ -149,6 +150,7 @@ export const AssetsToLoad = {
       "char_walk (9).png",
       "char_walk (10).png",
       "char_walk (11).png",
+      "char_walk (12).png",
     ],
   },
   "flower2_live": {

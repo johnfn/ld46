@@ -53,8 +53,6 @@ export class DialogOverlay extends Entity {
       const fullText = this.activeDialogText[0];
       let textToShow = "";
 
-      console.log(fullText);
-
       while (textToShow.length < fullText.text.length) {
         textToShow += fullText.text[textToShow.length];
         this.displayDialogContents(textToShow);
