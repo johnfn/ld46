@@ -7,8 +7,8 @@ import { IGameState } from "Library";
 import { Mode } from "Library";
 
 export type DialogText = {
-  speaker: string;
-  text   : string;
+  speaker?: string;
+  text    : string;
 }[];
 
 export class DialogBox extends Entity {
@@ -112,7 +112,9 @@ export class DialogBox extends Entity {
     const speaker = this.activeDialogText[0].speaker;
 
     this.dialogText.setText(textToShow);
-    this.speakerText.setText(speaker);
+    if (speaker) {
+      this.speakerText.setText(speaker);
+    }
 
     // if (speaker === "Chief Nabisco") {
     //   this.profilePic.texture = Assets.getResource("oberon_portrait");

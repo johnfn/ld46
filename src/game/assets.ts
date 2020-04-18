@@ -40,6 +40,8 @@ export type AssetPath =
   | "sound effects/step wood 1.mp3"
   | "sound effects/step wood 2.mp3"
   | "sound effects/step wood 3.mp3"
+  | "spirit_empty_hud.png"
+  | "spirit_full_hud.png"
   | "tileset.png"
   | "vine_flower_source.png"
   | "world.json"
@@ -68,6 +70,7 @@ export type AssetPath =
   | "char_jump (6).png"
   | "char_jump (7).png"
   | "char_jump (8).png"
+  | "char_jump (9).png"
   | "char_walk (1).png"
   | "char_walk (2).png"
   | "char_walk (3).png"
@@ -134,6 +137,8 @@ export const AssetsToLoad = {
   "sound effects/step wood 1"  : { type: "Audio"       as const, path: "sound effects/step wood 1.mp3"   },
   "sound effects/step wood 2"  : { type: "Audio"       as const, path: "sound effects/step wood 2.mp3"   },
   "sound effects/step wood 3"  : { type: "Audio"       as const, path: "sound effects/step wood 3.mp3"   },
+  "spirit_empty_hud"           : { type: "Image"       as const, path: "spirit_empty_hud.png"            },
+  "spirit_full_hud"            : { type: "Image"       as const, path: "spirit_full_hud.png"             },
   "tileset"                    : { type: "Image"       as const, path: "tileset.png"                     },
   "vine_flower_source"         : { type: "Image"       as const, path: "vine_flower_source.png"          },
   "world"                      : { type: "TileWorld"   as const, path: "world.json"                      },
@@ -178,6 +183,7 @@ export const AssetsToLoad = {
       "char_jump (6).png",
       "char_jump (7).png",
       "char_jump (8).png",
+      "char_jump (9).png",
     ],
   },
   "char_walk": {

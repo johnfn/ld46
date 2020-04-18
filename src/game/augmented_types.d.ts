@@ -9,5 +9,7 @@ declare module "Library" {
   export interface IGameState {
     player : Player;
     overlay: Overlay;
+    spiritTotal  : number;
+    spiritUnused : number;
   }
 }
