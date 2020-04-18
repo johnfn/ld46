@@ -78,7 +78,7 @@ export class Cinematics {
       { speaker: "Herald", text: "...huh?", }, // etc
       { speaker: "Herald", text: "Where am I?", },
       { speaker: "Herald", text: "...who am I?", },
-      { speaker: "Herald", text: "And why does my body feel like it’s been asleep for, like, eighty quintillion years?", },
+      { speaker: "Herald", text: "And why does my body feel like it’s been asleep for, like, FOREVER years?", },
     ]);
 
     this.spaceToContinueText.visible = false; // hide space to continue text
