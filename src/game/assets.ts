@@ -29,6 +29,7 @@ export type AssetPath =
   | "parallax bg/sky1.png"
   | "parallax bg/skyline1.png"
   | "tileset.png"
+  | "vine_flower_source.png"
   | "world.json"
   | "char_idle (1).png"
   | "char_idle (2).png"
@@ -100,6 +101,7 @@ export const AssetsToLoad = {
   "parallax bg/sky1"      : { type: "Image"       as const, path: "parallax bg/sky1.png"       },
   "parallax bg/skyline1"  : { type: "Image"       as const, path: "parallax bg/skyline1.png"   },
   "tileset"               : { type: "Image"       as const, path: "tileset.png"                },
+  "vine_flower_source"    : { type: "Image"       as const, path: "vine_flower_source.png"     },
   "world"                 : { type: "TileWorld"   as const, path: "world.json"                 },
 
   /* Animations */

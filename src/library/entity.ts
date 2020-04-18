@@ -107,8 +107,9 @@ export class Entity {
     this.sprite.texture = newTexture;
   }
 
-  /**
-   * Used for collision detection.
+  /** 
+   * Used for collision detection. (x, y) is relative to the sprite, btw, not
+   * the map or anything else.
    */
   public collisionBounds(): Rect | RectGroup {
     return new Rect({
