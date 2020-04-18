@@ -64,27 +64,27 @@ export class Cinematics {
   }
 
   public *openingCinematic(): GameCoroutine {
-    let state = yield "next";
+    let state = yield "next"; // Wait for one frame.
 
-    state.mode = "Dialog";
+    state.mode = "Dialog"; // Set game mode to dialog. This means that the player can't move etc
 
-    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state });
+    yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state }); // Fade the screen to 100% faded, taking 0 frames (time). state always has to be there
 
-    this.spaceToContinueText.visible = true;
+    this.spaceToContinueText.visible = true; // Show the "space to continue" text
 
-    yield* DialogOverlay.StartDialog([
-      { speaker: "Herald", text: "...", },
-      { speaker: "Herald", text: ".........", },
-      { speaker: "Herald", text: "...huh?", },
+    yield* DialogOverlay.StartDialog([ // Start the following dialog
+      { speaker: "Herald", text: "...", }, // First dialog: speaker name is Herald, text is "..."
+      { speaker: "Herald", text: ".........", }, // second dialog
+      { speaker: "Herald", text: "...huh?", }, // etc
       { speaker: "Herald", text: "Where am I?", },
       { speaker: "Herald", text: "...who am I?", },
       { speaker: "Herald", text: "And why does my body feel like it’s been asleep for, like, two thousand years?", },
     ]);
 
-    this.spaceToContinueText.visible = false;
+    this.spaceToContinueText.visible = false; // hide space to continue text
 
-    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state });
+    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); // Fade the screen to 0% faded over 90 frames. 
 
-    state.mode = "Normal";
+    state.mode = "Normal"; // Set game state back to normal so the player can play the game
   }
 }
