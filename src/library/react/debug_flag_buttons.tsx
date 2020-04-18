@@ -11,6 +11,14 @@ export const ReadDebugFlagsFromLocalStorage = <T extends DebugFlagsType>(default
   if (IS_DEBUG) {
     const prevStoredFlags = JSON.parse((window.localStorage.getItem(LOCAL_STORAGE_KEY) || "{}")) as DebugFlagsType;
 
+    // delete flags that don't exist
+
+    for (const flagName of Object.keys(prevStoredFlags)) {
+      if (!defaultFlags.hasOwnProperty(flagName)) {
+        delete prevStoredFlags[flagName];
+      }
+    }
+
     return {
       ...defaultFlags,
       ...prevStoredFlags,

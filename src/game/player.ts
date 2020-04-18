@@ -19,8 +19,6 @@ export class Player extends Entity {
     });
 
     this.idle = Assets.getResource("char_idle");
-
-    this.scale = new Vector2({ x: 0.5, y: 0.5 });
   }
 
   audio: HTMLAudioElement | null = null;

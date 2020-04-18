@@ -1,5 +1,6 @@
 import { ReadDebugFlagsFromLocalStorage } from "../library/react/debug_flag_buttons";
 
 export const DebugFlags = ReadDebugFlagsFromLocalStorage({
-  "Play Music": { on: true, description: "" },
+  "Play Music"       : { on: true, description: "" },
+  "Initial Cinematic": { on: true, description: "" },
 });
