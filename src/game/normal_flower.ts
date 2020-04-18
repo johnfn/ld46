@@ -8,7 +8,7 @@ import { C } from "./constants";
 let flowers = 0;
 
 export class NormalFlower extends Entity {
-  interactionDistance = 800;
+  interactionDistance = 200;
   frame = 0;
   frames: Texture[];
 

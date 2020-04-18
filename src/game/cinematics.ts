@@ -52,6 +52,9 @@ export class Cinematics {
     state.overlay.alpha = 1;
 
     yield* DialogOverlay.StartDialog(DialogTexts.IntroText);
+
+    text.visible = false;
+
     yield* this.linearTween({
       set   : x => state.overlay.alpha = x,
       start : 1,
