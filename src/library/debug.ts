@@ -1,4 +1,4 @@
-import { Vector2 } from "./geometry/vector2";
+import { Vector2, IVector2 } from "./geometry/vector2";
 import { Graphics, Sprite, Container } from "pixi.js";
 import { Line } from "./geometry/line";
 import { Entity } from "./entity";
@@ -32,23 +32,23 @@ export class Debug {
    * Debug graphics drawn in the previous tick are removed in the game loop. 
    * If that's not what you want, pass persistent = true.
    */
-  public static DrawPoint(point: Vector2, color = 0xff0000, persistent = false): Graphics {
+  public static DrawPoint(point: IVector2, color = 0xff0000, persistent = false): Graphics {
     const graphics = new Graphics();
 
     new Line({
-      x1: point.x - 10,
-      x2: point.x + 10,
+      x1: point.x - 40,
+      x2: point.x + 40,
 
-      y1: point.y - 10,
-      y2: point.y + 10,
+      y1: point.y - 40,
+      y2: point.y + 40,
     }).drawOnto(graphics, color);
 
     new Line({
-      x1: point.x + 10,
-      x2: point.x - 10,
+      x1: point.x + 40,
+      x2: point.x - 40,
 
-      y1: point.y - 10,
-      y2: point.y + 10,
+      y1: point.y - 40,
+      y2: point.y + 40,
     }).drawOnto(graphics, color);
 
     GameReference.stage.sprite.addChild(graphics);

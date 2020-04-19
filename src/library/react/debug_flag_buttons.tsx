@@ -47,7 +47,9 @@ export class DebugFlagButtons extends React.Component<DebugFlagButtonsProps, {}>
             const flag = this.props.flags[flagName];
 
             return (
-              <div>
+              <div
+                key={flagName}
+              >
                 <input 
                   type="checkbox" 
                   checked={ flag.on } 

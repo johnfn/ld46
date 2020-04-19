@@ -1,5 +1,4 @@
 import { Game } from "./game";
-import { GameMap } from "./game_map";
 import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { IGameState } from "Library";
@@ -31,6 +30,17 @@ export class Player extends Entity {
   facing: "left" | "right" = "right";
   climbSpeed = 20;
 
+  /** 
+   * If the character is climbing a ladder, we cap abs(velocity.y) at
+   * climbSpeed (so that holding up doesnt cause them to fly into the air).
+   * 
+   * If the character is jumping, we don't cap velocity.y at all.
+   * 
+   * If the character jumps while on a ladder, we need to keep track of which
+   * behavior we want, so we have this flag.
+   */
+  jumpingOnLadder = false;
+
   constructor() {
     super({
       name   : "Player",
@@ -38,7 +48,6 @@ export class Player extends Entity {
     });
 
     Player.Instance = this;
-
 
     this.idle  = Assets.getResource("char_idle");
     this.walk  = Assets.getResource("char_walk");
@@ -50,7 +59,6 @@ export class Player extends Entity {
     this.x = Player.StartPosition.x;
     this.y = Player.StartPosition.y;
 
-
     this.glowOverlay = new Sprite(Assets.getResource("glow"))
     this.glowOverlay.blendMode = BLEND_MODES.SOFT_LIGHT;
     this.glowOverlay.tint = 0xfccad1;
@@ -59,7 +67,6 @@ export class Player extends Entity {
     this.glowOverlay.position.x -= 400;
     this.glowOverlay.position.y -= 400;
     this.glowOverlay.zIndex = 1;
-
   }
 
   audio: HTMLAudioElement | null = null;
@@ -110,6 +117,7 @@ export class Player extends Entity {
 
     if (this.hitInfo.down || this.hitInfo.up) {
       this.velocity = this.velocity.withY(0);
+      this.jumpingOnLadder = false;
     }
 
     const touchingVine = this.hitInfo.interactions.find(x => x.otherEntity instanceof Vine);
@@ -117,26 +125,37 @@ export class Player extends Entity {
     if (touchingVine) {
       // Climb ladder
 
-      this.velocity = this.velocity.addY(this.gravity);
+      if (!this.jumpingOnLadder) {
+        this.velocity = this.velocity.withY(0)
+      }
 
       if (state.keys.down.A) {
         this.velocity = this.velocity.addX(-this.climbSpeed);
       }
   
       if (state.keys.down.D) {
-        this.velocity = this.velocity.addX(this.climbSpeed/2);
+        this.velocity = this.velocity.addX(this.climbSpeed);
       }
 
       if (state.keys.down.W) {
-        this.velocity = this.velocity.addY(-this.climbSpeed/2);
+        if (!this.jumpingOnLadder) {
+          this.velocity = this.velocity.addY(-this.climbSpeed);
+        }
+
+        if (this.velocity.y > 1) {
+          this.jumpingOnLadder = false;
+        }
       } 
-      
+
       if (state.keys.down.S) {
-        // This is the only way you can go down
         this.velocity = this.velocity.addY(this.climbSpeed);
-        this.velocity = this.velocity.clampY(-this.climbSpeed, this.climbSpeed);
+        this.jumpingOnLadder = false;
+      }
+
+      if (this.jumpingOnLadder) {
+        this.velocity = this.velocity.addY(this.gravity);
       } else {
-        this.velocity = this.velocity.clampY(-this.climbSpeed, 0);
+        this.velocity = this.velocity.clampY(-this.climbSpeed, this.climbSpeed);
       }
     } else {
       // gravity
@@ -150,7 +169,6 @@ export class Player extends Entity {
       if (state.keys.down.D) {
         this.velocity = this.velocity.addX(this.speed);
       }
-
     }
 
     if (this.grounded) {
@@ -167,16 +185,18 @@ export class Player extends Entity {
       }
     }
 
-
-    if (state.keys.justDown.Spacebar && (this.hitInfo.down || (touchingVine && this.velocity.y <= 2))) {
+    if (state.keys.justDown.Spacebar && (this.hitInfo.down || (touchingVine && this.velocity.y >= -this.climbSpeed))) {
       this.velocity = this.velocity.withY(-this.jumpHeight);
       this.animState = this.jump;
       this.frame = 0;
+
+      if (touchingVine) {
+        this.jumpingOnLadder = true;
+      }
     }
 
     this.texture = this.animState[this.frame];
     
     Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)));
-
   }
 }

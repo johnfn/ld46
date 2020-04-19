@@ -106,8 +106,6 @@ export class GameMap extends Entity {
     const newBounds = this.getCameraRegion(position).rect;
     const layers = this.artMap.loadLayersInRect(newBounds);
 
-    console.log(newBounds);
-
     for (const layer of layers) {
       this.addChild(layer.entity);
     }
