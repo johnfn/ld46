@@ -15,7 +15,7 @@ import { IGameState } from "Library";
 import { MusicMap } from "./music_map";
 import { Bud } from "./bud";
 import { Fountain } from "./fountain";
-import { BouncyShroom } from "./bouncyshroom";
+import { BouncyShroom } from "./bouncy_shroom";
 
 type FlowerRegion = {
   tilemapRegion: TilemapRegion,

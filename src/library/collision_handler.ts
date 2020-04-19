@@ -3,7 +3,7 @@ import { Vector2 } from "./geometry/vector2";
 import { CollisionGrid, CollisionResultRect } from "./collision_grid";
 import { HashSet } from "./data_structures/hash";
 import { Rect } from "./geometry/rect";
-import { BouncyShroom } from "../game/bouncyshroom";
+import { BouncyShroom } from "../game/bouncy_shroom";
 
 export type HitInfo = { 
   hit         : boolean; 
