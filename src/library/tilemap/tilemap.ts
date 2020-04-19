@@ -96,8 +96,8 @@ export class TiledTilemap {
           // We have to offset here because we'd be drawing outside of the
           // bounds of the RenderTexture otherwise.
 
-          sprite.x = tile.x - region.x;
-          sprite.y = tile.y - region.y;
+          sprite.x = tile.x - region.x - layer.offset.x;
+          sprite.y = tile.y - region.y - layer.offset.y;
 
           this._renderer.render(sprite, renderTexture, false);
         }
@@ -108,8 +108,8 @@ export class TiledTilemap {
         name   : layerName,
       });
 
-      layerEntity.x = region.x - layer.offset.x;
-      layerEntity.y = region.y - layer.offset.y;
+      layerEntity.x = region.x;
+      layerEntity.y = region.y;
 
       tileLayers.push({
         entity     : layerEntity,
