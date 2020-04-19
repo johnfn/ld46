@@ -155,6 +155,9 @@ export class Cinematics {
     state.mode = "Dialog"; 
 
     yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Huh? What was that stepping sound?", },
+      { text: "ok so bud turns around here but we'll animate this in later maybe", },
+        // AT LEAST I HOPE SO
       { speaker: "Bud", text: "HOLY CANOPIES! AM I DREAMING???", },
       { speaker: "Bud", text: "I WISH I COULD PINCH MYSELF!! I’VE BEEN WAITING FOR THIS MOMENT FOR SO LONG!", },
       { speaker: "Bud", text: "So... this is real? You’re really awake?", },
