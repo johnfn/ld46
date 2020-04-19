@@ -80,14 +80,18 @@ export class Player extends Entity {
     if (touchingVine) {
       // Climb ladder
 
-      this.velocity = this.velocity.withY(0);
+      this.velocity = this.velocity.addY(1);
 
       if (state.keys.down.W) {
         this.velocity = this.velocity.addY(-10);
-      }
-
+      } 
+      
       if (state.keys.down.S) {
+        // This is the only way you can go down
         this.velocity = this.velocity.addY(10);
+        this.velocity = this.velocity.clampY(-10, 10);
+      } else {
+        this.velocity = this.velocity.clampY(-10, 0);
       }
     } else {
       // gravity
@@ -101,9 +105,10 @@ export class Player extends Entity {
       }
     }
     
-    if (state.keys.justDown.Spacebar && this.hitInfo.down) {
+    if (state.keys.justDown.Spacebar && (this.hitInfo.down || (touchingVine && this.velocity.y <= 2))) {
       this.velocity = this.velocity.withY(-this.jumpHeight);
       this.animState = this.jump;
+      this.frame = 0;
     }
 
     this.texture = this.animState[this.frame];
