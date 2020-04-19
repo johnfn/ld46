@@ -14,7 +14,7 @@ export class Overlay extends Entity {
     this.sprite.addChild(graphic);
 
     graphic.beginFill(0x000000);
-    graphic.drawRect(0, 0, C.CanvasWidth, C.CanvasHeight);
+    graphic.drawRect(0, 0, C.CanvasWidth / C.Scale.x, C.CanvasHeight / C.Scale.y);
     graphic.endFill();
 
     this.sprite.addChild(graphic);

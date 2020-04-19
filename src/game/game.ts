@@ -4,7 +4,6 @@ import { Player } from "./player";
 import { GameMap } from "./game_map";
 import { DialogBox } from "./dialog_box";
 import { DebugFlags } from "./debug";
-import { GameState } from "./state";
 import { C } from "./constants";
 import { Overlay } from "./overlay";
 import { Cinematics } from "./cinematics";
@@ -25,7 +24,19 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
       scale       : 1/4,
       assets      : Assets,
       debugFlags  : DebugFlags,
-      state       : new GameState(),
+      state       : {
+        tick         : 0,
+        spiritTotal  : 3,
+        spiritUnused : 3,
+        budFollowing : DebugFlags["Fairy Follows You Immediately"],
+
+        // These are set later.
+        player       : undefined as any,
+        overlay      : undefined as any,
+        map          : undefined as any,
+        camera       : undefined as any,
+        cinematics   : undefined as any,
+      }
     });
 
     Game.Instance = this;

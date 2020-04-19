@@ -8,6 +8,11 @@ import { IGameState } from "Library";
 import { DialogBox } from "./dialog_box";
 import { DebugFlags } from "./debug";
 import { Bud } from "./bud";
+import { Vector2 } from "../library/geometry/vector2";
+
+export type Tweenable = 
+  | number
+  | Vector2
 
 export class Cinematics {
   coroutineManager   : CoroutineManager;
@@ -30,10 +35,10 @@ export class Cinematics {
     this.spaceToContinueText.visible = false;
   }
 
-  public *linearTween(props: {
-    set   : (newValue: number) => void;
-    start : number;
-    stop  : number;
+  public static *LinearTween<T extends Tweenable>(props: {
+    set   : (newValue: T) => void;
+    start : T;
+    stop  : T;
     frames: number;
   }): GameCoroutine {
     const { set, start, stop, frames } = props;
@@ -47,10 +52,22 @@ export class Cinematics {
     yield "next";
 
     for (let i = 0; i < frames; i++) {
-      const value = start + (i * (stop - start)) / frames;
+      if (typeof start === "number" && typeof stop === "number") {
+        const value = start + (i * (stop - start)) / frames;
 
-      set(value);
-      yield "next";
+        set(value as any);
+        yield "next";
+      }
+
+      if (start instanceof Vector2 && stop instanceof Vector2) {
+        const newVector = new Vector2({
+          x: start.x + (i * (stop.x - start.x)) / frames,
+          y: start.y + (i * (stop.y - start.y)) / frames,
+        });
+
+        set(newVector as any);
+        yield "next";
+      }
     }
 
     set(stop);
@@ -59,7 +76,7 @@ export class Cinematics {
   public *fadeScreenToPercentage(props: { percentage: number; time: number; state: IGameState }): GameCoroutine {
     const { percentage, time, state } = props;
 
-    yield* this.linearTween({
+    yield* Cinematics.LinearTween({
       set   : x => state.overlay.alpha = x,
       start : state.overlay.alpha,
       stop  : percentage / 100,
@@ -93,25 +110,27 @@ export class Cinematics {
   }
 
   public *openingBud1(): GameCoroutine {
+    if (!DebugFlags["Show Bud Text"]) {
+      return;
+    }
+
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    if (DebugFlags["Show Bud Text"]) {
-      yield* DialogBox.StartDialog([ 
-        { speaker: "Bud", text: "Sigh... Another day, another lonely diary entry.", },
-        { speaker: "Bud", text: "Dear diary...", },
-        { speaker: "Bud", text: "I hope you’re doing well today!", },
-        { speaker: "Bud", text: "Me? Oh, thanks for asking!", },
-        { speaker: "Bud", text: "It’s been the same as every other day, I suppose.", },
-        { speaker: "Bud", text: "Wake up, brush my wings, and stand guard for the whole day!", },
-        { speaker: "Bud", text: "I can’t complain. I have stability and routine. What more could I want?", },
-        { speaker: "Bud", text: "...I sure do hope he wakes up someday, though.", },
-        { speaker: "Bud", text: "Huh? What’s that?", },
-        { speaker: "Bud", text: "You want me to turn around?", },
-        { speaker: "Bud", text: "What a silly book! Why would I want to do that?", },
-      ]);
-    }
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Sigh... Another day, another lonely diary entry.", },
+      { speaker: "Bud", text: "Dear diary...", },
+      { speaker: "Bud", text: "I hope you’re doing well today!", },
+      { speaker: "Bud", text: "Me? Oh, thanks for asking!", },
+      { speaker: "Bud", text: "It’s been the same as every other day, I suppose.", },
+      { speaker: "Bud", text: "Wake up, brush my wings, and stand guard for the whole day!", },
+      { speaker: "Bud", text: "I can’t complain. I have stability and routine. What more could I want?", },
+      { speaker: "Bud", text: "...I sure do hope he wakes up someday, though.", },
+      { speaker: "Bud", text: "Huh? What’s that?", },
+      { speaker: "Bud", text: "You want me to turn around?", },
+      { speaker: "Bud", text: "What a silly book! Why would I want to do that?", },
+    ]);
 
     state.mode = "Normal"; 
 
@@ -164,6 +183,8 @@ export class Cinematics {
       { speaker: "Bud", text: "Well...", },
       { speaker: "Bud", text: "Actually, let’s take a look around. You can see it for yourself.", },
     ]);
+
+    state.budFollowing = true;
 
     state.mode = "Normal"; 
   }
