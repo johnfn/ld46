@@ -124,11 +124,11 @@ export class Player extends Entity {
       }
   
       if (state.keys.down.D) {
-        this.velocity = this.velocity.addX(this.climbSpeed/4);
+        this.velocity = this.velocity.addX(this.climbSpeed/2);
       }
 
       if (state.keys.down.W) {
-        this.velocity = this.velocity.addY(-this.climbSpeed/4);
+        this.velocity = this.velocity.addY(-this.climbSpeed/2);
       } 
       
       if (state.keys.down.S) {
