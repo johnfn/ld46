@@ -85,12 +85,13 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
   };
 
   renderLeaf(root: any) {
-    if (!DebugFlags["Show Flowers in Hierarchy"].on && root instanceof NormalFlower) {return null};
-    return  (<div>
-    { root.name } (depth: { root.zIndex }) { root instanceof Entity && (
-        root.activeModes.includes(this.props.gameState.mode) ? "Active" : "Inactive"
-    )}
-  </div>)
+    if (!DebugFlags["Show Flowers in Hierarchy"] && root instanceof NormalFlower) { return null };
+
+    return (<div>
+      { root.name } (depth: { root.zIndex }) { root instanceof Entity && (
+          root.activeModes.includes(this.props.gameState.mode) ? "Active" : "Inactive"
+      )}
+    </div>)
   }
 
   render() {
