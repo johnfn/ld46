@@ -54,7 +54,7 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
   constructor(props: GameArgs) {
     GameReference = this;
 
-    this.coroutineManager = new CoroutineManager();
+    this.coroutineManager = new CoroutineManager(this);
     this.state = props.state;
 
     const view = document.getElementById('canvas');
@@ -169,15 +169,17 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
 
     this.state.toBeDestroyed = [];
 
+    const activeEntities = new HashSet(this.state.entities.values().filter(e => e.activeModes.includes(this.state.mode)));
+
     const grid = this.collisionHandler.buildCollisionGrid({
       bounds  : new Rect({ x: 0, y: 0, width: 5000, height: 5000 }),
-      entities: this.state.entities,
+      entities: activeEntities,
     });
 
     this.state.lastCollisionGrid = grid;
 
     this.collisionHandler.resolveCollisions({
-      entities: this.state.entities,
+      entities: activeEntities,
       grid    : grid,
     });
 

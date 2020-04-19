@@ -50,12 +50,16 @@ export class KeyboardState {
   constructor() {
     document.addEventListener("keydown", e => this.keyDown(e), false);
     document.addEventListener("keyup"  , e => this.keyUp(e),   false);
-    window.addEventListener("blur"   , () => { 
-      this.down          = KeyInfo(); 
-      this.justDown      = KeyInfo(); 
-      this.justUp        = KeyInfo(); 
-      this._queuedEvents = [];
+    window.addEventListener("blur"     , () => { 
+      this.clear();
     }, false);
+  }
+
+  public clear() {
+    this.down          = KeyInfo(); 
+    this.justDown      = KeyInfo(); 
+    this.justUp        = KeyInfo(); 
+    this._queuedEvents = [];
   }
 
   private keyUp(e: KeyboardEvent): void {

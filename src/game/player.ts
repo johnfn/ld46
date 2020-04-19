@@ -70,8 +70,28 @@ export class Player extends Entity {
     })
   }
 
+  checkForDialogTriggers(state: IGameState) {
+    for (const trigger of state.map.dialogTriggers.filter(t => !t.triggered)) {
+      if (trigger.region.rect.contains(this.position)) {
+        const dialogName = trigger.region.properties["dialog"];
+
+        trigger.triggered = true;
+
+        if (!(dialogName in state.cinematics)) {
+          throw new Error(`Cant find a cinematic named ${ dialogName }`);
+        }
+
+        this.startCoroutine(
+          dialogName,
+          (state.cinematics as any)[dialogName as any]()
+        );
+      }
+    }
+  }
+
   update(state: IGameState): void {
     this.animate(state);
+    this.checkForDialogTriggers(state);
 
     this.velocity = this.velocity.withX(0);
 
@@ -136,14 +156,5 @@ export class Player extends Entity {
     
     Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)));
 
-    for (const region of state.map.musicRegions) {
-      if (region.rect.contains(this.position)) {
-        const songPath = region.properties["file"];
-
-        if (!this.audio || this.audio.src !== songPath) {
-          this.audio = new Audio(songPath);
-        }
-      }
-    }
   }
 }
