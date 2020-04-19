@@ -49,7 +49,6 @@ export class Player extends Entity {
 
     Player.Instance = this;
 
-
     this.idle  = Assets.getResource("char_idle");
     this.walk  = Assets.getResource("char_walk");
     this.jump  = Assets.getResource("char_jump");
@@ -158,9 +157,6 @@ export class Player extends Entity {
       } else {
         this.velocity = this.velocity.clampY(-this.climbSpeed, this.climbSpeed);
       }
-
-      // if (state.keys.down.W || state.keys.down.S) {
-      // }
     } else {
       // gravity
 
