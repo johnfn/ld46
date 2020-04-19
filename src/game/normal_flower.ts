@@ -21,6 +21,7 @@ export class NormalFlower extends Entity {
     });
 
     this.frames = Assets.getResource(flowersMap[Math.floor(Math.random()*Object.keys(flowersMap).length) + 1]) as Texture[];
+    if (Math.random() > 0.5) this.sprite.scale.x *= -1;
 
     this.startCoroutine(`flower-update-${ ++flowers }`, this.flowerUpdate());
   }
