@@ -9,7 +9,6 @@ import { DebugFlagsType } from "./react/debug_flag_buttons";
 import { CollisionHandler } from "./collision_handler";
 import { Rect } from "./geometry/rect";
 import { CoroutineManager } from "./coroutine_manager";
-import { CollisionGrid } from "./collision_grid";
 import { IGameState } from 'Library';
 
 export let GameReference: BaseGame<any>;
@@ -109,11 +108,11 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     this.renderer = this.app.renderer;
 
     this.camera = new Camera({
-      stage       : this.stage,
-      state       : this.state,
-      canvasWidth : props.canvasWidth,
-      canvasHeight: props.canvasHeight,
-      bounds      : new Rect({ x: -5000, y: -5000, width: 10000, height: 10000 }),
+      stage           : this.stage,
+      state           : this.state,
+      canvasWidth     : props.canvasWidth,
+      canvasHeight    : props.canvasHeight,
+      bounds          : new Rect({ x: -5000, y: -5000, width: 10000, height: 10000 }),
     });
 
     ReactMountGame(this, props.debugFlags);

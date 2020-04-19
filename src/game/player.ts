@@ -116,7 +116,11 @@ export class Player extends Entity {
     
     Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)));
 
-    for (const region of GameMap.Instance.musicRegions) {
+    const cameraRegion = state.map.getCameraRegion(this);
+
+    Game.Instance.camera.setBounds(cameraRegion.rect);
+
+    for (const region of state.map.musicRegions) {
       if (region.rect.contains(this.position)) {
         const songPath = region.properties["file"];
 
