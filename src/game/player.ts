@@ -7,14 +7,16 @@ import { Rect } from "../library/geometry/rect";
 import { Vine } from "./vine_flower";
 import { Vector2 } from "../library/geometry/vector2";
 import { BouncyShroom } from "./bouncy_shroom";
+import { Debug } from "../library/debug";
 
 export class Player extends Entity {
+  public static StartPosition = new Vector2(800, 600);
+  public static Instance: Player;
+
   speed      = 30;
-  jumpHeight = 50;
+  jumpHeight = 60;
   gravity    = 2;
   colliderSize = new Vector2(100, 550);
-
-  static StartPosition = new Vector2(800, 600);
 
   idle:  Texture[];
   walk:  Texture[];
@@ -25,7 +27,6 @@ export class Player extends Entity {
   
   animState: Texture[]
 
-  public static Instance: Player;
 
   frame = 0;
   facing: "left" | "right" = "right";
@@ -84,7 +85,7 @@ export class Player extends Entity {
   }
 
   animate(state: IGameState) {
-    if (state.tick % 8 === 0) {
+    if (state.tick % 6 === 0) {
       this.frame = (this.frame + 1) % this.animState.length;
     }
   }
@@ -224,10 +225,12 @@ export class Player extends Entity {
 
     if (this.velocity.x > 0 && this.scale.x < 0) {
       this.scale = this.scale.invertX();
+      this.graphic.x = -300;
     }
 
     if (this.velocity.x < 0 && this.scale.x > 0) {
       this.scale = this.scale.invertX();
+      this.graphic.x = -500;
     }
   }
 }
