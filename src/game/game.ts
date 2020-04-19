@@ -48,7 +48,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
       audio.loop = true;
     }
 
-    if (DebugFlags["Initial Cinematic"].on) {
+    if (DebugFlags["Show Initial Cinematic"].on) {
       this.coroutineManager.startCoroutine(
         "Initial Cinematic",
         this.cinematics.openingCinematic(),

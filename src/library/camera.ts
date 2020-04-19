@@ -18,18 +18,22 @@ export class Camera {
   private _currentBounds   : Rect;
 
   constructor(props: { 
-    stage           : Entity;
-    state           : IGameState;
-    canvasWidth     : number; 
-    canvasHeight    : number;
-    bounds          : Rect;
+    stage       : Entity;
+    state       : IGameState;
+    canvasWidth : number; 
+    canvasHeight: number;
+    scale       : number;
+    bounds      : Rect;
   }) {
     this._stage            = props.stage;
-    this._canvasWidth      = props.canvasWidth;
-    this._canvasHeight     = props.canvasHeight;
+    this._canvasWidth      = props.canvasWidth / props.scale;
+    this._canvasHeight     = props.canvasHeight / props.scale;
     this._currentBounds    = props.bounds;
 
-    this._immediatelyCenterOn(new Vector2({ x: props.canvasWidth / 2, y: props.canvasHeight / 2 }));
+    this._immediatelyCenterOn(new Vector2({ 
+      x: this._canvasWidth/ 2, 
+      y: this._canvasHeight / 2 
+    }));
 
     this._desiredPosition = this._position;
   }
@@ -43,6 +47,10 @@ export class Camera {
 
   public setBounds(newBounds: Rect) {
     this._currentBounds = newBounds;
+  }
+
+  public getBounds(): Rect {
+    return this._currentBounds;
   }
 
   public cameraFrame(): Rect {

@@ -9,15 +9,19 @@ import { Vine } from "./vine_flower";
 import { Vector2 } from "../library/geometry/vector2";
 
 export class Player extends Entity {
-  speed = 30;
+  speed      = 30;
   jumpHeight = 50;
-  gravity = 2;
+  gravity    = 2;
+
+  static StartPosition = new Vector2(300, 300);
 
   idle: Texture[];
   walk: Texture[];
   jump: Texture[];
   
   animState: Texture[]
+
+  public static Instance: Player;
 
   frame = 0;
   facing: "left" | "right" = "right";
@@ -29,13 +33,16 @@ export class Player extends Entity {
       texture: Assets.getResource("owo"),
     });
 
+    Player.Instance = this;
+
     this.idle = Assets.getResource("char_idle");
 
     this.walk = Assets.getResource("char_walk");
     this.jump = Assets.getResource("char_jump");
 
     this.animState = this.idle;
-    this.x = 300;
+    this.x = Player.StartPosition.x;
+    this.y = Player.StartPosition.y;
   }
 
   audio: HTMLAudioElement | null = null;
@@ -115,10 +122,6 @@ export class Player extends Entity {
     this.texture = this.animState[this.frame];
     
     Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)));
-
-    const cameraRegion = state.map.getCameraRegion(this);
-
-    Game.Instance.camera.setBounds(cameraRegion.rect);
 
     for (const region of state.map.musicRegions) {
       if (region.rect.contains(this.position)) {

@@ -19,6 +19,7 @@ export type AssetPath =
   | "loop2.mp3"
   | "map.json"
   | "music/Sanctuary.mp3"
+  | "music/Withers.mp3"
   | "music.json"
   | "owo.png"
   | "parallax bg/bigcloud01.png"
@@ -123,6 +124,7 @@ export const AssetsToLoad = {
   "loop2"                      : { type: "Audio"       as const, path: "loop2.mp3"                       },
   "map"                        : { type: "TileMap"     as const, path: "map.json"                        },
   "music/Sanctuary"            : { type: "Audio"       as const, path: "music/Sanctuary.mp3"             },
+  "music/Withers"              : { type: "Audio"       as const, path: "music/Withers.mp3"               },
   "music"                      : { type: "TileMap"     as const, path: "music.json"                      },
   "owo"                        : { type: "Image"       as const, path: "owo.png"                         },
   "parallax bg/bigcloud01"     : { type: "Image"       as const, path: "parallax bg/bigcloud01.png"      },
