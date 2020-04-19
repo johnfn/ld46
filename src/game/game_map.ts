@@ -55,7 +55,7 @@ export class GameMap extends Entity {
           type     : "single",
           name     : "start",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
-            if (DebugFlags["Set Position To Start Object"].on) {
+            if (DebugFlags["Set Position To Start Object"]) {
               setTimeout(() => {
                 Player.Instance.x = props.x;
                 Player.Instance.y = props.y;

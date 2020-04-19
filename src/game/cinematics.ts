@@ -6,6 +6,8 @@ import { DialogOverlay } from "./dialog_overlay";
 import { TextEntity } from "../library/text_entity";
 import { IGameState } from "Library";
 import { DialogBox } from "./dialog_box";
+import { DebugFlags } from "./debug";
+import { Bud } from "./bud";
 
 export class Cinematics {
   coroutineManager   : CoroutineManager;
@@ -95,21 +97,37 @@ export class Cinematics {
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "Bud", text: "Sigh... Another day, another lonely diary entry.", },
-      { speaker: "Bud", text: "Dear diary...", },
-      { speaker: "Bud", text: "I hope you’re doing well today!", },
-      { speaker: "Bud", text: "Me? Oh, thanks for asking!", },
-      { speaker: "Bud", text: "It’s been the same as every other day, I suppose.", },
-      { speaker: "Bud", text: "Wake up, brush my wings, and stand guard for the whole day!", },
-      { speaker: "Bud", text: "I can’t complain. I have stability and routine. What more could I want?", },
-      { speaker: "Bud", text: "...I sure do hope he wakes up someday, though.", },
-      { speaker: "Bud", text: "Huh? What’s that?", },
-      { speaker: "Bud", text: "You want me to turn around?", },
-      { speaker: "Bud", text: "What a silly book! Why would I want to do that?", },
-    ]);
+    if (DebugFlags["Show Bud Text"]) {
+      yield* DialogBox.StartDialog([ 
+        { speaker: "Bud", text: "Sigh... Another day, another lonely diary entry.", },
+        { speaker: "Bud", text: "Dear diary...", },
+        { speaker: "Bud", text: "I hope you’re doing well today!", },
+        { speaker: "Bud", text: "Me? Oh, thanks for asking!", },
+        { speaker: "Bud", text: "It’s been the same as every other day, I suppose.", },
+        { speaker: "Bud", text: "Wake up, brush my wings, and stand guard for the whole day!", },
+        { speaker: "Bud", text: "I can’t complain. I have stability and routine. What more could I want?", },
+        { speaker: "Bud", text: "...I sure do hope he wakes up someday, though.", },
+        { speaker: "Bud", text: "Huh? What’s that?", },
+        { speaker: "Bud", text: "You want me to turn around?", },
+        { speaker: "Bud", text: "What a silly book! Why would I want to do that?", },
+      ]);
+    }
 
     state.mode = "Normal"; 
+
+    const bud = Bud.Instance;
+
+    let startX = bud.x;
+    let startY = bud.y;
+
+    for (let i = 0; i < 20; i++) {
+      bud.x = startX + (Math.random() * 200 - 100);
+      bud.y = startY + (Math.random() * 200 - 100);
+
+      yield { frames: 2 };
+    }
+
+    yield* this.openingBud2();
   }
 
   public *openingBud2(): GameCoroutine {

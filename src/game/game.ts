@@ -43,7 +43,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
     this.fixedCameraStage.addChild(new DialogOverlay());
     this.fixedCameraStage.addChild(new Hud(this.state.spiritTotal));
 
-    if (DebugFlags["Show Initial Cinematic"].on) {
+    if (DebugFlags["Show Initial Cinematic"]) {
       this.coroutineManager.startCoroutine(
         "Initial Cinematic",
         this.cinematics.openingCinematic(),

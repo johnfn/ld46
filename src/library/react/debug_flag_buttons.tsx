@@ -2,7 +2,7 @@ import React from 'react';
 import { IS_DEBUG } from '../environment';
 
 export type DebugFlagsType = {
-  [key: string]: { on: boolean; description: string }
+  [key: string]: boolean;
 };
 
 const LOCAL_STORAGE_KEY = "debug flags";
@@ -52,7 +52,7 @@ export class DebugFlagButtons extends React.Component<DebugFlagButtonsProps, {}>
               >
                 <input 
                   type="checkbox" 
-                  checked={ flag.on } 
+                  checked={ flag } 
                   onChange={ () => { 
                     // NOTE: This is TERRIBLE React code. DO NOT LEARN FROM
                     // THIS. DO NOT IMITATE THIS. IN FACT, RUN FAR AWAY FROM
@@ -65,7 +65,7 @@ export class DebugFlagButtons extends React.Component<DebugFlagButtonsProps, {}>
 
                     // The point being that the value gets synced back into the
                     // game with no one being the wiser. MAGIC!
-                    this.props.flags[flagName].on = !this.props.flags[flagName].on;
+                    this.props.flags[flagName] = !this.props.flags[flagName];
 
                     SaveDebugFlagsToLocalStorage(this.props.flags);
                   }}
