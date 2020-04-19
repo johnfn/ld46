@@ -1186,7 +1186,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":2048,
+                 "width":2304,
                  "x":-2304,
                  "y":2304
                 }, 
@@ -1197,8 +1197,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":4096,
-                 "x":-256,
+                 "width":3840,
+                 "x":0,
                  "y":2304
                 }, 
                 {
@@ -1298,7 +1298,7 @@
                  "type":"",
                  "visible":true,
                  "width":512,
-                 "x":5632,
+                 "x":5888,
                  "y":0
                 }],
          "opacity":1,
