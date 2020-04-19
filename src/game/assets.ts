@@ -98,6 +98,12 @@ export type AssetPath =
   | "flower_live2 (3).png"
   | "flower_live2 (4).png"
   | "flower_live2 (5).png"
+  | "vine_flower_live (1).png"
+  | "vine_flower_live (2).png"
+  | "vine_flower_live (3).png"
+  | "vine_flower_live (4).png"
+  | "vine_flower_live (5).png"
+  | "vine_flower_live (6).png"
   | "vine_live (1).png"
   | "vine_live (2).png"
   | "vine_live (3).png"
@@ -231,6 +237,17 @@ export const AssetsToLoad = {
       "flower_live2 (3).png",
       "flower_live2 (4).png",
       "flower_live2 (5).png",
+    ],
+  },
+  "vine_flower_live": {
+    type: "Animation" as const,
+    paths: [
+      "vine_flower_live (1).png",
+      "vine_flower_live (2).png",
+      "vine_flower_live (3).png",
+      "vine_flower_live (4).png",
+      "vine_flower_live (5).png",
+      "vine_flower_live (6).png",
     ],
   },
   "vine_live": {

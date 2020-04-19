@@ -7,13 +7,14 @@ import { RectGroup } from "../library/geometry/rect_group";
 import { Assets } from "./assets";
 import { Texture } from "pixi.js";
 import { NormalFlower } from "./normal_flower";
-import { C } from "./constants";
 import { VineFlower } from "./vine_flower";
+import { Player } from "./player";
 
 export class GameMap extends Entity {
   artMap         : TiledTilemap;
   // musicRegionsMap: TiledTilemap;
   musicRegions   : TilemapRegion[] = [];
+  cameraRegions  : TilemapRegion[] = [];
 
   public static Instance: GameMap;
 
@@ -45,6 +46,14 @@ export class GameMap extends Entity {
             return new VineFlower(tex);
           }
         },
+
+        {
+          type     : "rect",
+          layerName: "Camera Region Layer",
+          process  : region => {
+            this.cameraRegions.push(region);
+          },
+        },
     ],
       assets: Assets
     });
@@ -64,6 +73,16 @@ export class GameMap extends Entity {
     // });
 
     this.loadMap();
+  }
+
+  getCameraRegion(player: Player): TilemapRegion {
+    for (const region of this.cameraRegions) {
+      if (region.rect.contains(player.positionAbsolute())) {
+        return region;
+      }
+    }
+
+    throw new Error("No camera region for that location. Halp!")
   }
 
   loadMap() {

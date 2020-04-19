@@ -7,7 +7,6 @@ import { TiledTilemapObjects, TilemapCustomObjects, ObjectInfo } from './tilemap
 import { TilemapData, TilemapRegion } from './tilemap_data';
 import { Assets } from '../../game/assets';
 import { TypesafeLoader } from '../typesafe_loader';
-import { Vector2 } from '../geometry/vector2';
 
 export type MapLayer = {
   layerName  : string;
