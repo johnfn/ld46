@@ -232,6 +232,12 @@ export class Vector2 {
     });
   }
 
+  invertX(): Vector2 {
+    return new Vector2({
+      x: -this.x,
+      y: this.y,
+    });
+  }
 
   lerp(other: Vector2, t: number): Vector2 {
     if (t > 1 || t < 0) { console.error("Lerp t must be between 0 and 1."); }

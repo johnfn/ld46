@@ -116,18 +116,13 @@ export class Player extends Entity {
     }
   }
 
-  update(state: IGameState): void {
-    this.animate(state);
-    this.checkForDialogTriggers(state);
-
+  calculateVelocity(state: IGameState, touchingVine: boolean) {
     this.velocity = this.velocity.withX(0);
 
     if (this.hitInfo.down || this.hitInfo.up) {
       this.velocity = this.velocity.withY(0);
       this.jumpingOnLadder = false;
     }
-
-    const touchingVine = this.hitInfo.interactions.find(x => x.otherEntity instanceof Vine);
 
     if (touchingVine) {
       // Climb ladder
@@ -178,6 +173,15 @@ export class Player extends Entity {
       }
     }
 
+  }
+
+  update(state: IGameState): void {
+    const touchingVine = this.hitInfo.interactions.find(x => x.otherEntity instanceof Vine) !== undefined;
+
+    this.animate(state);
+    this.checkForDialogTriggers(state);
+    this.calculateVelocity(state, touchingVine);
+
     if (this.grounded) {
       if (touchingVine) {
         this.animState = this.climb;
@@ -205,5 +209,12 @@ export class Player extends Entity {
     this.graphic.texture = this.animState[this.frame];
     
     Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)));
+
+    if (this.velocity.x > 0 && this.scale.x < 0) {
+      this.scale = this.scale.invertX();
+    }
+    if (this.velocity.x < 0 && this.scale.x > 0) {
+      this.scale = this.scale.invertX();
+    }
   }
 }
