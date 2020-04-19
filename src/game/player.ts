@@ -12,12 +12,14 @@ export class Player extends Entity {
   speed      = 30;
   jumpHeight = 50;
   gravity    = 2;
+  colliderSize = new Vector2(100, 550);
 
   static StartPosition = new Vector2(300, 300);
 
-  idle: Texture[];
-  walk: Texture[];
-  jump: Texture[];
+  idle:  Texture[];
+  walk:  Texture[];
+  jump:  Texture[];
+  climb: Texture[];
   
   animState: Texture[]
 
@@ -35,20 +37,22 @@ export class Player extends Entity {
 
     Player.Instance = this;
 
-    this.idle = Assets.getResource("char_idle");
-
-    this.walk = Assets.getResource("char_walk");
-    this.jump = Assets.getResource("char_jump");
+    this.idle  = Assets.getResource("char_idle");
+    this.walk  = Assets.getResource("char_walk");
+    this.jump  = Assets.getResource("char_jump");
+    this.climb = Assets.getResource("char_climb");
 
     this.animState = this.idle;
+
     this.x = Player.StartPosition.x;
     this.y = Player.StartPosition.y;
+
   }
 
   audio: HTMLAudioElement | null = null;
 
   get grounded() {
-    return this.hitInfo.down
+    return this.hitInfo.down !== undefined
   }
 
   animate(state: IGameState) {
@@ -59,10 +63,10 @@ export class Player extends Entity {
 
   public collisionBounds(): Rect {
     return new Rect({
-      x     : 200,
-      y     : 20,
-      width : 40,
-      height: this.height - 80,
+      x     : 400 - this.colliderSize.x / 2,
+      y     : 400 - this.colliderSize.y / 2,
+      width : this.colliderSize.x,
+      height: this.colliderSize.y,
     })
   }
 
@@ -108,11 +112,20 @@ export class Player extends Entity {
     }
 
     if (this.grounded) {
-      if (this.velocity.x === 0) {
+      if (touchingVine) {
+        this.animState = this.climb;
+      } else if (this.velocity.x === 0) {
         this.animState = this.idle;
+      } else {
+        this.animState = this.walk;
+      }
+    } else {
+      if (touchingVine) {
+        this.animState = this.climb;
       }
     }
-    
+
+
     if (state.keys.justDown.Spacebar && (this.hitInfo.down || (touchingVine && this.velocity.y <= 2))) {
       this.velocity = this.velocity.withY(-this.jumpHeight);
       this.animState = this.jump;

@@ -7,7 +7,7 @@ import { C } from "./constants";
 
 let flowers = 0;
 
-let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {1: "flower1", 2: "flower2", 3: "flower3"}
+let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {1: "flower1", 2: "flower2", 3: "flower3", 4: "flower4"}
 
 export class NormalFlower extends Entity {
   interactionDistance = C.InteractionDistance;
