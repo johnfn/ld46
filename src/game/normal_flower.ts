@@ -1,11 +1,13 @@
 import { Texture } from "pixi.js";
 
-import { Assets } from "./assets";
+import { Assets, AssetsToLoad } from "./assets";
 import { Entity } from "../library/entity";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { C } from "./constants";
 
 let flowers = 0;
+
+let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {1: "flower1", 2: "flower2", 3: "flower3"}
 
 export class NormalFlower extends Entity {
   interactionDistance = C.InteractionDistance;
@@ -15,10 +17,10 @@ export class NormalFlower extends Entity {
   constructor() {
     super({
       name   : "Flower",
-      texture: Assets.getResource("flower_live")[0],
+      texture: Assets.getResource("flower1")[0],
     });
 
-    this.frames = Assets.getResource("flower_live");
+    this.frames = Assets.getResource(flowersMap[Math.floor(Math.random()*Object.keys(flowersMap).length) + 1]) as Texture[];
 
     this.startCoroutine(`flower-update-${ ++flowers }`, this.flowerUpdate());
   }
