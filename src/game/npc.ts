@@ -3,10 +3,11 @@ import { IGameState } from "Library";
 import { Texture, Graphics } from "pixi.js";
 import { Rect } from "../library/geometry/rect";
 import { TextEntity } from "../library/text_entity";
-import { Assets } from "./assets";
 import { HoverText } from "./hover_text";
 import { C } from "./constants";
 import { Mode } from "Library";
+import { Assets } from "./assets";
+import { Vector2 } from "../library/geometry/vector2";
 
 export class NpcDialog extends Entity {
   graphic: Graphics;
@@ -22,17 +23,27 @@ export class NpcDialog extends Entity {
     });
 
     const wid = this.text.calculateTextWidth();
+    const height = 120;
 
     this.graphic = new Graphics();
     this.graphic.beginFill(0x0);
-    this.graphic.drawRoundedRect(0, 0, wid, 120, 10);
+    this.graphic.drawRoundedRect(0, 0, wid + 40, height, 40);
 
     this.sprite.addChild(this.graphic);
 
-    this.addChild(this.text, 10, 10);
+    const ent = new Entity({ name: "DialogTip", texture: Assets.getResource("dialog_tip") });
+    ent.scale = new Vector2(0.25, 0.25);
+    this.addChild(
+      ent,
+      20,
+      height
+    );
+
+    this.addChild(this.text, 20, 10);
   }
 
   update(state: IGameState) {
+
   }
 }
 
