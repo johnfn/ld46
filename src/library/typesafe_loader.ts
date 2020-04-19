@@ -73,7 +73,6 @@ export class TypesafeLoader<Resources extends AllResourcesType> {
         const tilemapData = new TilemapData({ 
           data: this.getResource(castedResource) as TiledJSON, 
           pathToTilemap, 
-          scale: C.Scale,
         });
 
         allTilemapDependencyPaths = allTilemapDependencyPaths.concat(

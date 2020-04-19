@@ -76,7 +76,7 @@ export class Debug {
    * If that's not what you want, pass persistent = true.
    */
   public static DrawLineV2(start: Vector2, end: Vector2, color = 0xff0000, persistent = false): Graphics {
-    return Debug.DrawLine(new Line({ start, end }), color);
+    return Debug.DrawLine(new Line({ start, end }), color, persistent);
   }
 
   /** 

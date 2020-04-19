@@ -47,14 +47,11 @@ export class TiledTilemapObjects {
 
   private _assets: TypesafeLoader<any>;
 
-  private _scale: Vector2;
-
   constructor(props: {
     assets       : TypesafeLoader<any>;
     layers       : TiledObjectLayerJSON[];
     customObjects: TilemapCustomObjects[];
     map          : TiledTilemap;
-    scale        : Vector2;
   }) {
     const { layers, customObjects, map } = props;
 
@@ -62,7 +59,6 @@ export class TiledTilemapObjects {
     this._layers        = layers;
     this._customObjects = customObjects;
     this._map           = map;
-    this._scale         = props.scale;
 
     for (const layer of this._layers) {
       const objectsInLayer = this.loadLayer(layer);
@@ -126,10 +122,10 @@ export class TiledTilemapObjects {
           if (customObject.type === "rect" && customObject.layerName === layer.name) {
             customObject.process({
               rect: new Rect({
-                  x     : obj.x      * this._scale.x,
-                  y     : obj.y      * this._scale.y,
-                  width : obj.width  * this._scale.x,
-                  height: obj.height * this._scale.y,
+                  x     : obj.x     ,
+                  y     : obj.y     ,
+                  width : obj.width ,
+                  height: obj.height,
                 }),
               properties: obj.properties || {},
             });
@@ -158,8 +154,8 @@ export class TiledTilemapObjects {
       let y = obj.y - spritesheet.tileheight // Tiled pivot point is (0, 1) so we need to subtract by tile height.
 
       const tile = {
-        x             : x * this._scale.x,
-        y             : y * this._scale.y,
+        x             : x,
+        y             : y,
         tile          : spritesheet,
         isCollider    : this._map._data._gidHasCollision[obj.gid] || false,
         gid           : obj.gid,

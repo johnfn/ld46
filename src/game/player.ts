@@ -4,13 +4,14 @@ import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { IGameState } from "Library";
 import { Texture } from "pixi.js";
-import { C } from "./constants";
 import { Rect } from "../library/geometry/rect";
 import { Vine } from "./vine_flower";
+import { Vector2 } from "../library/geometry/vector2";
 
 export class Player extends Entity {
-  speed = 10;
-  jumpHeight = 20;
+  speed = 30;
+  jumpHeight = 50;
+  gravity = 2;
 
   idle: Texture[];
   walk: Texture[];
@@ -20,6 +21,7 @@ export class Player extends Entity {
 
   frame = 0;
   facing: "left" | "right" = "right";
+  climbSpeed = 20;
 
   constructor() {
     super({
@@ -28,13 +30,12 @@ export class Player extends Entity {
     });
 
     this.idle = Assets.getResource("char_idle");
-    this.scale = C.Scale;
 
     this.walk = Assets.getResource("char_walk");
     this.jump = Assets.getResource("char_jump");
 
     this.animState = this.idle;
-    this.x = 200;
+    this.x = 300;
   }
 
   audio: HTMLAudioElement | null = null;
@@ -51,8 +52,8 @@ export class Player extends Entity {
 
   public collisionBounds(): Rect {
     return new Rect({
-      x     : 50,
-      y     : 50,
+      x     : 200,
+      y     : 20,
       width : 40,
       height: this.height - 80,
     })
@@ -80,23 +81,23 @@ export class Player extends Entity {
     if (touchingVine) {
       // Climb ladder
 
-      this.velocity = this.velocity.addY(1);
+      this.velocity = this.velocity.addY(this.gravity);
 
       if (state.keys.down.W) {
-        this.velocity = this.velocity.addY(-10);
+        this.velocity = this.velocity.addY(-this.climbSpeed);
       } 
       
       if (state.keys.down.S) {
         // This is the only way you can go down
-        this.velocity = this.velocity.addY(10);
-        this.velocity = this.velocity.clampY(-10, 10);
+        this.velocity = this.velocity.addY(this.climbSpeed);
+        this.velocity = this.velocity.clampY(-this.climbSpeed, this.climbSpeed);
       } else {
-        this.velocity = this.velocity.clampY(-10, 0);
+        this.velocity = this.velocity.clampY(-this.climbSpeed, 0);
       }
     } else {
       // gravity
 
-      this.velocity = this.velocity.addY(1);
+      this.velocity = this.velocity.addY(this.gravity);
     }
 
     if (this.grounded) {
@@ -112,7 +113,7 @@ export class Player extends Entity {
 
     this.texture = this.animState[this.frame];
     
-    Game.Instance.camera.centerOn(this.position);
+    Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)));
 
     for (const region of GameMap.Instance.musicRegions) {
       if (region.rect.contains(this.position)) {

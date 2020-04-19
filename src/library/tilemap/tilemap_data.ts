@@ -26,7 +26,6 @@ export class TilemapData {
   private _tileHeight: number;
   private _layers    : { [tilesetName: string]: TilemapLayer };
   private _tilesets  : Tileset[];
-  private _scale     : Vector2;
 
   // (should be private, but cant be for organization reasons)
   _gidHasCollision: { [id: number]: boolean } = {};
@@ -34,7 +33,6 @@ export class TilemapData {
   constructor(props: { 
     data         : TiledJSON;
     pathToTilemap: string;
-    scale        : Vector2;
   }) {
     const { data, pathToTilemap } = props;
 
@@ -44,7 +42,6 @@ export class TilemapData {
     this._gidHasCollision = this.buildCollisionInfoForTiles()
     this._tilesets        = this.loadTilesets(pathToTilemap, this._data);
     this._layers          = this.loadTileLayers();
-    this._scale           = props.scale;
   }
 
   isGidCollider(gid: number): boolean {
@@ -348,15 +345,6 @@ export class TilemapData {
           }));
         }
       }
-    }
-
-    if (!this._scale.equals(Vector2.One)) {
-      colliders = colliders.map(c => new Rect({ 
-        x     : c.x * this._scale.x,
-        y     : c.y * this._scale.y,
-        width : c.width * this._scale.x,
-        height: c.height * this._scale.y,
-      }))
     }
 
     return new RectGroup(colliders);

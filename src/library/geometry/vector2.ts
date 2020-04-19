@@ -77,11 +77,11 @@ export class Vector2 {
     return Math.abs(p.x - this.x) + Math.abs(p.y - this.y);
   }
 
-  diagonalDistance(p: Vector2): number {
+  diagonalDistance(p: IVector2): number {
     return Math.max(Math.abs(p.x - this.x), Math.abs(p.y - this.y));
   }
 
-  distance(p: Vector2): number {
+  distance(p: IVector2): number {
     let dx = Math.abs(p.x - this.x);
     let dy = Math.abs(p.y - this.y);
 

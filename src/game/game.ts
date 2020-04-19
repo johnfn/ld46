@@ -22,7 +22,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
       canvasHeight: C.CanvasHeight,
       tileWidth   : 256,
       tileHeight  : 256,
-      scale       : 1,
+      scale       : 1/4,
       assets      : Assets,
       debugFlags  : DebugFlags,
       state       : new GameState(),

@@ -27,7 +27,6 @@ export class GameMap extends Entity {
 
     this.artMap = new TiledTilemap({
       pathToTilemap: "",
-      scale        : C.Scale,
       json         : Assets.getResource("map"),
       renderer     : Game.Instance.renderer,
       customObjects: [
@@ -52,7 +51,6 @@ export class GameMap extends Entity {
 
     // this.musicRegionsMap = new TiledTilemap({
     //   pathToTilemap: "",
-    //   scale        : C.Scale,
     //   json         : Assets.getResource("music"),
     //   renderer     : Game.Instance.renderer,
     //   customObjects: [{

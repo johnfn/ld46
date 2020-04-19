@@ -17,11 +17,10 @@ class SpiritMeter extends Entity {
       this.icons.push(icon);
       this.addChild(icon);
 
-      icon.x = i * 256 * C.Scale.x;
+      icon.x = i * 256;
       icon.y = 0;
 
       icon.texture = Assets.getResource("spirit_full_hud");
-      icon.scale = C.Scale;
     }
   }
 

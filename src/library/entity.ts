@@ -1,4 +1,4 @@
-import { Vector2 } from "./geometry/vector2";
+import { Vector2, IVector2 } from "./geometry/vector2";
 import { Rect } from "./geometry/rect";
 import { Sprite, Texture, MaskData, Container } from "pixi.js";
 import { getUniqueID } from "./util";
@@ -271,5 +271,9 @@ export class Entity {
   public set scale(value: Vector2) { 
     this.sprite.scale.x = value.x;
     this.sprite.scale.y = value.y;
+  }
+
+  public distance(other: IVector2) {
+    return this.position.distance(other);
   }
 }

@@ -7,9 +7,24 @@ import { Assets } from "./assets";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { Rect } from "../library/geometry/rect";
 import { Vector2 } from "../library/geometry/vector2";
+import { Debug } from "../library/debug";
+
+class VineComponent extends Entity {
+  public frame = 0;
+  private frames = Assets.getResource("vine_live");
+
+  constructor() {
+    super({ name: "VineComponent" });
+  }
+
+  setFrame(frame: number) {
+    this.texture = this.frames[frame];
+    this.frame = frame;
+  }
+}
 
 export class Vine extends Entity {
-  vineComponents: Entity[] = [];
+  finishedVineComponents: VineComponent[] = [];
 
   constructor() {
     super({
@@ -19,20 +34,22 @@ export class Vine extends Entity {
     });
   }
 
+  deadFrame = 4;
+  aliveFrame = 7;
+
   *growVine(): GameCoroutine {
     let state = yield "next";
 
-    let frames = Assets.getResource("vine_live");
     this.visible = true;
 
     for (let i = 0; true; i++) {
-      const ent = new Entity({ texture: frames[0], name: "VineComponent" });
-      const nextPosition = new Vector2(
-        (ent.width / 2) * C.Scale.x,
-        (ent.height / 2 + this.y - ent.height * i) * C.Scale.y
-      ).add(this.positionAbsolute());
+      const ent = new VineComponent();
+      ent.setFrame(0);
 
-      console.log(nextPosition);
+      const nextPosition = new Vector2(
+        (ent.width / 2),
+        (ent.height / 2 + this.y - ent.height * i)
+      ).add(this.positionAbsolute());
 
       // Are we about to hit a wall?
       if (state.lastCollisionGrid.collidesPoint(nextPosition).length > 0) {
@@ -41,24 +58,40 @@ export class Vine extends Entity {
 
       this.addChild(ent, 0, this.y - ent.height * i);
 
-      for (let frame = 0; frame < frames.length; frame++) {
-        ent.texture = frames[frame];
+      for (let frame = 0; frame < this.deadFrame; frame++) {
+        ent.setFrame(frame);
 
         state = yield { frames: 1 };
       }
 
-      this.vineComponents.push(ent);
+      this.finishedVineComponents.push(ent);
+    }
+  }
+
+  update(state: IGameState) {
+    if (state.tick % 8 !== 0) return;
+
+    for (const vine of this.finishedVineComponents) {
+      if (state.player.positionAbsolute().distance(vine.positionAbsolute()) < 600) {
+        if (vine.frame < this.aliveFrame) {
+          vine.setFrame(vine.frame + 1);
+        }
+      } else {
+        if (vine.frame > this.deadFrame) {
+          vine.setFrame(vine.frame - 1);
+        }
+      }
     }
   }
 
   public collisionBounds(): Rect {
     if (this.visible) {
-      const height = (this.vineComponents.length * 256) * C.Scale.y;
+      const height = (this.finishedVineComponents.length * 256);
 
       return new Rect({
         x     : 0,
         y     : -height,
-        width : this.width * C.Scale.x,
+        width : this.width,
         height: height,
       });
     } else {
@@ -73,7 +106,7 @@ export class Vine extends Entity {
 }
 
 export class VineFlower extends Entity {
-  interactionDistance = 200;
+  interactionDistance = C.InteractionDistance;
   frame = 0;
   hoverText: HoverText;
   interacted = false;
@@ -86,7 +119,6 @@ export class VineFlower extends Entity {
       texture: tex,
     });
 
-    this.scale = C.Scale;
     this.addChild(this.hoverText = new HoverText("x: interact"), 0, -80);
     this.hoverText.visible = false;
 

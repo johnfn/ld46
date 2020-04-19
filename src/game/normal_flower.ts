@@ -8,7 +8,7 @@ import { C } from "./constants";
 let flowers = 0;
 
 export class NormalFlower extends Entity {
-  interactionDistance = 200;
+  interactionDistance = C.InteractionDistance;
   frame = 0;
   frames: Texture[];
 
@@ -21,8 +21,6 @@ export class NormalFlower extends Entity {
     this.frames = Assets.getResource("flower_live");
 
     this.startCoroutine(`flower-update-${ ++flowers }`, this.flowerUpdate());
-
-    this.scale = C.Scale;
   }
 
   *flowerUpdate(): GameCoroutine {

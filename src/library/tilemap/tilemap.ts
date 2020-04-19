@@ -23,32 +23,28 @@ export class TiledTilemap {
   private _renderer   : Renderer;
   private _objects    : TiledTilemapObjects;
   private _assets     : TypesafeLoader<any>;
-  private _scale      : Vector2;
 
   _data : TilemapData;
 
-  constructor({ json: data, renderer, pathToTilemap, customObjects, assets, scale }: { 
+  constructor({ json: data, renderer, pathToTilemap, customObjects, assets }: { 
     // this is required to calculate the relative paths of the tileset images.
     json         : TiledJSON; 
     renderer     : Renderer; 
-    scale        : Vector2;
     pathToTilemap: string;
     customObjects: TilemapCustomObjects[];
     assets       : TypesafeLoader<any>;
   }) {
-    this._data       = new TilemapData({ data, pathToTilemap, scale });
+    this._data       = new TilemapData({ data, pathToTilemap });
     this._renderer   = renderer;
     this._tileWidth  = this._data.getTileWidth();
     this._tileHeight = this._data.getTileHeight();
     this._assets     = assets;
-    this._scale      = scale;
 
     this._objects    = new TiledTilemapObjects({
       layers       : this._data.getAllObjectLayers(),
       customObjects: customObjects,
       map          : this,
       assets       : Assets,
-      scale        : this._scale,
     });
   }
 
@@ -113,10 +109,8 @@ export class TiledTilemap {
         name   : layerName,
       });
 
-      layerEntity.x = region.x * this._scale.x - layer.offset.x * this._scale.x;
-      layerEntity.y = region.y * this._scale.y - layer.offset.y * this._scale.y;
-
-      layerEntity.scale = this._scale;
+      layerEntity.x = region.x - layer.offset.x;
+      layerEntity.y = region.y - layer.offset.y;
 
       tileLayers.push({
         entity     : layerEntity,
