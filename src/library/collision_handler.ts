@@ -43,8 +43,7 @@ export class CollisionHandler {
     const grid = new CollisionGrid({
       width   : 2 * this._canvasWidth,
       height  : 2 * this._canvasHeight,
-      cellSize: 8 * this._tileSize,
-      debug   : false,
+      cellSize: 4 * this._tileSize,
     });
 
     const collideableEntities = entities.values().filter(x => x.isCollideable() || x.isInteractable());
@@ -124,7 +123,6 @@ export class CollisionHandler {
         updatedBounds instanceof Rect 
           ? grid.getRectCollisions(updatedBounds, entity) 
           : grid.getRectGroupCollisions(updatedBounds, entity);
-
 
       const yCollisions = yHits.filter(x => !x.otherEntity || (x.otherEntity && !x.otherEntity.isInteractable()));
       const yInteractions = yHits.filter(x => (x.otherEntity && x.otherEntity.isInteractable()));

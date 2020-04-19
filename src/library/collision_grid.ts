@@ -4,7 +4,7 @@ import { Entity } from "./entity";
 import { Vector2 } from "./geometry/vector2";
 import { DefaultGrid } from "./data_structures/default_grid";
 import { RectGroup } from "./geometry/rect_group";
-import { Line } from "./geometry/line";
+import { Debug } from "./debug";
 
 export type CollisionResultRect = {
   firstRect    : Rect;
@@ -36,29 +36,39 @@ export class CollisionGrid {
     width   : number;
     height  : number;
     cellSize: number;
-    debug   : boolean;
   }) {
-    const { width, height, cellSize, debug } = props;
+    const { width, height, cellSize } = props;
 
     this._width = width;
     this._height = height;
     this._cellSize = cellSize;
 
-    if (debug) {
-      this._renderLines = new Graphics();
-
-      // this._game.stage.addChild(this._renderLines);
-    }
-
-    this._numCellsPerRow = Math.floor(width / cellSize);
-    this._numCellsPerCol = Math.floor(height / cellSize);
+    this._numCellsPerRow = Math.ceil(width / cellSize);
+    this._numCellsPerCol = Math.ceil(height / cellSize);
 
     this._cells = new DefaultGrid<Cell>((x, y) => new Cell(
       new Vector2({ x: x * cellSize, y: y * cellSize }),
       cellSize
     ));
+  }
 
-    if (debug) this.drawGrid();
+  debug() {
+    for (let x = 0; x < 10; x++) {
+      for (let y = 0; y < 10; y++) {
+        // Draw cell
+
+        Debug.DrawRect(new Rect({ 
+          x     : x * this._cellSize,
+          y     : y * this._cellSize,
+          width : this._cellSize,
+          height: this._cellSize,
+        }), 0xff0000, true, "fixed");
+
+        for (const obj of this._cells.get(x, y).colliders) {
+          Debug.DrawRect(obj.rect, 0xff0000, true, "fixed");
+        }
+      }
+    }
   }
 
   public get topLeft() {
@@ -233,13 +243,13 @@ export class CollisionGrid {
   // Add a rect to the hash grid.
   // Checks each corner, to handle entities that span multiply grid cells.
   add = (rect: Rect, associatedEntity?: Entity) => {
-    const corners = rect.getCorners();
-
-    for (const corner of corners) {
-      this._cells.get(
-        Math.floor(corner.x / this._cellSize),
-        Math.floor(corner.y / this._cellSize),
-      ).add(rect, associatedEntity);
+    for (let x = rect.x; x < rect.right; x += this._cellSize) {
+      for (let y = rect.y; y < rect.bottom; y += this._cellSize) {
+        this._cells.get(
+          Math.floor(x / this._cellSize),
+          Math.floor(y / this._cellSize),
+        ).add(rect, associatedEntity);
+      }
     }
   };
 
@@ -248,40 +258,6 @@ export class CollisionGrid {
       this.add(rect, associatedEntity);
     }
   }
-
-  // Shows the grid outline for debugging
-  drawGrid = () => {
-    if (this._renderLines) {
-      const lines: Line[] = [];
-      for (let x = 0; x < this._numCellsPerRow; x++) {
-        lines.push(
-          new Line({
-            x1: x * this._cellSize,
-            x2: x * this._cellSize,
-            y1: 0,
-            y2: this._height
-          })
-        );
-      }
-      for (let y = 0; y < this._numCellsPerRow; y++) {
-        lines.push(
-          new Line({
-            x1: 0,
-            x2: this._width,
-            y1: y * this._cellSize,
-            y2: y * this._cellSize
-          })
-        );
-      }
-
-      for (let line of lines) {
-        this._renderLines
-          .lineStyle(1, 0xffffff)
-          .moveTo(line.x1, line.y1)
-          .lineTo(line.x2, line.y2);
-      }
-    }
-  };
 }
 
 type CellItem = {

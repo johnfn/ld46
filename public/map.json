@@ -542,6 +542,24 @@
                  "width":256,
                  "x":4352,
                  "y":2560
+                }, 
+                {
+                 "gid":38,
+                 "height":256,
+                 "id":80,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"bud-start"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":7680,
+                 "y":2304
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -611,7 +629,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":80,
+ "nextobjectid":81,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

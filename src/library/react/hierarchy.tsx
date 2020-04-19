@@ -41,7 +41,7 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
     this.hoverGraphics = [];
 
     if (this.hoverTarget !== null) {
-      this.hoverGraphics = Debug.DrawBounds(this.props.root, 0xff0000, true);
+      this.hoverGraphics = Debug.DrawBounds(this.props.root, 0xff0000, true, "stage");
 
       if (this.props.root instanceof Entity) {
         this.hoverGraphics = [
@@ -107,10 +107,18 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
         </div>
         {
           root instanceof Entity &&
-          root.children().length > 0 &&
+          root.children().length > 0 && root.children().length < 10 &&
             root.children().map(child => {
               return <Hierarchy setMoused={this.props.setMoused} setSelected={this.props.setSelected } root={ child } gameState={ this.props.gameState } />
             })
+        }
+
+        {
+          root instanceof Entity &&
+          root.children().length > 10 &&
+            <div>
+              A lot of children
+            </div>
         }
       </div>
     )

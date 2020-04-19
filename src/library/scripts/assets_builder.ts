@@ -28,11 +28,15 @@ function allNestedFiles(dir: string): string[] {
 }
 
 const isPathTiledTileMap = (path: string) => {
-  const json = JSON.parse(fs.readFileSync(path, 'utf8'));
+  try {
+    const json = JSON.parse(fs.readFileSync(path, 'utf8'));
 
-  return (
-    json.version && json.tilewidth && json.type === "map"
-  );
+    return (
+      json.version && json.tilewidth && json.type === "map"
+    );
+  } catch (e) {
+    return false;
+  }
 };
 
 const isPathTiledWorldMap = (path: string) => {

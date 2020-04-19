@@ -6,6 +6,7 @@ import { Rect } from "./geometry/rect";
 import { RectGroup } from "./geometry/rect_group";
 import { GameReference } from "./base_game";
 import { BaseGameState } from "./base_state";
+import { Player } from "../game/player";
 
 const MAX_DEBUGGING_GRAPHICS_COUNT = 500;
 
@@ -87,12 +88,16 @@ export class Debug {
    * 
    * If that's not what you want, pass persistent = true.
    */
-  public static DrawLine(line: Line, color = 0xff0000, persistent = false): Graphics {
+  public static DrawLine(line: Line, color = 0xff0000, persistent = false, target: "stage" | "fixed" = "fixed"): Graphics {
     const graphics = new Graphics();
 
     line.drawOnto(graphics, color);
 
-    GameReference.fixedCameraStage.sprite.addChild(graphics);
+    if (target === "fixed") {
+      GameReference.fixedCameraStage.sprite.addChild(graphics);
+    } else {
+      GameReference.stage.sprite.addChild(graphics);
+    }
 
     if (persistent) {
       this.DebugGraphicStack.push(graphics);
@@ -116,11 +121,11 @@ export class Debug {
    * 
    * If that's not what you want, pass persistent = true.
    */
-  public static DrawRect(rect: Rect, color = 0xff0000, persistent = false): Graphics[] {
+  public static DrawRect(rect: Rect, color = 0xff0000, persistent = false, target: "stage" | "fixed" = "fixed"): Graphics[] {
     const lines: Graphics[] = [];
 
     for (const line of rect.getLinesFromRect()) {
-      lines.push(Debug.DrawLine(line, color));
+      lines.push(Debug.DrawLine(line, color, persistent, target));
     }
 
     return lines;
@@ -134,7 +139,12 @@ export class Debug {
    * 
    * If that's not what you want, pass persistent = true.
    */
-  public static DrawBounds(entity: Entity | Sprite | Graphics | RectGroup | Container | Rect, color = 0xff0000, persistent = false): Graphics[] {
+  public static DrawBounds(
+    entity: Entity | Sprite | Graphics | RectGroup | Container | Rect, 
+    color = 0xff0000, 
+    persistent = false,
+    target: "stage" | "fixed" = "stage"
+  ): Graphics[] {
     if (entity instanceof Entity) {
       entity = entity.collisionBounds().add(entity.positionAbsolute());
     } 
@@ -143,7 +153,7 @@ export class Debug {
       const results: Graphics[] = [];
 
       for (const rect of entity.getRects()) {
-        const lines = Debug.DrawRect(rect, color);
+        const lines = Debug.DrawRect(rect, color, persistent, target);
 
         for (const line of lines) {
           results.push(line);

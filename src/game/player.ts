@@ -13,7 +13,7 @@ export class Player extends Entity {
   gravity    = 2;
   colliderSize = new Vector2(100, 550);
 
-  static StartPosition = new Vector2(300, 300);
+  static StartPosition = new Vector2(800, 600);
 
   idle:  Texture[];
   walk:  Texture[];
@@ -41,11 +41,18 @@ export class Player extends Entity {
    */
   jumpingOnLadder = false;
 
+  graphic: Entity;
+
   constructor() {
     super({
-      name   : "Player",
-      texture: Assets.getResource("owo"),
+      name: "Player",
     });
+
+    this.graphic = new Entity({ name: "PlayerGraphic" });
+    this.addChild(this.graphic);
+
+    this.graphic.x = -300;
+    this.graphic.y = -100;
 
     Player.Instance = this;
 
@@ -83,8 +90,8 @@ export class Player extends Entity {
 
   public collisionBounds(): Rect {
     return new Rect({
-      x     : 400 - this.colliderSize.x / 2,
-      y     : 400 - this.colliderSize.y / 2,
+      x     : 0,
+      y     : 0,
       width : this.colliderSize.x,
       height: this.colliderSize.y,
     })
@@ -195,7 +202,7 @@ export class Player extends Entity {
       }
     }
 
-    this.texture = this.animState[this.frame];
+    this.graphic.texture = this.animState[this.frame];
     
     Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)));
   }

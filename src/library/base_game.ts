@@ -24,6 +24,9 @@ export type GameArgs = {
   assets      : TypesafeLoader<any>;
 };
 
+export const StageName      = "Stage";
+export const FixedStageName = "FixedStage";
+
 export class BaseGame<TResources extends AllResourcesType = {}> {
   app   : PIXI.Application;
 
@@ -64,8 +67,8 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     }
 
     this.collisionHandler = new CollisionHandler({
-      canvasWidth : props.canvasWidth,
-      canvasHeight: props.canvasHeight,
+      canvasWidth : props.canvasWidth / props.scale,
+      canvasHeight: props.canvasHeight / props.scale,
       tileHeight  : props.tileHeight,
       tileWidth   : props.tileWidth,
     });
@@ -84,7 +87,7 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     this.app.stage.scale = new Point(props.scale, props.scale);
 
     this.stage = new Entity({
-      name: "Stage",
+      name: StageName,
     });
     this.state.stage = this.stage;
 
@@ -94,7 +97,7 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     this.app.stage.addChild(this.stage.sprite);
 
     this.fixedCameraStage = new Entity({
-      name: "FixedStage"
+      name: FixedStageName,
     });
     this.app.stage.addChild(this.fixedCameraStage.sprite);
 
@@ -136,6 +139,8 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
   };
 
   gameLoop = () => {
+    Debug.Clear();
+
     const { entities } = this.state;
 
     if (!this.state.lastCollisionGrid) {
@@ -148,8 +153,6 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     }
 
     this.state.tick++;
-
-    Debug.Clear();
 
     this.state.keys.update();
 

@@ -13,7 +13,9 @@ export type AssetType =
 
 export type AssetName = keyof typeof AssetsToLoad
 export type AssetPath = 
+  | "bud.png"
   | "dialog_box.png"
+  | "glow.png"
   | "interactions.json"
   | "loop1.mp3"
   | "loop2.mp3"
@@ -51,7 +53,6 @@ export type AssetPath =
   | "tileset.png"
   | "vine_flower_source.png"
   | "world.json"
-  | "glow.png"
   | "char_climb (1).png"
   | "char_climb (2).png"
   | "char_climb (3).png"
@@ -89,18 +90,18 @@ export type AssetPath =
   | "char_walk (9).png"
   | "char_walk (10).png"
   | "char_walk (11).png"
-  | "flower2 (1).png"
-  | "flower2 (2).png"
-  | "flower2 (3).png"
-  | "flower2 (4).png"
-  | "flower2 (5).png"
-  | "flower2 (6).png"
   | "flower1 (1).png"
   | "flower1 (2).png"
   | "flower1 (3).png"
   | "flower1 (4).png"
   | "flower1 (5).png"
   | "flower1 (6).png"
+  | "flower2 (1).png"
+  | "flower2 (2).png"
+  | "flower2 (3).png"
+  | "flower2 (4).png"
+  | "flower2 (5).png"
+  | "flower2 (6).png"
   | "flower3 (1).png"
   | "flower3 (2).png"
   | "flower3 (3).png"
@@ -110,6 +111,12 @@ export type AssetPath =
   | "flower4 (2).png"
   | "flower4 (3).png"
   | "flower4 (4).png"
+  | "mushroom1 (1).png"
+  | "mushroom1 (2).png"
+  | "mushroom1 (3).png"
+  | "mushroom1 (4).png"
+  | "mushroom1 (5).png"
+  | "mushroom1 (6).png"
   | "vine_flower_live (1).png"
   | "vine_flower_live (2).png"
   | "vine_flower_live (3).png"
@@ -128,7 +135,9 @@ export type AssetPath =
 
 
 export const AssetsToLoad = {
+  "bud"                          : { type: "Image"       as const, path: "bud.png"                           },
   "dialog_box"                   : { type: "Image"       as const, path: "dialog_box.png"                    },
+  "glow"                         : { type: "Image"       as const, path: "glow.png"                          },
   "interactions"                 : { type: "TileMap"     as const, path: "interactions.json"                 },
   "loop1"                        : { type: "Audio"       as const, path: "loop1.mp3"                         },
   "loop2"                        : { type: "Audio"       as const, path: "loop2.mp3"                         },
@@ -165,7 +174,6 @@ export const AssetsToLoad = {
   "spirit_full_hud"              : { type: "Image"       as const, path: "spirit_full_hud.png"               },
   "tileset"                      : { type: "Image"       as const, path: "tileset.png"                       },
   "vine_flower_source"           : { type: "Image"       as const, path: "vine_flower_source.png"            },
-  "glow"                         : { type: "Image"       as const, path: "glow.png"                          },
   "world"                        : { type: "TileWorld"   as const, path: "world.json"                        },
 
   /* Animations */
@@ -266,6 +274,17 @@ export const AssetsToLoad = {
       "flower4 (2).png",
       "flower4 (3).png",
       "flower4 (4).png",
+    ],
+  },
+  "mushroom1": {
+    type: "Animation" as const,
+    paths: [
+      "mushroom1 (1).png",
+      "mushroom1 (2).png",
+      "mushroom1 (3).png",
+      "mushroom1 (4).png",
+      "mushroom1 (5).png",
+      "mushroom1 (6).png",
     ],
   },
   "vine_flower_live": {

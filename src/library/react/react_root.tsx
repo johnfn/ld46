@@ -30,7 +30,7 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
       moused  : null,
     };
 
-    setInterval(() => this.monitorHierarchyUpdates(), 50);
+    setInterval(() => this.monitorHierarchyUpdates(), 500);
   }
 
   componentDidMount() {
@@ -79,6 +79,9 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
           x: { target.x }, y: { target.y }
         </div>
         <div>
+          xAbs: { target.positionAbsolute().x }, y: { target.positionAbsolute().y }
+        </div>
+        <div>
           width: { target.width }, height: { target.height }
         </div>
         <div>
@@ -114,8 +117,8 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
               { this.renderSelected() }
 
               <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>Debug Hierarchy</div>
-              <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.stage} gameState={this.props.game.state} />
-              <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} />
+              {/* <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.stage} gameState={this.props.game.state} /> 
+              <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} /> */}
             </div> 
           }
         </div>

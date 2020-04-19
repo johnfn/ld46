@@ -13,6 +13,7 @@ import { DebugFlags } from "./debug";
 import { Vector2 } from "../library/geometry/vector2";
 import { IGameState } from "Library";
 import { MusicMap } from "./music_map";
+import { Bud } from "./bud";
 
 export class GameMap extends Entity {
   artMap         : TiledTilemap;
@@ -62,6 +63,14 @@ export class GameMap extends Entity {
             }
 
             return null;
+          }
+        },
+
+        {
+          type     : "single",
+          name     : "bud-start",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
+            return new Bud();
           }
         },
 
