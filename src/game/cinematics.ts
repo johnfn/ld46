@@ -388,18 +388,81 @@ export class Cinematics {
 
   // INTERACTION STUFF
 
+  hubFlowerLevel = 0;
+  flowerCheckLv0 = 0;
+  flowerCheckLv1 = 0;
+  flowerCheckLv2 = 0;
+  flowerCheckFinal = 0;
   public *hubFlower(): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { text: "You pick up a small, delicate sunblossom.", },
-      { text: "Floral energy starts to flow through you.", },         
-    ]);
+    if (this.hubFlowerLevel === 0){
+      if (this.flowerCheckLv0 === 0){
+        this.flowerCheckLv0 = this.flowerCheckLv0 + 1;
 
-    state.mode = "Normal"; 
-  }
+        yield* DialogBox.StartDialog([ 
+          { text: "You caress a small, delicate sunblossom.", },
+          { text: "Floral energy starts to flow through you.", },         
+        ]);
+
+      } else {
+        this.flowerCheckLv0 = this.flowerCheckLv0 + 1;
+
+        yield* DialogBox.StartDialog([ 
+          { text: "Floral energy is flowing through you.", },       
+        ]);
+
+      }
+    } else if (this.hubFlowerLevel === 1){
+      if (this.flowerCheckLv1 === 0){
+        this.flowerCheckLv1 = this.flowerCheckLv1 + 1;
+
+        yield* DialogBox.StartDialog([ 
+          { text: "You place a hand on the glowing petals of a sunblossom.", },
+          { text: "Fluorescent energy starts to flow through you.", },         
+        ]);
+
+      } else {
+        this.flowerCheckLv1 = this.flowerCheckLv1 + 1;
+
+        yield* DialogBox.StartDialog([ 
+          { text: "Fluorescent energy is flowing through you.", },       
+        ]);
+
+      } 
+    } else if (this.hubFlowerLevel === 2){
+        if (this.flowerCheckLv2 === 0){
+          this.flowerCheckLv2 = this.flowerCheckLv2 + 1;
+  
+          yield* DialogBox.StartDialog([ 
+            { text: "You firmly grasp the stem of a sturdy sunblossom.", },
+            { text: "Sylvan energy starts to flow through you.", },         
+          ]);
+  
+        } else {
+          this.flowerCheckLv1 = this.flowerCheckLv1 + 1;
+  
+          yield* DialogBox.StartDialog([ 
+            { text: "Sylvan energy is flowing through you.", },       
+          ]);
+      } 
+    } else if (this.hubFlowerLevel === 3){
+        this.flowerCheckFinal = this.flowerCheckFinal + 1;
+
+        yield* DialogBox.StartDialog([ 
+          { text: "You marvel at the tenacity of a sunblossom.", },     
+        ]);
+
+      } else {
+
+        yield* DialogBox.StartDialog([ 
+          { text: "Now how did you get to here?", },     
+        ]);
+
+      }
+    }
 
   wisteriaCheckCount = 0;
   public *wisteria(): GameCoroutine { 
