@@ -25,7 +25,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
       scale       : 1,
       assets      : Assets,
       debugFlags  : DebugFlags,
-      state       : new GameState()
+      state       : new GameState(),
     });
 
     Game.Instance = this;
@@ -33,7 +33,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
   }
 
   initialize() {
-    this.stage.addChild(new GameMap());
+    this.stage.addChild(this.state.map = new GameMap());
     this.stage.addChild(this.state.player = new Player());
 
     this.fixedCameraStage.addChild(this.state.overlay = new Overlay());

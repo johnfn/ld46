@@ -122,6 +122,18 @@ export class Vector2 {
       y: this.y + y,
     });
   }
+  
+  clampY(low: number, high: number): Vector2 {
+    let newY = this.y;
+
+    if (newY < low) { newY = low; }
+    if (newY > high) { newY = high; }
+
+    return new Vector2({
+      x: this.x,
+      y: newY,
+    });
+  }
 
   scale(about: { x: number; y: number }, amount: { x: number; y: number }): Vector2 {
     return new Vector2({
