@@ -12,11 +12,10 @@ import { GetInstanceTypeProps } from "../library/tilemap/tilemap_objects";
 import { DebugFlags } from "./debug";
 import { Vector2 } from "../library/geometry/vector2";
 import { IGameState } from "Library";
+import { MusicMap } from "./music_map";
 
 export class GameMap extends Entity {
   artMap         : TiledTilemap;
-  // musicRegionsMap: TiledTilemap;
-  musicRegions   : TilemapRegion[] = [];
   cameraRegions  : TilemapRegion[] = [];
 
   public static Instance: GameMap;
@@ -85,22 +84,12 @@ export class GameMap extends Entity {
       assets: Assets
     });
     
-
-    // this.musicRegionsMap = new TiledTilemap({
-    //   pathToTilemap: "",
-    //   json         : Assets.getResource("music"),
-    //   renderer     : Game.Instance.renderer,
-    //   customObjects: [{
-    //     type     : "rect",
-    //     layerName: "Music Layer",
-    //     process  : (rect: TilemapRegion) => {
-    //       this.musicRegions.push(rect);
-    //     }
-    //   }],
-    //   assets: Assets,
-    // });
-
     this.loadMap(Player.StartPosition);
+
+    if (DebugFlags["Play Music"]) {
+      const musicMap = new MusicMap();
+      this.addChild(musicMap);
+    }
   }
 
   getCameraRegion(pos: Vector2): TilemapRegion {

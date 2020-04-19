@@ -143,14 +143,5 @@ export class Player extends Entity {
     
     Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)));
 
-    for (const region of state.map.musicRegions) {
-      if (region.rect.contains(this.position)) {
-        const songPath = region.properties["file"];
-
-        if (!this.audio || this.audio.src !== songPath) {
-          this.audio = new Audio(songPath);
-        }
-      }
-    }
   }
 }

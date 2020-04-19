@@ -89,22 +89,23 @@ export type AssetPath =
   | "char_walk (10).png"
   | "char_walk (11).png"
   | "char_walk (12).png"
-  | "flower2_live (1).png"
-  | "flower2_live (2).png"
-  | "flower2_live (3).png"
-  | "flower2_live (4).png"
-  | "flower2_live (5).png"
-  | "flower_live (1).png"
-  | "flower_live (2).png"
-  | "flower_live (3).png"
-  | "flower_live (4).png"
-  | "flower_live (5).png"
-  | "flower_live (6).png"
-  | "flower_live2 (1).png"
-  | "flower_live2 (2).png"
-  | "flower_live2 (3).png"
-  | "flower_live2 (4).png"
-  | "flower_live2 (5).png"
+  | "flower2 (1).png"
+  | "flower2 (2).png"
+  | "flower2 (3).png"
+  | "flower2 (4).png"
+  | "flower2 (5).png"
+  | "flower2 (6).png"
+  | "flower1 (1).png"
+  | "flower1 (2).png"
+  | "flower1 (3).png"
+  | "flower1 (4).png"
+  | "flower1 (5).png"
+  | "flower1 (6).png"
+  | "flower3 (1).png"
+  | "flower3 (2).png"
+  | "flower3 (3).png"
+  | "flower3 (4).png"
+  | "flower3 (5).png"
   | "vine_flower_live (1).png"
   | "vine_flower_live (2).png"
   | "vine_flower_live (3).png"
@@ -222,35 +223,36 @@ export const AssetsToLoad = {
       "char_walk (12).png",
     ],
   },
-  "flower2_live": {
+  "flower1": {
     type: "Animation" as const,
     paths: [
-      "flower2_live (1).png",
-      "flower2_live (2).png",
-      "flower2_live (3).png",
-      "flower2_live (4).png",
-      "flower2_live (5).png",
+      "flower1 (1).png",
+      "flower1 (2).png",
+      "flower1 (3).png",
+      "flower1 (4).png",
+      "flower1 (5).png",
+      "flower1 (6).png",
     ],
   },
-  "flower_live": {
+  "flower2": {
     type: "Animation" as const,
     paths: [
-      "flower_live (1).png",
-      "flower_live (2).png",
-      "flower_live (3).png",
-      "flower_live (4).png",
-      "flower_live (5).png",
-      "flower_live (6).png",
+      "flower2 (1).png",
+      "flower2 (2).png",
+      "flower2 (3).png",
+      "flower2 (4).png",
+      "flower2 (5).png",
+      "flower2 (6).png",
     ],
   },
-  "flower_live2": {
+  "flower3": {
     type: "Animation" as const,
     paths: [
-      "flower_live2 (1).png",
-      "flower_live2 (2).png",
-      "flower_live2 (3).png",
-      "flower_live2 (4).png",
-      "flower_live2 (5).png",
+      "flower3 (1).png",
+      "flower3 (2).png",
+      "flower3 (3).png",
+      "flower3 (4).png",
+      "flower3 (5).png",
     ],
   },
   "vine_flower_live": {
