@@ -109,6 +109,7 @@ export class Player extends Entity {
     if (state.keys.justDown.Spacebar && (this.hitInfo.down || (touchingVine && this.velocity.y <= 2))) {
       this.velocity = this.velocity.withY(-this.jumpHeight);
       this.animState = this.jump;
+      this.frame = 0;
     }
 
     this.texture = this.animState[this.frame];
