@@ -83,7 +83,7 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
       height         : props.canvasHeight,
       antialias      : true,
       transparent    : false,
-      resolution     : DebugFlags["High Resolution"] ? window.devicePixelRatio : window.devicePixelRatio / 2,
+      resolution     : DebugFlags["High Performance"] ? window.devicePixelRatio/2 : window.devicePixelRatio,
       autoDensity    : true,
       backgroundColor: 0x4e5759,
       view           : view as HTMLCanvasElement,

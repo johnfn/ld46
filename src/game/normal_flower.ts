@@ -9,9 +9,10 @@ let flowers = 0;
 
 let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {1: "flower1", 2: "flower2", 3: "flower3", 4: "flower4"}
 let flowersRate: {[key: number]: string[]} = {
-  1: ["flower1"],
-  2: ["flower2"],
-  3: ["flower1", "flower2", "flower3", "flower4"],
+  0: ["flower1"],
+  1: ["flower2"],
+  2: ["flower3"],
+  3: ["flower4"],
 }
 
 export class NormalFlower extends Entity {
@@ -25,10 +26,10 @@ export class NormalFlower extends Entity {
       texture: Assets.getResource("flower1")[0],
     });
 
-    if (level) {
-      let rate = flowersRate[level];
-      let r = Math.floor(Math.random()*rate.length);
-      this.frames = Assets.getResource(rate[r] as keyof typeof AssetsToLoad) as Texture[];
+    if (level != undefined && level in flowersRate) {
+      let flowers = flowersRate[level];
+      let r = Math.floor(Math.random()*flowers.length);
+      this.frames = Assets.getResource(flowers[r] as keyof typeof AssetsToLoad) as Texture[];
     } else {
       this.frames = Assets.getResource(flowersMap[Math.floor(Math.random()*Object.keys(flowersMap).length) + 1]) as Texture[];
     }
