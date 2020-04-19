@@ -84,7 +84,7 @@ export class Player extends Entity {
   }
 
   animate(state: IGameState) {
-    if (state.tick % 8 === 0) {
+    if (state.tick % 6 === 0) {
       this.frame = (this.frame + 1) % this.animState.length;
     }
   }
