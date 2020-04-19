@@ -3,7 +3,7 @@ import { GameMap } from "./game_map";
 import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { IGameState } from "Library";
-import { Texture } from "pixi.js";
+import { Texture, Sprite, BLEND_MODES } from "pixi.js";
 import { Rect } from "../library/geometry/rect";
 import { Vine } from "./vine_flower";
 import { Vector2 } from "../library/geometry/vector2";
@@ -20,6 +20,8 @@ export class Player extends Entity {
   walk:  Texture[];
   jump:  Texture[];
   climb: Texture[];
+
+  glowOverlay: Sprite;
   
   animState: Texture[]
 
@@ -37,6 +39,7 @@ export class Player extends Entity {
 
     Player.Instance = this;
 
+
     this.idle  = Assets.getResource("char_idle");
     this.walk  = Assets.getResource("char_walk");
     this.jump  = Assets.getResource("char_jump");
@@ -46,6 +49,16 @@ export class Player extends Entity {
 
     this.x = Player.StartPosition.x;
     this.y = Player.StartPosition.y;
+
+
+    this.glowOverlay = new Sprite(Assets.getResource("glow"))
+    this.glowOverlay.blendMode = BLEND_MODES.SOFT_LIGHT;
+    this.glowOverlay.tint = 0xfccad1;
+    this.glowOverlay.alpha = 0.17;
+    this.sprite.addChild(this.glowOverlay);
+    this.glowOverlay.position.x -= 400;
+    this.glowOverlay.position.y -= 400;
+    this.glowOverlay.zIndex = 1;
 
   }
 
