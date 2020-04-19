@@ -11,6 +11,11 @@ declare module "Library" {
 
   export interface IGameState {
     player       : Player;
+
+    /**
+     * Is Bud following the player
+     */
+    budFollowing : boolean;
     overlay      : Overlay;
     spiritTotal  : number;
     spiritUnused : number;
