@@ -71,7 +71,7 @@ export class Player extends Entity {
     this.glowOverlay.tint = 0xfccad1;
     this.glowOverlay.alpha = 0.17;
     this.sprite.addChild(this.glowOverlay);
-    this.glowOverlay.position.x -= 400;
+    this.glowOverlay.position.x -= 800;
     this.glowOverlay.position.y -= 400;
     this.glowOverlay.zIndex = 1;
   }

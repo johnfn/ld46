@@ -4,7 +4,6 @@ import { Assets, AssetsToLoad } from "./assets";
 import { Entity } from "../library/entity";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { C } from "./constants";
-import { GameMap } from "./game_map";
 
 let flowers = 0;
 
