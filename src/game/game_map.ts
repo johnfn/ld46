@@ -174,7 +174,6 @@ export class GameMap extends Entity {
       for (let i = 0; i < numFlowers; i++) {
         let f: NormalFlower;
         if (region.properties["level"]) {
-          console.log(parseInt(region.properties["level"]))
           f = new NormalFlower(parseInt(region.properties["level"]))
         } else {
           f = new NormalFlower()
