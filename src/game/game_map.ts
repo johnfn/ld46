@@ -1,6 +1,5 @@
 import { Game } from "./game";
 import { TiledTilemap } from "../library/tilemap/tilemap";
-import { Rect } from "../library/geometry/rect";
 import { Entity } from "../library/entity";
 import { TilemapRegion } from "../library/tilemap/tilemap_data";
 import { RectGroup } from "../library/geometry/rect_group";
@@ -10,8 +9,6 @@ import { NormalFlower } from "./normal_flower";
 import { VineFlower } from "./vine_flower";
 import { Player } from "./player";
 import { GetInstanceTypeProps } from "../library/tilemap/tilemap_objects";
-import { Debug } from "../library/debug";
-import { DebugFlagButtons } from "../library/react/debug_flag_buttons";
 import { DebugFlags } from "./debug";
 import { Vector2 } from "../library/geometry/vector2";
 import { IGameState } from "Library";
@@ -23,6 +20,7 @@ export class GameMap extends Entity {
   cameraRegions  : TilemapRegion[] = [];
 
   public static Instance: GameMap;
+  public dialogTriggers: { region: TilemapRegion, triggered: boolean }[] = [];
 
   constructor() {
     super({ 
@@ -63,6 +61,7 @@ export class GameMap extends Entity {
                 Player.Instance.y = props.y;
               }, 100);
             }
+
             return null;
           }
         },
@@ -74,9 +73,18 @@ export class GameMap extends Entity {
             this.cameraRegions.push(region);
           },
         },
+
+        {
+          type     : "rect",
+          layerName: "Dialog Trigger Layer",
+          process  : region => {
+            this.dialogTriggers.push({ region, triggered: false });
+          },
+        },
     ],
       assets: Assets
     });
+    
 
     // this.musicRegionsMap = new TiledTilemap({
     //   pathToTilemap: "",

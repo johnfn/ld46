@@ -3,6 +3,7 @@ import { Grid } from "../data_structures/grid";
 import { Rect } from "../geometry/rect";
 import { RectGroup } from "../geometry/rect_group";
 import { Vector2 } from "../geometry/vector2";
+import { TiledTilemap } from "./tilemap";
 
 export type TilemapRegion = {
   rect      : Rect;
@@ -191,7 +192,7 @@ export class TilemapData {
             width: obj.width,
             height: obj.height,
           }),
-          properties: obj.properties || {},
+          properties: TiledTilemap.ParseTiledProperties(obj.properties) || {},
         });
       }
     }

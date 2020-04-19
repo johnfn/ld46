@@ -66,8 +66,28 @@ export class Player extends Entity {
     })
   }
 
+  checkForDialogTriggers(state: IGameState) {
+    for (const trigger of state.map.dialogTriggers.filter(t => !t.triggered)) {
+      if (trigger.region.rect.contains(this.position)) {
+        const dialogName = trigger.region.properties["dialog"];
+
+        trigger.triggered = true;
+
+        if (!(dialogName in state.cinematics)) {
+          throw new Error(`Cant find a cinematic named ${ dialogName }`);
+        }
+
+        this.startCoroutine(
+          dialogName,
+          (state.cinematics as any)[dialogName as any]()
+        );
+      }
+    }
+  }
+
   update(state: IGameState): void {
     this.animate(state);
+    this.checkForDialogTriggers(state);
 
     this.velocity = this.velocity.withX(0);
 

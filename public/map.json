@@ -155,6 +155,39 @@
         }, 
         {
          "draworder":"topdown",
+         "id":4,
+         "name":"Dialog Trigger Layer",
+         "objects":[
+                {
+                 "height":2816,
+                 "id":57,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"openingBud1"
+                        }, 
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"dialog-trigger"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":768,
+                 "x":5632,
+                 "y":0
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":3,
          "name":"Camera Region Layer",
          "objects":[
@@ -186,8 +219,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":57,
+ "nextlayerid":5,
+ "nextobjectid":58,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

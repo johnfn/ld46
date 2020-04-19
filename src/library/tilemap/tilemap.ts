@@ -143,4 +143,18 @@ export class TiledTilemap {
   getAllObjects(): ObjectInfo[] {
     return this._objects.getAllObjects();
   }
+
+  public static ParseTiledProperties(properties: { name: string; type: string; value: string }[] | undefined): { [key: string]: string } {
+    const result: { [key: string]: string } = {};
+
+    if (properties === undefined) {
+      return {};
+    }
+
+    for (const obj of properties) {
+      result[obj.name] = obj.value;
+    }
+
+    return result;
+  }
 }

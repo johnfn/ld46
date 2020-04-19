@@ -37,19 +37,20 @@ export class DialogBox extends Entity {
       name: "Dialog Graphic",
     });
 
-    graphic.width = 1400;
-    graphic.height = 500;
+    graphic.width = 1400 * 2;
+    graphic.height = 500 * 2;
+
     this.addChild(graphic);
 
     DialogBox.Instance = this;
 
-    this.speakerText = new TextEntity({ text: "Name test", width: 900, height: 400, fontSize: 60, color: "orange"});
+    this.speakerText = new TextEntity({ text: "Name test", width: 900, height: 400, fontSize: 60, color: "orange" });
     this.speakerText.y = 30;
     this.speakerText.x = 90;
 
     this.addChild(this.speakerText);
 
-    this.dialogText = new TextEntity({ text: "Line test", width: 900, height: 400, fontSize: 40});
+    this.dialogText = new TextEntity({ text: "Line test", width: 1800, height: 800, fontSize: 80 });
     this.dialogText.y = 120;
     this.dialogText.x = 380;
 
@@ -96,11 +97,10 @@ export class DialogBox extends Entity {
       state = yield { untilKeyPress: "Spacebar" };
       state = yield "next"; // make sure spacebar isnt justDown
 
-      state.mode = "Normal";
-
       this.activeDialogText.shift();
     }
 
+    state.mode = "Normal";
     this.visible = false;
   }
 
