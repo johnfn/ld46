@@ -93,6 +93,7 @@ export type AssetPath =
   | "flower_live (3).png"
   | "flower_live (4).png"
   | "flower_live (5).png"
+  | "flower_live (6).png"
   | "flower_live2 (1).png"
   | "flower_live2 (2).png"
   | "flower_live2 (3).png"
@@ -227,6 +228,7 @@ export const AssetsToLoad = {
       "flower_live (3).png",
       "flower_live (4).png",
       "flower_live (5).png",
+      "flower_live (6).png",
     ],
   },
   "flower_live2": {
