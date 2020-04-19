@@ -168,6 +168,36 @@ export class Cinematics {
     state.mode = "Normal"; 
   }
 
+  public *outdoorBud1(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Yeah. Not too pretty.", }, 
+      { speaker: "Bud", text: "So much metal, and so little nature. It’s really kind of horrifying.", },
+      { speaker: "Bud", text: "But that’s why you were sent here, $NAME! You can help us make things better!", },
+      // branching dialogue happens here
+      // we'll wait for grant to figure that one out      
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *outdoorBud2(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "What’s up? You look startled.", },
+      // MORE branching dialogue
+      { speaker: "Bud", text: "What? Don’t be weird, heh. That’s impossible.", },   
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
   public *hub01(): GameCoroutine {
     let state = yield "next";
 
@@ -194,6 +224,331 @@ export class Cinematics {
       { speaker: "Bud", text: "It must be your nature powers! Maybe they’re coming back!", },
       { speaker: "Bud", text: "Sadly, that’s not the exit that leads to Withers' Lair...", },
       { speaker: "Bud", text: "But let’s go explore it anyway! Maybe we’ll find something helpful.", },          
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *hub03(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Huh. So you really can see ghosts? That’s so strange.", },
+      { speaker: "Bud", text: "Hey, wait. This area looks kind of familiar.", },
+      { speaker: "Bud", text: "Oh! I remember now! I actually know a shortcut to the Tree of Sprights from here!", },
+      { speaker: "Bud", text: "C’mon, $NAME, there’s no time to waste!", },        
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *vineworld01(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Uh oh, it looks like we’ve hit a dead end.", },
+      { speaker: "Bud", text: "Unless we can somehow make a new pathway...?", },          
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *vineworld02(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Wow, this vine thing is a game changer!", },
+      { speaker: "Bud", text: "Wait, what the", },
+      { speaker: "Bud", text: "How did you climb that? You don’t even have arms.", },               
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *vineworld03(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Whoa... look at that.", },
+      { speaker: "Bud", text: "I had no idea there was still a tree here!", },
+      { speaker: "Bud", text: "It doesn’t look like it’s doing too hot, but I’m sure you’ll still get some good energy out of it.", },
+      { speaker: "Bud", text: "Maybe even enough for us to unblock the Lair entrance!", },               
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *hub04(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Let’s see if your new power has changed anything!", },             
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *hub05(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Hey, cool!", },
+      { speaker: "Bud", text: "Uh, that’s still not the shortcut.", },
+      { speaker: "Bud", text: "But I’m sure there’s interesting stuff down there too!", },
+      { speaker: "Bud", text: "Let’s go explore! Maybe we’ll find another cool tree. Or something.", },  
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *mushworld01(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "...And, it looks like we’ve hit another dead end.", },
+      { speaker: "Bud", text: "Aww, look at that cute little mushroom!", },      
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *mushworld02(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Whoa! How did you do that?", },
+      { speaker: "Bud", text: "Mushrooms aren’t even plants!", },
+      { speaker: "Bud", text: "Artistic license, I guess.", },      
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *mushworld03(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Gosh, look at that.", },
+      { speaker: "Bud", text: "That’s the biggest mushroom I’ve ever seen.", },
+      { speaker: "Bud", text: "Kinda crazy how much life is still hidden here.", },      
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *hub06(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Okay, there’s only one exit out of this tree base left.", },
+      { speaker: "Bud", text: "Now the way to Withers’ Lair HAS to be next!", },            
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *hub07(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "YES! It’s open!", },
+      { speaker: "Bud", text: "C’mon, $NAME! Let’s go!", },           
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *withers01(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+        // withers, alone, facing away from the entrance of his lair
+      { speaker: "Withers", text: "♫ Doo de doo~ ♫", },
+      { speaker: "Withers", text: "♫ Toss a coin to your Withers~ ♫", },
+      { speaker: "Withers", text: "♫ Oh, factory of plenty~ ♫", },
+      { speaker: "Withers", text: "Ahhh. What a wonderful time to be an industry leader. ", },
+      { speaker: "Withers", text: "Business is booming, profits are soaring...", },
+      { speaker: "Withers", text: "On days like these...", },
+      { speaker: "Withers", text: "Heh.", },
+      { speaker: "Withers", text: "On days like these, I do wonder about those old forest dolts.", },
+      { speaker: "Withers", text: "If we hadn’t destroyed their whole race, where would they be now?", },
+      { speaker: "Withers", text: "Perhaps they would’ve migrated off to some foreign land.", },
+      { speaker: "Withers", text: "Perhaps they would’ve stayed hidden nearby, plotting their revenge.", },
+      { speaker: "Withers", text: "But...", },
+      { speaker: "Withers", text: "Heh.", },
+      { speaker: "Withers", text: "Heheh.", },
+      { speaker: "Withers", text: "That’s impossible.", },
+      { speaker: "Withers", text: "After all, I saw to it myself.", },
+      { speaker: "Withers", text: "Those hippies are gone for good.", },
+        // herald and bud sneak in
+      { speaker: "Withers", text: "Hmm.", },
+      { speaker: "Withers", text: "Unless, of course...", },
+      { speaker: "Withers", text: "There happened to be one left.", },
+        // withers turns around to look at herald
+      { speaker: "Withers", text: "Hello, $NAME.", },
+      { speaker: "Withers", text: "I’ve been expecting you.", },
+      { speaker: "Bud", text: "Master! Master! I’ve done as you asked!", },
+      { speaker: "Withers", text: "Very good, Bud.", },
+      { speaker: "Bud", text: "I’ve brought you the dirty dryad!", },
+      { speaker: "Bud", text: "I even timed the entrance to be at the most dramatic part of your monologue! Just like we rehearsed!", },
+      { speaker: "Withers", text: "Yes, thank you. I’m very proud of you, Bud.", },
+      { speaker: "Withers", text: "...What, an evil tycoon can’t show his henchfairies some validation? Please.", },
+      { speaker: "Withers", text: "Our society has progressed by five hundred years since you were put under that spell. Adapt to our new standards, or you’ll be streets behind.", },
+      { speaker: "Withers", text: "Oh, I’m sorry. You don’t know what a “street” is. Or what “standards” are, for that matter.", },
+      { speaker: "Bud", text: "Oooh! Clever burn, master! If I had arms, I would be dabbing in celebration!", },
+      { speaker: "Bud", text: "Y’know, because we’re evil!", },
+      { speaker: "Withers", text: "You must be so confused, $NAME. Let me make some things clear to you.", },
+      { speaker: "Withers", text: "Firstly, you’re not here because you’re some kind of Superdryad who intrepidly braved the elements to get to my lair.", },
+      { speaker: "Withers", text: "Didn’t you ever wonder why your journey here was so easy? I mean, I have Tinker Men everywhere that I could’ve sent to stop you.", },
+      { speaker: "Withers", text: "No, you’re here because I wanted you to be here.", },
+      { speaker: "Withers", text: "And definitely not because we didn’t have time to animate enemies or anything.", },
+      { speaker: "Withers", text: "Secondly, this element of surprise that you thought you had?", },
+      { speaker: "Withers", text: "Please. I’ve known about this plan since before you closed your eyes.", },
+      { speaker: "Withers", text: "Dryad societies are soooo easy to infiltrate.", },
+      { speaker: "Withers", text: "No security anywhere? Implicit trust of strangers? Like, okay, bloomer.", },
+      { speaker: "Withers", text: "Perhaps you don’t understand what this knowledge has allowed me to do.", },
+      { speaker: "Withers", text: "I’ve been planning for your return.", },
+      { speaker: "Withers", text: "For the last five hundred years.", },
+      { speaker: "Withers", text: "Everything you think you know about this world is just everything that Bud told you!", },
+      { speaker: "Withers", text: "And you were foolish enough to believe every word!", },
+      { speaker: "Withers", text: "What the hell is a “spirit partner” anyway? Blathering nonsense!", },
+      { speaker: "Withers", text: "In fact, your name isn’t even $NAME!", },
+      { speaker: "Withers", text: "That’s just a dumb name I told Bud to call you!", },
+      { speaker: "Withers", text: "What even is that, anyway? $NAME?! What kind of simpleton would just go and embrace such a stupid name?!", },
+      { speaker: "Bud", text: "WAHAHAH! You believed me!", },
+      { speaker: "Withers", text: "You utter fool!", },
+      { speaker: "Withers", text: "Anyway.", },
+      { speaker: "Withers", text: "Lastly.", },
+      { speaker: "Withers", text: "And most importantly.", },
+      { speaker: "Withers", text: "The reason I’ve so cordially invited you here today.", },
+      { speaker: "Withers", text: "Yes, you.", },
+      { speaker: "Withers", text: "Herald of Wisp.", },
+      { speaker: "Withers", text: "Your true name.", },
+      { speaker: "Withers", text: "Herald, you are in this lair right now because I am going to kill you.", },
+        // withers BRANDISHES A SWORD
+      { speaker: "Withers", text: "You hear me? You’re not going to make it out of here alive.", },
+      { speaker: "Withers", text: "And the last hope of the Pastorian Dryads will vanish.", },
+      { speaker: "Withers", text: "No chance of defeating me.", },
+      { speaker: "Withers", text: "No chance of reaching the Energy Fruit.", },
+      { speaker: "Withers", text: "No chance of restoring the forest.", },
+      { speaker: "Withers", text: "Any last words?", },
+        // BIG IMPORTANT CHOICE HERE 
+        // that grant has YET TO COMMENT ON
+      { speaker: "Withers", text: "Hmph.", },
+      { speaker: "Withers", text: "Thought so.", },
+        // withers POUNCES SUPER FAST at herald
+        // some metallic sfx?
+      { text: "(You feel a burning in your chest.)", },
+      { speaker: "Withers", text: "Hah...", },
+      { speaker: "Withers", text: "Too easy.", },
+      { text: "(The feeling starts burning stronger.)", },
+      { text: "(It feels... healing.)", },
+      { text: "(Your chest starts to glow.)", },
+      { speaker: "Withers", text: "...wait.", },
+      { speaker: "Withers", text: "You’re not dead.", },
+      { speaker: "Withers", text: "What’s going on?", },
+        // npc ghosts appear
+      { speaker: "Bud", text: "Uh... Master...", },
+      { speaker: "Bud", text: "In all the excitement... I may have forgotten to tell you about the ghosts...", },
+      { speaker: "Withers", text: "WHAT?", },
+      { speaker: "NPC", text: "So long as we, the spirits of the forest, still cling to existence...", },
+      { speaker: "NPC", text: "You will not lay a hand on the Time Warrior!", },
+      { speaker: "Withers", text: "What. The hell.", },
+        // tries to stab a few more times
+      { speaker: "NPC", text: "Herald is our hero and he is under our protection. STRIKE HIM NOT.", },
+      { speaker: "Withers", text: "Grr...", },
+      { speaker: "Withers", text: "You know what?", },
+      { speaker: "Withers", text: "Fine.", },
+      { speaker: "Withers", text: "I didn’t want to do this.", },
+      { speaker: "Withers", text: "After all, I’ll lose the energy source for my power plants...", },
+      { speaker: "Withers", text: "No. It’s a worthy sacrifice.", },
+      { speaker: "Withers", text: "You cannot be allowed to come near the Energy Fruit.", },
+      { speaker: "Withers", text: "I WILL DESTROY IT MYSELF.", },
+        // withers flees away
+        // herald chases after him
+      { speaker: "Bud", text: "Oh dear. Oh dear, dear, dear.", },
+        
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  bossCount = 0;
+  public *bossFail(): GameCoroutine { // the first NPC the player comes across
+    this.bossCount = this.bossCount + 1;
+    
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    if (this.bossCount === 1){
+
+      yield* DialogBox.StartDialog([ 
+        { speaker: "Withers", text: "AHAHAHA! Stupid idiot dryad!", },
+        { speaker: "Withers", text: "Nice try, but the Energy Fruit is mine. Sorry, suckaaaa", },
+          // npc ghosts appear
+        { speaker: "NPC", text: "Time Warrior! There is yet one more trick up our sleeve.", },
+        { speaker: "NPC", text: "It may destroy some of us... but there has never been a better time.", },
+        { speaker: "NPC", text: "If we pool together our remaining energy, we can send you back in time, but only to the beginning of this tree chase.", },
+        { speaker: "NPC", text: "We won’t be able to do this much, though. Get ready, and good luck!", },
+          // back to start of boss chase        
+      ]);
+
+    } else {
+
+      yield* DialogBox.StartDialog([ 
+        { speaker: "Withers", text: "AHAHAHA! Stupid idiot dryad!", },
+        { speaker: "Withers", text: "Nice try, but the Energy Fruit is mine. Sorry, suckaaaa", },
+          // npc ghosts appear
+        { speaker: "NPC", text: "Agh, you were so close!", },
+        { speaker: "NPC", text: "It's okay, we still have enough juice to send you back in time once more.", },
+        { speaker: "NPC", text: "But you gotta get it on this next one, okay?", },
+          // back to start of boss chase
+      ]);
+
+    }
+
+    state.mode = "Normal"; 
+  }
+
+  public *bossWin(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Withers", text: "No! Don’t do it! Don’t touch that fruit!", },
+      { speaker: "Withers", text: "Look. Maybe I came across too strongly.", },
+      { speaker: "Withers", text: "I’m sure we can work a deal out.", },
+      { speaker: "Withers", text: "Just stay away from the glowing cantaloupe!", },
+      { speaker: "NPC", text: "God, just shut up already. Jeez.", },
+        // [press x to interact] pops up
+      { speaker: "Withers", text: "NOOOOOOOOOOO", },
+        // fade to white                
     ]);
 
     state.mode = "Normal"; 
@@ -439,7 +794,7 @@ export class Cinematics {
       { speaker: "NPC", text: "I wonder if the vines are still around?", },
       { speaker: "NPC", text: "I still remember the day I found two vines growing out of the same root!", },
       { speaker: "NPC", text: "It was a BINE!", },
-      { speaker: "NPC", text: "…Yeah, comedy was never my strong suit, even when I was alive.", },      
+      { speaker: "NPC", text: "...Yeah, comedy was never my strong suit, even when I was alive.", },      
     ]);
 
     state.mode = "Normal"; 
@@ -455,7 +810,7 @@ export class Cinematics {
       { speaker: "NPC", text: "I also wonder how many Spirit Slots the Time Warrior has!", },
       { speaker: "NPC", text: "Does he have five yet? That’s the maximum, right?", },
       { speaker: "NPC", text: "There couldn’t be any ways to unlock Secret Slots lying around, right?", },
-      { speaker: "NPC", text: "So much to wonder about…", },            
+      { speaker: "NPC", text: "So much to wonder about...", },            
     ]);
 
     state.mode = "Normal"; 
@@ -472,11 +827,11 @@ export class Cinematics {
     if (this.npc14CheckCount === 1){
 
       yield* DialogBox.StartDialog([ 
-        { speaker: "NPC", text: "Whoa… Did a nearby natural presence just grow stronger?", },
+        { speaker: "NPC", text: "Whoa... Did a nearby natural presence just grow stronger?", },
         { speaker: "NPC", text: "I haven’t felt something like that in centuries!", },
         { speaker: "NPC", text: "It must be the Time Warrior!", },
         { speaker: "NPC", text: "Hey, Time Warrior! Can you see me? It’s me, Squill!", },
-        { speaker: "NPC", text: "At least, I hope you’re the Time Warrior. But what else could you be? Everything else is slowly dying…", },
+        { speaker: "NPC", text: "At least, I hope you’re the Time Warrior. But what else could you be? Everything else is slowly dying...", },
         { speaker: "NPC", text: "This is so cool, though! You’re finally back, and we’re one step closer to restoring the forest!", },
         { speaker: "NPC", text: "I wish I could do something in the physical world to help you, but us ghosts are far too weak for anything like that at the moment.", },
         { speaker: "NPC", text: "Just remember, I’ll always be there cheering you on! When there’s a Squill, there’s a squay!", },             
@@ -501,7 +856,7 @@ export class Cinematics {
 
     yield* DialogBox.StartDialog([ 
       { speaker: "NPC", text: "I wish my parents were still around.", },
-      { speaker: "NPC", text: "I prayed so hard that they would become ghosts like I did, but…", },
+      { speaker: "NPC", text: "I prayed so hard that they would become ghosts like I did, but...", },
       { speaker: "NPC", text: "I guess they just didn’t have as much unfinished business as me.", },
       { speaker: "NPC", text: "Kind of ironic, really.", },
       { speaker: "NPC", text: "C’mon, Time Warrior. Make things right. I believe in you.", },            
@@ -510,6 +865,51 @@ export class Cinematics {
     state.mode = "Normal"; 
   }
 
+  public *npc16(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "NPC", text: "There’s been some buzzing going on that the Time Warrior might be back!", },
+      { speaker: "NPC", text: "Could it be true? That would be crazy!", },
+      { speaker: "NPC", text: "But wait... Withers still doesn’t know about him, right?", },
+      { speaker: "NPC", text: "I hope not. Otherwise, our five-hundred year comeback plan will have been a huge dud...", },                
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *npc17(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "NPC", text: "Hello? Anyone?", },
+      { speaker: "NPC", text: "I think I lost my puppy!", },
+      { speaker: "NPC", text: "If anyone could help me find him, I’d be very grateful!", },
+      { speaker: "NPC", text: "Man, I hope this doesn’t activate a sidequest or something. We DEFINITELY don’t have time to program one of those.", },                  
+    ]);
+
+    state.mode = "Normal"; 
+  }
+  
+  public *npc18(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "NPC", text: "If what they say is true and the Time Warrior is truly awake...", },
+      { speaker: "NPC", text: "Maybe we should all head to the top of the Tree of Sprights!", },
+      { speaker: "NPC", text: "The Energy Fruit at the top of the tree is the best chance that he has at restoring the forest.", },
+      { speaker: "NPC", text: "And if he use it to channel enough natural energy, maybe we could even get our bodies back!", },
+      { speaker: "NPC", text: "Gosh, wouldn’t that be a miracle?", },                       
+    ]);
+
+    state.mode = "Normal"; 
+  }
 
 
   // INTERACTION STUFF

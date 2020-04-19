@@ -4,6 +4,8 @@ import { Container, Graphics } from 'pixi.js';
 import { Entity } from '../entity';
 import { Debug } from '../debug';
 import { IGameState } from 'Library';
+import { NormalFlower } from '../../game/normal_flower';
+import { DebugFlags } from '../../game/debug';
 
 type HierarchyProps = { 
   root       : Entity | Container;
@@ -82,6 +84,15 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
     console.log(this.props.root);
   };
 
+  renderLeaf(root: any) {
+    if (!DebugFlags["Show Flowers in Hierarchy"].on && root instanceof NormalFlower) {return null};
+    return  (<div>
+    { root.name } (depth: { root.zIndex }) { root instanceof Entity && (
+        root.activeModes.includes(this.props.gameState.mode) ? "Active" : "Inactive"
+    )}
+  </div>)
+  }
+
   render() {
     const root = this.props.root;
 
@@ -99,11 +110,9 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
           onMouseLeave={this.mouseOut}
           onClick={this.click}
         >
-          <div>
-            { root.name } (depth: { root.zIndex }) { root instanceof Entity && (
-                root.activeModes.includes(this.props.gameState.mode) ? "Active" : "Inactive"
-            )}
-          </div>
+          
+          {this.renderLeaf(root)}
+          
         </div>
         {
           root instanceof Entity &&
