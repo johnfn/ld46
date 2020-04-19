@@ -9,6 +9,7 @@ import { Entity } from '../entity';
 import { Container } from 'pixi.js';
 import { BaseTextEntity } from '../base_text_entity';
 import { TextEntity } from '../text_entity';
+import { DebugFlags } from '../../game/debug';
 
 type ReactWrapperProps = {
   game      : BaseGame<{}>;
@@ -98,6 +99,14 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
     );
   };
 
+  renderHierarchy() {
+    if (DebugFlags["High Performance"]) return null;
+    return (<div>
+      <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.stage} gameState={this.props.game.state} /> 
+      <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} />
+      </div>)
+  }
+
   render() {
     return (
       <div style={{
@@ -124,8 +133,7 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
               { this.renderSelected() }
 
               <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>Debug Hierarchy</div>
-              <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.stage} gameState={this.props.game.state} /> 
-              <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} />
+              {this.renderHierarchy()}
             </div> 
           }
         </div>

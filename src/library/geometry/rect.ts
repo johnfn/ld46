@@ -296,7 +296,7 @@ export class Rect {
     return undefined;
   }
 
-  contains(p: Vector2): boolean {
+  contains(p: IVector2): boolean {
     return (
       p.x >= this.x &&
       p.x < this.x + this.width &&

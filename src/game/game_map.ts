@@ -15,7 +15,7 @@ import { IGameState } from "Library";
 import { MusicMap } from "./music_map";
 import { Bud } from "./bud";
 import { Fountain } from "./fountain";
-import { BouncyShroom } from "./bouncyshroom";
+import { BouncyShroom } from "./bouncy_shroom";
 
 type FlowerRegion = {
   tilemapRegion: TilemapRegion,
@@ -133,8 +133,6 @@ export class GameMap extends Entity {
     ],
       assets: Assets
     });
-
-    console.log(this.artMap);
     
     this.loadMap(Player.StartPosition);
 
@@ -166,11 +164,20 @@ export class GameMap extends Entity {
   }
 
   loadFlowers() {
+    let frequency = 2;
     for (const region of this.flowerRegions) {
-      const numFlowers = region.rect.width / 128;
+      if (region.properties["frequency"]) {
+        frequency = parseInt(region.properties["frequency"])
+      }
+      let numFlowers = Math.round(frequency * region.rect.width / 256 / 2); // 2 is just because the lowest frequency was still too many flowers
+
       for (let i = 0; i < numFlowers; i++) {
-        const f = new NormalFlower(parseInt(region.properties["level"]))
-        const start = region.rect.topLeft.addX(128);
+        let f: NormalFlower;
+        if (region.properties["level"]) {
+          f = new NormalFlower(parseInt(region.properties["level"]))
+        } else {
+          f = new NormalFlower()
+        }
         f.position = region.rect.topLeft.addX(128).addX(Math.random()*(region.rect.width-256))
         this.addChild(f)
       }
