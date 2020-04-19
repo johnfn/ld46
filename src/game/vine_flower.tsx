@@ -7,6 +7,7 @@ import { Assets } from "./assets";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { Rect } from "../library/geometry/rect";
 import { Vector2 } from "../library/geometry/vector2";
+import { Debug } from "../library/debug";
 
 class VineComponent extends Entity {
   public frame = 0;
