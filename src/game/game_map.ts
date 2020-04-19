@@ -14,6 +14,7 @@ import { Vector2 } from "../library/geometry/vector2";
 import { IGameState } from "Library";
 import { MusicMap } from "./music_map";
 import { Bud } from "./bud";
+import { Fountain } from "./fountain";
 
 type FlowerRegion = {
   tilemapRegion: TilemapRegion,
@@ -78,7 +79,7 @@ export class GameMap extends Entity {
           type     : "single",
           name     : "fountain",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
-            return new Entity({ name: "entity", texture: tex });
+            return new Fountain(tex);
           }
         },
 
