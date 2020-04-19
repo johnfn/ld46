@@ -401,4 +401,32 @@ export class Cinematics {
     state.mode = "Normal"; 
   }
 
+  wisteriaCheckCount = 0;
+  public *wisteria(): GameCoroutine { 
+    this.wisteriaCheckCount = this.wisteriaCheckCount + 1;
+    
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    if (this.wisteriaCheckCount === 1){
+
+      yield* DialogBox.StartDialog([ 
+        { text: "You reach out to the wisteria. It seems to grow stronger in your presence.", },
+        { text: "Verdant energy starts to flow through you.", },
+        // spirit slots increase! 
+        { text: "Your number of Spirit Slots increased!", },
+      ]);
+
+    } else {
+
+      yield* DialogBox.StartDialog([ 
+        { text: "The wisteria stands majestically before you. Its trunk is straighter than it was when you first saw it.", },  
+      ]);
+
+    }
+
+    state.mode = "Normal"; 
+  }
+
 }
