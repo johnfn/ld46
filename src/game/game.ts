@@ -43,13 +43,6 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
     this.fixedCameraStage.addChild(new DialogOverlay());
     this.fixedCameraStage.addChild(new Hud(this.state.spiritTotal));
 
-    if (DebugFlags["Play Music"].on) {
-      const audio = Assets.getResource("loop1");
-
-      audio.play();
-      audio.loop = true;
-    }
-
     if (DebugFlags["Show Initial Cinematic"].on) {
       this.coroutineManager.startCoroutine(
         "Initial Cinematic",
