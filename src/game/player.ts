@@ -213,6 +213,7 @@ export class Player extends Entity {
     if (this.velocity.x > 0 && this.scale.x < 0) {
       this.scale = this.scale.invertX();
     }
+
     if (this.velocity.x < 0 && this.scale.x > 0) {
       this.scale = this.scale.invertX();
     }
