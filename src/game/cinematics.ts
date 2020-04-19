@@ -1,3 +1,5 @@
+// aka this is where luny dumps everything
+
 import { CoroutineManager, GameCoroutine } from "../library/coroutine_manager";
 import { Game } from "./game";
 import { DialogOverlay } from "./dialog_overlay";
@@ -154,9 +156,9 @@ export class Cinematics {
     state.mode = "Dialog"; 
 
     yield* DialogBox.StartDialog([ 
-      { speaker: "Bud", text: "Oh, what?", },
-      { speaker: "Bud", text: "I guess I haven’t been here in a while.", },
-      { speaker: "Bud", text: "The shortcut is at the top of this area, but it looks like it’s been blocked off by some old vines or something.", },
+      { speaker: "Bud", text: "Welcome to the Tree of Sprights!", },
+      { speaker: "Bud", text: "Huh... That's odd.", },
+      { speaker: "Bud", text: "The entrance to Withers' Lair is above this area, but it looks like it’s been blocked off by some old vines or something.", },
       { speaker: "Bud", text: "That’s... actually a little disappointing.", },
       { speaker: "Bud", text: "I’m sorry I couldn’t help more.", },      
     ]);
@@ -172,7 +174,7 @@ export class Cinematics {
     yield* DialogBox.StartDialog([ 
       { speaker: "Bud", text: "How did you do that?!", },
       { speaker: "Bud", text: "It must be your nature powers! Maybe they’re coming back!", },
-      { speaker: "Bud", text: "Sadly, that’s not the exit that leads to the shortcut...", },
+      { speaker: "Bud", text: "Sadly, that’s not the exit that leads to Withers' Lair...", },
       { speaker: "Bud", text: "But let’s go explore it anyway! Maybe we’ll find something helpful.", },          
     ]);
 
