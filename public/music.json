@@ -7,19 +7,19 @@
          "name":"Music Regions",
          "objects":[
                 {
-                 "height":2048,
+                 "height":3584,
                  "id":1,
                  "name":"",
                  "properties":[
                         {
                          "name":"file",
                          "type":"string",
-                         "value":"loop1.mp3"
+                         "value":"music\/Sanctuary.mp3"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":3840,
+                 "width":10240,
                  "x":0,
                  "y":0
                 }],
@@ -30,7 +30,7 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":2,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

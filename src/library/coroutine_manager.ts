@@ -2,6 +2,7 @@ import { KeyInfoType } from "./keyboard";
 import { IGameState } from "Library";
 import { Entity } from "./entity";
 import { Game } from "../game/game";
+import { BaseGame } from "./base_game";
 
 /**
  * const state: GameState = yield CoroutineResult;
@@ -23,33 +24,40 @@ type ActiveCoroutine = {
 export type CoroutineId = number;
 
 export class CoroutineManager {
-  private lastCoroutineId: CoroutineId = -1;
-  private activeCoroutines: { [key: number]: ActiveCoroutine } = [];
+  private _lastCoroutineId: CoroutineId = -1;
+  private _activeCoroutines: { [key: number]: ActiveCoroutine } = [];
+  private _game: BaseGame<any>;
+
+  constructor(game: BaseGame<any>) {
+    this._game = game;
+  }
 
   startCoroutine(name: string, co: GameCoroutine, owner: Entity | Game): CoroutineId {
-    for (const activeCo of Object.values(this.activeCoroutines)) {
+    this._game.state.keys.clear();
+
+    for (const activeCo of Object.values(this._activeCoroutines)) {
       if (activeCo.name === name) {
         throw new Error(`Two coroutines with the name ${ name }. Tell grant about this!!!`);
       }
     }
 
-    this.activeCoroutines[++this.lastCoroutineId] = {
+    this._activeCoroutines[++this._lastCoroutineId] = {
       fn     : co,
       status : { waiting: false },
       name   : name,
       owner  : owner,
     };
 
-    return this.lastCoroutineId;
+    return this._lastCoroutineId;
   }
 
   public stopCoroutine(id: CoroutineId): void {
-    delete this.activeCoroutines[id];
+    delete this._activeCoroutines[id];
   }
 
   public updateCoroutines(state: IGameState): void {
-    for (const key of Object.keys(this.activeCoroutines)) {
-      const co = this.activeCoroutines[Number(key)];
+    for (const key of Object.keys(this._activeCoroutines)) {
+      const co = this._activeCoroutines[Number(key)];
 
       if (co.status.waiting) {
         if (co.status.type === "frames") {
@@ -94,10 +102,10 @@ export class CoroutineManager {
   }
 
   stopCoroutinesOwnedBy(entity: Entity) {
-    const ids = Object.keys(this.activeCoroutines).map(k => Number(k));
+    const ids = Object.keys(this._activeCoroutines).map(k => Number(k));
 
     for (const id of ids) {
-      if (this.activeCoroutines[id].owner === entity) {
+      if (this._activeCoroutines[id].owner === entity) {
         this.stopCoroutine(id);
       }
     }

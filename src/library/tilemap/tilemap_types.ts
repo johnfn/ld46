@@ -34,6 +34,12 @@ export interface TiledGroupLayerJSON {
   y: number;
 };
 
+export type TiledPropertiesType = { 
+  name: string; 
+  type: string; 
+  value: string 
+}[];
+
 export interface TiledObjectJSON {
   gid?: number;
 

@@ -2,6 +2,7 @@ import { Player } from "./player";
 import { Overlay } from "./overlay";
 import { GameMap } from "./game_map";
 import { Camera } from "../library/camera";
+import { Cinematics } from "/Users/johnfn/code/ld46/src/game/cinematics";
 
 declare module "Library" {
   export interface ModeList {
@@ -15,5 +16,6 @@ declare module "Library" {
     spiritUnused : number;
     map          : GameMap;
     camera       : Camera;
+    cinematics   : Cinematics;
   }
 }

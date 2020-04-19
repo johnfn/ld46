@@ -135,7 +135,7 @@ export class TiledTilemapObjects {
                   width : obj.width ,
                   height: obj.height,
                 }),
-              properties: obj.properties || {},
+              properties: TiledTilemap.ParseTiledProperties(obj.properties),
             });
 
             continue processNextObject;

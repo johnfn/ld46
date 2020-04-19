@@ -30,6 +30,8 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
 
     Game.Instance = this;
     this.cinematics = new Cinematics(this.coroutineManager, this);
+
+    this.state.cinematics = this.cinematics;
   }
 
   initialize() {
