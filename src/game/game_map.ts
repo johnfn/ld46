@@ -13,6 +13,8 @@ import { GetInstanceTypeProps } from "../library/tilemap/tilemap_objects";
 import { Debug } from "../library/debug";
 import { DebugFlagButtons } from "../library/react/debug_flag_buttons";
 import { DebugFlags } from "./debug";
+import { Vector2 } from "../library/geometry/vector2";
+import { IGameState } from "Library";
 
 export class GameMap extends Entity {
   artMap         : TiledTilemap;
@@ -90,12 +92,12 @@ export class GameMap extends Entity {
     //   assets: Assets,
     // });
 
-    this.loadMap();
+    this.loadMap(Player.StartPosition);
   }
 
-  getCameraRegion(player: Player): TilemapRegion {
+  getCameraRegion(pos: Vector2): TilemapRegion {
     for (const region of this.cameraRegions) {
-      if (region.rect.contains(player.positionAbsolute())) {
+      if (region.rect.contains(pos)) {
         return region;
       }
     }
@@ -103,13 +105,10 @@ export class GameMap extends Entity {
     throw new Error("No camera region for that location. Halp!")
   }
 
-  loadMap() {
-    const layers = this.artMap.loadLayersInRect(new Rect({
-      x     : -(256 * 10),
-      y     : -(256 * 10),
-      width :  9000,
-      height:  9000,
-    }));
+  loadMap(position: Vector2) {
+    const newBounds = this.getCameraRegion(position).rect;
+
+    const layers = this.artMap.loadLayersInRect(newBounds);
 
     for (const layer of layers) {
       this.addChild(layer.entity);
@@ -117,7 +116,7 @@ export class GameMap extends Entity {
   }
 
   collisionBounds(): RectGroup {
-    const bounds = new Rect({ x: -5000, y: -5000, width: 10000, height: 10000 });
+    const bounds = this.getCameraRegion(Player.Instance.position).rect;
     const rects = this.artMap._data.getCollidersInRegionForLayer(
       bounds,
       "Tile Layer 1"
@@ -129,5 +128,17 @@ export class GameMap extends Entity {
   }
 
   loadMusicRegions() {
+
+  }
+
+  update(state: IGameState) {
+    const oldRegion = state.camera.getBounds();
+    const cameraRegion = state.map.getCameraRegion(state.player.position).rect;
+
+    if (!oldRegion.equals(cameraRegion)) {
+      this.loadMap(state.player.position);
+    }
+
+    state.camera.setBounds(cameraRegion);
   }
 }

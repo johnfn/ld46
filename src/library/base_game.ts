@@ -116,6 +116,8 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
       bounds          : new Rect({ x: -5000, y: -5000, width: 10000, height: 10000 }),
     });
 
+    this.state.camera = this.camera;
+
     ReactMountGame(this, props.debugFlags);
 
     this.stage.sprite.sortableChildren = true;

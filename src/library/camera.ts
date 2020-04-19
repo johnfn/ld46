@@ -49,6 +49,10 @@ export class Camera {
     this._currentBounds = newBounds;
   }
 
+  public getBounds(): Rect {
+    return this._currentBounds;
+  }
+
   public cameraFrame(): Rect {
     return new Rect({
       x     : this.center.x - this._canvasWidth / 2,
@@ -87,8 +91,6 @@ export class Camera {
     if (currentBounds.width < this._canvasWidth || currentBounds.height < this._canvasHeight) {
       throw new Error("There is a region on the map which is too small for the camera.");
     }
-
-    console.log(currentBounds);
 
     // fit the camera rect into the regions rect
 
