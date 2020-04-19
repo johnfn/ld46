@@ -6,6 +6,7 @@ import { Texture, Sprite, BLEND_MODES } from "pixi.js";
 import { Rect } from "../library/geometry/rect";
 import { Vine } from "./vine_flower";
 import { Vector2 } from "../library/geometry/vector2";
+import { BouncyShroom } from "./bouncy_shroom";
 
 export class Player extends Entity {
   speed      = 30;
@@ -98,25 +99,28 @@ export class Player extends Entity {
   }
 
   checkForDialogTriggers(state: IGameState) {
-    for (const trigger of state.map.dialogTriggers.filter(t => !t.triggered)) {
-      if (trigger.region.rect.contains(this.position)) {
-        const dialogName = trigger.region.properties["dialog"];
+    const trigger = state.map.dialogTriggers.find(t => !t.triggered && t.region.rect.contains(this));
 
-        trigger.triggered = true;
+    if (!trigger) { return; }
 
-        if (!(dialogName in state.cinematics)) {
-          throw new Error(`Cant find a cinematic named ${ dialogName }`);
-        }
+    const dialogName = trigger.region.properties["dialog"];
 
-        this.startCoroutine(
-          dialogName,
-          (state.cinematics as any)[dialogName as any]()
-        );
-      }
+    trigger.triggered = true;
+
+    if (!(dialogName in state.cinematics)) {
+      throw new Error(`Cant find a cinematic named ${ dialogName }`);
     }
+
+    this.startCoroutine(
+      dialogName,
+      (state.cinematics as any)[dialogName as any]()
+    );
   }
 
   calculateVelocity(state: IGameState, touchingVine: boolean) {
+    const touchingBouncyBoi = this.hitInfo.collisions.find(x => x.otherEntity instanceof BouncyShroom) !== undefined;
+
+    const prevVelocity = this.velocity;
     this.velocity = this.velocity.withX(0);
 
     if (this.hitInfo.down || this.hitInfo.up) {
@@ -173,6 +177,24 @@ export class Player extends Entity {
       }
     }
 
+    if (state.keys.justDown.Spacebar && (this.hitInfo.down || (touchingVine && this.velocity.y >= -this.climbSpeed))) {
+      this.velocity = this.velocity.withY(-this.jumpHeight);
+      this.animState = this.jump;
+      this.frame = 0;
+
+      if (touchingVine) {
+        this.jumpingOnLadder = true;
+      }
+    }
+
+    if (touchingBouncyBoi) {
+      let newVelocity = Math.abs(prevVelocity.y / 1.2);
+
+      if (newVelocity < 5) { newVelocity = 5; } // always bounce a little (valuable life advice too)
+      if (newVelocity > 70) { newVelocity = 70; } // dont bounce too much (hey, that's also good life advice!)
+
+      this.velocity = this.velocity.withY(-newVelocity);
+    }
   }
 
   update(state: IGameState): void {
@@ -193,16 +215,6 @@ export class Player extends Entity {
     } else {
       if (touchingVine) {
         this.animState = this.climb;
-      }
-    }
-
-    if (state.keys.justDown.Spacebar && (this.hitInfo.down || (touchingVine && this.velocity.y >= -this.climbSpeed))) {
-      this.velocity = this.velocity.withY(-this.jumpHeight);
-      this.animState = this.jump;
-      this.frame = 0;
-
-      if (touchingVine) {
-        this.jumpingOnLadder = true;
       }
     }
 
