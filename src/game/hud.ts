@@ -1,6 +1,5 @@
 import { Entity } from "../library/entity";
 import { Assets } from "./assets";
-import { C } from "./constants";
 import { IGameState } from "Library";
 
 class SpiritMeter extends Entity {

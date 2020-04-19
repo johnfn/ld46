@@ -18,16 +18,16 @@ export class Camera {
   private _currentBounds   : Rect;
 
   constructor(props: { 
-    stage       : Entity;
-    state       : IGameState;
-    canvasWidth : number; 
-    canvasHeight: number;
-    bounds      : Rect;
+    stage           : Entity;
+    state           : IGameState;
+    canvasWidth     : number; 
+    canvasHeight    : number;
+    bounds          : Rect;
   }) {
-    this._stage         = props.stage;
-    this._canvasWidth   = props.canvasWidth;
-    this._canvasHeight  = props.canvasHeight;
-    this._currentBounds = props.bounds;
+    this._stage            = props.stage;
+    this._canvasWidth      = props.canvasWidth;
+    this._canvasHeight     = props.canvasHeight;
+    this._currentBounds    = props.bounds;
 
     this._immediatelyCenterOn(new Vector2({ x: props.canvasWidth / 2, y: props.canvasHeight / 2 }));
 
@@ -41,11 +41,15 @@ export class Camera {
     });
   }
 
-  public bounds(): Rect {
+  public setBounds(newBounds: Rect) {
+    this._currentBounds = newBounds;
+  }
+
+  public cameraFrame(): Rect {
     return new Rect({
-      x: this.center.x - this._canvasWidth / 2,
-      y: this.center.y - this._canvasHeight / 2,
-      width: this._canvasWidth,
+      x     : this.center.x - this._canvasWidth / 2,
+      y     : this.center.y - this._canvasHeight / 2,
+      width : this._canvasWidth,
       height: this._canvasHeight,
     });
   }
@@ -64,12 +68,6 @@ export class Camera {
   centerOn = (position: Vector2) => {
     this._desiredPosition = position.subtract(this.halfDimensions());
   };
-
-  // currentRegion(): Rect | undefined {
-  //   const mapRegions = this._state.map.getCameraRegions();
-
-  //   return mapRegions.find(region => region.contains(this._target.positionVector()));
-  // }
 
   calculateDesiredPosition = (): Vector2 => {
     let desiredPosition = this._desiredPosition;
@@ -92,7 +90,7 @@ export class Camera {
       desiredPosition = desiredPosition.withX(currentBounds.left);
     }
 
-    if (desiredPosition.x + this.bounds().width > currentBounds.right) {
+    if (desiredPosition.x + this.cameraFrame().width > currentBounds.right) {
       desiredPosition = desiredPosition.withX(currentBounds.right - this._canvasWidth);
     }
 
@@ -100,7 +98,7 @@ export class Camera {
       desiredPosition = desiredPosition.withY(currentBounds.top);
     }
 
-    if (desiredPosition.y + this.bounds().height > currentBounds.bottom) {
+    if (desiredPosition.y + this.cameraFrame().height > currentBounds.bottom) {
       desiredPosition = desiredPosition.withY(currentBounds.bottom - this._canvasHeight);
     }
 
