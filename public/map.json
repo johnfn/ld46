@@ -144,8 +144,8 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":5376,
-                 "y":2048
+                 "x":6656,
+                 "y":1536
                 }, 
                 {
                  "gid":44,
@@ -562,22 +562,22 @@
                  "y":2048
                 }, 
                 {
-                 "gid":48,
+                 "gid":47,
                  "height":256,
-                 "id":88,
+                 "id":90,
                  "name":"",
                  "properties":[
                         {
                          "name":"name",
                          "type":"string",
-                         "value":"fountain"
+                         "value":"bouncyshroom"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":7424,
-                 "y":2560
+                 "x":7680,
+                 "y":2304
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -743,7 +743,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":90,
+ "nextobjectid":91,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.3",

@@ -82,7 +82,7 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
       height         : props.canvasHeight,
       antialias      : true,
       transparent    : false,
-      resolution     : window.devicePixelRatio,
+      resolution     : window.devicePixelRatio / 2,
       autoDensity    : true,
       backgroundColor: 0x4e5759,
       view           : view as HTMLCanvasElement,
@@ -179,7 +179,7 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     const activeEntities = new HashSet(this.state.entities.values().filter(e => e.activeModes.includes(this.state.mode)));
 
     const grid = this.collisionHandler.buildCollisionGrid({
-      bounds  : new Rect({ x: 0, y: 0, width: 5000, height: 5000 }),
+      bounds  : this.camera.getBounds(),
       entities: activeEntities,
     });
 

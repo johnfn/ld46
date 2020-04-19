@@ -146,7 +146,7 @@ export class Debug {
     target: "stage" | "fixed" = "stage"
   ): Graphics[] {
     if (entity instanceof Entity) {
-      entity = entity.collisionBounds().add(entity.positionAbsolute());
+      entity = entity.collisionBounds().add(entity.position);
     } 
     
     if (entity instanceof RectGroup) {

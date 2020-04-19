@@ -15,6 +15,7 @@ import { IGameState } from "Library";
 import { MusicMap } from "./music_map";
 import { Bud } from "./bud";
 import { Fountain } from "./fountain";
+import { BouncyShroom } from "./bouncyshroom";
 
 type FlowerRegion = {
   tilemapRegion: TilemapRegion,
@@ -71,7 +72,7 @@ export class GameMap extends Entity {
           type     : "single",
           name     : "bouncyshroom",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
-            return new Entity({ name: "entity", texture: tex });
+            return new BouncyShroom(tex);
           }
         },
 
@@ -82,7 +83,6 @@ export class GameMap extends Entity {
             return new Fountain(tex);
           }
         },
-
 
         {
           type     : "single",
