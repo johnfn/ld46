@@ -87,10 +87,11 @@ export class Vine extends Entity {
     if (this.visible) {
       const height = (this.finishedVineComponents.length * 256);
 
+      // tiny offsets make vine climbing more forgiving
       return new Rect({
-        x     : 0,
+        x     : -this.width*(1/14),
         y     : -height,
-        width : this.width,
+        width : this.width*(7/6),
         height: height,
       });
     } else {

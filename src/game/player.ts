@@ -99,14 +99,6 @@ export class Player extends Entity {
       this.velocity = this.velocity.withY(0);
     }
 
-    if (state.keys.down.A) {
-      this.velocity = this.velocity.addX(-this.speed);
-    }
-
-    if (state.keys.down.D) {
-      this.velocity = this.velocity.addX(this.speed);
-    }
-
     const touchingVine = this.hitInfo.interactions.find(x => x.otherEntity instanceof Vine);
 
     if (touchingVine) {
@@ -114,8 +106,16 @@ export class Player extends Entity {
 
       this.velocity = this.velocity.addY(this.gravity);
 
+      if (state.keys.down.A) {
+        this.velocity = this.velocity.addX(-this.climbSpeed);
+      }
+  
+      if (state.keys.down.D) {
+        this.velocity = this.velocity.addX(this.climbSpeed/4);
+      }
+
       if (state.keys.down.W) {
-        this.velocity = this.velocity.addY(-this.climbSpeed);
+        this.velocity = this.velocity.addY(-this.climbSpeed/4);
       } 
       
       if (state.keys.down.S) {
@@ -129,6 +129,15 @@ export class Player extends Entity {
       // gravity
 
       this.velocity = this.velocity.addY(this.gravity);
+
+      if (state.keys.down.A) {
+        this.velocity = this.velocity.addX(-this.speed);
+      }
+  
+      if (state.keys.down.D) {
+        this.velocity = this.velocity.addX(this.speed);
+      }
+
     }
 
     if (this.grounded) {
