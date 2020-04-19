@@ -19,6 +19,8 @@ export class Player extends Entity {
   
   animState: Texture[]
 
+  public static Instance: Player;
+
   frame = 0;
   facing: "left" | "right" = "right";
   climbSpeed = 20;
@@ -29,6 +31,8 @@ export class Player extends Entity {
       texture: Assets.getResource("owo"),
     });
 
+    Player.Instance = this;
+
     this.idle = Assets.getResource("char_idle");
 
     this.walk = Assets.getResource("char_walk");
@@ -36,6 +40,7 @@ export class Player extends Entity {
 
     this.animState = this.idle;
     this.x = 300;
+    this.y = 300;
   }
 
   audio: HTMLAudioElement | null = null;

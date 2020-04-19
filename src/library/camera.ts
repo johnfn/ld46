@@ -18,18 +18,22 @@ export class Camera {
   private _currentBounds   : Rect;
 
   constructor(props: { 
-    stage           : Entity;
-    state           : IGameState;
-    canvasWidth     : number; 
-    canvasHeight    : number;
-    bounds          : Rect;
+    stage       : Entity;
+    state       : IGameState;
+    canvasWidth : number; 
+    canvasHeight: number;
+    scale       : number;
+    bounds      : Rect;
   }) {
     this._stage            = props.stage;
-    this._canvasWidth      = props.canvasWidth;
-    this._canvasHeight     = props.canvasHeight;
+    this._canvasWidth      = props.canvasWidth / props.scale;
+    this._canvasHeight     = props.canvasHeight / props.scale;
     this._currentBounds    = props.bounds;
 
-    this._immediatelyCenterOn(new Vector2({ x: props.canvasWidth / 2, y: props.canvasHeight / 2 }));
+    this._immediatelyCenterOn(new Vector2({ 
+      x: this._canvasWidth/ 2, 
+      y: this._canvasHeight / 2 
+    }));
 
     this._desiredPosition = this._position;
   }
@@ -83,6 +87,8 @@ export class Camera {
     if (currentBounds.width < this._canvasWidth || currentBounds.height < this._canvasHeight) {
       throw new Error("There is a region on the map which is too small for the camera.");
     }
+
+    console.log(currentBounds);
 
     // fit the camera rect into the regions rect
 

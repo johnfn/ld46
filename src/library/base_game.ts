@@ -112,6 +112,7 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
       state           : this.state,
       canvasWidth     : props.canvasWidth,
       canvasHeight    : props.canvasHeight,
+      scale           : props.scale,
       bounds          : new Rect({ x: -5000, y: -5000, width: 10000, height: 10000 }),
     });
 

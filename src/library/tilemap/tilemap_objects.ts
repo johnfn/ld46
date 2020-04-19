@@ -8,17 +8,26 @@ import { TiledTilemap, MapLayer } from "./tilemap";
 import { TilemapRegion } from "./tilemap_data";
 import { TypesafeLoader } from "../typesafe_loader";
 
+export type GetInstanceTypeProps = {
+  layerName: string; 
+  x: number; 
+  y: number 
+}
+
 type TilemapCustomObjectSingle = {
   type            : "single";
   name            : string;
-  getInstanceType : (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => Entity;
+  getInstanceType : (
+    tex: Texture, 
+    tileProperties: { [key: string]: unknown }, 
+    props: GetInstanceTypeProps) => Entity | null;
 };
 
 type TilemapCustomObjectGroup = {
   type                 : "group";
   names                : string[];
   getInstanceType      : (tex: Texture) => Entity;
-  getGroupInstanceType : () => Entity;
+  getGroupInstanceType : (props: GetInstanceTypeProps) => Entity;
 };
 
 type TilemapCustomObjectRect = {
@@ -187,7 +196,11 @@ export class TiledTilemapObjects {
         if (associatedObject.name === tileName) {
           const spriteTex = TextureCache.GetTextureForTile({ assets: this._assets, tile }); 
 
-          newObj = associatedObject.getInstanceType(spriteTex, allProperties, layer.name);
+          newObj = associatedObject.getInstanceType(spriteTex, allProperties, {
+            layerName: layer.name,
+            x: tile.x,
+            y: tile.y,
+          });
         }
       } else if (associatedObject.type === "group") {
         // add to the list of grouped objects, which we will process later.
@@ -305,7 +318,11 @@ export class TiledTilemapObjects {
         minTileY = Math.min(minTileY, obj.tile.y);
       }
 
-      const groupEntity = customObject.getGroupInstanceType();
+      const groupEntity = customObject.getGroupInstanceType({
+        layerName: layer.name,
+        x        : minTileX,
+        y        : minTileY,
+      });
 
       groupEntity.x = minTileX;
       groupEntity.y = minTileY;

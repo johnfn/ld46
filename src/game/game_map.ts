@@ -9,6 +9,10 @@ import { Texture } from "pixi.js";
 import { NormalFlower } from "./normal_flower";
 import { VineFlower } from "./vine_flower";
 import { Player } from "./player";
+import { GetInstanceTypeProps } from "../library/tilemap/tilemap_objects";
+import { Debug } from "../library/debug";
+import { DebugFlagButtons } from "../library/react/debug_flag_buttons";
+import { DebugFlags } from "./debug";
 
 export class GameMap extends Entity {
   artMap         : TiledTilemap;
@@ -34,7 +38,7 @@ export class GameMap extends Entity {
         {
           type     : "single",
           name     : "flower",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
             return new NormalFlower();
           }
         },
@@ -42,8 +46,22 @@ export class GameMap extends Entity {
         {
           type     : "single",
           name     : "vineflower",
-          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, layerName: string) => {
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
             return new VineFlower(tex);
+          }
+        },
+
+        {
+          type     : "single",
+          name     : "start",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
+            if (DebugFlags["Set Position To Start Object"].on) {
+              setTimeout(() => {
+                Player.Instance.x = props.x;
+                Player.Instance.y = props.y;
+              }, 100);
+            }
+            return null;
           }
         },
 
