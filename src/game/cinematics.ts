@@ -384,7 +384,113 @@ export class Cinematics {
     state.mode = "Normal"; 
   }
 
+  public *npc10(): GameCoroutine {
+    let state = yield "next";
 
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "NPC", text: "Yap!", },
+      { speaker: "NPC", text: "Yap! Yap!", },
+      { text: "(It’s a puppy ghost in the body of a dryad ghost!)", },
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *npc11(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "NPC", text: "I wonder if any of the other ghosts think it’s weird that we’re all just talking to ourselves constantly.", },
+      { speaker: "NPC", text: "There really isn’t much of anything else to do, though.", },
+      { speaker: "NPC", text: "We just gotta go crazy and shout into the void! It’s our only shot to survive!", },
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *npc12(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "NPC", text: "I wonder if the vines are still around?", },
+      { speaker: "NPC", text: "I still remember the day I found two vines growing out of the same root!", },
+      { speaker: "NPC", text: "It was a BINE!", },
+      { speaker: "NPC", text: "…Yeah, comedy was never my strong suit, even when I was alive.", },      
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *npc13(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "NPC", text: "I wonder if the Time Warrior is up.", },
+      { speaker: "NPC", text: "I also wonder how many Spirit Slots the Time Warrior has!", },
+      { speaker: "NPC", text: "Does he have five yet? That’s the maximum, right?", },
+      { speaker: "NPC", text: "There couldn’t be any ways to unlock Secret Slots lying around, right?", },
+      { speaker: "NPC", text: "So much to wonder about…", },            
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  npc14CheckCount = 0;
+  public *npc14(): GameCoroutine { // first npc encountered in MushWorld(tm)
+    this.npc14CheckCount = this.npc14CheckCount + 1;
+    
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    if (this.npc14CheckCount === 1){
+
+      yield* DialogBox.StartDialog([ 
+        { speaker: "NPC", text: "Whoa… Did a nearby natural presence just grow stronger?", },
+        { speaker: "NPC", text: "I haven’t felt something like that in centuries!", },
+        { speaker: "NPC", text: "It must be the Time Warrior!", },
+        { speaker: "NPC", text: "Hey, Time Warrior! Can you see me? It’s me, Squill!", },
+        { speaker: "NPC", text: "At least, I hope you’re the Time Warrior. But what else could you be? Everything else is slowly dying…", },
+        { speaker: "NPC", text: "This is so cool, though! You’re finally back, and we’re one step closer to restoring the forest!", },
+        { speaker: "NPC", text: "I wish I could do something in the physical world to help you, but us ghosts are far too weak for anything like that at the moment.", },
+        { speaker: "NPC", text: "Just remember, I’ll always be there cheering you on! When there’s a Squill, there’s a squay!", },             
+      ]);
+
+    } else {
+
+      yield* DialogBox.StartDialog([ 
+        { speaker: "NPC", text: "I wish I could do something in the physical world to help you, but us ghosts are far too weak for anything like that at the moment.", },
+        { speaker: "NPC", text: "Just remember, I’ll always be there cheering you on! When there’s a Squill, there’s a squay!", },        
+      ]);
+
+    }
+
+    state.mode = "Normal"; 
+  }
+
+  public *npc15(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "NPC", text: "I wish my parents were still around.", },
+      { speaker: "NPC", text: "I prayed so hard that they would become ghosts like I did, but…", },
+      { speaker: "NPC", text: "I guess they just didn’t have as much unfinished business as me.", },
+      { speaker: "NPC", text: "Kind of ironic, really.", },
+      { speaker: "NPC", text: "C’mon, Time Warrior. Make things right. I believe in you.", },            
+    ]);
+
+    state.mode = "Normal"; 
+  }
 
 
 
@@ -405,7 +511,7 @@ export class Cinematics {
         this.flowerCheckLv0 = this.flowerCheckLv0 + 1;
 
         yield* DialogBox.StartDialog([ 
-          { text: "You caress a small, delicate sunblossom.", },
+          { text: "You gently touch a small, delicate sunblossom.", },
           { text: "Floral energy starts to flow through you.", },         
         ]);
 
@@ -422,7 +528,7 @@ export class Cinematics {
         this.flowerCheckLv1 = this.flowerCheckLv1 + 1;
 
         yield* DialogBox.StartDialog([ 
-          { text: "You place a hand on the glowing petals of a sunblossom.", },
+          { text: "You caress the petals of a growing sunblossom. It begins to light up.", },
           { text: "Fluorescent energy starts to flow through you.", },         
         ]);
 
@@ -475,6 +581,7 @@ export class Cinematics {
     state.mode = "Dialog"; 
 
     if (this.wisteriaCheckCount === 1){
+      this.hubFlowerLevel = this.hubFlowerLevel + 1;
 
       yield* DialogBox.StartDialog([ 
         { text: "You reach out to the wisteria. It seems to grow stronger in your presence.", },
@@ -482,7 +589,7 @@ export class Cinematics {
         // spirit slots increase! 
         { text: "Your number of Spirit Slots increased!", },
       ]);
-
+    
     } else {
 
       yield* DialogBox.StartDialog([ 

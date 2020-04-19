@@ -51,6 +51,7 @@ export type AssetPath =
   | "tileset.png"
   | "vine_flower_source.png"
   | "world.json"
+  | "glow.png"
   | "char_climb (1).png"
   | "char_climb (2).png"
   | "char_climb (3).png"
@@ -164,6 +165,7 @@ export const AssetsToLoad = {
   "spirit_full_hud"              : { type: "Image"       as const, path: "spirit_full_hud.png"               },
   "tileset"                      : { type: "Image"       as const, path: "tileset.png"                       },
   "vine_flower_source"           : { type: "Image"       as const, path: "vine_flower_source.png"            },
+  "glow"                         : { type: "Image"       as const, path: "glow.png"                          },
   "world"                        : { type: "TileWorld"   as const, path: "world.json"                        },
 
   /* Animations */
