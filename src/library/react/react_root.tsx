@@ -7,6 +7,8 @@ import { DebugFlagButtons, DebugFlagsType } from './debug_flag_buttons';
 import { IS_DEBUG } from '../environment';
 import { Entity } from '../entity';
 import { Container } from 'pixi.js';
+import { BaseTextEntity } from '../base_text_entity';
+import { TextEntity } from '../text_entity';
 
 type ReactWrapperProps = {
   game      : BaseGame<{}>;
@@ -87,6 +89,11 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
         <div>
           visible: { target.visible ? "true" : "false" }
         </div>
+        {
+          target instanceof TextEntity 
+            ? <div>text: { target.html }</div>
+            : <div>hi</div>
+        }
       </div>
     );
   };
@@ -117,8 +124,8 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
               { this.renderSelected() }
 
               <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>Debug Hierarchy</div>
-              {/* <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.stage} gameState={this.props.game.state} /> 
-              <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} /> */}
+              <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.stage} gameState={this.props.game.state} /> 
+              <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} />
             </div> 
           }
         </div>

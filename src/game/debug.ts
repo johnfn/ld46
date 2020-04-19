@@ -6,4 +6,5 @@ export const DebugFlags = ReadDebugFlagsFromLocalStorage({
   "Show Initial Cinematic"       : true,
   "Show Bud Text"                : true,
   "Show Flowers in Hierarchy"    : false,
+  "Fairy Follows You Immediately": false,
 });

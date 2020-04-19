@@ -10,6 +10,7 @@ import { CollisionHandler } from "./collision_handler";
 import { Rect } from "./geometry/rect";
 import { CoroutineManager } from "./coroutine_manager";
 import { IGameState } from 'Library';
+import { BaseGameState } from "./base_state";
 
 export let GameReference: BaseGame<any>;
 
@@ -20,7 +21,7 @@ export type GameArgs = {
   tileHeight  : number;
   tileWidth   : number;
   debugFlags  : DebugFlagsType;
-  state       : IGameState;
+  state       : Omit<IGameState, keyof BaseGameState>;
   assets      : TypesafeLoader<any>;
 };
 
@@ -58,7 +59,10 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     GameReference = this;
 
     this.coroutineManager = new CoroutineManager(this);
-    this.state = props.state;
+    this.state = {
+      ...(new BaseGameState()),
+      ...props.state,
+    } 
 
     const view = document.getElementById('canvas');
 

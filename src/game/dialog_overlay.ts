@@ -21,7 +21,7 @@ export class DialogOverlay extends Entity {
 
   constructor() {
     super({
-      name: "DialogBox",
+      name: "Dialog Overlay",
     });
 
     this.visible = false;
@@ -31,9 +31,9 @@ export class DialogOverlay extends Entity {
 
     DialogOverlay.Instance = this;
 
-    this.dialogText = new TextEntity({ text: "dialog overlay text", width: 900, height: 400, fontSize: 15 });
-    this.dialogText.y = 120;
-    this.dialogText.x = 380;
+    this.dialogText = new TextEntity({ text: "Dialog overlay text", width: 900, height: 400, fontSize: 15 * 4 });
+    this.dialogText.y = 120 * 4;
+    this.dialogText.x = 380 * 4;
 
     this.addChild(this.dialogText);
   }
