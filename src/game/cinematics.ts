@@ -1020,7 +1020,7 @@ export class Cinematics {
     state.mode = "Dialog"; 
 
     if (this.wisteriaCheckCount === 1){
-      this.hubFlowerLevel = this.hubFlowerLevel + 1;
+      this.wisteriaCheckCount = this.wisteriaCheckCount + 1;
 
       yield* DialogBox.StartDialog([ 
         { text: "You reach out to the wisteria. It seems to grow stronger in your presence.", },
@@ -1033,6 +1033,35 @@ export class Cinematics {
 
       yield* DialogBox.StartDialog([ 
         { text: "The wisteria stands majestically before you. Its trunk is straighter than it was when you first saw it.", },  
+      ]);
+
+    }
+
+    state.mode = "Normal"; 
+  }
+
+  bigMushCheckCount = 0;
+  public *bigMush(): GameCoroutine { 
+    this.bigMushCheckCount = this.bigMushCheckCount + 1;
+    
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    if (this.bigMushCheckCount === 1){
+      this.bigMushCheckCount = this.bigMushCheckCount + 1;
+
+      yield* DialogBox.StartDialog([ 
+        { text: "The giant mushroom is cool to the touch.", },
+        { text: "Buoyant energy starts to flow through you.", },
+        // spirit slots increase! 
+        { text: "Your number of Spirit Slots increased!", },
+      ]);
+    
+    } else {
+
+      yield* DialogBox.StartDialog([ 
+        { text: "The mushroom has grown plumper. It seems pleased with itself.", },  
       ]);
 
     }
