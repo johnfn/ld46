@@ -4,4 +4,5 @@ export const DebugFlags = ReadDebugFlagsFromLocalStorage({
   "Play Music"                   : { on: true, description: "" },
   "Set Position To Start Object" : { on: false, description: "" },
   "Show Initial Cinematic"       : { on: true, description: "" },
+  "Show Flowers in Hierarchy"    : { on: false, description: "" },
 });

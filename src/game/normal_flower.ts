@@ -4,23 +4,37 @@ import { Assets, AssetsToLoad } from "./assets";
 import { Entity } from "../library/entity";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { C } from "./constants";
+import { GameMap } from "./game_map";
 
 let flowers = 0;
 
 let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {1: "flower1", 2: "flower2", 3: "flower3", 4: "flower4"}
+let flowersRate: {[key: number]: string[]} = {
+  1: ["flower1"],
+  2: ["flower2"],
+  3: ["flower1", "flower2", "flower3", "flower4"],
+}
 
 export class NormalFlower extends Entity {
   interactionDistance = C.InteractionDistance;
   frame = 0;
   frames: Texture[];
 
-  constructor() {
+  constructor(level?: number) {
     super({
       name   : "Flower",
       texture: Assets.getResource("flower1")[0],
     });
 
-    this.frames = Assets.getResource(flowersMap[Math.floor(Math.random()*Object.keys(flowersMap).length) + 1]) as Texture[];
+    if (level) {
+      let rate = flowersRate[level];
+      let r = Math.floor(Math.random()*rate.length);
+      this.frames = Assets.getResource(rate[r] as keyof typeof AssetsToLoad) as Texture[];
+    } else {
+      this.frames = Assets.getResource(flowersMap[Math.floor(Math.random()*Object.keys(flowersMap).length) + 1]) as Texture[];
+    }
+
+    this.sprite.anchor.set(0.5, 0);
     if (Math.random() > 0.5) this.sprite.scale.x *= -1;
 
     this.startCoroutine(`flower-update-${ ++flowers }`, this.flowerUpdate());

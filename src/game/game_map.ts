@@ -14,9 +14,15 @@ import { Vector2 } from "../library/geometry/vector2";
 import { IGameState } from "Library";
 import { MusicMap } from "./music_map";
 
+type FlowerRegion = {
+  tilemapRegion: TilemapRegion,
+  level?:        number,
+}
 export class GameMap extends Entity {
   artMap         : TiledTilemap;
+  flowers        : NormalFlower[] = [];
   cameraRegions  : TilemapRegion[] = [];
+  flowerRegions  : TilemapRegion[] = [];
 
   public static Instance: GameMap;
   public dialogTriggers: { region: TilemapRegion, triggered: boolean }[] = [];
@@ -38,6 +44,7 @@ export class GameMap extends Entity {
           type     : "single",
           name     : "flower",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
+            return null;
             return new NormalFlower();
           }
         },
@@ -75,6 +82,14 @@ export class GameMap extends Entity {
 
         {
           type     : "rect",
+          layerName: "Flower Region Layer",
+          process  : region => {
+            this.flowerRegions.push(region);
+          },
+        },
+
+        {
+          type     : "rect",
           layerName: "Dialog Trigger Layer",
           process  : region => {
             this.dialogTriggers.push({ region, triggered: false });
@@ -83,6 +98,8 @@ export class GameMap extends Entity {
     ],
       assets: Assets
     });
+
+    console.log(this.artMap);
     
     this.loadMap(Player.StartPosition);
 
@@ -106,9 +123,24 @@ export class GameMap extends Entity {
     const newBounds = this.getCameraRegion(position).rect;
     const layers = this.artMap.loadLayersInRect(newBounds);
 
+    this.loadFlowers()
+
     for (const layer of layers) {
       this.addChild(layer.entity);
     }
+  }
+
+  loadFlowers() {
+    for (const region of this.flowerRegions) {
+      const numFlowers = region.rect.width / 128;
+      for (let i = 0; i < numFlowers; i++) {
+        const f = new NormalFlower(parseInt(region.properties["level"]))
+        const start = region.rect.topLeft.addX(128);
+        f.position = region.rect.topLeft.addX(128).addX(Math.random()*(region.rect.width-256))
+        this.addChild(f)
+      }
+      
+    } 
   }
 
   collisionBounds(): RectGroup {
