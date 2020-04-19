@@ -133,8 +133,6 @@ export class GameMap extends Entity {
     ],
       assets: Assets
     });
-
-    console.log(this.artMap);
     
     this.loadMap(Player.StartPosition);
 

@@ -11,6 +11,7 @@ import { Rect } from "./geometry/rect";
 import { CoroutineManager } from "./coroutine_manager";
 import { IGameState } from 'Library';
 import { BaseGameState } from "./base_state";
+import { DebugFlags } from "../game/debug";
 
 export let GameReference: BaseGame<any>;
 
@@ -82,7 +83,7 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
       height         : props.canvasHeight,
       antialias      : true,
       transparent    : false,
-      resolution     : window.devicePixelRatio / 2,
+      resolution     : DebugFlags["High Resolution"] ? window.devicePixelRatio : window.devicePixelRatio / 2,
       autoDensity    : true,
       backgroundColor: 0x4e5759,
       view           : view as HTMLCanvasElement,
