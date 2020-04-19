@@ -60,6 +60,31 @@ export class GameMap extends Entity {
 
         {
           type     : "single",
+          name     : "npc",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
+            return new Entity({ name: "entity", texture: tex });
+          }
+        },
+
+        {
+          type     : "single",
+          name     : "bouncyshroom",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
+            return new Entity({ name: "entity", texture: tex });
+          }
+        },
+
+        {
+          type     : "single",
+          name     : "fountain",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
+            return new Entity({ name: "entity", texture: tex });
+          }
+        },
+
+
+        {
+          type     : "single",
           name     : "start",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
             if (DebugFlags["Set Position To Start Object"]) {
