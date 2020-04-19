@@ -143,7 +143,7 @@ export class Player extends Entity {
           this.velocity = this.velocity.addY(-this.climbSpeed);
         }
 
-        if (this.velocity.y > 5) {
+        if (this.velocity.y > 1) {
           this.jumpingOnLadder = false;
         }
       } 
@@ -158,8 +158,6 @@ export class Player extends Entity {
       } else {
         this.velocity = this.velocity.clampY(-this.climbSpeed, this.climbSpeed);
       }
-
-      console.log(this.jumpingOnLadder);
 
       // if (state.keys.down.W || state.keys.down.S) {
       // }
@@ -191,7 +189,7 @@ export class Player extends Entity {
       }
     }
 
-    if (state.keys.justDown.Spacebar && (this.hitInfo.down || (touchingVine && this.velocity.y >= 0))) {
+    if (state.keys.justDown.Spacebar && (this.hitInfo.down || (touchingVine && this.velocity.y >= -this.climbSpeed))) {
       this.velocity = this.velocity.withY(-this.jumpHeight);
       this.animState = this.jump;
       this.frame = 0;
