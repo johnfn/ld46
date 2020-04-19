@@ -156,7 +156,7 @@ export class CollisionGrid {
     return false;
   };
 
-  collidesPoint = (point: Vector2, entity?: Entity): CollisionResultPoint[] => {
+  collidesPoint = (point: Vector2, takeFirst = false): CollisionResultPoint[] => {
     const cell = this._cells.get(
       Math.floor(point.x / this._cellSize),
       Math.floor(point.y / this._cellSize),
@@ -172,10 +172,14 @@ export class CollisionGrid {
           firstEntity : entityInCell,
 
           secondRect  : rect,
-          secondEntity: entity,
+          secondEntity: undefined,
 
           overlap     : point,
         });
+
+        if (takeFirst) {
+          return collisions;
+        }
       }
     }
 

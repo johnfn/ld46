@@ -6,6 +6,7 @@ import { HoverText } from "./hover_text";
 import { Assets } from "./assets";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { Rect } from "../library/geometry/rect";
+import { Vector2 } from "../library/geometry/vector2";
 
 export class Vine extends Entity {
   vineComponents: Entity[] = [];
@@ -19,18 +20,31 @@ export class Vine extends Entity {
   }
 
   *growVine(): GameCoroutine {
+    let state = yield "next";
+
     let frames = Assets.getResource("vine_live");
     this.visible = true;
 
-    for (let i = 1; i < 10; i++) {
+    for (let i = 0; true; i++) {
       const ent = new Entity({ texture: frames[0], name: "VineComponent" });
+      const nextPosition = new Vector2(
+        (ent.width / 2) * C.Scale.x,
+        (ent.height / 2 + this.y - ent.height * i) * C.Scale.y
+      ).add(this.positionAbsolute());
+
+      console.log(nextPosition);
+
+      // Are we about to hit a wall?
+      if (state.lastCollisionGrid.collidesPoint(nextPosition).length > 0) {
+        break;
+      }
 
       this.addChild(ent, 0, this.y - ent.height * i);
 
       for (let frame = 0; frame < frames.length; frame++) {
         ent.texture = frames[frame];
 
-        yield { frames: 4 };
+        state = yield { frames: 1 };
       }
 
       this.vineComponents.push(ent);
@@ -44,7 +58,7 @@ export class Vine extends Entity {
       return new Rect({
         x     : 0,
         y     : -height,
-        width : this.width   * C.Scale.x,
+        width : this.width * C.Scale.x,
         height: height,
       });
     } else {

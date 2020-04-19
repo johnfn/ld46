@@ -4,15 +4,17 @@ import { Entity } from "./entity";
 import { HashSet } from "./data_structures/hash";
 import { IGameState } from "Library";
 import { Mode } from "Library";
+import { CollisionGrid } from "./collision_grid";
 
 export class BaseGameState implements Partial<IGameState> {
-  keys          : KeyboardState;
-  renderer     !: Renderer;
-  entities      = new HashSet<Entity>();
-  toBeDestroyed : Entity[] = [];
-  stage        !: Entity;
-  spriteToEntity: { [key: number]: Entity } = {};
-  mode          : Mode = "Normal";
+  keys              : KeyboardState;
+  renderer         !: Renderer;
+  entities          = new HashSet<Entity>();
+  toBeDestroyed     : Entity[] = [];
+  stage            !: Entity;
+  spriteToEntity    : { [key: number]: Entity } = {};
+  mode              : Mode = "Normal";
+  lastCollisionGrid!: CollisionGrid;
 
   constructor() {
     this.keys = new KeyboardState();

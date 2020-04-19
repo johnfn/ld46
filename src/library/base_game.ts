@@ -9,7 +9,8 @@ import { DebugFlagsType } from "./react/debug_flag_buttons";
 import { CollisionHandler } from "./collision_handler";
 import { Rect } from "./geometry/rect";
 import { CoroutineManager } from "./coroutine_manager";
-import { IGameState } from "Library";
+import { CollisionGrid } from "./collision_grid";
+import { IGameState } from 'Library';
 
 export let GameReference: BaseGame<any>;
 
@@ -88,6 +89,9 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     });
     this.state.stage = this.stage;
 
+    // this.state.stage.sprite.interactive = true;
+    // this.state.stage.sprite.on("mousemove", (x: any) => console.log(x));
+
     this.app.stage.addChild(this.stage.sprite);
 
     this.fixedCameraStage = new Entity({
@@ -132,6 +136,15 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
   gameLoop = () => {
     const { entities } = this.state;
 
+    if (!this.state.lastCollisionGrid) {
+      const grid = this.collisionHandler.buildCollisionGrid({
+        bounds  : new Rect({ x: 0, y: 0, width: 5000, height: 5000 }),
+        entities: this.state.entities,
+      });
+
+      this.state.lastCollisionGrid = grid;
+    }
+
     this.state.tick++;
 
     Debug.Clear();
@@ -158,6 +171,8 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
       bounds  : new Rect({ x: 0, y: 0, width: 5000, height: 5000 }),
       entities: this.state.entities,
     });
+
+    this.state.lastCollisionGrid = grid;
 
     this.collisionHandler.resolveCollisions({
       entities: this.state.entities,
