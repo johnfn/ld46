@@ -8,6 +8,8 @@ import { GameCoroutine } from "../library/coroutine_manager";
 import { Rect } from "../library/geometry/rect";
 
 export class Vine extends Entity {
+  vineComponents: Entity[] = [];
+
   constructor() {
     super({
       name        : "Vine",
@@ -17,22 +19,33 @@ export class Vine extends Entity {
   }
 
   *growVine(): GameCoroutine {
+    let frames = Assets.getResource("vine_live");
     this.visible = true;
 
-    while (this.height < 2000) {
-      this.height += 10;
+    for (let i = 1; i < 10; i++) {
+      const ent = new Entity({ texture: frames[0], name: "VineComponent" });
 
-      yield "next";
+      this.addChild(ent, 0, this.y - ent.height * i);
+
+      for (let frame = 0; frame < frames.length; frame++) {
+        ent.texture = frames[frame];
+
+        yield { frames: 4 };
+      }
+
+      this.vineComponents.push(ent);
     }
   }
 
   public collisionBounds(): Rect {
     if (this.visible) {
+      const height = (this.vineComponents.length * 256) * C.Scale.y;
+
       return new Rect({
         x     : 0,
-        y     : -this.height * C.Scale.y,
+        y     : -height,
         width : this.width   * C.Scale.x,
-        height: this.height  * C.Scale.y,
+        height: height,
       });
     } else {
       return new Rect({
