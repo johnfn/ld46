@@ -184,7 +184,7 @@ export class Cinematics {
 
   // NPC STUFF DOWN HERE
 
-  public *npc01(): GameCoroutine {
+  public *npc01(): GameCoroutine { // the first NPC the player comes across
     let state = yield "next";
 
     state.mode = "Dialog"; 
@@ -197,6 +197,21 @@ export class Cinematics {
       { speaker: "NPC", text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
       { speaker: "NPC", text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
       { speaker: "NPC", text: "You might even just be a random flower. In which case, howdy!", },
+      { speaker: "NPC", text: "…But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *npc01Check2(): GameCoroutine { // abridged text shown for check 2+
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "NPC", text: "Time Warrior, is that you?", },
+      { speaker: "NPC", text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
+      { speaker: "NPC", text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
       { speaker: "NPC", text: "…But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
     ]);
 
@@ -294,6 +309,41 @@ export class Cinematics {
 
     state.mode = "Normal"; 
   }
+
+  public *npc08(): GameCoroutine { // first npc in the vine world
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "NPC", text: "I wish I could go sit down somewhere.", },
+      { speaker: "NPC", text: "But I have to keep wandering around! If I don’t, then the Time Warrior won’t have me to draw Spirit Energy from!", },
+      { speaker: "NPC", text: "In fact, he can check out how much Spirit Energy he has left in his Spirit Meter.", },
+      { speaker: "NPC", text: "And I know all my ghost buddies are nearby for him to replenish his energy from too!", },
+      { speaker: "NPC", text: "Wait, why am I talking to myself about this? I know all of this already, hah.", },
+      { speaker: "NPC", text: "Maybe I’m going crazy!", },
+      { speaker: "NPC", text: "I sure wish I could go sit down somewhere…", },            
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+  public *npc08Check2(): GameCoroutine { // abridged for check 2+
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "NPC", text: "I have to keep wandering around! If I don’t, then the Time Warrior won’t have me to draw Spirit Energy from!", },
+      { speaker: "NPC", text: "In fact, he can check out how much Spirit Energy he has left in his Spirit Meter.", },
+      { speaker: "NPC", text: "And I know all my ghost buddies are nearby for him to replenish his energy from too!", },
+      { speaker: "NPC", text: "I sure wish I could go sit down somewhere…", },        
+    ]);
+
+    state.mode = "Normal"; 
+  }
+
+
 
 
 
