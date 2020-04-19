@@ -120,6 +120,7 @@ export class Player extends Entity {
   calculateVelocity(state: IGameState, touchingVine: boolean) {
     const touchingBouncyBoi = this.hitInfo.collisions.find(x => x.otherEntity instanceof BouncyShroom) !== undefined;
 
+    const prevVelocity = this.velocity;
     this.velocity = this.velocity.withX(0);
 
     if (this.hitInfo.down || this.hitInfo.up) {
@@ -187,7 +188,12 @@ export class Player extends Entity {
     }
 
     if (touchingBouncyBoi) {
-      this.velocity = this.velocity.addY(-50);
+      let newVelocity = Math.abs(prevVelocity.y / 1.2);
+
+      if (newVelocity < 5) { newVelocity = 5; } // always bounce a little (valuable life advice too)
+      if (newVelocity > 70) { newVelocity = 70; } // dont bounce too much (hey, that's also good life advice!)
+
+      this.velocity = this.velocity.withY(-newVelocity);
     }
   }
 

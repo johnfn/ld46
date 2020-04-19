@@ -50,10 +50,6 @@ export class CollisionHandler {
     const collideableEntities = entities.values().filter(x => x.isCollideable() || x.isInteractable());
 
     for (const entity of collideableEntities) {
-      if (entity instanceof BouncyShroom) {
-        debugger;
-      }
-
       const collisionRect = entity.collisionBounds().add(entity.positionAbsolute());
 
       if (collisionRect.intersects(bounds)) {
