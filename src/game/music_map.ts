@@ -5,6 +5,7 @@ import { Assets, AssetsToLoad } from "./assets";
 import { Game } from "./game";
 import { IGameState } from "Library";
 import { SetAudioToLoop } from "./sfx";
+import { GameCoroutine } from "../library/coroutine_manager";
 
 type AllKeys = keyof typeof AssetsToLoad;
 type AudioNames = {
@@ -37,12 +38,22 @@ export class MusicMap extends Entity {
 
   playing = false;
 
-  allMusic: { [key: string]: { audio: HTMLAudioElement; } } = {
-    "music/Vines"    : { audio: SetAudioToLoop(Assets.getResource("music/Vines")), },
-    "music/The Hub"  : { audio: SetAudioToLoop(Assets.getResource("music/The Hub")), },
-    "music/Sanctuary": { audio: SetAudioToLoop(Assets.getResource("music/Sanctuary")), },
-    "music/Withers"  : { audio: SetAudioToLoop(Assets.getResource("music/Withers")), },
+  allMusic: { [key: string]: { coId: null | number; audio: HTMLAudioElement; } } = {
+    "music/Vines"    : { coId: null, audio: SetAudioToLoop(Assets.getResource("music/Vines")), },
+    "music/The Hub"  : { coId: null, audio: SetAudioToLoop(Assets.getResource("music/The Hub")), },
+    "music/Sanctuary": { coId: null, audio: SetAudioToLoop(Assets.getResource("music/Sanctuary")), },
+    "music/Withers"  : { coId: null, audio: SetAudioToLoop(Assets.getResource("music/Withers")), },
   };
+
+  firstUpdate(state: IGameState) {
+    for (const musicPath of Object.keys(this.allMusic)) {
+      const songObj = this.allMusic[musicPath];
+
+      songObj.audio.pause();
+      songObj.audio.volume = 0;
+      songObj.audio.currentTime = 0;
+    }
+  }
 
   update(state: IGameState) {
     const songPathsToPlay = this.musicRegions.filter(r => r.rect.contains(state.player.position)).map(k => k.properties["file"]);
@@ -51,14 +62,17 @@ export class MusicMap extends Entity {
       const songObj = this.allMusic[musicPath];
       const shouldPlay = songPathsToPlay.includes(musicPath)
 
-      if (shouldPlay && songObj.audio.paused) {
-        songObj.audio.currentTime = 0;
-        songObj.audio.play();
+      if (shouldPlay && songObj.audio.volume < 1) {
+        if (songObj.audio.paused) {
+          songObj.audio.currentTime = 0;
+          songObj.audio.play();
+        }
+
+        songObj.audio.volume = Math.min(songObj.audio.volume + 1 / 100, 1);
       }
 
-      if (!shouldPlay && !songObj.audio.paused) {
-        songObj.audio.currentTime = 0;
-        songObj.audio.pause();
+      if (!shouldPlay && songObj.audio.volume > 0) {
+        songObj.audio.volume = Math.max(songObj.audio.volume - 1 / 100, 0);
       }
     }
   }

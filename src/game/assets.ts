@@ -48,7 +48,7 @@ export type AssetPath =
   | "parallax bg/bigcloud04.png"
   | "parallax bg/bigcloud05.png"
   | "sound effects/Distant Gears.mp3"
-  | "sound effects/alert noise.mp3"
+  | "sound effects/alert_noise.mp3"
   | "sound effects/button 1.mp3"
   | "sound effects/button 2.mp3"
   | "sound effects/climax sweep.mp3"
@@ -69,7 +69,7 @@ export type AssetPath =
   | "sound effects/voices/voice 4.mp3"
   | "sound effects/voices/voice withers.mp3"
   | "sound effects/waterfall.mp3"
-  | "sound effects/withers chuckle.mp3"
+  | "sound effects/withers_chuckle.mp3"
   | "spirit_empty_hud.png"
   | "spirit_full_hud.png"
   | "tileset.png"
@@ -191,6 +191,10 @@ export type AssetPath =
   | "mushroom1 (4).png"
   | "mushroom1 (5).png"
   | "mushroom1 (6).png"
+  | "notbeam/notbeam_0000.png"
+  | "notbeam/notbeam_0001.png"
+  | "notbeam/notbeam_0002.png"
+  | "notbeam/notbeam_0003.png"
   | "shroom1 (1).png"
   | "shroom1 (2).png"
   | "shroom1 (3).png"
@@ -262,7 +266,7 @@ export const AssetsToLoad = {
   "parallax bg/bigcloud04"            : { type: "Image"       as const, path: "parallax bg/bigcloud04.png"             },
   "parallax bg/bigcloud05"            : { type: "Image"       as const, path: "parallax bg/bigcloud05.png"             },
   "sound effects/Distant Gears"       : { type: "Audio"       as const, path: "sound effects/Distant Gears.mp3"        },
-  "sound effects/alert noise"         : { type: "Audio"       as const, path: "sound effects/alert noise.mp3"          },
+  "sound effects/alert_noise"         : { type: "Audio"       as const, path: "sound effects/alert_noise.mp3"          },
   "sound effects/button 1"            : { type: "Audio"       as const, path: "sound effects/button 1.mp3"             },
   "sound effects/button 2"            : { type: "Audio"       as const, path: "sound effects/button 2.mp3"             },
   "sound effects/climax sweep"        : { type: "Audio"       as const, path: "sound effects/climax sweep.mp3"         },
@@ -283,7 +287,7 @@ export const AssetsToLoad = {
   "sound effects/voices/voice 4"      : { type: "Audio"       as const, path: "sound effects/voices/voice 4.mp3"       },
   "sound effects/voices/voice withers": { type: "Audio"       as const, path: "sound effects/voices/voice withers.mp3" },
   "sound effects/waterfall"           : { type: "Audio"       as const, path: "sound effects/waterfall.mp3"            },
-  "sound effects/withers chuckle"     : { type: "Audio"       as const, path: "sound effects/withers chuckle.mp3"      },
+  "sound effects/withers_chuckle"     : { type: "Audio"       as const, path: "sound effects/withers_chuckle.mp3"      },
   "spirit_empty_hud"                  : { type: "Image"       as const, path: "spirit_empty_hud.png"                   },
   "spirit_full_hud"                   : { type: "Image"       as const, path: "spirit_full_hud.png"                    },
   "tileset"                           : { type: "Image"       as const, path: "tileset.png"                            },
@@ -501,6 +505,15 @@ export const AssetsToLoad = {
       "mushroom1 (4).png",
       "mushroom1 (5).png",
       "mushroom1 (6).png",
+    ],
+  },
+  "notbeam/notbeam": {
+    type: "Animation" as const,
+    paths: [
+      "notbeam/notbeam_0000.png",
+      "notbeam/notbeam_0001.png",
+      "notbeam/notbeam_0002.png",
+      "notbeam/notbeam_0003.png",
     ],
   },
   "shroom1": {
