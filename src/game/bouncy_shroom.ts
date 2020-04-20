@@ -11,7 +11,7 @@ import { GabbysGlowThing } from "./gabbys_glow_thing";
 export class BouncyShroom extends Entity {
   public interactionDistance = C.InteractionDistance;
   public frames: Texture[];
-  public interacted = false;
+  public isActivated = false;
 
   hoverText: HoverText;
 
@@ -43,22 +43,62 @@ export class BouncyShroom extends Entity {
     if (state.player.position.distance(this.position) < this.interactionDistance) {
       this.hoverText.visible = true;
 
-      if (state.keys.justDown.X && !this.interacted && state.spiritUnused >= 1) {
+      if (state.keys.justDown.X && !this.isActivated && state.spiritUnused >= 1) {
         state.spiritUnused -= 1;
-        this.interacted = true;
+        this.isActivated = true;
         state.sfx.useSpirit.play();
-        this.startCoroutine("animateAlive", this.animateAlive())
+        this.startCoroutine("animateAlive", this.animateAliveThenDie());
       }
     } else {
       this.hoverText.visible = false;
     }
   }
 
-  *animateAlive(): GameCoroutine {
+  *animateAliveThenDie(): GameCoroutine {
     for (let i = 0; i < this.frames.length; i++) {
       this.texture = this.frames[i];
 
       yield { frames: 8 };
     }
+
+    let state = yield "next";
+
+    if (state.haveShroomPerma) {
+      return;
+    }
+
+    for (let i = 0; i < 4; i++) {
+      state = yield { frames: 60 };
+      state.sfx.tickSound.currentTime = 0;
+      state.sfx.tickSound.play();
+    }
+
+    this.texture = this.frames[this.frames.length - 2];
+
+    for (let i = 0; i < 4 * 2; i++) {
+      state = yield { frames: 30 };
+      state.sfx.tickSound.currentTime = 0;
+      state.sfx.tickSound.play();
+    }
+
+    this.texture = this.frames[this.frames.length - 3];
+
+    for (let i = 0; i < 4 * 4; i++) {
+      state = yield { frames: 15 };
+      state.sfx.tickSound.currentTime = 0;
+      state.sfx.tickSound.play();
+    }
+
+    state = yield "next";
+
+    state.sfx.tickSound2.play();
+
+    for (let i = 2; i < this.frames.length; i++) {
+      this.texture = this.frames[this.frames.length - i - 1];
+
+      yield { frames: 8 };
+    }
+
+    this.isActivated = false;
   }
 }

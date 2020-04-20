@@ -14,6 +14,8 @@ export const SetAudioToLoop = (audio: HTMLAudioElement) => {
 }
 
 export class Sfx extends Entity {
+  public tickSound  = Assets.getResource("sound effects/button 1");
+  public tickSound2 = Assets.getResource("sound effects/button 2");
   public voiceSound1 = Assets.getResource("sound effects/voices/voice 1");
   public voiceSound2 = Assets.getResource("sound effects/voices/voice 2");
   public voiceSound3 = Assets.getResource("sound effects/voices/voice 3");

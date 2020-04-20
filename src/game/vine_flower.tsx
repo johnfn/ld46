@@ -26,13 +26,17 @@ class VineComponent extends Entity {
 
 export class Vine extends Entity {
   finishedVineComponents: VineComponent[] = [];
+  parentFlower: VineFlower;
+  isActivated = false;
 
-  constructor() {
+  constructor(parentFlower: VineFlower) {
     super({
       name        : "Vine",
       texture     : Assets.getResource("vine_live")[0],
       interactable: true,
     });
+
+    this.parentFlower = parentFlower;
   }
 
   deadFrame = 4;
@@ -42,6 +46,7 @@ export class Vine extends Entity {
     let state = yield "next";
 
     this.visible = true;
+    this.isActivated = true;
 
     for (let i = 1; true; i++) {
       const ent = new VineComponent();
@@ -67,6 +72,49 @@ export class Vine extends Entity {
 
       this.finishedVineComponents.push(ent);
     }
+
+    if (state.haveVinePerma) {
+      return;
+    }
+
+    for (let i = 0; i < 4; i++) {
+      const state = yield { frames: 60 };
+      state.sfx.tickSound.currentTime = 0;
+      state.sfx.tickSound.play();
+    }
+
+    this.parentFlower.texture = this.parentFlower.frames[this.parentFlower.frames.length - 2];
+
+    for (let i = 0; i < 4 * 2; i++) {
+      const state = yield { frames: 30 };
+      state.sfx.tickSound.currentTime = 0;
+      state.sfx.tickSound.play();
+    }
+
+    this.parentFlower.texture = this.parentFlower.frames[this.parentFlower.frames.length - 3];
+
+    for (let i = 0; i < 4 * 4; i++) {
+      const state = yield { frames: 15 };
+      state.sfx.tickSound.currentTime = 0;
+      state.sfx.tickSound.play();
+    }
+
+    state = yield "next";
+
+    state.sfx.tickSound2.play();
+
+    for (let i = 2; i < this.finishedVineComponents.length; i++) {
+      const comp = this.finishedVineComponents[i];
+
+      comp.parent?.removeChild(comp);
+      comp.destroy(state);
+
+      yield { frames: 8 };
+    }
+
+    yield* this.parentFlower.die()
+
+    this.isActivated = false;
   }
 
   update(state: IGameState) {
@@ -127,7 +175,7 @@ export class VineFlower extends Entity {
     this.addChild(this.hoverText = new HoverText("x: interact"), 0, -80);
     this.hoverText.visible = false;
 
-    this.addChild(this.vine = new Vine());
+    this.addChild(this.vine = new Vine(this));
 
     this.vine.sprite.anchor.set(0, 1); // grow upwards
     this.vine.height = 256;
@@ -139,6 +187,14 @@ export class VineFlower extends Entity {
   *animateAlive(): GameCoroutine {
     for (let i = 0; i < this.frames.length; i++) {
       this.texture = this.frames[i];
+
+      yield { frames: 8 };
+    }
+  }
+
+  *die(): GameCoroutine {
+    for (let i = 0; i < this.frames.length; i++) {
+      this.texture = this.frames[this.frames.length - i - 1];
 
       yield { frames: 8 };
     }

@@ -14,6 +14,8 @@ export class TextureCache {
     tileheight : number;
     assets     : TypesafeLoader<{}>;
   }): Texture {
+    console.log(textureName);
+
     const key = `${ textureName }-${ x }-${ y }`;
 
     if (!TextureCache.Cache[key]) {

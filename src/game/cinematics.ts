@@ -122,33 +122,9 @@ export class Cinematics {
 
     state.mode = "Dialog";
 
+    // SPEECH 
+
     yield* DialogBox.StartDialog([
-      /*
-      BRANCH DEMO FOR LUNY HAVE FUN!!!!!!!
-      {
-        speaker: "Bud",
-        text: "This is a question with a BRANCH",
-        branches: [
-          { text: "Choice Name One", next: [{ speaker: "Bud", text: "Cool Cool Cool"}] },
-          { text: "Choice Name 2", next: [
-            { speaker: "Bud", text: "Put multiple in here if u want, it's exactly the same as the outer one"},
-            { speaker: "Bud", text: " R E C U R S I V E "},
-            { speaker: "Bud", text: "Put multiple in here if u want"},
-          ] },
-          { text: "Choice Name III", next: [
-            {
-              speaker: "Bud",
-              text: "YOu can even have branches in branches omfg",
-              branches: [
-                { text: "INNER CHOICE 1", next: []},
-                { text: "INNER CHOICE 2", next: []},
-                { text: "INNER CHOICE 3", next: []},
-              ]
-            }
-          ] },
-        ]
-      },
-      */
       { speaker: "???", text: "Sigh... Another day, another lonely diary entry.", },
       { speaker: "???", text: "Dear diary...", },
       { speaker: "???", text: "I hope you’re doing well today!", },
@@ -168,6 +144,11 @@ export class Cinematics {
 
     let startX = bud.x;
     let startY = bud.y;
+
+    for (let i = 0; i < 8; i++) {
+      bud.sprite.rotation = bud.sprite.rotation - 1;
+      yield { frames: 4 };
+    }
 
     for (let i = 0; i < 20; i++) {
       bud.x = startX + (Math.random() * 200 - 100);
@@ -543,7 +524,6 @@ export class Cinematics {
       { speaker: "Withers", text: "That’s impossible.", },
       { speaker: "Withers", text: "After all, I saw to it myself.", },
       { speaker: "Withers", text: "Those hippies are gone for good.", },
-        // herald and bud sneak in
       { speaker: "Withers", text: "Hmm.", },
       { speaker: "Withers", text: "Unless, of course...", },
       { speaker: "Withers", text: "There happened to be one left.", },
@@ -588,7 +568,6 @@ export class Cinematics {
       { speaker: "Withers", text: "Herald of Wisp.", },
       { speaker: "Withers", text: "Your true name.", },
       { speaker: "Withers", text: "Herald, you are in this lair right now because I am going to kill you.", },
-        // withers BRANDISHES A SWORD
       { speaker: "Withers", text: "You hear me? You’re not going to make it out of here alive.", },
       { speaker: "Withers", text: "And the last hope of the Pastorian Dryads will vanish.", },
       { speaker: "Withers", text: "No chance of defeating me.", },
@@ -611,8 +590,8 @@ export class Cinematics {
           ] },
         ]
       },
-        // withers POUNCES SUPER FAST at herald
-        // some metallic sfx?
+      { speaker: "Withers", text: "DARK BLAST HAH", },
+        // ball of darkness shoots at herald
       { speaker: " ", text: "(You feel a burning in your chest.)", },
       { speaker: "Withers", text: "Hah...", },
       { speaker: "Withers", text: "Too easy.", },
@@ -634,7 +613,7 @@ export class Cinematics {
       { speaker: "Wisps", text: "You will not lay a hand on the Time Warrior!", },
       { speaker: "Pisp", text: "Yap! Yap!", },
       { speaker: "Withers", text: "What. The hell.", },
-        // tries to stab a few more times
+        // tries to shoot dark blast a few more times
       { speaker: "Wisps", text: "STRIKE HIM NOT.", },
       { speaker: "Withers", text: "Grr...", },
       { speaker: "Withers", text: "You know what?", },
@@ -644,8 +623,7 @@ export class Cinematics {
       { speaker: "Withers", text: "No. It’s a worthy sacrifice.", },
       { speaker: "Withers", text: "You cannot be allowed to come near the Energy Fruit.", },
       { speaker: "Withers", text: "I WILL DESTROY IT MYSELF.", },
-        // withers flees away
-        // herald chases after him
+        // withers flees 
       { speaker: "Bud", text: "Oh dear. Oh dear, dear, dear.", },
 
     ]);
@@ -1277,8 +1255,6 @@ export class Cinematics {
       yield* DialogBox.StartDialog([
         { text: "The giant mushroom is cool to the touch.", },
         { text: "Buoyant energy starts to flow through you.", },
-        // the mushroom HEALS
-        // spirit slots increase!
         { text: "Your number of Spirit Slots increased!", },
       ]);
 

@@ -2898,7 +2898,7 @@
                 {
                  "gid":41,
                  "height":256,
-                 "id":438,
+                 "id":439,
                  "name":"",
                  "properties":[
                         {
@@ -2910,8 +2910,8 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":51968,
-                 "y":256
+                 "x":10741.5652173913,
+                 "y":1761.63210702341
                 }],
          "opacity":1,
          "type":"objectgroup",
