@@ -160,7 +160,6 @@ export class Cinematics {
       { speaker: "???", text: "Huh? What’s that?", },
       { speaker: "???", text: "You want me to turn around?", },
       { speaker: "???", text: "What a silly book! Why would I want to do that?", },
->>>>>>> 0c51f1531c411b8777bac723d319c3842e1a3a11
     ]);
 
     state.mode = "Normal";
@@ -182,62 +181,78 @@ export class Cinematics {
 
   public *openingBud2(): GameCoroutine {
     let state = yield "next";
-
+  
     state.mode = "Dialog";
-
+  
     yield* DialogBox.StartDialog([
-      { speaker: "Bud", text: "Huh? What was that sound?", },
+      { speaker: "???", text: "Huh? What was that sound?", },
       { text: "(ok so bud turns around here but we'll animate this in later maybe)", },
         // AT LEAST I HOPE SO
-      { speaker: "Bud", text: "HOLY CANOPIES!", },
-      { speaker: "Bud", text: "AM I DREAMING??? I WISH I COULD PINCH MYSELF!", },
-      { speaker: "Bud", text: "I’VE BEEN WAITING FOR THIS MOMENT FOR SO LONG!", },
-      { speaker: "Bud", text: "HIHIHIHIHIHIHI", },
+      { speaker: "???", text: "HOLY CANOPIES!", },
+      { speaker: "???", text: "AM I DREAMING??? I WISH I COULD PINCH MYSELF!", },
+      { speaker: "???", text: "I’VE BEEN WAITING FOR THIS MOMENT FOR SO LONG!", },
+      { speaker: "???", text: "HIHIHIHIHIHIHI", },
         // bud rushes over to herald
-      { speaker: "Bud", text: "So... this is real? You’re really awake?", },
-        // here there’s a yes or no choice. we can program that in later
-      { text: "(there’s a yes or no choice here, assume player says yes for now)", },
-      { speaker: "Bud", text: "YESS!!! Oh my gosh, there’s so much to show you!", },
-      { speaker: "Bud", text: "Follow me!!! I’ll show you the forest!", },
-      { speaker: "Bud", text: "Or... what used to be the forest...", },
-      { speaker: "Bud", text: "...but that doesn’t matter! You’re awake now! You'll make things better!", },
-      { speaker: "Bud", text: "C’MON!!!!", },
+      {
+        speaker: "???",
+        text: "So... this is real? You’re really awake, ${ this.name }?",
+        branches: [
+          { text: "Yes", next: [
+            { speaker: "???", text: "YESS!!! Oh my gosh, there’s so much to show you!", },
+          ] },
+          { text: "No", next: [
+            { speaker: "???", text: "Huh... so that means..."},
+            { speaker: "???", text: "That I'M the one dreaming..."},
+            { speaker: "???", text: "And if that's the case..."},
+            { speaker: "???", text: "THEN I NEVER WANNA WAKE UP!!! And I'll PRETEND this is real!!!"},
+          ] },
+        ]
+      },
+      { speaker: "???", text: "Follow me!!! I’ll show you to the forest!", },
+      { speaker: "???", text: "Or... what used to be the forest...", },
+      { speaker: "???", text: "...but that doesn’t matter! You’re awake now! You'll make things better!", },
+      { speaker: "???", text: "C’MON!!!!", },
     ]);
-
+  
     state.budFollowing = true;
-
+  
     state.mode = "Normal";
   }
 
   public *openingBud3(): GameCoroutine {
     let state = yield "next";
-
+  
     state.mode = "Dialog";
-
+  
     yield* DialogBox.StartDialog([
-      { speaker: "Bud", text: "Yeah... it really doesn't look too good out here.", },
-      { speaker: "Bud", text: "Those Tinker Men really did a number on the forest. It's almost all gone now.", },
-      { speaker: "Bud", text: "All these artificial structures everywhere...", },
-      { speaker: "Bud", text: "But you're here! The secret weapon of the dryads!", },
-      { speaker: "Bud", text: "You've got a plan to bring the forest back, right?", },
+      { speaker: "???", text: "Yeah... it really doesn't look too good out here.", },
+      { speaker: "???", text: "Those Tinker Men really did a number on the forest. It's almost all gone now.", },
+      { speaker: "???", text: "All these artificial structures everywhere...", },
+      { speaker: "???", text: "But you're here! The secret weapon of the dryads!", },
+      { speaker: "???", text: "You've got a plan to bring the forest back, right?", },
         // yes or no choice here
       { text: "(this is gonna be a yes or no choice. imagine player picks no.)", },
-      { speaker: "Bud", text: "...huh?", },
-      { speaker: "Bud", text: "You're staring at me pretty blankly, dude.", },
-      { speaker: "Bud", text: "Everything okay?", },
+      { speaker: "???", text: "...huh?", },
+      { speaker: "???", text: "You're staring at me pretty blankly, dude.", },
+      { speaker: "???", text: "Everything okay?", },
         // another yes no choice
       { text: "(another yes or no. imagine player picks no.)", },
-      { speaker: "Bud", text: "Oh no... this is awful.", },
-      { speaker: "Bud", text: "So you don't even recognize me?", },
-      { speaker: "Bud", text: "I'm your spirit partner. It's me, Bud.", },
+      { speaker: "???", text: "Oh no, this is awful... You don't even recognize me?", },
+      { speaker: "???", text: "I was your spirit partner. It's me, Bud.", },
       { speaker: "Bud", text: "Nothing??", },
-
+      { speaker: "Bud", text: "That's not good.", },
+      { speaker: "Bud", text: "You're ${ this.name }! Hero of the Pastoria Forest!"}
+      { speaker: "Bud", text: "...Well, I guess the forest has been long, long gone. And so have you. For about five hundred years.", },
+      { speaker: "Bud", text: "There's a reason you're here, ${ this.name }. You were sent here to the future to take down Withers, the leader of the Tinker Men.", },
+      { speaker: "Bud", text: "And if you don't remember anything... then it's up to me, Bud, to help you!", },
+      { speaker: "Bud", text: "C'mon, ${ this.name }! Withers' Lair is in the Tree of Sprights, which is the only remaining big tree left. Let's go!", },
     ]);
-
+  
     state.budFollowing = true;
-
+  
     state.mode = "Normal";
   }
+ 
 
   public *outdoorBud1(): GameCoroutine {
     let state = yield "next";
