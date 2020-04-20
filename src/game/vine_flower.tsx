@@ -106,8 +106,6 @@ export class Vine extends Entity {
   }
 }
 
-let myId = 0;
-
 export class VineFlower extends Entity {
   interactionDistance = C.InteractionDistance;
   frame = 0;
@@ -116,15 +114,12 @@ export class VineFlower extends Entity {
 
   vine: Vine;
   frames: Texture[];
-  id: number;
 
   constructor(tex: Texture) {
     super({
       name   : "VineFlower",
       texture: Assets.getResource("vine_flower_live")[0],
     });
-
-    this.id = ++myId;
 
     this.frames = Assets.getResource("vine_flower_live");
 
