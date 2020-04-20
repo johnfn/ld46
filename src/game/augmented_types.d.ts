@@ -13,6 +13,8 @@ declare module "Library" {
   export interface IGameState {
     player       : Player;
     sfx          : Sfx;
+    haveVinePerma : boolean;
+    haveShroomPerma: boolean;
 
     /**
      * Is Bud following the player

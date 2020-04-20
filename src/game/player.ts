@@ -119,7 +119,7 @@ export class Player extends Entity {
   }
 
   calculateVelocity(state: IGameState, touchingVine: boolean) {
-    const touchingBouncyBoi = this.hitInfo.collisions.find(x => x.otherEntity instanceof BouncyShroom) !== undefined;
+    const touchingBouncyBoi = this.hitInfo.collisions.find(x => x.otherEntity instanceof BouncyShroom && x.otherEntity.isActivated) !== undefined;
 
     const prevVelocity = this.velocity;
     this.velocity = this.velocity.withX(0);
@@ -231,7 +231,7 @@ export class Player extends Entity {
 
     this.checkForDialogTriggers(state);
 
-    const touchingVine = this.hitInfo.interactions.find(x => x.otherEntity instanceof Vine) !== undefined;
+    const touchingVine = this.hitInfo.interactions.find(x => x.otherEntity instanceof Vine && x.otherEntity.isActivated) !== undefined;
     this.calculateVelocity(state, touchingVine);
 
     if (this.grounded) {

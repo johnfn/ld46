@@ -122,33 +122,9 @@ export class Cinematics {
 
     state.mode = "Dialog";
 
+    // SPEECH 
+
     yield* DialogBox.StartDialog([
-      /*
-      BRANCH DEMO FOR LUNY HAVE FUN!!!!!!!
-      {
-        speaker: "Bud",
-        text: "This is a question with a BRANCH",
-        branches: [
-          { text: "Choice Name One", next: [{ speaker: "Bud", text: "Cool Cool Cool"}] },
-          { text: "Choice Name 2", next: [
-            { speaker: "Bud", text: "Put multiple in here if u want, it's exactly the same as the outer one"},
-            { speaker: "Bud", text: " R E C U R S I V E "},
-            { speaker: "Bud", text: "Put multiple in here if u want"},
-          ] },
-          { text: "Choice Name III", next: [
-            {
-              speaker: "Bud",
-              text: "YOu can even have branches in branches omfg",
-              branches: [
-                { text: "INNER CHOICE 1", next: []},
-                { text: "INNER CHOICE 2", next: []},
-                { text: "INNER CHOICE 3", next: []},
-              ]
-            }
-          ] },
-        ]
-      },
-      */
       { speaker: "???", text: "Sigh... Another day, another lonely diary entry.", },
       { speaker: "???", text: "Dear diary...", },
       { speaker: "???", text: "I hope you’re doing well today!", },
@@ -1291,8 +1267,6 @@ export class Cinematics {
       yield* DialogBox.StartDialog([
         { text: "The giant mushroom is cool to the touch.", },
         { text: "Buoyant energy starts to flow through you.", },
-        // the mushroom HEALS
-        // spirit slots increase!
         { text: "Your number of Spirit Slots increased!", },
       ]);
 

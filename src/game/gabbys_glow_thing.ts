@@ -13,7 +13,7 @@ export class GabbysGlowThing extends Entity {
     this.glowOverlay = new Sprite(Assets.getResource("glow"))
     this.glowOverlay.blendMode = BLEND_MODES.SOFT_LIGHT;
     this.glowOverlay.tint = tint;
-    this.glowOverlay.alpha = 0.17;
+    this.glowOverlay.alpha = 0.35;
     this.sprite.addChild(this.glowOverlay);
     this.glowOverlay.position.x -= 800;
     this.glowOverlay.position.y -= 400;
