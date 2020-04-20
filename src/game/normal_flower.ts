@@ -9,12 +9,12 @@ import { Vector2 } from "../library/geometry/vector2";
 let flowers = 0;
 
 let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {
-  1: "blueflower",
-  2: "pinkflower",
-  3: "yellowflowers",
-  4: "grass1",
-  5: "whitemushrooms",
-  6: "bluemushroom",
+  // 1: "blueflower",
+  // 2: "pinkflower",
+  // 3: "yellowflowers",
+  // 4: "grass1",
+  // 5: "whitemushrooms",
+  // 6: "bluemushroom",
 }
 
 let flowersRate: {[key: number]: string[]} = {
