@@ -172,7 +172,7 @@ export class Cinematics {
       yield { frames: 15 };
       
       // bud goes !
-      state.sfx.alertNoise.play();
+      state.sfx.climaxSweep.play();
 
       yield { frames: 30 };
       
