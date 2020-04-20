@@ -27,6 +27,9 @@ export type AssetPath =
   | "music/Withers.mp3"
   | "music/menu theme placeholder.mp3"
   | "music.json"
+  | "npc1.png"
+  | "npc2.png"
+  | "npc3.png"
   | "owo.png"
   | "parallax bg/00 - sky ver2.png"
   | "parallax bg/00 - sky.png"
@@ -44,7 +47,10 @@ export type AssetPath =
   | "parallax bg/bigcloud05.png"
   | "sound effects/Distant Gears.mp3"
   | "sound effects/alert noise.mp3"
+  | "sound effects/button 1.mp3"
+  | "sound effects/button 2.mp3"
   | "sound effects/climax sweep.mp3"
+  | "sound effects/refill spirit.mp3"
   | "sound effects/step grass 1.mp3"
   | "sound effects/step grass 2.mp3"
   | "sound effects/step grass 3.mp3"
@@ -54,6 +60,7 @@ export type AssetPath =
   | "sound effects/step wood 1.mp3"
   | "sound effects/step wood 2.mp3"
   | "sound effects/step wood 3.mp3"
+  | "sound effects/use spirit.mp3"
   | "sound effects/voices/voice 1.mp3"
   | "sound effects/voices/voice 2.mp3"
   | "sound effects/voices/voice 3.mp3"
@@ -65,6 +72,13 @@ export type AssetPath =
   | "tileset.png"
   | "vine_flower_source.png"
   | "world.json"
+  | "bigshroom (1).png"
+  | "bigshroom (2).png"
+  | "bigshroom (3).png"
+  | "bigshroom (4).png"
+  | "bigshroom (5).png"
+  | "bigshroom (6).png"
+  | "bigshroom (7).png"
   | "bud/bud_idle_0000.png"
   | "bud/bud_idle_0001.png"
   | "bud/bud_idle_0002.png"
@@ -181,6 +195,9 @@ export const AssetsToLoad = {
   "music/Withers"                     : { type: "Audio"       as const, path: "music/Withers.mp3"                      },
   "music/menu theme placeholder"      : { type: "Audio"       as const, path: "music/menu theme placeholder.mp3"       },
   "music"                             : { type: "TileMap"     as const, path: "music.json"                             },
+  "npc1"                              : { type: "Image"       as const, path: "npc1.png"                               },
+  "npc2"                              : { type: "Image"       as const, path: "npc2.png"                               },
+  "npc3"                              : { type: "Image"       as const, path: "npc3.png"                               },
   "owo"                               : { type: "Image"       as const, path: "owo.png"                                },
   "parallax bg/00 - sky ver2"         : { type: "Image"       as const, path: "parallax bg/00 - sky ver2.png"          },
   "parallax bg/00 - sky"              : { type: "Image"       as const, path: "parallax bg/00 - sky.png"               },
@@ -198,7 +215,10 @@ export const AssetsToLoad = {
   "parallax bg/bigcloud05"            : { type: "Image"       as const, path: "parallax bg/bigcloud05.png"             },
   "sound effects/Distant Gears"       : { type: "Audio"       as const, path: "sound effects/Distant Gears.mp3"        },
   "sound effects/alert noise"         : { type: "Audio"       as const, path: "sound effects/alert noise.mp3"          },
+  "sound effects/button 1"            : { type: "Audio"       as const, path: "sound effects/button 1.mp3"             },
+  "sound effects/button 2"            : { type: "Audio"       as const, path: "sound effects/button 2.mp3"             },
   "sound effects/climax sweep"        : { type: "Audio"       as const, path: "sound effects/climax sweep.mp3"         },
+  "sound effects/refill spirit"       : { type: "Audio"       as const, path: "sound effects/refill spirit.mp3"        },
   "sound effects/step grass 1"        : { type: "Audio"       as const, path: "sound effects/step grass 1.mp3"         },
   "sound effects/step grass 2"        : { type: "Audio"       as const, path: "sound effects/step grass 2.mp3"         },
   "sound effects/step grass 3"        : { type: "Audio"       as const, path: "sound effects/step grass 3.mp3"         },
@@ -208,6 +228,7 @@ export const AssetsToLoad = {
   "sound effects/step wood 1"         : { type: "Audio"       as const, path: "sound effects/step wood 1.mp3"          },
   "sound effects/step wood 2"         : { type: "Audio"       as const, path: "sound effects/step wood 2.mp3"          },
   "sound effects/step wood 3"         : { type: "Audio"       as const, path: "sound effects/step wood 3.mp3"          },
+  "sound effects/use spirit"          : { type: "Audio"       as const, path: "sound effects/use spirit.mp3"           },
   "sound effects/voices/voice 1"      : { type: "Audio"       as const, path: "sound effects/voices/voice 1.mp3"       },
   "sound effects/voices/voice 2"      : { type: "Audio"       as const, path: "sound effects/voices/voice 2.mp3"       },
   "sound effects/voices/voice 3"      : { type: "Audio"       as const, path: "sound effects/voices/voice 3.mp3"       },
@@ -222,6 +243,18 @@ export const AssetsToLoad = {
 
   /* Animations */
 
+  "bigshroom": {
+    type: "Animation" as const,
+    paths: [
+      "bigshroom (1).png",
+      "bigshroom (2).png",
+      "bigshroom (3).png",
+      "bigshroom (4).png",
+      "bigshroom (5).png",
+      "bigshroom (6).png",
+      "bigshroom (7).png",
+    ],
+  },
   "bud/bud_idle": {
     type: "Animation" as const,
     paths: [

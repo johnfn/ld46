@@ -88,7 +88,7 @@ export class NpcDialog extends Entity {
       state = yield "next";
     }
 
-    yield { untilKeyPress: "X" }
+    yield { untilKeyPress: "X" };
 
     state.mode = "Normal";
   }

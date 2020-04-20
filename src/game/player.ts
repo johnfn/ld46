@@ -43,6 +43,10 @@ export class Player extends Entity {
    */
   jumpingOnLadder = false;
 
+  // The first jump on a bouncyshroom should be higher than your initial jump.
+  // The rest aren't though, to stop infinitely high jumps.
+  hasBouncedOnShroomThisJump = false;
+
   graphic: Entity;
 
   constructor() {
@@ -129,8 +133,14 @@ export class Player extends Entity {
       this.jumpingOnLadder = false;
     }
 
+    if ((this.hitInfo.down && !touchingBouncyBoi) || touchingVine) {
+      this.hasBouncedOnShroomThisJump = false;
+    }
+
     if (touchingVine) {
       // Climb ladder
+
+      this.hasBouncedOnShroomThisJump = false;
 
       if (!this.jumpingOnLadder) {
         this.velocity = this.velocity.withY(0)
@@ -189,12 +199,23 @@ export class Player extends Entity {
     }
 
     if (touchingBouncyBoi) {
-      let newVelocity = Math.abs(prevVelocity.y / 1.2);
+      let newVelocity: number;
+      
+      if (!this.hasBouncedOnShroomThisJump) {
+        let addition = Math.abs(prevVelocity.y) * 0.5;
+
+        if (addition > 30) { addition = 30; }
+
+        newVelocity = Math.abs(prevVelocity.y) + addition;
+      } else {
+        newVelocity = Math.abs(prevVelocity.y / 1.2);
+      }
 
       if (newVelocity < 5) { newVelocity = 5; } // always bounce a little (valuable life advice too)
-      if (newVelocity > 70) { newVelocity = 70; } // dont bounce too much (hey, that's also good life advice!)
+      if (newVelocity > 200) { newVelocity = 200; } // dont bounce too much (hey, that's also good life advice!)
 
       this.velocity = this.velocity.withY(-newVelocity);
+      this.hasBouncedOnShroomThisJump = true;
     }
   }
 
