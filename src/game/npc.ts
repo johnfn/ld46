@@ -126,28 +126,30 @@ export class Npc extends Entity {
 
   graphic: Entity;
 
-  constructor(props: { [key: string]: unknown }) {
+  initialY = -512;
+
+  constructor(props: { [key: string]: unknown }, x: number, y: number ) {
     super({ 
       name      : "Npc",
       collidable: true,
     });
 
-    let tex: Texture;
+    let path = props["imagepath"];
 
-    if (String(props["npctype"]) === "1") {
-      tex = Assets.getResource("npc1");
-    } else if (String(props["npctype"]) === "2") {
-      tex = Assets.getResource("npc2");
-    } else if (String(props["npctype"]) === "3") {
-      tex = Assets.getResource("npc3");
-    } else {
-      console.error("npc without type", this);
+    if (!path) {
+      path = "npc1";
 
-      tex = Assets.getResource("npc1");
+      console.error("interactable without type", this);
+    }
+
+    const tex: unknown = Assets.getResource(path as any);
+
+    if (!(tex instanceof Texture)) {
+      throw new Error(`Interactable at x ${ x } y ${ y } had path ${ path } which either doesnt exist or isnt a standalone image. animations (imgs that end in numbers) dont work currently but grant might fix that. anyway the point is, go fix it?`);
     }
 
     this.graphic = new Entity({ name: "NpcName", texture: tex });
-    this.graphic.y = -512;
+    this.graphic.y = this.initialY;
     this.addChild(this.graphic);
 
     this.dialogName = props["dialog"] as string;
@@ -166,6 +168,8 @@ export class Npc extends Entity {
   }
 
   update(state: IGameState) { 
+    this.graphic.y = this.initialY + Math.sin(state.tick / 400) * 40;
+
     // if (this.npcDialog) {
     //   if (state.keys.justDown.X) {
     //     this.hoverText.visible = false;
