@@ -16,6 +16,7 @@ export type AssetPath =
   | "bigfruit.png"
   | "dialog_box.png"
   | "dialog_tip.png"
+  | "exclamation.png"
   | "fountain_nowater.png"
   | "glow.png"
   | "hub bg/hub_bg1.png"
@@ -234,6 +235,7 @@ export const AssetsToLoad = {
   "bigfruit"                          : { type: "Image"       as const, path: "bigfruit.png"                           },
   "dialog_box"                        : { type: "Image"       as const, path: "dialog_box.png"                         },
   "dialog_tip"                        : { type: "Image"       as const, path: "dialog_tip.png"                         },
+  "exclamation"                       : { type: "Image"       as const, path: "exclamation.png"                        },
   "fountain_nowater"                  : { type: "Image"       as const, path: "fountain_nowater.png"                   },
   "glow"                              : { type: "Image"       as const, path: "glow.png"                               },
   "hub bg/hub_bg1"                    : { type: "Image"       as const, path: "hub bg/hub_bg1.png"                     },
