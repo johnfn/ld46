@@ -227,8 +227,6 @@ export class TilemapData {
         const offsetX = layer.offsetx / this._tileWidth;
         const offsetY = layer.offsety / this._tileHeight;
 
-        console.log(`offsetX: ${offsetX}`)
-        console.log(`offsetY: ${offsetY}`)
         if (offsetX !== Math.floor(offsetX) || offsetY !== Math.floor(offsetY)) {
           throw new Error("AAAAAAAAAAAAAAAAAAAAAAAAA");
         }
