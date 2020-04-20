@@ -217,7 +217,6 @@ export class GameMap extends Entity {
         }
         this.addChild(f)
       }
-      
     } 
   }
 
