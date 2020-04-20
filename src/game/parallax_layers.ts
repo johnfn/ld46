@@ -30,8 +30,6 @@ export class ParallaxLayers extends Entity {
       name: "ParallaxLayers",
     });
 
-    // this.scale = new Vector2(2, 2);
-
     for (const { texture } of this.layers) {
       const sprite = new TilingSprite(texture, texture.width, texture.height);
       sprite.scale = new PixiPoint(4, 4);
@@ -50,7 +48,9 @@ export class ParallaxLayers extends Entity {
       layer.y = C.CanvasHeight * 4 - layer.height * 4;
     }
 
+    // Push city layer down a little
     this.sprites[6].y += 1000;
+    // also make it darker
     this.sprites[6].tint = 0x999999;
   }
 
