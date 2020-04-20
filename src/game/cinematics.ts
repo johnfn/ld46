@@ -164,22 +164,14 @@ export class Cinematics {
 
     state.mode = "Normal";
 
-    const bud = Bud.Instance;
-
-    let startX = bud.x;
-    let startY = bud.y;
-
-    for (let i = 0; i < 8; i++) {
-      bud.sprite.rotation = bud.sprite.rotation - 1;
-      yield { frames: 4 };
-    }
-
+    /*
     for (let i = 0; i < 20; i++) {
       bud.x = startX + (Math.random() * 200 - 100);
       bud.y = startY + (Math.random() * 200 - 100);
 
       yield { frames: 2 };
     }
+    */
 
     yield* this.openingBud2();
   }
@@ -188,11 +180,32 @@ export class Cinematics {
     let state = yield "next";
   
     state.mode = "Dialog";
+
+    const bud = Bud.Instance;
+
+      let startX = bud.x;
+      let startY = bud.y;
+  
   
     yield* DialogBox.StartDialog([
       { speaker: "???", text: "Huh? What was that sound?", },
-      { text: "(ok so bud turns around here but we'll animate this in later maybe)", },
-        // AT LEAST I HOPE SO
+    ]);
+      
+      bud.sprite.scale.x = bud.sprite.scale.x * -1;
+  
+      yield { frames: 15 };
+      
+      // bud goes !
+      // play alert_noise.mp3
+
+      yield { frames: 15 };
+      
+      for (let i = 0; i < 6; i++) {
+        bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 2);
+        yield { frames: 4 };
+      }
+
+    yield* DialogBox.StartDialog([
       { speaker: "???", text: "HOLY CANOPIES!", },
       { speaker: "???", text: "AM I DREAMING??? I WISH I COULD PINCH MYSELF!", },
       { speaker: "???", text: "I’VE BEEN WAITING FOR THIS MOMENT FOR SO LONG!", },
@@ -638,7 +651,7 @@ export class Cinematics {
       { speaker: "Pisp", text: "Yap! Yap!", },
       { speaker: "Withers", text: "What. The hell.", },
         // tries to shoot dark blast a few more times
-      { speaker: "Wisps", text: "STRIKE HIM NOT.", },
+      { speaker: "Wisps", text: "ATTACK HIM NOT.", },
       { speaker: "Withers", text: "Grr...", },
       { speaker: "Withers", text: "You know what?", },
       { speaker: "Withers", text: "Fine.", },
@@ -646,7 +659,7 @@ export class Cinematics {
       { speaker: "Withers", text: "After all, I’ll lose the energy source for my power plants...", },
       { speaker: "Withers", text: "No. It’s a worthy sacrifice.", },
       { speaker: "Withers", text: "You cannot be allowed to come near the Energy Fruit.", },
-      { speaker: "Withers", text: "I WILL DESTROY IT MYSELF.", },
+      { speaker: "Withers", text: "I WILL GO DESTROY IT MYSELF.", },
         // withers flees 
       { speaker: "Bud", text: "Oh dear. Oh dear, dear, dear.", },
 
@@ -669,10 +682,10 @@ export class Cinematics {
         { speaker: "Withers", text: "AHAHAHA! Stupid idiot dryad!", },
         { speaker: "Withers", text: "Nice try, but the Energy Fruit is mine. Sorry, suckaaaa", },
           // npc ghosts appear
-        { speaker: "NPC", text: "Time Warrior! There is yet one more trick up our sleeve.", },
-        { speaker: "NPC", text: "It may destroy some of us... but there has never been a better time.", },
-        { speaker: "NPC", text: "If we pool together our remaining energy, we can send you back in time, but only to the beginning of this tree chase.", },
-        { speaker: "NPC", text: "We won’t be able to do this much, though. Get ready, and good luck!", },
+        { speaker: "Wisps", text: "Time Warrior! There is yet one more trick up our sleeve.", },
+        { speaker: "Wisps", text: "It may destroy some of us... but there has never been a better time.", },
+        { speaker: "Wisps", text: "If we pool together our remaining energy, we can send you back in time, but only to the beginning of this tree chase.", },
+        { speaker: "Wisps", text: "We won’t be able to do this much, though. Get ready, and good luck!", },
           // back to start of boss chase
       ]);
 
@@ -682,9 +695,9 @@ export class Cinematics {
         { speaker: "Withers", text: "AHAHAHA! Stupid idiot dryad!", },
         { speaker: "Withers", text: "Nice try, but the Energy Fruit is mine. Sorry, suckaaaa", },
           // npc ghosts appear
-        { speaker: "NPC", text: "Agh, you were so close!", },
-        { speaker: "NPC", text: "It's okay, we still have enough juice to send you back in time once more.", },
-        { speaker: "NPC", text: "But you gotta get it on this next one, okay?", },
+        { speaker: "Wisps", text: "Agh, you were so close!", },
+        { speaker: "Wisps", text: "It's okay, we still have enough juice to send you back in time once more.", },
+        { speaker: "Wisps", text: "But you gotta get it on this next one, okay?", },
           // back to start of boss chase
       ]);
 
@@ -703,8 +716,7 @@ export class Cinematics {
       { speaker: "Withers", text: "Look. Maybe I came across too strongly.", },
       { speaker: "Withers", text: "I’m sure we can work a deal out.", },
       { speaker: "Withers", text: "Just stay away from the glowing cantaloupe!", },
-      { speaker: "NPC", text: "God, just shut up already. Jeez.", },
-        // [press x to interact] pops up
+      { speaker: "Wisps", text: "God, just shut up already. Jeez.", },
       { speaker: "Withers", text: "NOOOOOOOOOOO", },
         // fade to white
     ]);
@@ -1301,8 +1313,8 @@ export class Cinematics {
     state.mode = "Dialog";
 
     yield* NpcDialog.StartDialog([
-      { speaker, text: "It's a statue of a crying woman.", },
-      { speaker, text: "It has a basin like a fountain, but any water inside dried up long ago.", },
+      { speaker, text: "It's a fountain with a statue of a crying woman.", },
+      { speaker, text: "The water in its basin seems dusty, like it hasn't been cleaned in a long time.", },
     ]);
 
     state.mode = "Normal";
@@ -1314,8 +1326,8 @@ export class Cinematics {
     state.mode = "Dialog";
 
     yield* NpcDialog.StartDialog([
-      { speaker, text: "It's a fountain.", },
-      { speaker, text: "The figure carved into it seems strangely familiar.", },
+      { speaker, text: "Standing near the fountain, you feel a sense of uncertainty.", },
+      { speaker, text: "What's going on...?", },
     ]);
 
     state.mode = "Normal";
