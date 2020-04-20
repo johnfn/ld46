@@ -97,17 +97,11 @@ export class TextEntity extends BaseTextEntity<BaseGameState> {
 
   // TODO: This is a hard function to write properly.
   // This only works after the CSS has loaded 
-  // It also doesnt handle varying sizes. Actually, maybe it does, who knows???
-  calculateTextWidth = () => {
-    let calculatedWidth = 0;
-    const test = document.createElement('span');
-
-    test.style.fontFamily = "FreePixel";
-    test.style.fontSize   = String(this.defaultStyle.fontSize); // doesnt handle different sizes
-
-    test.innerHTML = this._html; // .replace(/ /g, '&nbsp;');
-    document.body.appendChild(test);
-    calculatedWidth = Math.ceil(test.getBoundingClientRect().width);
+  calculateTextWidth = (text: string) => {
+    const canvas = document.getElementById("canvas2d")! as HTMLCanvasElement;
+    const context = canvas.getContext("2d")!;
+    context.font = `${ this.defaultStyle.fontSize }px FreePixel`;
+    const calculatedWidth = context.measureText(text).width;
 
     if (this.width < calculatedWidth) {
       return this.width;

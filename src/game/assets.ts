@@ -60,6 +60,9 @@ export type AssetPath =
   | "tileset.png"
   | "vine_flower_source.png"
   | "world.json"
+  | "bud/bud_idle_0000.png"
+  | "bud/bud_idle_0001.png"
+  | "bud/bud_idle_0002.png"
   | "char_climb (1).png"
   | "char_climb (2).png"
   | "char_climb (3).png"
@@ -209,6 +212,14 @@ export const AssetsToLoad = {
 
   /* Animations */
 
+  "bud/bud_idle": {
+    type: "Animation" as const,
+    paths: [
+      "bud/bud_idle_0000.png",
+      "bud/bud_idle_0001.png",
+      "bud/bud_idle_0002.png",
+    ],
+  },
   "char_climb": {
     type: "Animation" as const,
     paths: [

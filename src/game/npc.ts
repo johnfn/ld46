@@ -8,38 +8,58 @@ import { C } from "./constants";
 import { Mode } from "Library";
 import { Assets } from "./assets";
 import { Vector2 } from "../library/geometry/vector2";
+import { GameCoroutine } from "../library/coroutine_manager";
 
 export class NpcDialog extends Entity {
-  graphic: Graphics;
-  text   : TextEntity;
+  graphic : Graphics;
+  text    : TextEntity;
+  fullText: string;
 
-  constructor() {
+  constructor(fullText: string) {
     super({ name: "NpcDialogParent" });
 
     this.text = new TextEntity({
-      text    : "LALA LALAL LAAAAAAAAAA",
+      text    : "",
       fontSize: 80,
       width   : 5000,
     });
 
-    const wid = this.text.calculateTextWidth();
+    this.fullText = fullText;
+
+    const wid = this.text.calculateTextWidth(fullText);
     const height = 120;
+
+    console.log(wid);
 
     this.graphic = new Graphics();
     this.graphic.beginFill(0x0);
-    this.graphic.drawRoundedRect(0, 0, wid + 40, height, 40);
+    this.graphic.drawRoundedRect(0, 0, wid + 100, height, 40);
 
     this.sprite.addChild(this.graphic);
 
     const ent = new Entity({ name: "DialogTip", texture: Assets.getResource("dialog_tip") });
     ent.scale = new Vector2(0.25, 0.25);
-    this.addChild(
-      ent,
+    this.addChild(ent,
       20,
       height
     );
 
     this.addChild(this.text, 20, 10);
+
+    this.startCoroutine("write-dialog", this.writeDialog());
+  }
+
+  *writeDialog(): GameCoroutine {
+    let state = yield "next";
+
+    let textSoFar = "";
+
+    while (textSoFar.length < this.fullText.length) {
+      textSoFar += this.fullText[textSoFar.length];
+      this.text.setText(textSoFar);
+
+      state = yield "next";
+    }
   }
 
   update(state: IGameState) {
@@ -91,7 +111,7 @@ export class Npc extends Entity {
 
         if (state.keys.justDown.X) {
           state.mode = "Dialog";
-          this.addChild(this.npcDialog = new NpcDialog(), 0, -200);
+          this.addChild(this.npcDialog = new NpcDialog("This is a very long DIALOG."), 0, -200);
         }
       } else {
         this.hoverText.visible = false;
