@@ -2454,7 +2454,7 @@
                  "visible":true,
                  "width":256,
                  "x":40704,
-                 "y":-7936
+                 "y":-8192
                 }, 
                 {
                  "gid":52,
@@ -2969,24 +2969,6 @@
                  "y":-20736
                 }, 
                 {
-                 "gid":42,
-                 "height":256,
-                 "id":445,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"name",
-                         "type":"string",
-                         "value":"start"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":256,
-                 "x":10752,
-                 "y":2048
-                }, 
-                {
                  "gid":43,
                  "height":256,
                  "id":446,
@@ -3003,6 +2985,24 @@
                  "width":256,
                  "x":13568,
                  "y":2168.3007518797
+                }, 
+                {
+                 "gid":42,
+                 "height":256,
+                 "id":449,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"start"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":48128,
+                 "y":-8704
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -3922,6 +3922,23 @@
                  "width":256,
                  "x":11776,
                  "y":256
+                }, 
+                {
+                 "height":2048,
+                 "id":448,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"lair01"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":47616,
+                 "y":-9984
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -4084,7 +4101,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":448,
+ "nextobjectid":450,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",

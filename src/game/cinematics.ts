@@ -11,6 +11,7 @@ import { Bud } from "./bud";
 import { Vector2 } from "../library/geometry/vector2";
 import { NpcDialog } from "./npc";
 import { Entity } from "../library/entity";
+import { Withers } from "./withers";
 
 export type Tweenable =
   | number
@@ -515,6 +516,22 @@ export class Cinematics {
       { speaker: "Bud", text: "YES! We can get to Withers' Lair now!", },
       { speaker: "Bud", text: `C’mon, ${ this.name }! Let’s go!`, },
     ]);
+
+    state.mode = "Normal";
+  }
+
+  public *lair01(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* DialogBox.StartDialog([
+      { speaker: "Bud", text: "So this is Withers' Lair...", },
+      { speaker: "Bud", text: "Kinda spooky!", },
+    ]);
+
+    Withers.Instance.x = state.player.x - 6900;
+    Withers.Instance.y = state.player.y - 6900;
 
     state.mode = "Normal";
   }

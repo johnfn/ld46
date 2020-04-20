@@ -5,7 +5,6 @@ import { HoverText } from "./hover_text";
 import { Assets } from "./assets";
 import { IGameState } from "Library";
 import { GameCoroutine } from "../library/coroutine_manager";
-import { GabbysGlowThing } from "./gabbys_glow_thing";
 
 export class BigShroom extends Entity {
   public interactionDistance = C.InteractionDistance;
@@ -40,7 +39,7 @@ export class BigShroom extends Entity {
         if (!this.interacted) {
           state.sfx.useSpirit.play();
 
-          this.startCoroutine("animateAlive", this.animateAlive());
+          this.startCoroutine("animateAliveBigShroom", this.animateAlive());
         } else {
           this.startCoroutine("shroomtalk", state.cinematics.bigMush());
         }
