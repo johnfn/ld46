@@ -176,7 +176,7 @@ export class Cinematics {
     yield { frames: 50 };
         
     for (let i = 0; i < 8; i++) {
-      bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 2);
+      bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 4);
       yield { frames: 2 };
     }
 

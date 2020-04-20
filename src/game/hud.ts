@@ -8,11 +8,19 @@ class SpiritMeter extends Entity {
   constructor(spiritTotal: number) {
     super({ name: "SpiritMeter" });
 
+    const blackBackground = new Entity({ 
+      texture: Assets.getResource("dialog_box"),
+      name: "Dialog Graphic",
+    })
+    this.addChild(blackBackground);
+    blackBackground.sprite.scale.x *= 1.5;
+
     for (let i = 0; i < 10; i++) {
       const icon = new Entity({
         name: "SpiritIcon"
       });
 
+      
       this.icons.push(icon);
       this.addChild(icon);
 
