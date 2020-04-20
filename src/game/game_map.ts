@@ -96,6 +96,14 @@ export class GameMap extends Entity {
 
         {
           type     : "single",
+          name     : "big_shroom",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
+            return new BigShroom();
+          }
+        },
+
+        {
+          type     : "single",
           name     : "bouncyshroom",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
             return new BouncyShroom();

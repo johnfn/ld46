@@ -1,12 +1,4 @@
-{ "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "target":"."
-        }
-    },
- "height":32,
+{ "height":32,
  "infinite":true,
  "layers":[
         {
@@ -2265,8 +2257,8 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":23296,
-                 "y":-2560
+                 "x":68096,
+                 "y":-13568
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2545,7 +2537,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -2976,7 +2968,7 @@
  "nextobjectid":382,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.3.3",
+ "tiledversion":"1.2.3",
  "tileheight":256,
  "tilesets":[
         {
