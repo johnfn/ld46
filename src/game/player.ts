@@ -10,6 +10,7 @@ import { BouncyShroom } from "./bouncy_shroom";
 import { Mode } from "Library";
 import { Sfx } from "./sfx";
 import { GabbysGlowThing } from "./gabbys_glow_thing";
+import { MusicMap } from "./music_map";
 
 
 export class Player extends Entity {
@@ -20,7 +21,7 @@ export class Player extends Entity {
   speed      = 30;
   jumpHeight = 60;
   gravity    = 2;
-  colliderSize = new Vector2(100, 550);
+  colliderSize = new Vector2(100, 530);
 
   idle:  Texture[];
   walk:  Texture[];
@@ -87,13 +88,13 @@ export class Player extends Entity {
     if (state.tick % 6 === 0) {
       this.frame = (this.frame + 1) % this.animState.length;
     }
-    this.graphic.texture = this.animState[this.frame];
+    this.graphic.texture = this.animState[this.frame];  
   }
 
   public collisionBounds(): Rect {
     return new Rect({
       x     : 0,
-      y     : 0,
+      y     : 40,
       width : this.colliderSize.x,
       height: this.colliderSize.y,
     })
@@ -225,10 +226,14 @@ export class Player extends Entity {
     if (state.mode === "Dialog") {
       
       // BUG: If you're in the air while entering dialog, you'll just stay there for the duration of dialog. 
-      
+
       this.velocity = Vector2.Zero;
       this.animState = this.idle;
       return;
+    }
+
+    if (this.animState == this.walk && (this.frame) % Math.floor(this.animState.length/4) === 0) {
+      state.sfx.stepStone1.play();
     }
 
     this.checkForDialogTriggers(state);
