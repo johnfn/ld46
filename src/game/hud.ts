@@ -39,7 +39,12 @@ export class Hud extends Entity {
     super({
       name: "HUD",
     });
+    const sm = new SpiritMeter(spiritTotal)
 
-    this.addChild(new SpiritMeter(spiritTotal));
+    //aesthetics
+    sm.sprite.scale.set(1.4)
+    sm.position = sm.position.add({x:70, y:30})
+    
+    this.addChild(sm);
   }
 }
