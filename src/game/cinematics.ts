@@ -1132,6 +1132,19 @@ export class Cinematics {
     state.mode = "Normal";
   }
 
+  public *fountain00(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "It's a figure carved into stone.", },
+      { speaker, text: "It looks like a fountain, but the water dried up long ago.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
   public *fountain01(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
