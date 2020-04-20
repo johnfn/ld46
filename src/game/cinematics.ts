@@ -21,6 +21,8 @@ export class Cinematics {
   game               : Game;
   spaceToContinueText: TextEntity;
 
+  name = "Herald";
+
   constructor(coroutineManager: CoroutineManager, game: Game) {
     this.coroutineManager = coroutineManager;
     this.game = game;
@@ -214,7 +216,7 @@ export class Cinematics {
     yield* DialogBox.StartDialog([ 
       { speaker: "Bud", text: "Yeah. Not too pretty.", }, 
       { speaker: "Bud", text: "So much metal, and so little nature. It’s really kind of horrifying.", },
-      { speaker: "Bud", text: "But that’s why you were sent here, $NAME! You can help us make things better!", },
+      { speaker: "Bud", text: `But that’s why you were sent here, ${ this.name }! You can help us make things better!`, },
       // branching dialogue happens here
       // we'll wait for grant to figure that one out      
     ]);
@@ -276,7 +278,7 @@ export class Cinematics {
       { speaker: "Bud", text: "Huh. So you really can see ghosts? That’s so strange.", },
       { speaker: "Bud", text: "Hey, wait. This area looks kind of familiar.", },
       { speaker: "Bud", text: "Oh! I remember now! I actually know a shortcut to the Tree of Sprights from here!", },
-      { speaker: "Bud", text: "C’mon, $NAME, there’s no time to waste!", },        
+      { speaker: "Bud", text: `C’mon, ${ this.name }, there’s no time to waste!`, },        
     ]);
 
     state.mode = "Normal"; 
@@ -412,7 +414,7 @@ export class Cinematics {
 
     yield* DialogBox.StartDialog([ 
       { speaker: "Bud", text: "YES! It’s open!", },
-      { speaker: "Bud", text: "C’mon, $NAME! Let’s go!", },           
+      { speaker: "Bud", text: `C’mon, ${ name }! Let’s go!`, },           
     ]);
 
     state.mode = "Normal"; 
@@ -447,7 +449,7 @@ export class Cinematics {
       { speaker: "Withers", text: "Unless, of course...", },
       { speaker: "Withers", text: "There happened to be one left.", },
         // withers turns around to look at herald
-      { speaker: "Withers", text: "Hello, $NAME.", },
+      { speaker: "Withers", text: `Hello, ${ this.name }.`, },
       { speaker: "Withers", text: "I’ve been expecting you.", },
       { speaker: "Bud", text: "Master! Master! I’ve done as you asked!", },
       { speaker: "Withers", text: "Very good, Bud.", },
@@ -459,7 +461,7 @@ export class Cinematics {
       { speaker: "Withers", text: "Oh, I’m sorry. You don’t know what a “street” is. Or what “standards” are, for that matter.", },
       { speaker: "Bud", text: "Oooh! Clever burn, master! If I had arms, I would be dabbing in celebration!", },
       { speaker: "Bud", text: "Y’know, because we’re evil!", },
-      { speaker: "Withers", text: "You must be so confused, $NAME. Let me make some things clear to you.", },
+      { speaker: "Withers", text: `You must be so confused, ${ this.name }. Let me make some things clear to you.`, },
       { speaker: "Withers", text: "Firstly, you’re not here because you’re some kind of Superdryad who intrepidly braved the elements to get to my lair.", },
       { speaker: "Withers", text: "Didn’t you ever wonder why your journey here was so easy? I mean, I have Tinker Men everywhere that I could’ve sent to stop you.", },
       { speaker: "Withers", text: "No, you’re here because I wanted you to be here.", },
@@ -474,9 +476,9 @@ export class Cinematics {
       { speaker: "Withers", text: "Everything you think you know about this world is just everything that Bud told you!", },
       { speaker: "Withers", text: "And you were foolish enough to believe every word!", },
       { speaker: "Withers", text: "What the hell is a “spirit partner” anyway? Blathering nonsense!", },
-      { speaker: "Withers", text: "In fact, your name isn’t even $NAME!", },
+      { speaker: "Withers", text: `In fact, your name isn’t even ${ name }!`, },
       { speaker: "Withers", text: "That’s just a dumb name I told Bud to call you!", },
-      { speaker: "Withers", text: "What even is that, anyway? $NAME?! What kind of simpleton would just go and embrace such a stupid name?!", },
+      { speaker: "Withers", text: `What even is that, anyway? ${ name }?! What kind of simpleton would just go and embrace such a stupid name?!`, },
       { speaker: "Bud", text: "WAHAHAH! You believed me!", },
       { speaker: "Withers", text: "You utter fool!", },
       { speaker: "Withers", text: "Anyway.", },

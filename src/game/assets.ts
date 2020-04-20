@@ -30,6 +30,8 @@ export type AssetPath =
   | "npc1.png"
   | "npc2.png"
   | "npc3.png"
+  | "npc4.png"
+  | "npc5.png"
   | "owo.png"
   | "parallax bg/00 - sky ver2.png"
   | "parallax bg/00 - sky.png"
@@ -209,6 +211,8 @@ export const AssetsToLoad = {
   "npc1"                              : { type: "Image"       as const, path: "npc1.png"                               },
   "npc2"                              : { type: "Image"       as const, path: "npc2.png"                               },
   "npc3"                              : { type: "Image"       as const, path: "npc3.png"                               },
+  "npc4"                              : { type: "Image"       as const, path: "npc4.png"                               },
+  "npc5"                              : { type: "Image"       as const, path: "npc5.png"                               },
   "owo"                               : { type: "Image"       as const, path: "owo.png"                                },
   "parallax bg/00 - sky ver2"         : { type: "Image"       as const, path: "parallax bg/00 - sky ver2.png"          },
   "parallax bg/00 - sky"              : { type: "Image"       as const, path: "parallax bg/00 - sky.png"               },
