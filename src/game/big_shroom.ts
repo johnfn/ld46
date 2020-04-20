@@ -27,7 +27,7 @@ export class BigShroom extends Entity {
 
     this.frames = Assets.getResource("bigshroom");
 
-    this.addChild(this.hoverText = new HoverText("x: interact"), 400, -900);
+    this.addChild(this.hoverText = new HoverText("x: interact"), 200, -100);
     this.hoverText.visible = false;
   }
 
