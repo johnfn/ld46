@@ -11,16 +11,18 @@ export class HoverText extends Entity {
 
     this.addChild(this.shadow = new TextEntity({
       text    : text,
-      fontSize: 80,
-      color   : "0x000000",
+      fontSize: 100,
+      color   : "0x022a2e",
+      width   : 700,
     }));
 
-    this.shadow.x = 5;
-    this.shadow.y = 5;
+    this.shadow.x = 7;
+    this.shadow.y = 7;
 
     this.addChild(this.text = new TextEntity({
       text    : text,
-      fontSize: 80,
+      fontSize: 100,
+      width   : 700,
     }));
   }
 
