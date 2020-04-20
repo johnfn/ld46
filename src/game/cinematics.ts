@@ -162,7 +162,6 @@ export class Cinematics {
       let startX = bud.x;
       let startY = bud.y;
   
-  
     yield* DialogBox.StartDialog([
       { speaker: "???", text: "Huh? What was that sound?", },
     ]);
@@ -547,7 +546,11 @@ export class Cinematics {
       { speaker: "Withers", text: "Hmm.", },
       { speaker: "Withers", text: "Unless, of course...", },
       { speaker: "Withers", text: "There happened to be one left.", },
+    ]);
+
         // withers turns around to look at herald
+    
+    yield* DialogBox.StartDialog([
       { speaker: "Withers", text: `Hello, ${ this.name }.`, },
       { speaker: "Withers", text: "I’ve been expecting you.", },
       { speaker: "Bud", text: "Master! Master! I’ve done as you asked!", },
@@ -611,7 +614,11 @@ export class Cinematics {
         ]
       },
       { speaker: "Withers", text: "DARK BLAST HAH", },
+    ]);
+
         // ball of darkness shoots at herald
+    
+    yield* DialogBox.StartDialog([
       { speaker: " ", text: "(You feel a burning in your chest.)", },
       { speaker: "Withers", text: "Hah...", },
       { speaker: "Withers", text: "Too easy.", },
@@ -621,7 +628,11 @@ export class Cinematics {
       { speaker: "Withers", text: "...wait.", },
       { speaker: "Withers", text: "You’re not dead.", },
       { speaker: "Withers", text: "What’s going on?", },
+    ]);
+
         // npc ghosts appear
+
+    yield* DialogBox.StartDialog([
       { speaker: "Bud", text: "Uh... Master...", },
       { speaker: "Bud", text: "In all the excitement... I may have forgotten to tell you about the ghosts...", },
       { speaker: "Withers", text: "The", },
@@ -633,7 +644,11 @@ export class Cinematics {
       { speaker: "Wisps", text: "You will not lay a hand on the Time Warrior!", },
       { speaker: "Pisp", text: "Yap! Yap!", },
       { speaker: "Withers", text: "What. The hell.", },
+    ]);
+
         // tries to shoot dark blast a few more times
+
+    yield* DialogBox.StartDialog([
       { speaker: "Wisps", text: "ATTACK HIM NOT.", },
       { speaker: "Withers", text: "Grr...", },
       { speaker: "Withers", text: "You know what?", },
@@ -643,7 +658,11 @@ export class Cinematics {
       { speaker: "Withers", text: "No. It’s a worthy sacrifice.", },
       { speaker: "Withers", text: "You cannot be allowed to come near the Energy Fruit.", },
       { speaker: "Withers", text: "I WILL GO DESTROY IT MYSELF.", },
+    ]);
+
         // withers flees 
+
+    yield* DialogBox.StartDialog([
       { speaker: "Bud", text: "Oh dear. Oh dear, dear, dear.", },
 
     ]);
