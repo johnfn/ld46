@@ -160,7 +160,6 @@ export class Cinematics {
       { speaker: "???", text: "Huh? What’s that?", },
       { speaker: "???", text: "You want me to turn around?", },
       { speaker: "???", text: "What a silly book! Why would I want to do that?", },
->>>>>>> 0c51f1531c411b8777bac723d319c3842e1a3a11
     ]);
 
     state.mode = "Normal";
