@@ -4,11 +4,13 @@ import { Entity } from "../library/entity";
 import { Fountain } from "./fountain";
 import { Util } from "../library/util";
 
-const setAudioToLoop = (audio: HTMLAudioElement) => {
+export const SetAudioToLoop = (audio: HTMLAudioElement) => {
   audio.addEventListener('ended', () => {
     audio.currentTime = 0;
     audio.play();
   });
+
+  return audio;
 }
 
 export class Sfx extends Entity {
@@ -25,7 +27,7 @@ export class Sfx extends Entity {
   constructor() {
     super({ name: "Sfx" });
 
-    setAudioToLoop(this.waterfall);
+    SetAudioToLoop(this.waterfall);
     this.waterfall.play();
   }
 
