@@ -37,8 +37,8 @@ export class DialogBox extends Entity {
       name: "Dialog Graphic",
     });
 
-    graphic.width = 1400 * 2;
-    graphic.height = 500 * 2;
+    graphic.width = 1200 * 2;
+    graphic.height = 300 * 2;
 
     this.addChild(graphic);
 

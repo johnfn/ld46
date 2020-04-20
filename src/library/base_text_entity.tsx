@@ -25,9 +25,9 @@ export const PIXEL_RATIO = (() => {
 })();
     
 export class BaseTextEntity<T extends BaseGameState> extends Entity {
-  canvas       : HTMLCanvasElement;
-  context      : CanvasRenderingContext2D;
-  private _html: string;
+  canvas        : HTMLCanvasElement;
+  context       : CanvasRenderingContext2D;
+  protected _html: string;
 
   constructor(html: string, width: number, height: number) {
     super({

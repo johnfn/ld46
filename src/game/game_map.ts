@@ -16,6 +16,7 @@ import { MusicMap } from "./music_map";
 import { Bud } from "./bud";
 import { Fountain } from "./fountain";
 import { BouncyShroom } from "./bouncy_shroom";
+import { Npc } from "./npc";
 
 type FlowerRegion = {
   tilemapRegion: TilemapRegion,
@@ -64,7 +65,7 @@ export class GameMap extends Entity {
           type     : "single",
           name     : "npc",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
-            return new Entity({ name: "entity", texture: tex });
+            return new Npc(tex);
           }
         },
 
@@ -133,6 +134,8 @@ export class GameMap extends Entity {
     ],
       assets: Assets
     });
+
+    console.log(this.artMap);
     
     this.loadMap(Player.StartPosition);
 

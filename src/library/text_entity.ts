@@ -95,6 +95,22 @@ export class TextEntity extends BaseTextEntity<BaseGameState> {
     this.html = html;
   }
 
+  // TODO: This is a hard function to write properly.
+  // This only works after the CSS has loaded 
+  calculateTextWidth = (text: string) => {
+    const canvas = document.getElementById("canvas2d")! as HTMLCanvasElement;
+    const context = canvas.getContext("2d")!;
+    context.font = `${ this.defaultStyle.fontSize }px FreePixel`;
+    const calculatedWidth = context.measureText(text).width;
+
+    if (this.width < calculatedWidth) {
+      return this.width;
+    } else {
+      return calculatedWidth;
+    }
+  };
+
+
   buildTextSegments(text: string): TextSegment[] {
     let i = 0;
     const readChar = () => text[i++];

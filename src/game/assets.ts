@@ -15,13 +15,17 @@ export type AssetName = keyof typeof AssetsToLoad
 export type AssetPath = 
   | "bud.png"
   | "dialog_box.png"
+  | "dialog_tip.png"
   | "glow.png"
+  | "hub bg/hub_bg1.png"
   | "interactions.json"
   | "loop1.mp3"
   | "loop2.mp3"
   | "map.json"
   | "music/Sanctuary.mp3"
+  | "music/The Hub.mp3"
   | "music/Withers.mp3"
+  | "music/menu theme placeholder.mp3"
   | "music.json"
   | "owo.png"
   | "parallax bg/00 - sky ver2.png"
@@ -39,6 +43,8 @@ export type AssetPath =
   | "parallax bg/bigcloud04.png"
   | "parallax bg/bigcloud05.png"
   | "sound effects/Distant Gears.mp3"
+  | "sound effects/alert noise.mp3"
+  | "sound effects/climax sweep.mp3"
   | "sound effects/step grass 1.mp3"
   | "sound effects/step grass 2.mp3"
   | "sound effects/step grass 3.mp3"
@@ -48,11 +54,15 @@ export type AssetPath =
   | "sound effects/step wood 1.mp3"
   | "sound effects/step wood 2.mp3"
   | "sound effects/step wood 3.mp3"
+  | "sound effects/withers chuckle.mp3"
   | "spirit_empty_hud.png"
   | "spirit_full_hud.png"
   | "tileset.png"
   | "vine_flower_source.png"
   | "world.json"
+  | "bud/bud_idle_0000.png"
+  | "bud/bud_idle_0001.png"
+  | "bud/bud_idle_0002.png"
   | "char_climb (1).png"
   | "char_climb (2).png"
   | "char_climb (3).png"
@@ -111,6 +121,16 @@ export type AssetPath =
   | "flower4 (2).png"
   | "flower4 (3).png"
   | "flower4 (4).png"
+  | "flowey (1).png"
+  | "flowey (2).png"
+  | "flowey (3).png"
+  | "flowey (4).png"
+  | "flowey (5).png"
+  | "flowey (6).png"
+  | "flowey (7).png"
+  | "fountain (1).png"
+  | "fountain (2).png"
+  | "fountain (3).png"
   | "mushroom1 (1).png"
   | "mushroom1 (2).png"
   | "mushroom1 (3).png"
@@ -131,19 +151,30 @@ export type AssetPath =
   | "vine_live (6).png"
   | "vine_live (7).png"
   | "vine_live (8).png"
+  | "wisteria (1).png"
+  | "wisteria (2).png"
+  | "wisteria (3).png"
+  | "wisteria (4).png"
+  | "wisteria (5).png"
+  | "wisteria (6).png"
+  | "wisteria (7).png"
 
 
 
 export const AssetsToLoad = {
   "bud"                          : { type: "Image"       as const, path: "bud.png"                           },
   "dialog_box"                   : { type: "Image"       as const, path: "dialog_box.png"                    },
+  "dialog_tip"                   : { type: "Image"       as const, path: "dialog_tip.png"                    },
   "glow"                         : { type: "Image"       as const, path: "glow.png"                          },
+  "hub bg/hub_bg1"               : { type: "Image"       as const, path: "hub bg/hub_bg1.png"                },
   "interactions"                 : { type: "TileMap"     as const, path: "interactions.json"                 },
   "loop1"                        : { type: "Audio"       as const, path: "loop1.mp3"                         },
   "loop2"                        : { type: "Audio"       as const, path: "loop2.mp3"                         },
   "map"                          : { type: "TileMap"     as const, path: "map.json"                          },
   "music/Sanctuary"              : { type: "Audio"       as const, path: "music/Sanctuary.mp3"               },
+  "music/The Hub"                : { type: "Audio"       as const, path: "music/The Hub.mp3"                 },
   "music/Withers"                : { type: "Audio"       as const, path: "music/Withers.mp3"                 },
+  "music/menu theme placeholder" : { type: "Audio"       as const, path: "music/menu theme placeholder.mp3"  },
   "music"                        : { type: "TileMap"     as const, path: "music.json"                        },
   "owo"                          : { type: "Image"       as const, path: "owo.png"                           },
   "parallax bg/00 - sky ver2"    : { type: "Image"       as const, path: "parallax bg/00 - sky ver2.png"     },
@@ -161,6 +192,8 @@ export const AssetsToLoad = {
   "parallax bg/bigcloud04"       : { type: "Image"       as const, path: "parallax bg/bigcloud04.png"        },
   "parallax bg/bigcloud05"       : { type: "Image"       as const, path: "parallax bg/bigcloud05.png"        },
   "sound effects/Distant Gears"  : { type: "Audio"       as const, path: "sound effects/Distant Gears.mp3"   },
+  "sound effects/alert noise"    : { type: "Audio"       as const, path: "sound effects/alert noise.mp3"     },
+  "sound effects/climax sweep"   : { type: "Audio"       as const, path: "sound effects/climax sweep.mp3"    },
   "sound effects/step grass 1"   : { type: "Audio"       as const, path: "sound effects/step grass 1.mp3"    },
   "sound effects/step grass 2"   : { type: "Audio"       as const, path: "sound effects/step grass 2.mp3"    },
   "sound effects/step grass 3"   : { type: "Audio"       as const, path: "sound effects/step grass 3.mp3"    },
@@ -170,6 +203,7 @@ export const AssetsToLoad = {
   "sound effects/step wood 1"    : { type: "Audio"       as const, path: "sound effects/step wood 1.mp3"     },
   "sound effects/step wood 2"    : { type: "Audio"       as const, path: "sound effects/step wood 2.mp3"     },
   "sound effects/step wood 3"    : { type: "Audio"       as const, path: "sound effects/step wood 3.mp3"     },
+  "sound effects/withers chuckle": { type: "Audio"       as const, path: "sound effects/withers chuckle.mp3" },
   "spirit_empty_hud"             : { type: "Image"       as const, path: "spirit_empty_hud.png"              },
   "spirit_full_hud"              : { type: "Image"       as const, path: "spirit_full_hud.png"               },
   "tileset"                      : { type: "Image"       as const, path: "tileset.png"                       },
@@ -178,6 +212,14 @@ export const AssetsToLoad = {
 
   /* Animations */
 
+  "bud/bud_idle": {
+    type: "Animation" as const,
+    paths: [
+      "bud/bud_idle_0000.png",
+      "bud/bud_idle_0001.png",
+      "bud/bud_idle_0002.png",
+    ],
+  },
   "char_climb": {
     type: "Animation" as const,
     paths: [
@@ -276,6 +318,26 @@ export const AssetsToLoad = {
       "flower4 (4).png",
     ],
   },
+  "flowey": {
+    type: "Animation" as const,
+    paths: [
+      "flowey (1).png",
+      "flowey (2).png",
+      "flowey (3).png",
+      "flowey (4).png",
+      "flowey (5).png",
+      "flowey (6).png",
+      "flowey (7).png",
+    ],
+  },
+  "fountain": {
+    type: "Animation" as const,
+    paths: [
+      "fountain (1).png",
+      "fountain (2).png",
+      "fountain (3).png",
+    ],
+  },
   "mushroom1": {
     type: "Animation" as const,
     paths: [
@@ -309,6 +371,18 @@ export const AssetsToLoad = {
       "vine_live (6).png",
       "vine_live (7).png",
       "vine_live (8).png",
+    ],
+  },
+  "wisteria": {
+    type: "Animation" as const,
+    paths: [
+      "wisteria (1).png",
+      "wisteria (2).png",
+      "wisteria (3).png",
+      "wisteria (4).png",
+      "wisteria (5).png",
+      "wisteria (6).png",
+      "wisteria (7).png",
     ],
   },
 };

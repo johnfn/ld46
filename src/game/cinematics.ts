@@ -927,8 +927,8 @@ export class Cinematics {
     yield* DialogBox.StartDialog([ 
       { speaker: "NPC", text: "If what they say is true and the Time Warrior is truly awake...", },
       { speaker: "NPC", text: "Maybe we should all head to the top of the Tree of Sprights!", },
-      { speaker: "NPC", text: "The Energy Fruit at the top of the tree is the best chance that he has at restoring the forest.", },
-      { speaker: "NPC", text: "And if he use it to channel enough natural energy, maybe we could even get our bodies back!", },
+      { speaker: "NPC", text: "The Energy Fruit at the top of the tree is the best chance that the Time Warrior has at restoring the forest.", },
+      { speaker: "NPC", text: "And if he uses it to channel enough natural energy, maybe we could even get our bodies back!", },
       { speaker: "NPC", text: "Gosh, wouldn’t that be a miracle?", },                       
     ]);
 

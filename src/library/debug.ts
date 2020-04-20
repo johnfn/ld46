@@ -99,7 +99,7 @@ export class Debug {
       GameReference.stage.sprite.addChild(graphics);
     }
 
-    if (persistent) {
+    if (!persistent) {
       this.DebugGraphicStack.push(graphics);
 
       if (this.DebugGraphicStack.length > MAX_DEBUGGING_GRAPHICS_COUNT) {
@@ -146,7 +146,10 @@ export class Debug {
     target: "stage" | "fixed" = "stage"
   ): Graphics[] {
     if (entity instanceof Entity) {
-      entity = entity.collisionBounds().add(entity.position);
+      entity = entity.collisionBounds()
+        .add(entity.positionAbsolute())
+        .add(GameReference.stage.position)
+        ;
     } 
     
     if (entity instanceof RectGroup) {

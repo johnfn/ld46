@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      @font-face {
+        font-family: FreePixel;
+        src: url(FreePixel.ttf);
+      }
+    </style>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,7 +37,11 @@
     <div style="display: flex; flex-direction: row;">
       <canvas id="canvas"></canvas>
       <div id="root"></div>
+      <canvas id="canvas2d"></canvas>
     </div>
+
+    <!-- Force FreePixel to load -->
+    <div style="font-family: FreePixel; color: white">x</div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
