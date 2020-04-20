@@ -169,7 +169,7 @@ export class Cinematics {
     let startX = bud.x;
     let startY = bud.y;
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 8; i++) {
       bud.sprite.rotation = bud.sprite.rotation - 1;
       yield { frames: 4 };
     }
