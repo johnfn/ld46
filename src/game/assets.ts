@@ -68,6 +68,7 @@ export type AssetPath =
   | "sound effects/voices/voice 3.mp3"
   | "sound effects/voices/voice 4.mp3"
   | "sound effects/voices/voice withers.mp3"
+  | "sound effects/waterfall.mp3"
   | "sound effects/withers chuckle.mp3"
   | "spirit_empty_hud.png"
   | "spirit_full_hud.png"
@@ -278,6 +279,7 @@ export const AssetsToLoad = {
   "sound effects/voices/voice 3"      : { type: "Audio"       as const, path: "sound effects/voices/voice 3.mp3"       },
   "sound effects/voices/voice 4"      : { type: "Audio"       as const, path: "sound effects/voices/voice 4.mp3"       },
   "sound effects/voices/voice withers": { type: "Audio"       as const, path: "sound effects/voices/voice withers.mp3" },
+  "sound effects/waterfall"           : { type: "Audio"       as const, path: "sound effects/waterfall.mp3"            },
   "sound effects/withers chuckle"     : { type: "Audio"       as const, path: "sound effects/withers chuckle.mp3"      },
   "spirit_empty_hud"                  : { type: "Image"       as const, path: "spirit_empty_hud.png"                   },
   "spirit_full_hud"                   : { type: "Image"       as const, path: "spirit_full_hud.png"                    },

@@ -3,6 +3,7 @@ import { Overlay } from "./overlay";
 import { GameMap } from "./game_map";
 import { Camera } from "../library/camera";
 import { Cinematics } from "/Users/johnfn/code/ld46/src/game/cinematics";
+import { Sfx } from "./sfx";
 
 declare module "Library" {
   export interface ModeList {
@@ -11,6 +12,7 @@ declare module "Library" {
 
   export interface IGameState {
     player       : Player;
+    sfx          : Sfx;
 
     /**
      * Is Bud following the player

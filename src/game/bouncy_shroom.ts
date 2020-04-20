@@ -46,7 +46,7 @@ export class BouncyShroom extends Entity {
       if (state.keys.justDown.X && !this.interacted && state.spiritUnused >= 1) {
         state.spiritUnused -= 1;
         this.interacted = true;
-        Sfx.UseSpirit.play();
+        state.sfx.useSpirit.play();
         this.startCoroutine("animateAlive", this.animateAlive())
       }
     } else {

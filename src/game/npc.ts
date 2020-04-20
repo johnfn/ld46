@@ -98,7 +98,7 @@ export class NpcDialog extends Entity {
 
         state = yield "next";
 
-        Sfx.PlayVoiceSound1(state.tick);
+        state.sfx.playVoiceSound1(state.tick);
 
         if (state.keys.justDown.X) {
           break;

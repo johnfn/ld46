@@ -150,7 +150,7 @@ export class VineFlower extends Entity {
 
         this.interacted = true;
 
-        Sfx.UseSpirit.play();
+        state.sfx.useSpirit.play();
 
         this.startCoroutine("animateAlive", this.animateAlive())
         this.startCoroutine("growVine", this.vine.growVine());

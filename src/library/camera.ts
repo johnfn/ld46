@@ -89,7 +89,7 @@ export class Camera {
     }
 
     if (currentBounds.width < this._canvasWidth || currentBounds.height < this._canvasHeight) {
-      throw new Error("There is a region on the map which is too small for the camera.");
+      throw new Error(`There is a region on the map which is too small for the camera at x: ${ currentBounds.x } y: ${ currentBounds.y }.`);
     }
 
     // fit the camera rect into the regions rect

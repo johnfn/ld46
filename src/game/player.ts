@@ -8,6 +8,7 @@ import { Vine } from "./vine_flower";
 import { Vector2 } from "../library/geometry/vector2";
 import { BouncyShroom } from "./bouncy_shroom";
 import { Mode } from "Library";
+import { Sfx } from "./sfx";
 
 
 export class Player extends Entity {
@@ -223,14 +224,15 @@ export class Player extends Entity {
   }
 
   update(state: IGameState): void {
-
     this.animate(state);
 
     if (state.mode === "Dialog") {
       this.velocity = Vector2.Zero;
       this.animState = this.idle;
+
       return;
     }
+
     this.checkForDialogTriggers(state);
 
     const touchingVine = this.hitInfo.interactions.find(x => x.otherEntity instanceof Vine) !== undefined;

@@ -1,46 +1,75 @@
 import { Assets } from "./assets";
+import { IGameState } from "Library";
+import { Entity } from "../library/entity";
+import { Fountain } from "./fountain";
+import { Util } from "../library/util";
 
-export class Sfx {
-  public static VoiceSound1 = Assets.getResource("sound effects/voices/voice 1");
-  public static VoiceSound2 = Assets.getResource("sound effects/voices/voice 2");
-  public static VoiceSound3 = Assets.getResource("sound effects/voices/voice 3");
-  public static VoiceSound4 = Assets.getResource("sound effects/voices/voice 4");
-  public static VoiceWithers= Assets.getResource("sound effects/voices/voice withers");
+const setAudioToLoop = (audio: HTMLAudioElement) => {
+  audio.addEventListener('ended', () => {
+    audio.currentTime = 0;
+    audio.play();
+  });
+}
 
-  public static UseSpirit   = Assets.getResource("sound effects/use spirit");
+export class Sfx extends Entity {
+  public voiceSound1 = Assets.getResource("sound effects/voices/voice 1");
+  public voiceSound2 = Assets.getResource("sound effects/voices/voice 2");
+  public voiceSound3 = Assets.getResource("sound effects/voices/voice 3");
+  public voiceSound4 = Assets.getResource("sound effects/voices/voice 4");
+  public voiceWithers= Assets.getResource("sound effects/voices/voice withers");
 
-  public static PlayVoiceSound1(tick: number) {
+  public useSpirit   = Assets.getResource("sound effects/use spirit");
+
+  public waterfall = Assets.getResource("sound effects/waterfall");
+
+  constructor() {
+    super({ name: "Sfx" });
+
+    setAudioToLoop(this.waterfall);
+    this.waterfall.play();
+  }
+
+  public playVoiceSound1(tick: number) {
     if (tick % 5 === 0) {
-      Sfx.VoiceSound1.currentTime = 0;
-      Sfx.VoiceSound1.play();
+      this.voiceSound1.currentTime = 0;
+      this.voiceSound1.play();
     }
   }
 
-  public static PlayVoiceSound2(tick: number) {
+  public playVoiceSound2(tick: number) {
     if (tick % 5 === 0) {
-      Sfx.VoiceSound2.currentTime = 0;
-      Sfx.VoiceSound2.play();
+      this.voiceSound2.currentTime = 0;
+      this.voiceSound2.play();
     }
   }
 
-  public static PlayVoiceSound3(tick: number) {
+  public playVoiceSound3(tick: number) {
     if (tick % 5 === 0) {
-      Sfx.VoiceSound3.currentTime = 0;
-      Sfx.VoiceSound3.play();
+      this.voiceSound3.currentTime = 0;
+      this.voiceSound3.play();
     }
   }
 
-  public static PlayVoiceSound4(tick: number) {
+  public playVoiceSound4(tick: number) {
     if (tick % 5 === 0) {
-      Sfx.VoiceSound4.currentTime = 0;
-      Sfx.VoiceSound4.play();
+      this.voiceSound4.currentTime = 0;
+      this.voiceSound4.play();
     }
   }
 
-  public static PlayVoiceithers(tick: number) {
+  public playVoiceWithers(tick: number) {
     if (tick % 5 === 0) {
-      Sfx.VoiceWithers.currentTime = 0;
-      Sfx.VoiceWithers.play();
+      this.voiceWithers.currentTime = 0;
+      this.voiceWithers.play();
     }
+  }
+
+  public update(state: IGameState) {
+    const fountains = state.entities.values().filter(x => x instanceof Fountain) as Fountain[];
+    const closestFountain = Util.MinBy(fountains, f => f.distance(state.player))?.distance(state.player)!;
+
+    let fountainVol = Math.max(1 - closestFountain / 4000, 0);
+
+    this.waterfall.volume = fountainVol;
   }
 }
