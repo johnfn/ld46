@@ -32,7 +32,7 @@ export class NormalFlower extends Entity {
   constructor(position: Vector2, level?: number) {
     super({
       name   : "Flower",
-      texture: Assets.getResource("blueflower")[0],
+      texture: Assets.getResource("flower1")[0],
     });
 
     if (level != undefined && level in flowersRate) {
