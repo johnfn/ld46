@@ -17,6 +17,7 @@ import { Bud } from "./bud";
 import { Fountain } from "./fountain";
 import { BouncyShroom } from "./bouncy_shroom";
 import { Npc } from "./npc";
+import { Wisteria } from "./wisteria";
 
 type FlowerRegion = {
   tilemapRegion: TilemapRegion,
@@ -78,9 +79,17 @@ export class GameMap extends Entity {
 
         {
           type     : "single",
+          name     : "wisteria",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
+            return new Wisteria();
+          }
+        },
+
+        {
+          type     : "single",
           name     : "bouncyshroom",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
-            return new BouncyShroom(tex);
+            return new BouncyShroom();
           }
         },
 

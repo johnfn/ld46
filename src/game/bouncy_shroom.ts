@@ -15,9 +15,7 @@ export class BouncyShroom extends Entity {
 
   hoverText: HoverText;
 
-  constructor(
-    tempTex: Texture // need better 1
-  ) {
+  constructor() {
     super({ 
       name      : "BouncyShroom",
       texture   : Assets.getResource("mushroom1")[0],

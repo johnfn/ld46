@@ -9,7 +9,6 @@ import { Mode } from "Library";
 import { Assets } from "./assets";
 import { Vector2 } from "../library/geometry/vector2";
 import { GameCoroutine } from "../library/coroutine_manager";
-import { Sfx } from "./sfx";
 
 export type NpcDialogType = { speaker: Entity; text: string }[];
 
