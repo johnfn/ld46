@@ -6,10 +6,14 @@ import { Entity } from "../library/entity";
 import { IGameState } from "Library";
 import { Mode } from "Library";
 
-export type DialogText = {
-  speaker?: string;
-  text    : string;
-}[];
+export type DialogText = (
+  | { speaker?: string; text: string; }
+  | { 
+      speaker?: string; 
+      text    : string; 
+      branches: { text: string; next: DialogText }[];
+    }
+)[];
 
 export class DialogBox extends Entity {
   activeModes: Mode[] = ["Dialog", "Normal"] ;
@@ -17,10 +21,12 @@ export class DialogBox extends Entity {
   public static Instance: DialogBox;
   public static DialogVisible = () => DialogBox.Instance.visible;
 
-  private activeDialogText: DialogText = [];
   private dialogText: TextEntity;
   private speakerText: TextEntity;
   private profilePic: Entity;
+
+  private branches: TextEntity[] = [];
+  private graphic: Entity;
 
   constructor() {
     super({
@@ -32,15 +38,15 @@ export class DialogBox extends Entity {
     this.x = 100;
     this.y = 550;
 
-    const graphic = new Entity({ 
+    this.graphic = new Entity({ 
       texture: Assets.getResource("dialog_box"),
       name: "Dialog Graphic",
     });
 
-    graphic.width = 1200 * 2;
-    graphic.height = 300 * 2;
+    this.graphic.width = 1200 * 2;
+    this.graphic.height = 300 * 2;
 
-    this.addChild(graphic);
+    this.addChild(this.graphic);
 
     DialogBox.Instance = this;
 
@@ -62,29 +68,54 @@ export class DialogBox extends Entity {
     this.profilePic.width  = 530;
     this.profilePic.height = 530;
     this.addChild(this.profilePic);
+
+    for (let i = 0; i < 4; i++) {
+      let branchText = new TextEntity({ text: "", width: 900, fontSize: 80 });
+
+      this.branches.push(branchText);
+      branchText.x = 100;
+      branchText.y = 500 + i * 100;
+
+      this.addChild(branchText);
+    }
   }
 
   *startDialog(dialog: DialogText): GameCoroutine {
-    this.visible = true;
-    this.activeDialogText = dialog;
-
     let state: IGameState;
 
     state = yield "next";
 
+    let oldMode = state.mode;
+    let oldVisible = this.visible;
+
+    this.visible = true;
+    let activeDialogText = dialog.slice();
+
     state.mode = "Dialog";
 
-    while (this.activeDialogText.length > 0) {
-      const fullText = this.activeDialogText[0];
+    while (activeDialogText.length > 0) {
+      const fullText = activeDialogText[0];
+
+      if ('branches' in fullText) {
+        this.graphic.height = 1000;
+      } else {
+        this.graphic.height = 600;
+
+        this.branches[0].setText("");
+        this.branches[1].setText("");
+        this.branches[2].setText("");
+        this.branches[3].setText("");
+      }
+
       let textToShow = "";
 
       while (textToShow.length < fullText.text.length) {
         textToShow += fullText.text[textToShow.length];
-        this.displayDialogContents(textToShow);
+        this.displayDialogContents(fullText.speaker || "", textToShow);
 
         if (state.keys.justDown.Z) {
           textToShow = fullText.text;
-          this.displayDialogContents(textToShow);
+          this.displayDialogContents(fullText.speaker || "", textToShow);
 
           state = yield "next";
       
@@ -94,23 +125,44 @@ export class DialogBox extends Entity {
         state = yield "next";
       }
 
-      state = yield { untilKeyPress: "Z" };
-      state = yield "next"; // make sure spacebar isnt justDown
+      if ('branches' in fullText) {
+        this.displayBranches(fullText);
 
-      this.activeDialogText.shift();
+        while (true) {
+          state = yield 'next';
+
+          if (state.keys.justDown.A) { yield* this.startDialog(fullText.branches[0].next); break; }
+          if (state.keys.justDown.S) { yield* this.startDialog(fullText.branches[1].next); break; }
+          if (state.keys.justDown.D) { yield* this.startDialog(fullText.branches[2].next); break; }
+          if (state.keys.justDown.F) { yield* this.startDialog(fullText.branches[3].next); break; }
+        }
+      } else {
+        state = yield { untilKeyPress: "Z" };
+        state = yield "next"; // make sure z isnt justDown
+      }
+
+      activeDialogText.shift();
     }
 
-    state.mode = "Normal";
-    this.visible = false;
+    state.mode = oldMode;
+    this.visible = oldVisible;
+  }
+
+  displayBranches(fullText: { speaker?: string | undefined; text: string; branches: { text: string; next: DialogText; }[]; }) {
+    const keys = "ASDF";
+
+    for (let i = 0; i < fullText.branches.length; i++) {
+      const branch = fullText.branches[i];
+
+      this.branches[i].setText(`${ keys[i] }: ${ branch.text }`);
+    }
   }
 
   public static *StartDialog(dialog: DialogText): GameCoroutine {
     yield* DialogBox.Instance.startDialog(dialog.slice(0));
   }
 
-  displayDialogContents(textToShow: string) {
-    const speaker = this.activeDialogText[0].speaker;
-
+  displayDialogContents(speaker: string, textToShow: string) {
     this.dialogText.setText(textToShow);
 
     if (speaker) {

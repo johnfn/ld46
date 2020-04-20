@@ -15,20 +15,23 @@ export type AssetName = keyof typeof AssetsToLoad
 export type AssetPath = 
   | "dialog_box.png"
   | "dialog_tip.png"
+  | "fountain_nowater.png"
   | "glow.png"
   | "hub bg/hub_bg1.png"
   | "interactions.json"
   | "loop1.mp3"
   | "loop2.mp3"
   | "map.json"
+  | "music/Maybe Tomorrow.mp3"
   | "music/Sanctuary.mp3"
   | "music/The Hub.mp3"
   | "music/Withers.mp3"
-  | "music/menu theme placeholder.mp3"
   | "music.json"
   | "npc1.png"
   | "npc2.png"
   | "npc3.png"
+  | "npc4.png"
+  | "npc5.png"
   | "owo.png"
   | "parallax bg/00 - sky ver2.png"
   | "parallax bg/00 - sky.png"
@@ -193,20 +196,23 @@ export type AssetPath =
 export const AssetsToLoad = {
   "dialog_box"                        : { type: "Image"       as const, path: "dialog_box.png"                         },
   "dialog_tip"                        : { type: "Image"       as const, path: "dialog_tip.png"                         },
+  "fountain_nowater"                  : { type: "Image"       as const, path: "fountain_nowater.png"                   },
   "glow"                              : { type: "Image"       as const, path: "glow.png"                               },
   "hub bg/hub_bg1"                    : { type: "Image"       as const, path: "hub bg/hub_bg1.png"                     },
   "interactions"                      : { type: "TileMap"     as const, path: "interactions.json"                      },
   "loop1"                             : { type: "Audio"       as const, path: "loop1.mp3"                              },
   "loop2"                             : { type: "Audio"       as const, path: "loop2.mp3"                              },
   "map"                               : { type: "TileMap"     as const, path: "map.json"                               },
+  "music/Maybe Tomorrow"              : { type: "Audio"       as const, path: "music/Maybe Tomorrow.mp3"               },
   "music/Sanctuary"                   : { type: "Audio"       as const, path: "music/Sanctuary.mp3"                    },
   "music/The Hub"                     : { type: "Audio"       as const, path: "music/The Hub.mp3"                      },
   "music/Withers"                     : { type: "Audio"       as const, path: "music/Withers.mp3"                      },
-  "music/menu theme placeholder"      : { type: "Audio"       as const, path: "music/menu theme placeholder.mp3"       },
   "music"                             : { type: "TileMap"     as const, path: "music.json"                             },
   "npc1"                              : { type: "Image"       as const, path: "npc1.png"                               },
   "npc2"                              : { type: "Image"       as const, path: "npc2.png"                               },
   "npc3"                              : { type: "Image"       as const, path: "npc3.png"                               },
+  "npc4"                              : { type: "Image"       as const, path: "npc4.png"                               },
+  "npc5"                              : { type: "Image"       as const, path: "npc5.png"                               },
   "owo"                               : { type: "Image"       as const, path: "owo.png"                                },
   "parallax bg/00 - sky ver2"         : { type: "Image"       as const, path: "parallax bg/00 - sky ver2.png"          },
   "parallax bg/00 - sky"              : { type: "Image"       as const, path: "parallax bg/00 - sky.png"               },
