@@ -2,13 +2,12 @@ import { Game } from "./game";
 import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { IGameState } from "Library";
-import { Texture, Sprite, BLEND_MODES } from "pixi.js";
+import { Texture } from "pixi.js";
 import { Rect } from "../library/geometry/rect";
 import { Vine } from "./vine_flower";
 import { Vector2 } from "../library/geometry/vector2";
 import { BouncyShroom } from "./bouncy_shroom";
 import { Mode } from "Library";
-import { Sfx } from "./sfx";
 import { GabbysGlowThing } from "./gabbys_glow_thing";
 import { MusicMap } from "./music_map";
 
@@ -257,7 +256,7 @@ export class Player extends Entity {
       }
     }
 
-    Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)));
+    Game.Instance.camera.centerOn(this.position.add(new Vector2(this.scale.x > 0 ? 1500 : -1500, -400)));
 
     if (this.velocity.x > 0 && this.scale.x < 0) {
       this.scale = this.scale.invertX();

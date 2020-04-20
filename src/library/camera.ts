@@ -1,4 +1,4 @@
-import { Vector2 } from "./geometry/vector2";
+import { Vector2, IVector2 } from "./geometry/vector2";
 import { Entity } from "./entity";
 import { Rect } from "./geometry/rect";
 import { Debug } from "./debug";
@@ -69,15 +69,15 @@ export class Camera {
     });
   }
 
-  private _immediatelyCenterOn = (position: Vector2) => {
-    this._position = position.subtract(this.halfDimensions());
+  private _immediatelyCenterOn = (position: IVector2) => {
+    this._position = new Vector2(position).subtract(this.halfDimensions());
   };
 
-  centerOn = (position: Vector2, immediate = false) => {
+  centerOn = (position: IVector2, immediate = false) => {
     if (immediate) {
       this._immediatelyCenterOn(position);
     } else {
-      this._desiredPosition = position.subtract(this.halfDimensions());
+      this._desiredPosition = new Vector2(position).subtract(this.halfDimensions());
     }
   };
 

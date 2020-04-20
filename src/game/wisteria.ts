@@ -25,14 +25,23 @@ export class Wisteria extends Entity {
     this.hoverText.visible = false;
   }
 
+  interacting = false;
+
   update(state: IGameState) { 
+    if (this.interacting) { return; }
+
     if (state.player.position.distance(this.position) < this.interactionDistance) {
       this.hoverText.visible = true;
 
       if (state.keys.justDown.X && !this.interacted) {
+        this.interacting = true;
         this.interacted = true;
         state.sfx.useSpirit.play();
         this.startCoroutine("animateAliveWisteria", this.animateAlive());
+
+        setTimeout(() => {
+          this.interacting = false;
+        }, 20000);
       } else {
         this.startCoroutine("wisttalk", state.cinematics.wisteria());
       }
