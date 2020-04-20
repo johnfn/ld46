@@ -22,7 +22,7 @@ export class Withers extends Entity {
   update(state: IGameState) {
     this.texture = this.frames[Math.floor(state.tick / 8) % this.frames.length];
 
-    this.x = state.player.x - 500;
-    this.y = state.player.y - 500;
+    this.x = state.player.x - 2000;
+    this.y = state.player.y - 2000;
   }
 }
