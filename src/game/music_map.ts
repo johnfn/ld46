@@ -37,25 +37,28 @@ export class MusicMap extends Entity {
 
   playing = false;
 
-  music: { [key: string]: HTMLAudioElement } = {
-    "music/Vines"    : SetAudioToLoop(Assets.getResource("music/Vines")),
-    "music/The Hub"  : SetAudioToLoop(Assets.getResource("music/The Hub")),
-    "music/Sanctuary": SetAudioToLoop(Assets.getResource("music/Sanctuary")),
-    "music/Withers"  : SetAudioToLoop(Assets.getResource("music/Withers")),
+  allMusic: { [key: string]: { audio: HTMLAudioElement; } } = {
+    "music/Vines"    : { audio: SetAudioToLoop(Assets.getResource("music/Vines")), },
+    "music/The Hub"  : { audio: SetAudioToLoop(Assets.getResource("music/The Hub")), },
+    "music/Sanctuary": { audio: SetAudioToLoop(Assets.getResource("music/Sanctuary")), },
+    "music/Withers"  : { audio: SetAudioToLoop(Assets.getResource("music/Withers")), },
   };
 
   update(state: IGameState) {
-    for (const region of this.musicRegions) {
-      if (region.rect.contains(this.position)) {
-        const songPath = region.properties["file"];
+    const songPathsToPlay = this.musicRegions.filter(r => r.rect.contains(this.position)).map(k => k.properties["file"]);
 
-        if (!this.playing) {
-          const audio = new Audio(songPath);
-          audio.play();
-          audio.loop = true;
+    for (const musicPath of Object.keys(this.allMusic)) {
+      const songObj = this.allMusic[musicPath];
+      const shouldPlay = songPathsToPlay.includes(musicPath)
 
-          this.playing = true;
-        }
+      if (shouldPlay && songObj.audio.paused) {
+        songObj.audio.currentTime = 0;
+        songObj.audio.play();
+      }
+
+      if (!shouldPlay && !songObj.audio.paused) {
+        songObj.audio.currentTime = 0;
+        songObj.audio.pause();
       }
     }
   }
