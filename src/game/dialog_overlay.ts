@@ -69,8 +69,8 @@ export class DialogOverlay extends Entity {
         state = yield "next";
       }
 
-      state = yield { untilKeyPress: "Spacebar" };
-      state = yield "next"; // make sure spacebar isnt justDown
+      state = yield { untilKeyPress: "Z" };
+      state = yield "next"; // make sure z isnt justDown
 
       this.activeDialogText.shift();
 

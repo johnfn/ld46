@@ -94,7 +94,7 @@ export class DialogBox extends Entity {
         state = yield "next";
       }
 
-      state = yield { untilKeyPress: "Spacebar" };
+      state = yield { untilKeyPress: "Z" };
       state = yield "next"; // make sure spacebar isnt justDown
 
       this.activeDialogText.shift();
