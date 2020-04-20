@@ -5,6 +5,7 @@ import { Assets } from "./assets";
 import { Entity } from "../library/entity";
 import { IGameState } from "Library";
 import { Mode } from "Library";
+import { DebugFlags } from "./debug";
 
 export type DialogText = (
   | { speaker?: string; text: string; }
@@ -82,6 +83,8 @@ export class DialogBox extends Entity {
 
   *startDialog(dialog: DialogText): GameCoroutine {
     let state: IGameState;
+
+    if (DebugFlags["SKIP ALL DIALOG"]) { return; }
 
     state = yield "next";
 

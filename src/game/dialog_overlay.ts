@@ -4,6 +4,7 @@ import { GameCoroutine } from "../library/coroutine_manager";
 import { Entity } from "../library/entity";
 import { IGameState } from "Library";
 import { Mode } from "Library";
+import { DebugFlags } from "./debug";
 
 export type DialogText = {
   speaker: string;
@@ -83,6 +84,8 @@ export class DialogOverlay extends Entity {
   }
 
   public static *StartDialog(dialog: DialogText): GameCoroutine {
+    if (DebugFlags["SKIP ALL DIALOG"]) { return; }
+
     yield* DialogOverlay.Instance.startDialog(dialog.slice(0));
   }
 
