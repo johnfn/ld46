@@ -221,6 +221,9 @@ export class TilemapData {
         const relTileX = (i % chunk.width);
         const relTileY = Math.floor(i / chunk.width);
 
+        if (isNaN(layer.offsetx)) layer.offsetx = 0;
+        if (isNaN(layer.offsety)) layer.offsety = 0;
+
         const offsetX = layer.offsetx / this._tileWidth;
         const offsetY = layer.offsety / this._tileHeight;
 
