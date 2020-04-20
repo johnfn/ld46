@@ -110,7 +110,6 @@ export class TextEntity extends BaseTextEntity<BaseGameState> {
     }
   };
 
-
   buildTextSegments(text: string): TextSegment[] {
     let i = 0;
     const readChar = () => text[i++];

@@ -112,6 +112,7 @@ export class DialogBox extends Entity {
     const speaker = this.activeDialogText[0].speaker;
 
     this.dialogText.setText(textToShow);
+
     if (speaker) {
       this.speakerText.setText(speaker);
     }

@@ -9,6 +9,7 @@ import { Overlay } from "./overlay";
 import { Cinematics } from "./cinematics";
 import { DialogOverlay } from "./dialog_overlay";
 import { Hud } from "./hud";
+import { NpcDialog } from "./npc";
 
 export class Game extends BaseGame<typeof AssetsToLoad> {
   public static Instance: Game;
@@ -52,6 +53,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
     this.fixedCameraStage.addChild(this.state.overlay = new Overlay());
     this.fixedCameraStage.addChild(new DialogBox());
     this.fixedCameraStage.addChild(new DialogOverlay());
+    this.stage.addChild(new NpcDialog());
     this.fixedCameraStage.addChild(new Hud(this.state.spiritTotal));
 
     if (DebugFlags["Show Initial Cinematic"]) {

@@ -10,13 +10,21 @@ import { Assets } from "./assets";
 import { Vector2 } from "../library/geometry/vector2";
 import { GameCoroutine } from "../library/coroutine_manager";
 
-export class NpcDialog extends Entity {
-  graphic : Graphics;
-  text    : TextEntity;
-  fullText: string;
+export type NpcDialogType = { speaker: Entity; text: string }[];
 
-  constructor(fullText: string) {
-    super({ name: "NpcDialogParent" });
+export class NpcDialog extends Entity {
+  activeModes: Mode[] = ["Normal", "Dialog"];
+
+  public static Instance: NpcDialog;
+
+  graphic      : Graphics;
+  text         : TextEntity;
+  dialogHeight = 120;
+
+  constructor() {
+    super({ 
+      name   : "NpcDialogParent", 
+    });
 
     this.text = new TextEntity({
       text    : "",
@@ -24,42 +32,65 @@ export class NpcDialog extends Entity {
       width   : 5000,
     });
 
-    this.fullText = fullText;
-
-    const wid = this.text.calculateTextWidth(fullText);
-    const height = 120;
-
-    console.log(wid);
+    const yOffset = 200;
 
     this.graphic = new Graphics();
-    this.graphic.beginFill(0x0);
-    this.graphic.drawRoundedRect(0, 0, wid + 100, height, 40);
+    this.graphic.x = 0;
+    this.graphic.y = yOffset;
+    this.drawDialogBox("LALALALALA");
 
     this.sprite.addChild(this.graphic);
+    this.visible = false;
 
-    const ent = new Entity({ name: "DialogTip", texture: Assets.getResource("dialog_tip") });
-    ent.scale = new Vector2(0.25, 0.25);
-    this.addChild(ent,
-      20,
-      height
-    );
+    const tip = new Entity({ name: "DialogTip", texture: Assets.getResource("dialog_tip") });
+    tip.scale = new Vector2(0.25, 0.25);
 
-    this.addChild(this.text, 20, 10);
+    this.addChild(tip, 20, this.dialogHeight + yOffset);
+    this.addChild(this.text, 20, 10 + yOffset);
 
-    this.startCoroutine("write-dialog", this.writeDialog());
+    NpcDialog.Instance = this;
   }
 
-  *writeDialog(): GameCoroutine {
+  private drawDialogBox(text: string): void {
+    const wid = this.text.calculateTextWidth(text);
+
+    this.graphic.clear();
+    this.graphic.beginFill(0x0);
+    this.graphic.drawRoundedRect(0, 0, wid + 100, this.dialogHeight, 40);
+    this.graphic.endFill();
+  }
+
+  public static *StartDialog(dialog: NpcDialogType): GameCoroutine {
+    yield* NpcDialog.Instance.initiateDialog(dialog);
+  }
+
+  public *initiateDialog(dialog: NpcDialogType): GameCoroutine {
+    yield* this.writeDialog(dialog);
+  }
+
+  *writeDialog(dialog: NpcDialogType): GameCoroutine {
     let state = yield "next";
 
     let textSoFar = "";
+    let fullText = dialog[0].text;
 
-    while (textSoFar.length < this.fullText.length) {
-      textSoFar += this.fullText[textSoFar.length];
+    state.mode = "Dialog";
+
+    this.drawDialogBox(fullText);
+    this.visible = true;
+    this.x = dialog[0].speaker.x;
+    this.y = dialog[0].speaker.y;
+
+    while (textSoFar.length < fullText.length) {
+      textSoFar += fullText[textSoFar.length];
       this.text.setText(textSoFar);
 
       state = yield "next";
     }
+
+    yield { untilKeyPress: "X" }
+
+    state.mode = "Normal";
   }
 
   update(state: IGameState) {
@@ -68,13 +99,14 @@ export class NpcDialog extends Entity {
 }
 
 export class Npc extends Entity {
-  activeModes: Mode[] = ["Normal", "Dialog"];
+  activeModes: Mode[] = ["Normal"];
   hoverText: HoverText;
   interactionDistance = C.InteractionDistance;
-  npcDialog: NpcDialog | null;
+  dialogName: string = "";
 
   constructor(
-    tempTex: Texture // need better 1
+    tempTex: Texture, // need better 1
+    props: { [key: string]: unknown }
   ) {
     super({ 
       name      : "Npc",
@@ -82,7 +114,8 @@ export class Npc extends Entity {
       collidable: true,
     });
 
-    this.npcDialog = null;
+    this.dialogName = props["dialog"] as string;
+
     this.addChild(this.hoverText = new HoverText("x: interact"), 0, -80);
     this.hoverText.visible = false;
   }
@@ -97,25 +130,27 @@ export class Npc extends Entity {
   }
 
   update(state: IGameState) { 
-    if (this.npcDialog) {
-      if (state.keys.justDown.X) {
-        this.hoverText.visible = false;
-        state.mode = "Normal";
+    // if (this.npcDialog) {
+    //   if (state.keys.justDown.X) {
+    //     this.hoverText.visible = false;
+    //     state.mode = "Normal";
 
-        this.removeChild(this.npcDialog);
-        this.npcDialog = null;
+    //     this.removeChild(this.npcDialog);
+    //     this.npcDialog = null;
+    //   }
+    // } else {
+    if (state.player.position.distance(this.position) < this.interactionDistance) {
+      this.hoverText.visible = true;
+
+      if (state.keys.justDown.X) {
+        this.startCoroutine(
+          this.dialogName,
+          (state.cinematics as any)[this.dialogName](this)
+        );
       }
     } else {
-      if (state.player.position.distance(this.position) < this.interactionDistance) {
-        this.hoverText.visible = true;
-
-        if (state.keys.justDown.X) {
-          state.mode = "Dialog";
-          this.addChild(this.npcDialog = new NpcDialog("This is a very long DIALOG."), 0, -200);
-        }
-      } else {
-        this.hoverText.visible = false;
-      }
+      this.hoverText.visible = false;
     }
+    // }
   }
 }
