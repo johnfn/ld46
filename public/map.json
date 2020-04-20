@@ -4157,8 +4157,17 @@
          "tilewidth":256
         }, 
         {
+         "columns":8,
          "firstgid":3575,
-         "source":"tileset2.tsx"
+         "image":"tileset2.png",
+         "imageheight":1536,
+         "imagewidth":2048,
+         "margin":0,
+         "name":"tileset2",
+         "spacing":0,
+         "tilecount":48,
+         "tileheight":256,
+         "tilewidth":256
         }],
  "tilewidth":256,
  "type":"map",
