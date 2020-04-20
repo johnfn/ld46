@@ -22,6 +22,7 @@ export class Sfx extends Entity {
   public voiceSound4 = Assets.getResource("sound effects/voices/voice 4");
   public voiceWithers= Assets.getResource("sound effects/voices/voice withers");
   public climaxSweep = Assets.getResource("sound effects/climax sweep");
+  public alertNoise  = Assets.getResource("sound effects/alert_noise");
 
   public useSpirit   = Assets.getResource("sound effects/use spirit");
   public waterfall   = Assets.getResource("sound effects/waterfall");
