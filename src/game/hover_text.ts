@@ -3,10 +3,20 @@ import { TextEntity } from "../library/text_entity";
 import { IGameState } from "Library";
 
 export class HoverText extends Entity {
-  text: TextEntity;
+  text  : TextEntity;
+  shadow: TextEntity;
 
   constructor(text: string) {
     super({ name: "HoverText" });
+
+    this.addChild(this.shadow = new TextEntity({
+      text    : text,
+      fontSize: 80,
+      color   : "0x000000",
+    }));
+
+    this.shadow.x = 5;
+    this.shadow.y = 5;
 
     this.addChild(this.text = new TextEntity({
       text    : text,

@@ -58,8 +58,6 @@ export class MusicMap extends Entity {
   update(state: IGameState) {
     const songPathsToPlay = this.musicRegions.filter(r => r.rect.contains(state.player.position)).map(k => k.properties["file"]);
 
-    debugger;
-
     for (const musicPath of Object.keys(this.allMusic)) {
       const songObj = this.allMusic[musicPath];
       const shouldPlay = songPathsToPlay.includes(musicPath)
@@ -70,11 +68,11 @@ export class MusicMap extends Entity {
           songObj.audio.play();
         }
 
-        songObj.audio.volume = Math.min(songObj.audio.volume + 1/100, 1);
+        songObj.audio.volume = Math.min(songObj.audio.volume + 1 / 100, 1);
       }
 
       if (!shouldPlay && songObj.audio.volume > 0) {
-        songObj.audio.volume = Math.max(songObj.audio.volume - 1/100, 0);
+        songObj.audio.volume = Math.max(songObj.audio.volume - 1 / 100, 0);
       }
     }
   }
