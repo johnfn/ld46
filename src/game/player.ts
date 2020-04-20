@@ -9,6 +9,7 @@ import { Vector2 } from "../library/geometry/vector2";
 import { BouncyShroom } from "./bouncy_shroom";
 import { Mode } from "Library";
 import { Sfx } from "./sfx";
+import { GabbysGlowThing } from "./gabbys_glow_thing";
 
 
 export class Player extends Entity {
@@ -26,8 +27,6 @@ export class Player extends Entity {
   jump:  Texture[];
   climb: Texture[];
 
-  glowOverlay: Sprite;
-  
   animState: Texture[]
 
 
@@ -75,14 +74,7 @@ export class Player extends Entity {
     this.x = Player.StartPosition.x;
     this.y = Player.StartPosition.y;
 
-    this.glowOverlay = new Sprite(Assets.getResource("glow"))
-    this.glowOverlay.blendMode = BLEND_MODES.SOFT_LIGHT;
-    this.glowOverlay.tint = 0xfccad1;
-    this.glowOverlay.alpha = 0.17;
-    this.sprite.addChild(this.glowOverlay);
-    this.glowOverlay.position.x -= 800;
-    this.glowOverlay.position.y -= 400;
-    this.glowOverlay.zIndex = 1;
+    this.addChild(new GabbysGlowThing(0xfccad1));
   }
 
   audio: HTMLAudioElement | null = null;

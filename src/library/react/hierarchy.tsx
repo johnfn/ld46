@@ -119,18 +119,10 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
         </div>
         {
           root instanceof Entity &&
-          root.children().length > 0 && root.children().length < 500 &&
+          root.children().length > 0 && 
             root.children().map(child => {
               return <Hierarchy setMoused={this.props.setMoused} setSelected={this.props.setSelected } root={ child } gameState={ this.props.gameState } />
             })
-        }
-
-        {
-          root instanceof Entity &&
-          root.children().length > 500 &&
-            <div>
-              A lot of children
-            </div>
         }
       </div>
     )

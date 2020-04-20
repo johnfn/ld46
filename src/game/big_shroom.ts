@@ -5,6 +5,7 @@ import { HoverText } from "./hover_text";
 import { Assets } from "./assets";
 import { IGameState } from "Library";
 import { GameCoroutine } from "../library/coroutine_manager";
+import { GabbysGlowThing } from "./gabbys_glow_thing";
 
 export class BigShroom extends Entity {
   public interactionDistance = C.InteractionDistance;
@@ -29,6 +30,8 @@ export class BigShroom extends Entity {
 
     this.addChild(this.hoverText = new HoverText("x: interact"), 200, -100);
     this.hoverText.visible = false;
+
+    this.graphic.addChild(new GabbysGlowThing(0x3cda61));
   }
 
   update(state: IGameState) { 

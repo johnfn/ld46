@@ -8,6 +8,7 @@ import { GameCoroutine } from "../library/coroutine_manager";
 import { Rect } from "../library/geometry/rect";
 import { Vector2 } from "../library/geometry/vector2";
 import { Sfx } from "./sfx";
+import { GabbysGlowThing } from "./gabbys_glow_thing";
 
 class VineComponent extends Entity {
   public frame = 0;
@@ -131,6 +132,8 @@ export class VineFlower extends Entity {
     this.vine.sprite.anchor.set(0, 1); // grow upwards
     this.vine.height = 256;
     this.vine.visible = false;
+
+    this.addChild(new GabbysGlowThing(0x3c6ad1));
   }
 
   *animateAlive(): GameCoroutine {
