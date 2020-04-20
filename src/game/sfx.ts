@@ -14,17 +14,17 @@ export const SetAudioToLoop = (audio: HTMLAudioElement) => {
 }
 
 export class Sfx extends Entity {
-  public tickSound  = Assets.getResource("sound effects/button 1");
-  public tickSound2 = Assets.getResource("sound effects/button 2");
+  public tickSound   = Assets.getResource("sound effects/button 1");
+  public tickSound2  = Assets.getResource("sound effects/button 2");
   public voiceSound1 = Assets.getResource("sound effects/voices/voice 1");
   public voiceSound2 = Assets.getResource("sound effects/voices/voice 2");
   public voiceSound3 = Assets.getResource("sound effects/voices/voice 3");
   public voiceSound4 = Assets.getResource("sound effects/voices/voice 4");
   public voiceWithers= Assets.getResource("sound effects/voices/voice withers");
+  public climaxSweep = Assets.getResource("sound effects/climax sweep");
 
   public useSpirit   = Assets.getResource("sound effects/use spirit");
-
-  public waterfall = Assets.getResource("sound effects/waterfall");
+  public waterfall   = Assets.getResource("sound effects/waterfall");
 
   constructor() {
     super({ name: "Sfx" });
