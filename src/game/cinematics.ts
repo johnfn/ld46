@@ -149,7 +149,7 @@ export class Cinematics {
     }
     */
 
-    yield* this.openingBud2();
+    yield* this.openingBud2(); // comment this out later
   }
 
   public *openingBud2(): GameCoroutine {
@@ -172,9 +172,9 @@ export class Cinematics {
       yield { frames: 15 };
       
       // bud goes !
-      // play alert_noise.mp3
+      state.sfx.alertNoise.play();
 
-      yield { frames: 15 };
+      yield { frames: 30 };
       
       for (let i = 0; i < 6; i++) {
         bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 2);
@@ -693,9 +693,23 @@ export class Cinematics {
       { speaker: "Withers", text: "I’m sure we can work a deal out.", },
       { speaker: "Withers", text: "Just stay away from the glowing cantaloupe!", },
       { speaker: "Wisps", text: "God, just shut up already. Jeez.", },
-      { speaker: "Withers", text: "NOOOOOOOOOOO", },
-        // fade to white
     ]);
+
+    state.mode = "Normal";
+  }
+
+  public *touchFruit(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* DialogBox.StartDialog([
+      { speaker: "Withers", text: "NOOOOOOOOOOOO", },
+    ]);
+
+    state.sfx.climaxSweep.play();
+
+    // simultaneous climax_sweep.mp3 and fade to white
 
     state.mode = "Normal";
   }
