@@ -9,6 +9,7 @@ import { Mode } from "Library";
 import { Assets } from "./assets";
 import { Vector2 } from "../library/geometry/vector2";
 import { GameCoroutine } from "../library/coroutine_manager";
+import { Sfx } from "./sfx";
 
 export type NpcDialogType = { speaker: Entity; text: string }[];
 
@@ -96,6 +97,8 @@ export class NpcDialog extends Entity {
         this.text.setText(textSoFar);
 
         state = yield "next";
+
+        Sfx.PlayVoiceSound1(state.tick);
 
         if (state.keys.justDown.X) {
           break;
