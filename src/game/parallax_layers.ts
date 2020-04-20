@@ -7,14 +7,14 @@ import { TilingSprite, Point as PixiPoint } from "pixi.js";
 export class ParallaxLayers extends Entity {
   scaleFactor = 2.3
   layers = [
-    { speed: 0.03 , texture: Assets.getResource("parallax bg/00 - sky"), },
-    { speed: 0.04, texture: Assets.getResource("parallax bg/01 - skyline back"), },
-    { speed: 0.08 , texture: Assets.getResource("parallax bg/02 - skyline"), },
-    { speed: 0.1, texture: Assets.getResource("parallax bg/03 - mist"), },
-    { speed: 0.12 , texture: Assets.getResource("parallax bg/04 - city back"), },
-    { speed: 0.20, texture: Assets.getResource("parallax bg/05 - forest back"), },
-    { speed: 0.25 , texture: Assets.getResource("parallax bg/06 - city"), },
-    { speed: 0.9 , texture: Assets.getResource("parallax bg/07 - forest"), },
+    { speed: -0.03 , texture: Assets.getResource("parallax bg/00 - sky"), },
+    { speed: -0.04, texture: Assets.getResource("parallax bg/01 - skyline back"), },
+    { speed: -0.08 , texture: Assets.getResource("parallax bg/02 - skyline"), },
+    { speed: -0.1, texture: Assets.getResource("parallax bg/03 - mist"), },
+    { speed: -0.12 , texture: Assets.getResource("parallax bg/04 - city back"), },
+    { speed: -0.20, texture: Assets.getResource("parallax bg/05 - forest back"), },
+    { speed: -0.25 , texture: Assets.getResource("parallax bg/06 - city"), },
+    { speed: -0.9 , texture: Assets.getResource("parallax bg/07 - forest"), },
   ];
 
   sprites: TilingSprite[] = [];
