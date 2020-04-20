@@ -18,6 +18,7 @@ import { Fountain } from "./fountain";
 import { BouncyShroom } from "./bouncy_shroom";
 import { Npc } from "./npc";
 import { Wisteria } from "./wisteria";
+import { BigShroom } from "./big_shroom";
 
 type FlowerRegion = {
   tilemapRegion: TilemapRegion,
@@ -82,6 +83,14 @@ export class GameMap extends Entity {
           name     : "wisteria",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
             return new Wisteria();
+          }
+        },
+
+        {
+          type     : "single",
+          name     : "bigshroom",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
+            return new BigShroom();
           }
         },
 

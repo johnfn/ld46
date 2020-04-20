@@ -8,7 +8,7 @@ class SpiritMeter extends Entity {
   constructor(spiritTotal: number) {
     super({ name: "SpiritMeter" });
 
-    for (let i = 0; i < spiritTotal; i++) {
+    for (let i = 0; i < 10; i++) {
       const icon = new Entity({
         name: "SpiritIcon"
       });
@@ -20,6 +20,8 @@ class SpiritMeter extends Entity {
       icon.y = 0;
 
       icon.texture = Assets.getResource("spirit_full_hud");
+
+      icon.visible = false;
     }
   }
 
@@ -30,6 +32,8 @@ class SpiritMeter extends Entity {
       } else {
         this.icons[i].texture = Assets.getResource("spirit_empty_hud");
       }
+
+      this.icons[i].visible = true;
     }
   }
 }
