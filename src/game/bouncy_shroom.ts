@@ -47,7 +47,7 @@ export class BouncyShroom extends Entity {
         state.spiritUnused -= 1;
         this.isActivated = true;
         state.sfx.useSpirit.play();
-        this.startCoroutine("animateAlive", this.animateAliveThenDie());
+        this.startCoroutine(`animateAliveBouncyShroom-${ this.id }`, this.animateAliveThenDie());
       }
     } else {
       this.hoverText.visible = false;

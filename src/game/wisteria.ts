@@ -32,7 +32,7 @@ export class Wisteria extends Entity {
       if (state.keys.justDown.X && !this.interacted) {
         this.interacted = true;
         state.sfx.useSpirit.play();
-        this.startCoroutine("animateAlive", this.animateAlive());
+        this.startCoroutine("animateAliveWisteria", this.animateAlive());
       } else {
         this.startCoroutine("wisttalk", state.cinematics.wisteria());
       }
