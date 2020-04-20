@@ -59,7 +59,7 @@ export class Entity {
     texture      ?: Texture;
     interactable ?: boolean;
   }) {
-    this.sprite        = new AugmentedSprite(props.texture);;
+    this.sprite        = new AugmentedSprite(props.texture);
     this.name          = props.name;
     this.sprite.entity = this;
 

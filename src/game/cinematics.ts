@@ -9,6 +9,8 @@ import { DialogBox } from "./dialog_box";
 import { DebugFlags } from "./debug";
 import { Bud } from "./bud";
 import { Vector2 } from "../library/geometry/vector2";
+import { NpcDialog } from "./npc";
+import { Entity } from "../library/entity";
 
 export type Tweenable = 
   | number
@@ -584,134 +586,130 @@ export class Cinematics {
   // NPC STUFF DOWN HERE
 
   npc01CheckCount = 0;
-  public *npc01(): GameCoroutine { // the first NPC the player comes across
+  public *npc01(speaker: Entity): GameCoroutine { // the first NPC the player comes across
     this.npc01CheckCount = this.npc01CheckCount + 1;
     
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    if (this.npc01CheckCount === 1){
-
-      yield* DialogBox.StartDialog([ 
-        { speaker: "NPC", text: "Huh? I sense something...", },
-        { speaker: "NPC", text: "Something weak... but new!", },
-        { speaker: "NPC", text: "Time Warrior, is that you?", },
-        { speaker: "NPC", text: "If you’re trying to talk to me, I’m sorry, but I can’t hear you.", },
-        { speaker: "NPC", text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
-        { speaker: "NPC", text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
-        { speaker: "NPC", text: "You might even just be a random flower. In which case, howdy!", },
-        { speaker: "NPC", text: "...But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
+    if (this.npc01CheckCount === 1) {
+      yield* NpcDialog.StartDialog([
+        { speaker, text: "Huh? I sense something...", },
+        { speaker, text: "Something weak... but new!", },
+        { speaker, text: "Time Warrior, is that you?", },
+        { speaker, text: "If you’re trying to talk to me, I’m sorry, but I can’t hear you.", },
+        { speaker, text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
+        { speaker, text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
+        { speaker, text: "You might even just be a random flower. In which case, howdy!", },
+        { speaker, text: "...But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
       ]);
-
     } else {
-
-      yield* DialogBox.StartDialog([ 
-        { speaker: "NPC", text: "Time Warrior, is that you?", },
-        { speaker: "NPC", text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
-        { speaker: "NPC", text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
-        { speaker: "NPC", text: "...But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
+      yield* NpcDialog.StartDialog([ 
+        { speaker, text: "Time Warrior, is that you?", },
+        { speaker, text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
+        { speaker, text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
+        { speaker, text: "...But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
       ]);
-
     }
 
     state.mode = "Normal"; 
   }
 
-  public *npc02(): GameCoroutine {
+  public *npc02(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "Has it been five hundred years since the Time Warrior was put to sleep yet?", },
-      { speaker: "NPC", text: "It feels like he should be waking up any day now!", },
-      { speaker: "NPC", text: "Surely we’d be able to sense him, right?", },
-      { speaker: "NPC", text: "Hey, wait... I do sense something small...", },
-      { speaker: "NPC", text: "Probably just some moss.", },
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "Has it been five hundred years since the Time Warrior was put to sleep yet?", },
+      { speaker, text: "It feels like he should be waking up any day now!", },
+      { speaker, text: "Surely we’d be able to sense him, right?", },
+      { speaker, text: "Hey, wait... I do sense something small...", },
+      { speaker, text: "Probably just some moss.", },
     ]);
 
     state.mode = "Normal"; 
   }
 
-  public *npc03(): GameCoroutine {
+  public *npc03(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "Time Warrior? Could it be?", },
-      { speaker: "NPC", text: "Ever since our woods were cut down and Pastoria Metalworks opened, it’s been so hard to sense anything.", },
-      { speaker: "NPC", text: "All the other dryad spirits and I have been wandering near-blind for so long...", },
-      { speaker: "NPC", text: "But for the first time in ages, we have hope! Go get ‘em!", },
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "Time Warrior? Could it be?", },
+      { speaker, text: "Ever since our woods were cut down and Pastoria Metalworks opened, it’s been so hard to sense anything.", },
+      { speaker, text: "All the other dryad spirits and I have been wandering near-blind for so long...", },
+      { speaker, text: "But for the first time in ages, we have hope! Go get ‘em!", },
     ]);
 
     state.mode = "Normal"; 
   }
 
-  public *npc04(): GameCoroutine {
+  public *npc04(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "Boo-hoo... boo-hoo... *sniff*", },
-      { speaker: "NPC", text: "There’s no use wishing. It won’t be long before the Tinker Men destroy all that remains of Pastoria Forest.", },
-      { speaker: "NPC", text: "And when the forest disappears, so will we...", },
-      { speaker: "NPC", text: "A-boo-hoo-hoo...", },      
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "Boo-hoo... boo-hoo... *sniff*", },
+      { speaker, text: "There’s no use wishing. It won’t be long before the Tinker Men destroy all that remains of Pastoria Forest.", },
+      { speaker, text: "And when the forest disappears, so will we...", },
+      { speaker, text: "A-boo-hoo-hoo...", },      
     ]);
 
     state.mode = "Normal"; 
   }
 
-  public *npc05(): GameCoroutine {
+  public *npc05(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "I sure do miss the Tree of Sprights.", },
-      { speaker: "NPC", text: "Lounging around in the shade, swinging from its branches...", },
-      { speaker: "NPC", text: "But those days are gone.", },
-      { speaker: "NPC", text: "It’s so hard to sense now, and its signal keeps fading.", },
-      { speaker: "NPC", text: "But as long as its Energy Fruit still sits at the top, I know it’ll be okay!", },        
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "I sure do miss the Tree of Sprights.", },
+      { speaker, text: "Lounging around in the shade, swinging from its branches...", },
+      { speaker, text: "But those days are gone.", },
+      { speaker, text: "It’s so hard to sense now, and its signal keeps fading.", },
+      { speaker, text: "But as long as its Energy Fruit still sits at the top, I know it’ll be okay!", },        
     ]);
 
     state.mode = "Normal"; 
   }
 
-  public *npc06(): GameCoroutine {
+  public *npc06(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "Myah! I’m tired of waiting!", },
-      { speaker: "NPC", text: "When is that pesky Time Warrior going to wake up?", },
-      { speaker: "NPC", text: "He’s been sleeping for too long!", },
-      { speaker: "NPC", text: "He’d better wake up soon and bring our forest back! Myah!", },            
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "Myah! I’m tired of waiting!", },
+      { speaker, text: "When is that pesky Time Warrior going to wake up?", },
+      { speaker, text: "He’s been sleeping for too long!", },
+      { speaker, text: "He’d better wake up soon and bring our forest back! Myah!", },            
     ]);
 
     state.mode = "Normal"; 
   }
 
-  public *npc07(): GameCoroutine {
+  public *npc07(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "Time Warrior... if you can hear me...", },
-      { speaker: "NPC", text: "You may be the last of our people, but I have faith that you can restore the forest.", },
-      { speaker: "NPC", text: "The spirit of our race rests in your hands. I know you’ll keep it alive!", },
-      { speaker: "Bud", text: "Hey, that’s the theme for the game jam!", },               
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "Time Warrior... if you can hear me...", },
+      { speaker, text: "You may be the last of our people, but I have faith that you can restore the forest.", },
+      { speaker, text: "The spirit of our race rests in your hands. I know you’ll keep it alive!", },
+      { speaker: Bud.Instance, text: "Hey, that’s the theme for the game jam!", },               
     ]);
 
     state.mode = "Normal"; 
   }
 
   npc08CheckCount = 0;
-  public *npc08(): GameCoroutine { // first NPC in vine world
+  public *npc08(speaker: Entity): GameCoroutine { // first NPC in vine world
     this.npc08CheckCount = this.npc08CheckCount + 1;
     
     let state = yield "next";
@@ -720,23 +718,23 @@ export class Cinematics {
 
     if (this.npc08CheckCount === 1){
 
-      yield* DialogBox.StartDialog([ 
-        { speaker: "NPC", text: "I wish I could go sit down somewhere.", },
-        { speaker: "NPC", text: "But I have to keep wandering around! If I don’t, then the Time Warrior won’t have me to draw Spirit Energy from!", },
-        { speaker: "NPC", text: "In fact, he can check out how much Spirit Energy he has left in his Spirit Meter.", },
-        { speaker: "NPC", text: "And I know all my ghost buddies are nearby for him to replenish his energy from too!", },
-        { speaker: "NPC", text: "Wait, why am I talking to myself about this? I know all of this already, hah.", },
-        { speaker: "NPC", text: "Maybe I’m going crazy!", },
-        { speaker: "NPC", text: "I sure wish I could go sit down somewhere...", },            
+      yield* NpcDialog.StartDialog([ 
+        { speaker, text: "I wish I could go sit down somewhere.", },
+        { speaker, text: "But I have to keep wandering around! If I don’t, then the Time Warrior won’t have me to draw Spirit Energy from!", },
+        { speaker, text: "In fact, he can check out how much Spirit Energy he has left in his Spirit Meter.", },
+        { speaker, text: "And I know all my ghost buddies are nearby for him to replenish his energy from too!", },
+        { speaker, text: "Wait, why am I talking to myself about this? I know all of this already, hah.", },
+        { speaker, text: "Maybe I’m going crazy!", },
+        { speaker, text: "I sure wish I could go sit down somewhere...", },            
       ]);
 
     } else {
 
-      yield* DialogBox.StartDialog([ 
-        { speaker: "NPC", text: "I have to keep wandering around! If I don’t, then the Time Warrior won’t have me to draw Spirit Energy from!", },
-        { speaker: "NPC", text: "In fact, he can check out how much Spirit Energy he has left in his Spirit Meter.", },
-        { speaker: "NPC", text: "And I know all my ghost buddies are nearby for him to replenish his energy from too!", },
-        { speaker: "NPC", text: "I sure wish I could go sit down somewhere...", },        
+      yield* NpcDialog.StartDialog([ 
+        { speaker, text: "I have to keep wandering around! If I don’t, then the Time Warrior won’t have me to draw Spirit Energy from!", },
+        { speaker, text: "In fact, he can check out how much Spirit Energy he has left in his Spirit Meter.", },
+        { speaker, text: "And I know all my ghost buddies are nearby for him to replenish his energy from too!", },
+        { speaker, text: "I sure wish I could go sit down somewhere...", },        
       ]);
 
     }
@@ -745,7 +743,7 @@ export class Cinematics {
   }
 
   npc09CheckCount = 0;
-  public *npc09(): GameCoroutine { // vine world
+  public *npc09(speaker: Entity): GameCoroutine { // vine world
     this.npc09CheckCount = this.npc09CheckCount + 1;
     
     let state = yield "next";
@@ -754,26 +752,26 @@ export class Cinematics {
 
     if (this.npc09CheckCount === 1){
 
-      yield* DialogBox.StartDialog([ 
-        { speaker: "NPC", text: "Vines are so cool. They’re like, my second-favorite favorite plant.", },
-        { speaker: "NPC", text: "You can grow them...", },
-        { speaker: "NPC", text: "Climb up them...", },
-        { speaker: "NPC", text: "Climb down them...", },
-        { speaker: "NPC", text: "Climb back up them...", },
-        { speaker: "NPC", text: "Uh...", },
-        { speaker: "NPC", text: "Where was I?", },
-        { speaker: "NPC", text: "Whoa, is that a vine?", },
-        { speaker: "NPC", text: "Did I mention that vines are like, my second favorite plant?", },
-        { speaker: "NPC", text: "You can grow them...", },
-        { speaker: "NPC", text: "Climb up them...", },
-        { speaker: "NPC", text: "Climb... yawn...", },
-        { speaker: "NPC", text: "zzz...", },          
+      yield* NpcDialog.StartDialog([ 
+        { speaker, text: "Vines are so cool. They’re like, my second-favorite favorite plant.", },
+        { speaker, text: "You can grow them...", },
+        { speaker, text: "Climb up them...", },
+        { speaker, text: "Climb down them...", },
+        { speaker, text: "Climb back up them...", },
+        { speaker, text: "Uh...", },
+        { speaker, text: "Where was I?", },
+        { speaker, text: "Whoa, is that a vine?", },
+        { speaker, text: "Did I mention that vines are like, my second favorite plant?", },
+        { speaker, text: "You can grow them...", },
+        { speaker, text: "Climb up them...", },
+        { speaker, text: "Climb... yawn...", },
+        { speaker, text: "zzz...", },          
       ]);
 
     } else {
 
-      yield* DialogBox.StartDialog([ 
-        { speaker: "NPC", text: "zzz...", },  
+      yield* NpcDialog.StartDialog([ 
+        { speaker, text: "zzz...", },  
       ]);
 
     }
@@ -781,67 +779,67 @@ export class Cinematics {
     state.mode = "Normal"; 
   }
 
-  public *npc10(): GameCoroutine {
+  public *npc10(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "Yap!", },
-      { speaker: "NPC", text: "Yap! Yap!", },
-      { text: "(It’s a puppy ghost in the body of a dryad ghost!)", },
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "Yap!", },
+      { speaker, text: "Yap! Yap!", },
+      { speaker, text: "(It’s a puppy ghost in the body of a dryad ghost!)", },
     ]);
 
     state.mode = "Normal"; 
   }
 
-  public *npc11(): GameCoroutine {
+  public *npc11(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "I wonder if any of the other ghosts think it’s weird that we’re all just talking to ourselves constantly.", },
-      { speaker: "NPC", text: "There really isn’t much of anything else to do, though.", },
-      { speaker: "NPC", text: "We just gotta go crazy and shout into the void! It’s our only shot to survive!", },
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "I wonder if any of the other ghosts think it’s weird that we’re all just talking to ourselves constantly.", },
+      { speaker, text: "There really isn’t much of anything else to do, though.", },
+      { speaker, text: "We just gotta go crazy and shout into the void! It’s our only shot to survive!", },
     ]);
 
     state.mode = "Normal"; 
   }
 
-  public *npc12(): GameCoroutine {
+  public *npc12(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "I wonder if the vines are still around?", },
-      { speaker: "NPC", text: "I still remember the day I found two vines growing out of the same root!", },
-      { speaker: "NPC", text: "It was a BINE!", },
-      { speaker: "NPC", text: "...Yeah, comedy was never my strong suit, even when I was alive.", },      
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "I wonder if the vines are still around?", },
+      { speaker, text: "I still remember the day I found two vines growing out of the same root!", },
+      { speaker, text: "It was a BINE!", },
+      { speaker, text: "...Yeah, comedy was never my strong suit, even when I was alive.", },      
     ]);
 
     state.mode = "Normal"; 
   }
 
-  public *npc13(): GameCoroutine {
+  public *npc13(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "I wonder if the Time Warrior is up.", },
-      { speaker: "NPC", text: "I also wonder how many Spirit Slots the Time Warrior has!", },
-      { speaker: "NPC", text: "Does he have five yet? That’s the maximum, right?", },
-      { speaker: "NPC", text: "There couldn’t be any ways to unlock Secret Slots lying around, right?", },
-      { speaker: "NPC", text: "So much to wonder about...", },            
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "I wonder if the Time Warrior is up.", },
+      { speaker, text: "I also wonder how many Spirit Slots the Time Warrior has!", },
+      { speaker, text: "Does he have five yet? That’s the maximum, right?", },
+      { speaker, text: "There couldn’t be any ways to unlock Secret Slots lying around, right?", },
+      { speaker, text: "So much to wonder about...", },            
     ]);
 
     state.mode = "Normal"; 
   }
 
   npc14CheckCount = 0;
-  public *npc14(): GameCoroutine { // first npc encountered in MushWorld(tm)
+  public *npc14(speaker: Entity): GameCoroutine { // first npc encountered in MushWorld(tm)
     this.npc14CheckCount = this.npc14CheckCount + 1;
     
     let state = yield "next";
@@ -850,22 +848,22 @@ export class Cinematics {
 
     if (this.npc14CheckCount === 1){
 
-      yield* DialogBox.StartDialog([ 
-        { speaker: "NPC", text: "Whoa... Did a nearby natural presence just grow stronger?", },
-        { speaker: "NPC", text: "I haven’t felt something like that in centuries!", },
-        { speaker: "NPC", text: "It must be the Time Warrior!", },
-        { speaker: "NPC", text: "Hey, Time Warrior! Can you see me? It’s me, Squill!", },
-        { speaker: "NPC", text: "At least, I hope you’re the Time Warrior. But what else could you be? Everything else is slowly dying...", },
-        { speaker: "NPC", text: "This is so cool, though! You’re finally back, and we’re one step closer to restoring the forest!", },
-        { speaker: "NPC", text: "I wish I could do something in the physical world to help you, but us ghosts are far too weak for anything like that at the moment.", },
-        { speaker: "NPC", text: "Just remember, I’ll always be there cheering you on! When there’s a Squill, there’s a squay!", },             
+      yield* NpcDialog.StartDialog([ 
+        { speaker, text: "Whoa... Did a nearby natural presence just grow stronger?", },
+        { speaker, text: "I haven’t felt something like that in centuries!", },
+        { speaker, text: "It must be the Time Warrior!", },
+        { speaker, text: "Hey, Time Warrior! Can you see me? It’s me, Squill!", },
+        { speaker, text: "At least, I hope you’re the Time Warrior. But what else could you be? Everything else is slowly dying...", },
+        { speaker, text: "This is so cool, though! You’re finally back, and we’re one step closer to restoring the forest!", },
+        { speaker, text: "I wish I could do something in the physical world to help you, but us ghosts are far too weak for anything like that at the moment.", },
+        { speaker, text: "Just remember, I’ll always be there cheering you on! When there’s a Squill, there’s a squay!", },             
       ]);
 
     } else {
 
-      yield* DialogBox.StartDialog([ 
-        { speaker: "NPC", text: "I wish I could do something in the physical world to help you, but us ghosts are far too weak for anything like that at the moment.", },
-        { speaker: "NPC", text: "Just remember, I’ll always be there cheering you on! When there’s a Squill, there’s a squay!", },        
+      yield* NpcDialog.StartDialog([ 
+        { speaker, text: "I wish I could do something in the physical world to help you, but us ghosts are far too weak for anything like that at the moment.", },
+        { speaker, text: "Just remember, I’ll always be there cheering you on! When there’s a Squill, there’s a squay!", },        
       ]);
 
     }
@@ -873,63 +871,63 @@ export class Cinematics {
     state.mode = "Normal"; 
   }
 
-  public *npc15(): GameCoroutine {
+  public *npc15(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "I wish my parents were still around.", },
-      { speaker: "NPC", text: "I prayed so hard that they would become ghosts like I did, but...", },
-      { speaker: "NPC", text: "I guess they just didn’t have as much unfinished business as me.", },
-      { speaker: "NPC", text: "Kind of ironic, really.", },
-      { speaker: "NPC", text: "C’mon, Time Warrior. Make things right. I believe in you.", },            
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "I wish my parents were still around.", },
+      { speaker, text: "I prayed so hard that they would become ghosts like I did, but...", },
+      { speaker, text: "I guess they just didn’t have as much unfinished business as me.", },
+      { speaker, text: "Kind of ironic, really.", },
+      { speaker, text: "C’mon, Time Warrior. Make things right. I believe in you.", },            
     ]);
 
     state.mode = "Normal"; 
   }
 
-  public *npc16(): GameCoroutine {
+  public *npc16(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "There’s been some buzzing going on that the Time Warrior might be back!", },
-      { speaker: "NPC", text: "Could it be true? That would be crazy!", },
-      { speaker: "NPC", text: "But wait... Withers still doesn’t know about him, right?", },
-      { speaker: "NPC", text: "I hope not. Otherwise, our five-hundred year comeback plan will have been a huge dud...", },                
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "There’s been some buzzing going on that the Time Warrior might be back!", },
+      { speaker, text: "Could it be true? That would be crazy!", },
+      { speaker, text: "But wait... Withers still doesn’t know about him, right?", },
+      { speaker, text: "I hope not. Otherwise, our five-hundred year comeback plan will have been a huge dud...", },                
     ]);
 
     state.mode = "Normal"; 
   }
 
-  public *npc17(): GameCoroutine {
+  public *npc17(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "Hello? Anyone?", },
-      { speaker: "NPC", text: "I think I lost my puppy!", },
-      { speaker: "NPC", text: "If anyone could help me find him, I’d be very grateful!", },
-      { speaker: "NPC", text: "Man, I hope this doesn’t activate a sidequest or something. We DEFINITELY don’t have time to program one of those.", },                  
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "Hello? Anyone?", },
+      { speaker, text: "I think I lost my puppy!", },
+      { speaker, text: "If anyone could help me find him, I’d be very grateful!", },
+      { speaker, text: "Man, I hope this doesn’t activate a sidequest or something. We DEFINITELY don’t have time to program one of those.", },                  
     ]);
 
     state.mode = "Normal"; 
   }
   
-  public *npc18(): GameCoroutine {
+  public *npc18(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    yield* DialogBox.StartDialog([ 
-      { speaker: "NPC", text: "If what they say is true and the Time Warrior is truly awake...", },
-      { speaker: "NPC", text: "Maybe we should all head to the top of the Tree of Sprights!", },
-      { speaker: "NPC", text: "The Energy Fruit at the top of the tree is the best chance that the Time Warrior has at restoring the forest.", },
-      { speaker: "NPC", text: "And if he uses it to channel enough natural energy, maybe we could even get our bodies back!", },
-      { speaker: "NPC", text: "Gosh, wouldn’t that be a miracle?", },                       
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "If what they say is true and the Time Warrior is truly awake...", },
+      { speaker, text: "Maybe we should all head to the top of the Tree of Sprights!", },
+      { speaker, text: "The Energy Fruit at the top of the tree is the best chance that the Time Warrior has at restoring the forest.", },
+      { speaker, text: "And if he uses it to channel enough natural energy, maybe we could even get our bodies back!", },
+      { speaker, text: "Gosh, wouldn’t that be a miracle?", },                       
     ]);
 
     state.mode = "Normal"; 
@@ -1028,14 +1026,15 @@ export class Cinematics {
       yield* DialogBox.StartDialog([ 
         { text: "You reach out to the wisteria. It seems to grow stronger in your presence.", },
         { text: "Verdant energy starts to flow through you.", },
-        // spirit slots increase! 
+        // the wisteria GROWS POWERFUL
+        // spirit slots increase!
         { text: "Your number of Spirit Slots increased!", },
       ]);
     
     } else {
 
       yield* DialogBox.StartDialog([ 
-        { text: "The wisteria stands majestically before you. Its trunk is straighter than it was when you first saw it.", },  
+        { text: "The wisteria stands majestically before you. It blooms with vigor.", },  
       ]);
 
     }
@@ -1057,6 +1056,7 @@ export class Cinematics {
       yield* DialogBox.StartDialog([ 
         { text: "The giant mushroom is cool to the touch.", },
         { text: "Buoyant energy starts to flow through you.", },
+        // the mushroom HEALS
         // spirit slots increase! 
         { text: "Your number of Spirit Slots increased!", },
       ]);

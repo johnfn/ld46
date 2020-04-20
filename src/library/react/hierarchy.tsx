@@ -46,9 +46,11 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
       this.hoverGraphics = Debug.DrawBounds(this.props.root, 0xff0000, true, "stage");
 
       if (this.props.root instanceof Entity) {
+        const point = Debug.DrawPoint(this.props.root.position, 0xff0000, true);
+
         this.hoverGraphics = [
           ...this.hoverGraphics,
-          Debug.DrawPoint(this.props.root.position, 0xff0000, true),
+          point,
         ];
       }
     }

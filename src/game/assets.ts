@@ -27,6 +27,9 @@ export type AssetPath =
   | "music/Withers.mp3"
   | "music/menu theme placeholder.mp3"
   | "music.json"
+  | "npc1.png"
+  | "npc2.png"
+  | "npc3.png"
   | "owo.png"
   | "parallax bg/00 - sky ver2.png"
   | "parallax bg/00 - sky.png"
@@ -44,7 +47,10 @@ export type AssetPath =
   | "parallax bg/bigcloud05.png"
   | "sound effects/Distant Gears.mp3"
   | "sound effects/alert noise.mp3"
+  | "sound effects/button 1.mp3"
+  | "sound effects/button 2.mp3"
   | "sound effects/climax sweep.mp3"
+  | "sound effects/refill spirit.mp3"
   | "sound effects/step grass 1.mp3"
   | "sound effects/step grass 2.mp3"
   | "sound effects/step grass 3.mp3"
@@ -54,12 +60,25 @@ export type AssetPath =
   | "sound effects/step wood 1.mp3"
   | "sound effects/step wood 2.mp3"
   | "sound effects/step wood 3.mp3"
+  | "sound effects/use spirit.mp3"
+  | "sound effects/voices/voice 1.mp3"
+  | "sound effects/voices/voice 2.mp3"
+  | "sound effects/voices/voice 3.mp3"
+  | "sound effects/voices/voice 4.mp3"
+  | "sound effects/voices/voice withers.mp3"
   | "sound effects/withers chuckle.mp3"
   | "spirit_empty_hud.png"
   | "spirit_full_hud.png"
   | "tileset.png"
   | "vine_flower_source.png"
   | "world.json"
+  | "bigshroom (1).png"
+  | "bigshroom (2).png"
+  | "bigshroom (3).png"
+  | "bigshroom (4).png"
+  | "bigshroom (5).png"
+  | "bigshroom (6).png"
+  | "bigshroom (7).png"
   | "bud/bud_idle_0000.png"
   | "bud/bud_idle_0001.png"
   | "bud/bud_idle_0002.png"
@@ -170,56 +189,80 @@ export type AssetPath =
 
 
 export const AssetsToLoad = {
-  "bud"                          : { type: "Image"       as const, path: "bud.png"                           },
-  "dialog_box"                   : { type: "Image"       as const, path: "dialog_box.png"                    },
-  "dialog_tip"                   : { type: "Image"       as const, path: "dialog_tip.png"                    },
-  "glow"                         : { type: "Image"       as const, path: "glow.png"                          },
-  "hub bg/hub_bg1"               : { type: "Image"       as const, path: "hub bg/hub_bg1.png"                },
-  "interactions"                 : { type: "TileMap"     as const, path: "interactions.json"                 },
-  "loop1"                        : { type: "Audio"       as const, path: "loop1.mp3"                         },
-  "loop2"                        : { type: "Audio"       as const, path: "loop2.mp3"                         },
-  "map"                          : { type: "TileMap"     as const, path: "map.json"                          },
-  "music/Sanctuary"              : { type: "Audio"       as const, path: "music/Sanctuary.mp3"               },
-  "music/The Hub"                : { type: "Audio"       as const, path: "music/The Hub.mp3"                 },
-  "music/Withers"                : { type: "Audio"       as const, path: "music/Withers.mp3"                 },
-  "music/menu theme placeholder" : { type: "Audio"       as const, path: "music/menu theme placeholder.mp3"  },
-  "music"                        : { type: "TileMap"     as const, path: "music.json"                        },
-  "owo"                          : { type: "Image"       as const, path: "owo.png"                           },
-  "parallax bg/00 - sky ver2"    : { type: "Image"       as const, path: "parallax bg/00 - sky ver2.png"     },
-  "parallax bg/00 - sky"         : { type: "Image"       as const, path: "parallax bg/00 - sky.png"          },
-  "parallax bg/01 - skyline back": { type: "Image"       as const, path: "parallax bg/01 - skyline back.png" },
-  "parallax bg/02 - skyline"     : { type: "Image"       as const, path: "parallax bg/02 - skyline.png"      },
-  "parallax bg/03 - mist"        : { type: "Image"       as const, path: "parallax bg/03 - mist.png"         },
-  "parallax bg/04 - city back"   : { type: "Image"       as const, path: "parallax bg/04 - city back.png"    },
-  "parallax bg/05 - forest back" : { type: "Image"       as const, path: "parallax bg/05 - forest back.png"  },
-  "parallax bg/06 - city"        : { type: "Image"       as const, path: "parallax bg/06 - city.png"         },
-  "parallax bg/07 - forest"      : { type: "Image"       as const, path: "parallax bg/07 - forest.png"       },
-  "parallax bg/bigcloud01"       : { type: "Image"       as const, path: "parallax bg/bigcloud01.png"        },
-  "parallax bg/bigcloud02"       : { type: "Image"       as const, path: "parallax bg/bigcloud02.png"        },
-  "parallax bg/bigcloud03"       : { type: "Image"       as const, path: "parallax bg/bigcloud03.png"        },
-  "parallax bg/bigcloud04"       : { type: "Image"       as const, path: "parallax bg/bigcloud04.png"        },
-  "parallax bg/bigcloud05"       : { type: "Image"       as const, path: "parallax bg/bigcloud05.png"        },
-  "sound effects/Distant Gears"  : { type: "Audio"       as const, path: "sound effects/Distant Gears.mp3"   },
-  "sound effects/alert noise"    : { type: "Audio"       as const, path: "sound effects/alert noise.mp3"     },
-  "sound effects/climax sweep"   : { type: "Audio"       as const, path: "sound effects/climax sweep.mp3"    },
-  "sound effects/step grass 1"   : { type: "Audio"       as const, path: "sound effects/step grass 1.mp3"    },
-  "sound effects/step grass 2"   : { type: "Audio"       as const, path: "sound effects/step grass 2.mp3"    },
-  "sound effects/step grass 3"   : { type: "Audio"       as const, path: "sound effects/step grass 3.mp3"    },
-  "sound effects/step stone 1"   : { type: "Audio"       as const, path: "sound effects/step stone 1.mp3"    },
-  "sound effects/step stone 2"   : { type: "Audio"       as const, path: "sound effects/step stone 2.mp3"    },
-  "sound effects/step stone 3"   : { type: "Audio"       as const, path: "sound effects/step stone 3.mp3"    },
-  "sound effects/step wood 1"    : { type: "Audio"       as const, path: "sound effects/step wood 1.mp3"     },
-  "sound effects/step wood 2"    : { type: "Audio"       as const, path: "sound effects/step wood 2.mp3"     },
-  "sound effects/step wood 3"    : { type: "Audio"       as const, path: "sound effects/step wood 3.mp3"     },
-  "sound effects/withers chuckle": { type: "Audio"       as const, path: "sound effects/withers chuckle.mp3" },
-  "spirit_empty_hud"             : { type: "Image"       as const, path: "spirit_empty_hud.png"              },
-  "spirit_full_hud"              : { type: "Image"       as const, path: "spirit_full_hud.png"               },
-  "tileset"                      : { type: "Image"       as const, path: "tileset.png"                       },
-  "vine_flower_source"           : { type: "Image"       as const, path: "vine_flower_source.png"            },
-  "world"                        : { type: "TileWorld"   as const, path: "world.json"                        },
+  "bud"                               : { type: "Image"       as const, path: "bud.png"                                },
+  "dialog_box"                        : { type: "Image"       as const, path: "dialog_box.png"                         },
+  "dialog_tip"                        : { type: "Image"       as const, path: "dialog_tip.png"                         },
+  "glow"                              : { type: "Image"       as const, path: "glow.png"                               },
+  "hub bg/hub_bg1"                    : { type: "Image"       as const, path: "hub bg/hub_bg1.png"                     },
+  "interactions"                      : { type: "TileMap"     as const, path: "interactions.json"                      },
+  "loop1"                             : { type: "Audio"       as const, path: "loop1.mp3"                              },
+  "loop2"                             : { type: "Audio"       as const, path: "loop2.mp3"                              },
+  "map"                               : { type: "TileMap"     as const, path: "map.json"                               },
+  "music/Sanctuary"                   : { type: "Audio"       as const, path: "music/Sanctuary.mp3"                    },
+  "music/The Hub"                     : { type: "Audio"       as const, path: "music/The Hub.mp3"                      },
+  "music/Withers"                     : { type: "Audio"       as const, path: "music/Withers.mp3"                      },
+  "music/menu theme placeholder"      : { type: "Audio"       as const, path: "music/menu theme placeholder.mp3"       },
+  "music"                             : { type: "TileMap"     as const, path: "music.json"                             },
+  "npc1"                              : { type: "Image"       as const, path: "npc1.png"                               },
+  "npc2"                              : { type: "Image"       as const, path: "npc2.png"                               },
+  "npc3"                              : { type: "Image"       as const, path: "npc3.png"                               },
+  "owo"                               : { type: "Image"       as const, path: "owo.png"                                },
+  "parallax bg/00 - sky ver2"         : { type: "Image"       as const, path: "parallax bg/00 - sky ver2.png"          },
+  "parallax bg/00 - sky"              : { type: "Image"       as const, path: "parallax bg/00 - sky.png"               },
+  "parallax bg/01 - skyline back"     : { type: "Image"       as const, path: "parallax bg/01 - skyline back.png"      },
+  "parallax bg/02 - skyline"          : { type: "Image"       as const, path: "parallax bg/02 - skyline.png"           },
+  "parallax bg/03 - mist"             : { type: "Image"       as const, path: "parallax bg/03 - mist.png"              },
+  "parallax bg/04 - city back"        : { type: "Image"       as const, path: "parallax bg/04 - city back.png"         },
+  "parallax bg/05 - forest back"      : { type: "Image"       as const, path: "parallax bg/05 - forest back.png"       },
+  "parallax bg/06 - city"             : { type: "Image"       as const, path: "parallax bg/06 - city.png"              },
+  "parallax bg/07 - forest"           : { type: "Image"       as const, path: "parallax bg/07 - forest.png"            },
+  "parallax bg/bigcloud01"            : { type: "Image"       as const, path: "parallax bg/bigcloud01.png"             },
+  "parallax bg/bigcloud02"            : { type: "Image"       as const, path: "parallax bg/bigcloud02.png"             },
+  "parallax bg/bigcloud03"            : { type: "Image"       as const, path: "parallax bg/bigcloud03.png"             },
+  "parallax bg/bigcloud04"            : { type: "Image"       as const, path: "parallax bg/bigcloud04.png"             },
+  "parallax bg/bigcloud05"            : { type: "Image"       as const, path: "parallax bg/bigcloud05.png"             },
+  "sound effects/Distant Gears"       : { type: "Audio"       as const, path: "sound effects/Distant Gears.mp3"        },
+  "sound effects/alert noise"         : { type: "Audio"       as const, path: "sound effects/alert noise.mp3"          },
+  "sound effects/button 1"            : { type: "Audio"       as const, path: "sound effects/button 1.mp3"             },
+  "sound effects/button 2"            : { type: "Audio"       as const, path: "sound effects/button 2.mp3"             },
+  "sound effects/climax sweep"        : { type: "Audio"       as const, path: "sound effects/climax sweep.mp3"         },
+  "sound effects/refill spirit"       : { type: "Audio"       as const, path: "sound effects/refill spirit.mp3"        },
+  "sound effects/step grass 1"        : { type: "Audio"       as const, path: "sound effects/step grass 1.mp3"         },
+  "sound effects/step grass 2"        : { type: "Audio"       as const, path: "sound effects/step grass 2.mp3"         },
+  "sound effects/step grass 3"        : { type: "Audio"       as const, path: "sound effects/step grass 3.mp3"         },
+  "sound effects/step stone 1"        : { type: "Audio"       as const, path: "sound effects/step stone 1.mp3"         },
+  "sound effects/step stone 2"        : { type: "Audio"       as const, path: "sound effects/step stone 2.mp3"         },
+  "sound effects/step stone 3"        : { type: "Audio"       as const, path: "sound effects/step stone 3.mp3"         },
+  "sound effects/step wood 1"         : { type: "Audio"       as const, path: "sound effects/step wood 1.mp3"          },
+  "sound effects/step wood 2"         : { type: "Audio"       as const, path: "sound effects/step wood 2.mp3"          },
+  "sound effects/step wood 3"         : { type: "Audio"       as const, path: "sound effects/step wood 3.mp3"          },
+  "sound effects/use spirit"          : { type: "Audio"       as const, path: "sound effects/use spirit.mp3"           },
+  "sound effects/voices/voice 1"      : { type: "Audio"       as const, path: "sound effects/voices/voice 1.mp3"       },
+  "sound effects/voices/voice 2"      : { type: "Audio"       as const, path: "sound effects/voices/voice 2.mp3"       },
+  "sound effects/voices/voice 3"      : { type: "Audio"       as const, path: "sound effects/voices/voice 3.mp3"       },
+  "sound effects/voices/voice 4"      : { type: "Audio"       as const, path: "sound effects/voices/voice 4.mp3"       },
+  "sound effects/voices/voice withers": { type: "Audio"       as const, path: "sound effects/voices/voice withers.mp3" },
+  "sound effects/withers chuckle"     : { type: "Audio"       as const, path: "sound effects/withers chuckle.mp3"      },
+  "spirit_empty_hud"                  : { type: "Image"       as const, path: "spirit_empty_hud.png"                   },
+  "spirit_full_hud"                   : { type: "Image"       as const, path: "spirit_full_hud.png"                    },
+  "tileset"                           : { type: "Image"       as const, path: "tileset.png"                            },
+  "vine_flower_source"                : { type: "Image"       as const, path: "vine_flower_source.png"                 },
+  "world"                             : { type: "TileWorld"   as const, path: "world.json"                             },
 
   /* Animations */
 
+  "bigshroom": {
+    type: "Animation" as const,
+    paths: [
+      "bigshroom (1).png",
+      "bigshroom (2).png",
+      "bigshroom (3).png",
+      "bigshroom (4).png",
+      "bigshroom (5).png",
+      "bigshroom (6).png",
+      "bigshroom (7).png",
+    ],
+  },
   "bud/bud_idle": {
     type: "Animation" as const,
     paths: [

@@ -82,7 +82,7 @@ export class DialogBox extends Entity {
         textToShow += fullText.text[textToShow.length];
         this.displayDialogContents(textToShow);
 
-        if (state.keys.justDown.Spacebar) {
+        if (state.keys.justDown.Z) {
           textToShow = fullText.text;
           this.displayDialogContents(textToShow);
 
@@ -112,6 +112,7 @@ export class DialogBox extends Entity {
     const speaker = this.activeDialogText[0].speaker;
 
     this.dialogText.setText(textToShow);
+
     if (speaker) {
       this.speakerText.setText(speaker);
     }

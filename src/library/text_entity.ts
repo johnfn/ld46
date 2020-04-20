@@ -103,13 +103,8 @@ export class TextEntity extends BaseTextEntity<BaseGameState> {
     context.font = `${ this.defaultStyle.fontSize }px FreePixel`;
     const calculatedWidth = context.measureText(text).width;
 
-    if (this.width < calculatedWidth) {
-      return this.width;
-    } else {
-      return calculatedWidth;
-    }
+    return calculatedWidth;
   };
-
 
   buildTextSegments(text: string): TextSegment[] {
     let i = 0;
