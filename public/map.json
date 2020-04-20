@@ -487,8 +487,8 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":36608,
-                 "y":-1792
+                 "x":35072,
+                 "y":-3072
                 }, 
                 {
                  "gid":44,
@@ -2135,9 +2135,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc07"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc3"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",

@@ -65,7 +65,15 @@ export class GameMap extends Entity {
           type     : "single",
           name     : "npc",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
-            return new Npc(tileProperties);
+            return new Npc(tileProperties, props.x, props.y);
+          }
+        },
+
+        {
+          type     : "single",
+          name     : "interactable",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
+            return new Npc(tileProperties, props.x, props.y);
           }
         },
 
