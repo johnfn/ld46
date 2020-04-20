@@ -7,6 +7,8 @@ import { TiledTilemapObjects, TilemapCustomObjects, ObjectInfo } from './tilemap
 import { TilemapData, TilemapRegion } from './tilemap_data';
 import { Assets } from '../../game/assets';
 import { TypesafeLoader } from '../typesafe_loader';
+import { C } from '../../game/constants';
+import { Vector2 } from '../geometry/vector2';
 
 export type MapLayer = {
   layerName  : string;
@@ -63,6 +65,20 @@ export class TiledTilemap {
   private cache: { [key: string]: MapLayer[] } = {};
 
   public loadLayersInRectCached(region: Rect): MapLayer[] {
+    for (const k of Object.keys(this.cache)) {
+      const obj = this.cache[k]
+
+      for (const l of obj) {
+        if (l.entity.texture) {
+          l.entity.texture.destroy();
+        }
+
+        l.entity.parent?.removeChild(l.entity);
+      }
+    }
+
+    this.cache = {};
+
     const hash = region.toString();
 
     if (!this.cache[hash]) {
@@ -82,8 +98,8 @@ export class TiledTilemap {
       if (layer.type !== "tiles") { continue; }
 
       const renderTexture = RenderTexture.create({
-        width : region.width,
-        height: region.height,
+        width : Math.ceil(region.width  * C.Scale.x),
+        height: Math.ceil(region.height * C.Scale.y),
       });
 
       const tileWidth  = this._tileWidth;
@@ -108,8 +124,8 @@ export class TiledTilemap {
           // We have to offset here because we'd be drawing outside of the
           // bounds of the RenderTexture otherwise.
 
-          sprite.x = tile.x - region.x - layer.offset.x;
-          sprite.y = tile.y - region.y - layer.offset.y;
+          sprite.x = (tile.x - region.x - layer.offset.x) * C.Scale.x;
+          sprite.y = (tile.y - region.y - layer.offset.y) * C.Scale.y;
 
           this._renderer.render(sprite, renderTexture, false);
         }
@@ -120,8 +136,10 @@ export class TiledTilemap {
         name   : layerName,
       });
 
-      layerEntity.x = region.x;
-      layerEntity.y = region.y;
+      layerEntity.x      = region.x;
+      layerEntity.y      = region.y;
+      layerEntity.width  = region.width;
+      layerEntity.height = region.height;
 
       tileLayers.push({
         entity     : layerEntity,

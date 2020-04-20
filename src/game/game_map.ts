@@ -124,10 +124,10 @@ export class GameMap extends Entity {
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
             if (DebugFlags["Set Position To Start Object"]) {
               setTimeout(() => {
-                Player.Instance.x = props.x;
-                Player.Instance.y = props.y;
+                // Player.Instance.x = props.x;
+                // Player.Instance.y = props.y;
 
-                Game.Instance.camera.centerOn(Player.Instance.position.add(new Vector2(0, -400)), true);
+                // Game.Instance.camera.centerOn(Player.Instance.position.add(new Vector2(0, -400)), true);
               }, 100);
             }
 
