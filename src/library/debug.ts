@@ -170,7 +170,7 @@ export class Debug {
         y     : entity.y,
         width : entity.width,
         height: entity.height,
-      }), color);
+      }), color, persistent, target);
     }
   }
 

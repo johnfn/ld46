@@ -7,5 +7,5 @@ export const DebugFlags = ReadDebugFlagsFromLocalStorage({
   "Show Bud Text"                : true,
   "Show Flowers in Hierarchy"    : false,
   "Fairy Follows You Immediately": false,
-  "High Performance"             : true,
+  "High Performance"             : false,
 });

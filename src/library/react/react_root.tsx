@@ -82,13 +82,16 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
           x: { target.x }, y: { target.y }
         </div>
         <div>
-          xAbs: { target.positionAbsolute().x }, y: { target.positionAbsolute().y }
+          xAbs: { target.positionAbsolute().x }, yAbs: { target.positionAbsolute().y }
         </div>
         <div>
           width: { target.width }, height: { target.height }
         </div>
         <div>
           visible: { target.visible ? "true" : "false" }
+        </div>
+        <div>
+          scaleX: { target.scale.x.toFixed(2) } scaleY: { target.scale.y.toFixed(2) }
         </div>
         {
           target instanceof TextEntity 

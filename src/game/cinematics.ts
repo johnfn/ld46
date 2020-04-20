@@ -9,6 +9,8 @@ import { DialogBox } from "./dialog_box";
 import { DebugFlags } from "./debug";
 import { Bud } from "./bud";
 import { Vector2 } from "../library/geometry/vector2";
+import { NpcDialog } from "./npc";
+import { Entity } from "../library/entity";
 
 export type Tweenable = 
   | number
@@ -584,33 +586,32 @@ export class Cinematics {
   // NPC STUFF DOWN HERE
 
   npc01CheckCount = 0;
-  public *npc01(): GameCoroutine { // the first NPC the player comes across
+  public *npc01(speaker: Entity): GameCoroutine { // the first NPC the player comes across
     this.npc01CheckCount = this.npc01CheckCount + 1;
     
     let state = yield "next";
 
     state.mode = "Dialog"; 
 
-    if (this.npc01CheckCount === 1){
-
-      yield* DialogBox.StartDialog([ 
-        { speaker: "NPC", text: "Huh? I sense something...", },
-        { speaker: "NPC", text: "Something weak... but new!", },
-        { speaker: "NPC", text: "Time Warrior, is that you?", },
-        { speaker: "NPC", text: "If you’re trying to talk to me, I’m sorry, but I can’t hear you.", },
-        { speaker: "NPC", text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
-        { speaker: "NPC", text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
-        { speaker: "NPC", text: "You might even just be a random flower. In which case, howdy!", },
-        { speaker: "NPC", text: "...But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
+    if (this.npc01CheckCount === 1) {
+      yield* NpcDialog.StartDialog([
+        { speaker, text: "Huh? I sense something...", },
+        { speaker, text: "Something weak... but new!", },
+        { speaker, text: "Time Warrior, is that you?", },
+        { speaker, text: "If you’re trying to talk to me, I’m sorry, but I can’t hear you.", },
+        { speaker, text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
+        { speaker, text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
+        { speaker, text: "You might even just be a random flower. In which case, howdy!", },
+        { speaker, text: "...But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
       ]);
 
     } else {
 
-      yield* DialogBox.StartDialog([ 
-        { speaker: "NPC", text: "Time Warrior, is that you?", },
-        { speaker: "NPC", text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
-        { speaker: "NPC", text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
-        { speaker: "NPC", text: "...But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
+      yield* NpcDialog.StartDialog([ 
+        { speaker, text: "Time Warrior, is that you?", },
+        { speaker, text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
+        { speaker, text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
+        { speaker, text: "...But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
       ]);
 
     }
