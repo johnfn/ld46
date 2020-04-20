@@ -117,7 +117,7 @@ export class NpcDialog extends Entity {
   }
 
   update(state: IGameState) {
-
+    
   }
 }
 
@@ -171,7 +171,8 @@ export class Npc extends Entity {
   }
 
   update(state: IGameState) { 
-    this.graphic.y = this.initialY + Math.sin(state.tick / 400) * 40;
+    this.graphic.y = this.initialY + Math.sin(state.tick / 100) * 40;
+    this.sprite.alpha = 1 + Math.cos(state.tick / 60) / 2
 
     // if (this.npcDialog) {
     //   if (state.keys.justDown.X) {

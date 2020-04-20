@@ -226,7 +226,11 @@ export class Player extends Entity {
 
     this.animate(state);
 
-    if (state.mode === "Dialog") {this.velocity = Vector2.Zero; return;}
+    if (state.mode === "Dialog") {
+      this.velocity = Vector2.Zero;
+      this.animState = this.idle;
+      return;
+    }
     this.checkForDialogTriggers(state);
 
     const touchingVine = this.hitInfo.interactions.find(x => x.otherEntity instanceof Vine) !== undefined;
