@@ -20,8 +20,6 @@ export type AssetPath =
   | "glow.png"
   | "hub bg/hub_bg1.png"
   | "interactions.json"
-  | "loop1.mp3"
-  | "loop2.mp3"
   | "map.json"
   | "music/Maybe Tomorrow.mp3"
   | "music/Sanctuary.mp3"
@@ -77,6 +75,7 @@ export type AssetPath =
   | "tileset.png"
   | "tileset2.png"
   | "transparent.png"
+  | "tree_bg.png"
   | "vine_flower_source.png"
   | "world.json"
   | "bigshroom (1).png"
@@ -235,8 +234,6 @@ export const AssetsToLoad = {
   "glow"                              : { type: "Image"       as const, path: "glow.png"                               },
   "hub bg/hub_bg1"                    : { type: "Image"       as const, path: "hub bg/hub_bg1.png"                     },
   "interactions"                      : { type: "TileMap"     as const, path: "interactions.json"                      },
-  "loop1"                             : { type: "Audio"       as const, path: "loop1.mp3"                              },
-  "loop2"                             : { type: "Audio"       as const, path: "loop2.mp3"                              },
   "map"                               : { type: "TileMap"     as const, path: "map.json"                               },
   "music/Maybe Tomorrow"              : { type: "Audio"       as const, path: "music/Maybe Tomorrow.mp3"               },
   "music/Sanctuary"                   : { type: "Audio"       as const, path: "music/Sanctuary.mp3"                    },
@@ -292,6 +289,7 @@ export const AssetsToLoad = {
   "tileset"                           : { type: "Image"       as const, path: "tileset.png"                            },
   "tileset2"                          : { type: "Image"       as const, path: "tileset2.png"                           },
   "transparent"                       : { type: "Image"       as const, path: "transparent.png"                        },
+  "tree_bg"                           : { type: "Image"       as const, path: "tree_bg.png"                            },
   "vine_flower_source"                : { type: "Image"       as const, path: "vine_flower_source.png"                 },
   "world"                             : { type: "TileWorld"   as const, path: "world.json"                             },
 

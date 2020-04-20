@@ -1293,7 +1293,7 @@ export class Cinematics {
     state.mode = "Dialog";
 
     yield* NpcDialog.StartDialog([
-      { speaker, text: "It's a figure carved into stone.", },
+      { speaker, text: "It's a statue of a crying woman.", },
       { speaker, text: "It has a basin like a fountain, but any water inside dried up long ago.", },
     ]);
 
@@ -1306,8 +1306,150 @@ export class Cinematics {
     state.mode = "Dialog";
 
     yield* NpcDialog.StartDialog([
-      { speaker, text: "It's a stone fountain.", },
+      { speaker, text: "It's a fountain.", },
       { speaker, text: "The figure carved into it seems strangely familiar.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainHub(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "You hear the echoes of voices past from within the fountain.", },
+      { speaker, text: "'Keep going! You're doing great!'", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainVine1(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Standing near the fountain, you feel a sense of calm.", },
+      { speaker, text: "The way forward is becoming clearer.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainVine2(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Standing near the fountain, you feel a sense of clarity.", },
+      { speaker, text: "It's as if the brambles in your head have started to declutter.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainVine3(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Standing near the fountain, you feel a sense of history.", },
+      { speaker, text: "These relics of a vibrant society used to mean so much to so many. It would be good to make things right.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainVine4(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Standing near the fountain, you feel a sense of progress.", },
+      { speaker, text: "You're almost there.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainMush1(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Standing near the fountain, you feel a sense of tenacity.", },
+      { speaker, text: "Nothing can stop you.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainMush2(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Standing near the fountain, you feel a sense of illumination.", },
+      { speaker, text: "You're starting to see the light.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainMush3(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Standing near the fountain, you feel a sense of determination.", },
+      { speaker, text: "Hey, wait a minute. We can't use that word anymore.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainMush4(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Standing near the fountain, you feel a sense of progress.", },
+      { speaker, text: "Just one more room.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainLair(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Standing near the fountain, you feel a sense of boreboding.", },
+      { speaker, text: "Withers looms.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainboss(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Time is of the essence.", },
     ]);
 
     state.mode = "Normal";

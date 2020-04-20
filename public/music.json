@@ -1,4 +1,12 @@
-{ "height":32,
+{ "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "target":"."
+        }
+    },
+ "height":32,
  "infinite":true,
  "layers":[
         {
@@ -7,21 +15,100 @@
          "name":"Music Regions",
          "objects":[
                 {
-                 "height":3584,
+                 "height":4608,
                  "id":1,
                  "name":"",
                  "properties":[
                         {
                          "name":"file",
                          "type":"string",
-                         "value":"music\/Sanctuary.mp3"
+                         "value":"music\/Sanctuary"
                         }],
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":10240,
-                 "x":0,
-                 "y":0
+                 "width":45056,
+                 "x":-7680,
+                 "y":-1024
+                }, 
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":59.5238095238092,
+                 "x":-11964.2857142857,
+                 "y":4107.14285714286
+                }, 
+                {
+                 "height":16896,
+                 "id":16,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"file",
+                         "type":"string",
+                         "value":"music\/Withers"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":14592,
+                 "x":34304,
+                 "y":-24576
+                }, 
+                {
+                 "height":17920,
+                 "id":17,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"file",
+                         "type":"string",
+                         "value":"music\/Vines"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":17920,
+                 "x":52992,
+                 "y":-15872
+                }, 
+                {
+                 "height":6144,
+                 "id":18,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"file",
+                         "type":"string",
+                         "value":"music\/Sanctuary"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":24832,
+                 "x":12544,
+                 "y":-7424
+                }, 
+                {
+                 "height":10558.8717948718,
+                 "id":19,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"file",
+                         "type":"string",
+                         "value":"music\/The Hub"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15616,
+                 "x":37376,
+                 "y":-7680
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -30,10 +117,10 @@
          "y":0
         }],
  "nextlayerid":3,
- "nextobjectid":10,
+ "nextobjectid":20,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"1.3.4",
  "tileheight":256,
  "tilesets":[],
  "tilewidth":256,
