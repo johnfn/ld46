@@ -146,15 +146,15 @@ export class Player extends Entity {
         this.velocity = this.velocity.withY(0)
       }
 
-      if (state.keys.down.A) {
+      if (state.keys.down.Left) {
         this.velocity = this.velocity.addX(-this.climbSpeed);
       }
   
-      if (state.keys.down.D) {
+      if (state.keys.down.Right) {
         this.velocity = this.velocity.addX(this.climbSpeed);
       }
 
-      if (state.keys.down.W) {
+      if (state.keys.down.Up) {
         if (!this.jumpingOnLadder) {
           this.velocity = this.velocity.addY(-this.climbSpeed);
         }
@@ -164,7 +164,7 @@ export class Player extends Entity {
         }
       } 
 
-      if (state.keys.down.S) {
+      if (state.keys.down.Down) {
         this.velocity = this.velocity.addY(this.climbSpeed);
         this.jumpingOnLadder = false;
       }
@@ -179,16 +179,16 @@ export class Player extends Entity {
 
       this.velocity = this.velocity.addY(this.gravity);
 
-      if (state.keys.down.A) {
+      if (state.keys.down.Left) {
         this.velocity = this.velocity.addX(-this.speed);
       }
   
-      if (state.keys.down.D) {
+      if (state.keys.down.Right) {
         this.velocity = this.velocity.addX(this.speed);
       }
     }
 
-    if (state.keys.justDown.Spacebar && (this.hitInfo.down || (touchingVine && this.velocity.y >= -this.climbSpeed))) {
+    if (state.keys.justDown.Z && (this.hitInfo.down || (touchingVine && this.velocity.y >= -this.climbSpeed))) {
       this.velocity = this.velocity.withY(-this.jumpHeight);
       this.animState = this.jump;
       this.frame = 0;

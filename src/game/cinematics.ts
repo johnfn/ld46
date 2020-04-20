@@ -595,7 +595,7 @@ export class Cinematics {
 
     if (this.npc01CheckCount === 1) {
       yield* NpcDialog.StartDialog([
-        { speaker, text: "Huh? I sense something... la la lasdfas f sdaf dsf adslfjasdlf lkadsj flkdasf klaflkas flkjsflkadlskjf ", },
+        { speaker, text: "Huh? I sense something...", },
         { speaker, text: "Something weak... but new!", },
         { speaker, text: "Time Warrior, is that you?", },
         { speaker, text: "If you’re trying to talk to me, I’m sorry, but I can’t hear you.", },
