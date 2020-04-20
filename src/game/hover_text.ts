@@ -9,7 +9,7 @@ export class HoverText extends Entity {
 
     this.addChild(this.text = new TextEntity({
       text    : text,
-      fontSize: 60,
+      fontSize: 80,
     }));
   }
 }
