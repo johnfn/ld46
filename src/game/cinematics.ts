@@ -414,7 +414,7 @@ export class Cinematics {
 
     yield* DialogBox.StartDialog([ 
       { speaker: "Bud", text: "YES! It’s open!", },
-      { speaker: "Bud", text: `C’mon, ${ name }! Let’s go!`, },           
+      { speaker: "Bud", text: `C’mon, ${ this.name }! Let’s go!`, },           
     ]);
 
     state.mode = "Normal"; 
@@ -476,9 +476,9 @@ export class Cinematics {
       { speaker: "Withers", text: "Everything you think you know about this world is just everything that Bud told you!", },
       { speaker: "Withers", text: "And you were foolish enough to believe every word!", },
       { speaker: "Withers", text: "What the hell is a “spirit partner” anyway? Blathering nonsense!", },
-      { speaker: "Withers", text: `In fact, your name isn’t even ${ name }!`, },
+      { speaker: "Withers", text: `In fact, your name isn’t even ${ this.name }!`, },
       { speaker: "Withers", text: "That’s just a dumb name I told Bud to call you!", },
-      { speaker: "Withers", text: `What even is that, anyway? ${ name }?! What kind of simpleton would just go and embrace such a stupid name?!`, },
+      { speaker: "Withers", text: `What even is that, anyway? ${ this.name }?! What kind of simpleton would just go and embrace such a stupid name?!`, },
       { speaker: "Bud", text: "WAHAHAH! You believed me!", },
       { speaker: "Withers", text: "You utter fool!", },
       { speaker: "Withers", text: "Anyway.", },
