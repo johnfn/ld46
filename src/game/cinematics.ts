@@ -613,24 +613,29 @@ export class Cinematics {
       },
         // withers POUNCES SUPER FAST at herald
         // some metallic sfx?
-      { text: "(You feel a burning in your chest.)", },
+      { speaker: " ", text: "(You feel a burning in your chest.)", },
       { speaker: "Withers", text: "Hah...", },
       { speaker: "Withers", text: "Too easy.", },
-      { text: "(The feeling starts burning stronger.)", },
-      { text: "(It feels... healing.)", },
-      { text: "(Your chest starts to glow.)", },
+      { speaker: " ", text: "(The feeling starts burning stronger.)", },
+      { speaker: " ", text: "(It feels... healing.)", },
+      { speaker: " ", text: "(Your chest starts to glow.)", },
       { speaker: "Withers", text: "...wait.", },
       { speaker: "Withers", text: "You’re not dead.", },
       { speaker: "Withers", text: "What’s going on?", },
         // npc ghosts appear
       { speaker: "Bud", text: "Uh... Master...", },
       { speaker: "Bud", text: "In all the excitement... I may have forgotten to tell you about the ghosts...", },
-      { speaker: "Withers", text: "WHAT?", },
-      { speaker: "NPC", text: "So long as we, the spirits of the forest, still cling to existence...", },
-      { speaker: "NPC", text: "You will not lay a hand on the Time Warrior!", },
+      { speaker: "Withers", text: "The", },
+      { speaker: "Withers", text: "WHAT", },
+      { speaker: "Wisps", text: "Never fear, Time Warrior! You are under our protection, for you have given us strength and hope!", },
+      { speaker: "Squill", text: "Hey, Time Warrior! It's me, Squill! Remember me?", },
+      { speaker: "Wisps", text: "Listen here, Withers.", },
+      { speaker: "Wisps", text: "So long as we, the spirits of the forest, still cling to existence...", },
+      { speaker: "Wisps", text: "You will not lay a hand on the Time Warrior!", },
+      { speaker: "Pisp", text: "Yap! Yap!", },
       { speaker: "Withers", text: "What. The hell.", },
         // tries to stab a few more times
-      { speaker: "NPC", text: "Herald is our hero and he is under our protection. STRIKE HIM NOT.", },
+      { speaker: "Wisps", text: "STRIKE HIM NOT.", },
       { speaker: "Withers", text: "Grr...", },
       { speaker: "Withers", text: "You know what?", },
       { speaker: "Withers", text: "Fine.", },
@@ -969,10 +974,11 @@ export class Cinematics {
     state.mode = "Dialog";
 
     yield* NpcDialog.StartDialog([
-      { speaker, text: "I'm so scared...", },
-      { speaker, text: "I can't sense anything anymore.", },
-      { speaker, text: "I miss my friends and my family...", },
-      { speaker, text: "Mom? Is that you?", },
+      { speaker, text: "We wisps do talk a lot, but that's because we're so faded away!", },
+      { speaker, text: "If we don't talk randomly, how would we remember our history?", },
+      { speaker, text: "Like our tradition of rooting for people by rooting into the ground!", },
+      { speaker, text: "Or the escapades our intrepid President, Grower Leafland!", },
+      { speaker, text: "I'm so excited for the Time Warrior to wake up. So I can have another person to talk to.", },
     ]);
 
     state.mode = "Normal";
