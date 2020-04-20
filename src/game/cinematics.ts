@@ -121,17 +121,17 @@ export class Cinematics {
     state.mode = "Dialog"; 
 
     yield* DialogBox.StartDialog([ 
-      { speaker: "Bud", text: "Sigh... Another day, another lonely diary entry.", },
-      { speaker: "Bud", text: "Dear diary...", },
-      { speaker: "Bud", text: "I hope you’re doing well today!", },
-      { speaker: "Bud", text: "Me? Oh, thanks for asking!", },
-      { speaker: "Bud", text: "It’s been the same as every other day, I suppose.", },
-      { speaker: "Bud", text: "Wake up, brush my wings, and stand guard for the whole day!", },
-      { speaker: "Bud", text: "I can’t complain. I have stability and routine. What more could I want?", },
-      { speaker: "Bud", text: "...I sure do hope he wakes up someday, though.", },
-      { speaker: "Bud", text: "Huh? What’s that?", },
-      { speaker: "Bud", text: "You want me to turn around?", },
-      { speaker: "Bud", text: "What a silly book! Why would I want to do that?", },
+      { speaker: "???", text: "Sigh... Another day, another lonely diary entry.", },
+      { speaker: "???", text: "Dear diary...", },
+      { speaker: "???", text: "I hope you’re doing well today!", },
+      { speaker: "???", text: "Me? Oh, thanks for asking!", },
+      { speaker: "???", text: "It’s been the same as every other day, I suppose.", },
+      { speaker: "???", text: "Wake up, brush my wings, and stand guard for the whole day!", },
+      { speaker: "???", text: "I can’t complain. I have stability and routine. What more could I want?", },
+      { speaker: "???", text: "...I sure do hope he wakes up someday, though.", },
+      { speaker: "???", text: "Huh? What’s that?", },
+      { speaker: "???", text: "You want me to turn around?", },
+      { speaker: "???", text: "What a silly book! Why would I want to do that?", },
     ]);
 
     state.mode = "Normal"; 
@@ -157,7 +157,7 @@ export class Cinematics {
     state.mode = "Dialog"; 
 
     yield* DialogBox.StartDialog([ 
-      { speaker: "Bud", text: "Huh? What was that stepping sound?", },
+      { speaker: "Bud", text: "Huh? What was that sound?", },
       { text: "(ok so bud turns around here but we'll animate this in later maybe)", },
         // AT LEAST I HOPE SO
       { speaker: "Bud", text: "HOLY CANOPIES!", },
@@ -170,9 +170,39 @@ export class Cinematics {
       { text: "(there’s a yes or no choice here, assume player says yes for now)", }, 
       { speaker: "Bud", text: "YESS!!! Oh my gosh, there’s so much to show you!", },
       { speaker: "Bud", text: "Follow me!!! I’ll show you the forest!", },
-      { speaker: "Bud", text: "Or… what used to be the forest…", },
-      { speaker: "Bud", text: "…but that doesn’t matter! You’re awake now! Things will become better!", },
+      { speaker: "Bud", text: "Or... what used to be the forest...", },
+      { speaker: "Bud", text: "...but that doesn’t matter! You’re awake now! You'll make things better!", },
       { speaker: "Bud", text: "C’MON!!!!", },
+    ]);
+
+    state.budFollowing = true;
+
+    state.mode = "Normal"; 
+  }
+
+  public *openingBud3(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* DialogBox.StartDialog([ 
+      { speaker: "Bud", text: "Yeah... it really doesn't look too good out here.", },
+      { speaker: "Bud", text: "Those Tinker Men really did a number on the forest. It's almost all gone now.", },
+      { speaker: "Bud", text: "All these artificial structures everywhere...", },
+      { speaker: "Bud", text: "But you're here! The secret weapon of the dryads!", },
+      { speaker: "Bud", text: "You've got a plan to bring the forest back, right?", },
+        // yes or no choice here
+      { text: "(this is gonna be a yes or no choice. imagine player picks no.)", },
+      { speaker: "Bud", text: "...huh?", },
+      { speaker: "Bud", text: "You're staring at me pretty blankly, dude.", },
+      { speaker: "Bud", text: "Everything okay?", },
+        // another yes no choice
+      { text: "(another yes or no. imagine player picks no.)", },
+      { speaker: "Bud", text: "Oh no... this is awful.", },
+      { speaker: "Bud", text: "So you don't even recognize me?", },
+      { speaker: "Bud", text: "I'm your spirit partner. It's me, Bud.", },
+      { speaker: "Bud", text: "Nothing??", },
+
     ]);
 
     state.budFollowing = true;
@@ -582,8 +612,8 @@ export class Cinematics {
     if (this.npc01CheckCount === 1) {
       yield* NpcDialog.StartDialog([
         { speaker, text: "Huh? I sense something...", },
-        { speaker, text: "Something weak... but new!", },
-        { speaker, text: "Time Warrior, is that you?", },
+        { speaker, text: "Something weak... but something new!", },
+        { speaker, text: "Time Warrior, could that be that you? After all this time?", },
         { speaker, text: "If you’re trying to talk to me, I’m sorry, but I can’t hear you.", },
         { speaker, text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
         { speaker, text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
@@ -1054,6 +1084,19 @@ export class Cinematics {
       ]);
 
     }
+
+    state.mode = "Normal"; 
+  }
+
+  public *fountain01(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog"; 
+
+    yield* NpcDialog.StartDialog([ 
+      { speaker, text: "It's a stone fountain.", },
+      { speaker, text: "The figure carved into it seems strangely familiar.", },                 
+    ]);
 
     state.mode = "Normal"; 
   }
