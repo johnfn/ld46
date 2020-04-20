@@ -57,7 +57,7 @@ export class DialogOverlay extends Entity {
         textToShow += fullText.text[textToShow.length];
         this.displayDialogContents(textToShow);
 
-        if (state.keys.justDown.Z) {
+        if (state.keys.justDown.X) {
           textToShow = fullText.text;
           this.displayDialogContents(textToShow);
 
@@ -69,7 +69,7 @@ export class DialogOverlay extends Entity {
         state = yield "next";
       }
 
-      state = yield { untilKeyPress: "Z" };
+      state = yield { untilKeyPress: "X" };
       state = yield "next"; // make sure z isnt justDown
 
       this.activeDialogText.shift();

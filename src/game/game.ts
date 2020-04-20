@@ -11,6 +11,7 @@ import { DialogOverlay } from "./dialog_overlay";
 import { Hud } from "./hud";
 import { NpcDialog } from "./npc";
 import { Sfx } from "./sfx";
+import { ParallaxLayers } from "./parallax_layers";
 
 export class Game extends BaseGame<typeof AssetsToLoad> {
   public static Instance: Game;
@@ -53,6 +54,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
     this.stage.addChild(this.state.player = new Player());
     this.stage.addChild(this.state.sfx = new Sfx());
 
+    this.parallaxStage.addChild(new ParallaxLayers());
     this.fixedCameraStage.addChild(this.state.overlay = new Overlay());
     this.fixedCameraStage.addChild(new DialogBox());
     this.fixedCameraStage.addChild(new DialogOverlay());

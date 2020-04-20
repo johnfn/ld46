@@ -126,6 +126,8 @@ export class GameMap extends Entity {
               setTimeout(() => {
                 Player.Instance.x = props.x;
                 Player.Instance.y = props.y;
+
+                Game.Instance.camera.centerOn(Player.Instance.position.add(new Vector2(0, -400)), true);
               }, 100);
             }
 

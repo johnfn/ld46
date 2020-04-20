@@ -73,8 +73,12 @@ export class Camera {
     this._position = position.subtract(this.halfDimensions());
   };
 
-  centerOn = (position: Vector2) => {
-    this._desiredPosition = position.subtract(this.halfDimensions());
+  centerOn = (position: Vector2, immediate = false) => {
+    if (immediate) {
+      this._immediatelyCenterOn(position);
+    } else {
+      this._desiredPosition = position.subtract(this.halfDimensions());
+    }
   };
 
   calculateDesiredPosition = (): Vector2 => {

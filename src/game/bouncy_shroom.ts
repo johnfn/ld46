@@ -5,8 +5,8 @@ import { Rect } from "../library/geometry/rect";
 import { Assets } from "./assets";
 import { HoverText } from "./hover_text";
 import { C } from "./constants";
-import { Sfx } from "./sfx";
 import { GameCoroutine } from "../library/coroutine_manager";
+import { GabbysGlowThing } from "./gabbys_glow_thing";
 
 export class BouncyShroom extends Entity {
   public interactionDistance = C.InteractionDistance;
@@ -26,6 +26,8 @@ export class BouncyShroom extends Entity {
 
     this.addChild(this.hoverText = new HoverText("x: interact"), 0, -80);
     this.hoverText.visible = false;
+
+    this.addChild(new GabbysGlowThing(0x3cda61));
   }
 
   public collisionBounds(): Rect {

@@ -215,6 +215,10 @@ export class Player extends Entity {
     }
   }
 
+  firstUpdate(state: IGameState) {
+    Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)), true);
+  }
+
   update(state: IGameState): void {
     this.animate(state);
 
@@ -244,7 +248,6 @@ export class Player extends Entity {
       }
     }
 
-    
     Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)));
 
     if (this.velocity.x > 0 && this.scale.x < 0) {

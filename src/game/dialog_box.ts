@@ -113,7 +113,7 @@ export class DialogBox extends Entity {
         textToShow += fullText.text[textToShow.length];
         this.displayDialogContents(fullText.speaker || "", textToShow);
 
-        if (state.keys.justDown.Z) {
+        if (state.keys.justDown.X) {
           textToShow = fullText.text;
           this.displayDialogContents(fullText.speaker || "", textToShow);
 
@@ -137,8 +137,8 @@ export class DialogBox extends Entity {
           if (state.keys.justDown.F) { yield* this.startDialog(fullText.branches[3].next); break; }
         }
       } else {
-        state = yield { untilKeyPress: "Z" };
-        state = yield "next"; // make sure z isnt justDown
+        state = yield { untilKeyPress: "X" };
+        state = yield "next"; // make sure x isnt justDown
       }
 
       activeDialogText.shift();

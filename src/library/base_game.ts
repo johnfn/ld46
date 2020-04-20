@@ -26,8 +26,9 @@ export type GameArgs = {
   assets      : TypesafeLoader<any>;
 };
 
-export const StageName      = "Stage";
-export const FixedStageName = "FixedStage";
+export const StageName         = "Stage";
+export const FixedStageName    = "FixedStage";
+export const ParallaxStageName = "ParallaxStage";
 
 export class BaseGame<TResources extends AllResourcesType = {}> {
   app   : PIXI.Application;
@@ -39,6 +40,8 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
    * the game that isn't fixed as the camera moves should be under this.
    */
   stage : Entity;
+
+  parallaxStage: Entity;
 
   /**
    * A stage for things in the game that don't move when the camera move and are
@@ -91,19 +94,14 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
 
     this.app.stage.scale = new Point(props.scale, props.scale);
 
-    this.stage = new Entity({
-      name: StageName,
-    });
+    this.parallaxStage = new Entity({ name: ParallaxStageName });
+    this.stage = new Entity({ name: StageName });
+    this.fixedCameraStage = new Entity({ name: FixedStageName });
+
     this.state.stage = this.stage;
 
-    // this.state.stage.sprite.interactive = true;
-    // this.state.stage.sprite.on("mousemove", (x: any) => console.log(x));
-
+    this.app.stage.addChild(this.parallaxStage.sprite);
     this.app.stage.addChild(this.stage.sprite);
-
-    this.fixedCameraStage = new Entity({
-      name: FixedStageName,
-    });
     this.app.stage.addChild(this.fixedCameraStage.sprite);
 
     this.state.renderer = this.app.renderer;

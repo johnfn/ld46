@@ -4,7 +4,7 @@ import { Sprite, Texture, MaskData, Container } from "pixi.js";
 import { getUniqueID } from "./util";
 import { RectGroup } from "./geometry/rect_group";
 import { BaseGameState } from "./base_state";
-import { GameReference, FixedStageName, StageName } from "./base_game";
+import { GameReference, FixedStageName, StageName, ParallaxStageName } from "./base_game";
 import { CoroutineId, GameCoroutine } from "./coroutine_manager";
 import { IGameState, Mode } from "Library";
 import { HitInfo } from "./collision_handler";
@@ -109,6 +109,8 @@ export class Entity {
 
   update(state: IGameState): void {}
 
+  firstUpdate(state: IGameState): void {}
+
   setCollideable(isCollideable: boolean) {
     this._collidable = isCollideable;
   }
@@ -135,7 +137,11 @@ export class Entity {
    * parent, like position would).
    */
   public positionAbsolute(): Vector2 {
-    if (this.parent && (this.parent.name === FixedStageName || this.parent.name === StageName)) {
+    if (this.parent && (
+      this.parent.name === FixedStageName || 
+      this.parent.name === StageName || 
+      this.parent.name === ParallaxStageName
+      )) {
       return this.position;
     }
 
@@ -205,6 +211,7 @@ export class Entity {
   }
 
   private queuedUpdates: ((state: IGameState) => void)[] = [];
+  private firstUpdateCalled = false;
 
   baseUpdate(state: IGameState): void {
     if (this.shouldUpdate(state)) {
@@ -212,6 +219,10 @@ export class Entity {
         cb(state);
       }
 
+      if (!this.firstUpdateCalled) {
+        this.firstUpdateCalled = true;
+        this.firstUpdate(state);
+      }
       this.update(state);
     }
 
