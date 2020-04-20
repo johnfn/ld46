@@ -31,13 +31,23 @@ export class BigShroom extends Entity {
     this.hoverText.visible = false;
   }
 
+  interacting = false;
+
   update(state: IGameState) { 
+    if (this.interacting) { return; }
+
     if (state.player.position.distance(this.position) < this.interactionDistance) {
       this.hoverText.visible = true;
 
       if (state.keys.justDown.X) {
         if (!this.interacted) {
+          this.interacting = true;
+          this.interacted = true;
           state.sfx.useSpirit.play();
+
+          setTimeout(() => {
+            this.interacting = false;
+          }, 20000);
 
           this.startCoroutine("animateAliveBigShroom", this.animateAlive());
         } else {
