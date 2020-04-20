@@ -62,14 +62,14 @@ export class ParallaxLayers extends Entity {
     // 03 - mist
     // 04 - city back
     this.sprites[4].y -= 200;
-    this.sprites[4].tint = 0xCACACA;
+    this.sprites[4].tint = 0xBDBDBD;
     // 05 - forest back
     this.sprites[5].y += 300;
     this.sprites[5].tileScale = new PixiPoint(2, 2);
     // 06 - city
     this.sprites[6].tileScale = new PixiPoint(1, 1);
     this.sprites[6].y += 450;
-    this.sprites[6].tint = 0xCACACA;
+    this.sprites[6].tint = 0xBDBDBD;
     // 07 - forest
     this.sprites[7].tileScale = new PixiPoint(2.2, 2.2);
     this.sprites[7].y += 1400;
