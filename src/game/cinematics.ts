@@ -541,8 +541,8 @@ export class Cinematics {
     ]);
 
     
-    Withers.Instance.x = state.player.x - 5000;
-    Withers.Instance.y = state.player.y - 5000;
+    Withers.Instance.x = state.player.x - 10;
+    Withers.Instance.y = state.player.y - 10;
     
 
     state.mode = "Normal";
