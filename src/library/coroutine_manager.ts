@@ -33,8 +33,6 @@ export class CoroutineManager {
   }
 
   startCoroutine(name: string, co: GameCoroutine, owner: Entity | Game): CoroutineId {
-    this._game.state.keys.clear();
-
     for (const activeCo of Object.values(this._activeCoroutines)) {
       if (activeCo.name === name) {
         throw new Error(`Two coroutines with the name ${ name }. Tell grant about this!!!`);
