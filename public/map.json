@@ -3381,7 +3381,7 @@
  "nextobjectid":413,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.3.3",
+ "tiledversion":"1.3.4",
  "tileheight":256,
  "tilesets":[
         {
@@ -3696,8 +3696,17 @@
          "tilewidth":256
         }, 
         {
+         "columns":54,
          "firstgid":65,
-         "source":"tree.tsx"
+         "image":"tree_bg.png",
+         "imageheight":16676,
+         "imagewidth":13948,
+         "margin":0,
+         "name":"tree",
+         "spacing":0,
+         "tilecount":3510,
+         "tileheight":256,
+         "tilewidth":256
         }],
  "tilewidth":256,
  "type":"map",
