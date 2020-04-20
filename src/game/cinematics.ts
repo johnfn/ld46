@@ -354,10 +354,10 @@ export class Cinematics {
     yield* DialogBox.StartDialog([
       { speaker: "Bud", text: "Welcome to the bottom of the Tree of Sprights!", },
       { speaker: "Bud", text: "Huh... That's odd.", },
-      { speaker: "Bud", text: "The entrance to Withers' Lair is above here, but it looks the way to get up there has eroded.", },
-      { speaker: "Bud", text: "That’s... actually a little disappointing.", },
-      { speaker: "Bud", text: "I’m sorry I couldn’t help more.", },
+      { speaker: "Bud", text: "The entrance to Withers' Lair is above here, but getting up there will be tough.", },
+      { speaker: "Bud", text: "You just woke up, and it doesn't look like you're strong enough yet...", },
       { speaker: "Bud", text: "I wonder if there's anything else we could explore, though?", },
+      { speaker: "Bud", text: "Hey, what's that area all the way to the right?", },
     ]);
 
     state.mode = "Normal";
@@ -1505,7 +1505,20 @@ export class Cinematics {
     state.mode = "Normal";
   }
 
-  public *fountainboss(speaker: Entity): GameCoroutine {
+  public *fountainPrep(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Standing near the fountain, you feel a sense of preparation.", },
+      { speaker, text: "You're getting ready to do something great.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainBoss(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog";
