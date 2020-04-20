@@ -121,6 +121,32 @@ export class Cinematics {
     state.mode = "Dialog"; 
 
     yield* DialogBox.StartDialog([ 
+      /*
+      BRANCH DEMO FOR LUNY HAVE FUN!!!!!!!
+      { 
+        speaker: "Bud", 
+        text: "This is a question with a BRANCH", 
+        branches: [
+          { text: "Choice Name One", next: [{ speaker: "Bud", text: "Cool Cool Cool"}] },
+          { text: "Choice Name 2", next: [
+            { speaker: "Bud", text: "Put multiple in here if u want, it's exactly the same as the outer one"},
+            { speaker: "Bud", text: " R E C U R S I V E "},
+            { speaker: "Bud", text: "Put multiple in here if u want"},
+          ] },
+          { text: "Choice Name III", next: [
+            { 
+              speaker: "Bud", 
+              text: "YOu can even have branches in branches omfg", 
+              branches: [
+                { text: "INNER CHOICE 1", next: []},
+                { text: "INNER CHOICE 2", next: []},
+                { text: "INNER CHOICE 3", next: []},
+              ]
+            }
+          ] },
+        ]
+      },
+      */
       { speaker: "Bud", text: "Sigh... Another day, another lonely diary entry.", },
       { speaker: "Bud", text: "Dear diary...", },
       { speaker: "Bud", text: "I hope you’re doing well today!", },
