@@ -9,6 +9,7 @@ import { Mode } from "Library";
 import { Assets } from "./assets";
 import { Vector2 } from "../library/geometry/vector2";
 import { GameCoroutine } from "../library/coroutine_manager";
+import { Sfx } from "./sfx";
 
 export type NpcDialogType = { speaker: Entity; text: string }[];
 
@@ -97,6 +98,8 @@ export class NpcDialog extends Entity {
 
         state = yield "next";
 
+        Sfx.PlayVoiceSound1(state.tick);
+
         if (state.keys.justDown.X) {
           break;
         }
@@ -131,7 +134,7 @@ export class Npc extends Entity {
   constructor(props: { [key: string]: unknown }, x: number, y: number ) {
     super({ 
       name      : "Npc",
-      collidable: true,
+      collidable: String(props["collideable"]) === "true",
     });
 
     let path = props["imagepath"];

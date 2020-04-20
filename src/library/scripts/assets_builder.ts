@@ -40,11 +40,15 @@ const isPathTiledTileMap = (path: string) => {
 };
 
 const isPathTiledWorldMap = (path: string) => {
-  const json = JSON.parse(fs.readFileSync(path, 'utf8'));
+  try {
+    const json = JSON.parse(fs.readFileSync(path, 'utf8'));
 
-  return (
-    json.maps && json.type === "world"
-  );
+    return (
+      json.maps && json.type === "world"
+    );
+  } catch (e) {
+    return false;
+  }
 };
 
 const assetExtensions = [

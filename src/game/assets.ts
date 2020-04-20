@@ -13,7 +13,6 @@ export type AssetType =
 
 export type AssetName = keyof typeof AssetsToLoad
 export type AssetPath = 
-  | "bud.png"
   | "dialog_box.png"
   | "dialog_tip.png"
   | "glow.png"
@@ -136,10 +135,6 @@ export type AssetPath =
   | "flower3 (3).png"
   | "flower3 (4).png"
   | "flower3 (5).png"
-  | "grass1 (1).png"
-  | "grass1 (2).png"
-  | "grass1 (3).png"
-  | "grass1 (4).png"
   | "flowey (1).png"
   | "flowey (2).png"
   | "flowey (3).png"
@@ -150,6 +145,10 @@ export type AssetPath =
   | "fountain (1).png"
   | "fountain (2).png"
   | "fountain (3).png"
+  | "grass1 (1).png"
+  | "grass1 (2).png"
+  | "grass1 (3).png"
+  | "grass1 (4).png"
   | "mushroom1 (1).png"
   | "mushroom1 (2).png"
   | "mushroom1 (3).png"
@@ -192,7 +191,6 @@ export type AssetPath =
 
 
 export const AssetsToLoad = {
-  "bud"                               : { type: "Image"       as const, path: "bud.png"                                },
   "dialog_box"                        : { type: "Image"       as const, path: "dialog_box.png"                         },
   "dialog_tip"                        : { type: "Image"       as const, path: "dialog_tip.png"                         },
   "glow"                              : { type: "Image"       as const, path: "glow.png"                               },
@@ -331,7 +329,7 @@ export const AssetsToLoad = {
       "char_walk (11).png",
     ],
   },
-  "blueflower": {
+  "flower1": {
     type: "Animation" as const,
     paths: [
       "flower1 (1).png",
@@ -342,7 +340,7 @@ export const AssetsToLoad = {
       "flower1 (6).png",
     ],
   },
-  "pinkflower": {
+  "flower2": {
     type: "Animation" as const,
     paths: [
       "flower2 (1).png",
@@ -353,7 +351,7 @@ export const AssetsToLoad = {
       "flower2 (6).png",
     ],
   },
-  "yellowflowers": {
+  "flower3": {
     type: "Animation" as const,
     paths: [
       "flower3 (1).png",
@@ -361,33 +359,6 @@ export const AssetsToLoad = {
       "flower3 (3).png",
       "flower3 (4).png",
       "flower3 (5).png",
-    ],
-  },
-  "grass1": {
-    type: "Animation" as const,
-    paths: [
-      "grass1 (1).png",
-      "grass1 (2).png",
-      "grass1 (3).png",
-      "grass1 (4).png",
-    ],
-  },
-  "whitemushrooms": {
-    type: "Animation" as const,
-    paths: [
-      "shroom1 (1).png",
-      "shroom1 (2).png",
-      "shroom1 (3).png",
-      "shroom1 (4).png",
-    ],
-  },
-  "bluemushroom": {
-    type: "Animation" as const,
-    paths: [
-      "shroom2 (1).png",
-      "shroom2 (2).png",
-      "shroom2 (3).png",
-      "shroom2 (4).png",
     ],
   },
   "flowey": {
@@ -410,6 +381,15 @@ export const AssetsToLoad = {
       "fountain (3).png",
     ],
   },
+  "grass1": {
+    type: "Animation" as const,
+    paths: [
+      "grass1 (1).png",
+      "grass1 (2).png",
+      "grass1 (3).png",
+      "grass1 (4).png",
+    ],
+  },
   "mushroom1": {
     type: "Animation" as const,
     paths: [
@@ -419,6 +399,24 @@ export const AssetsToLoad = {
       "mushroom1 (4).png",
       "mushroom1 (5).png",
       "mushroom1 (6).png",
+    ],
+  },
+  "shroom1": {
+    type: "Animation" as const,
+    paths: [
+      "shroom1 (1).png",
+      "shroom1 (2).png",
+      "shroom1 (3).png",
+      "shroom1 (4).png",
+    ],
+  },
+  "shroom2": {
+    type: "Animation" as const,
+    paths: [
+      "shroom2 (1).png",
+      "shroom2 (2).png",
+      "shroom2 (3).png",
+      "shroom2 (4).png",
     ],
   },
   "vine_flower_live": {
