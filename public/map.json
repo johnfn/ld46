@@ -2765,7 +2765,7 @@
                 {
                  "gid":37,
                  "height":256,
-                 "id":437,
+                 "id":438,
                  "name":"",
                  "properties":[
                         {
@@ -2777,8 +2777,8 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":50176,
-                 "y":0
+                 "x":51711.4648829431,
+                 "y":-245.056856187291
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -3826,10 +3826,10 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":438,
+ "nextobjectid":439,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.3.3",
+ "tiledversion":"1.3.4",
  "tileheight":256,
  "tilesets":[
         {
