@@ -45,7 +45,7 @@ export class MusicMap extends Entity {
   };
 
   update(state: IGameState) {
-    const songPathsToPlay = this.musicRegions.filter(r => r.rect.contains(this.position)).map(k => k.properties["file"]);
+    const songPathsToPlay = this.musicRegions.filter(r => r.rect.contains(state.player.position)).map(k => k.properties["file"]);
 
     for (const musicPath of Object.keys(this.allMusic)) {
       const songObj = this.allMusic[musicPath];
