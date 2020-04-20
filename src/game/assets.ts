@@ -13,7 +13,6 @@ export type AssetType =
 
 export type AssetName = keyof typeof AssetsToLoad
 export type AssetPath = 
-  | "bud.png"
   | "dialog_box.png"
   | "dialog_tip.png"
   | "glow.png"
@@ -184,7 +183,6 @@ export type AssetPath =
 
 
 export const AssetsToLoad = {
-  "bud"                               : { type: "Image"       as const, path: "bud.png"                                },
   "dialog_box"                        : { type: "Image"       as const, path: "dialog_box.png"                         },
   "dialog_tip"                        : { type: "Image"       as const, path: "dialog_tip.png"                         },
   "glow"                              : { type: "Image"       as const, path: "glow.png"                               },
