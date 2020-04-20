@@ -9,19 +9,19 @@ import { Vector2 } from "../library/geometry/vector2";
 let flowers = 0;
 
 let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {
-  1: "blueflower",
-  2: "pinkflower",
-  3: "yellowflowers",
+  1: "flower1",
+  2: "flower2",
+  3: "flower3",
   4: "grass1",
-  5: "whitemushrooms",
-  6: "bluemushroom",
+  5: "shroom1",
+  6: "shroom2",
 }
 
 let flowersRate: {[key: number]: string[]} = {
-  0: ["yellowflowers"], //Sanctuary level
+  0: ["flower3"], //Sanctuary level
   1: ["grass1"], //Vine level
-  2: ["whitemushrooms", "bluemushroom"], //Mushroom level
-  3: ["blueflower", "pinkflower", "blueflower", "grass1"]  //Tree level
+  2: ["shroom1", "shroom1"], //Mushroom level
+  3: ["flower1", "flower2", "flower3", "grass1"]  //Tree level
 }
 
 export class NormalFlower extends Entity {
@@ -32,7 +32,7 @@ export class NormalFlower extends Entity {
   constructor(position: Vector2, level?: number) {
     super({
       name   : "Flower",
-      texture: Assets.getResource("blueflower")[0],
+      texture: Assets.getResource("flower1")[0],
     });
 
     if (level != undefined && level in flowersRate) {

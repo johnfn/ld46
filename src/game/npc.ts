@@ -131,7 +131,7 @@ export class Npc extends Entity {
   constructor(props: { [key: string]: unknown }, x: number, y: number ) {
     super({ 
       name      : "Npc",
-      collidable: true,
+      collidable: String(props["collideable"]) === "true",
     });
 
     let path = props["imagepath"];
