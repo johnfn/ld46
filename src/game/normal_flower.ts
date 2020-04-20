@@ -7,12 +7,20 @@ import { C } from "./constants";
 
 let flowers = 0;
 
-let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {1: "flower1", 2: "flower2", 3: "flower3", 4: "flower4"}
+let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {
+  1: "blueflower",
+  2: "pinkflower",
+  3: "yellowflowers",
+  4: "grass1",
+  5: "whitemushrooms",
+  6: "bluemushroom",
+}
+
 let flowersRate: {[key: number]: string[]} = {
-  0: ["flower1"],
-  1: ["flower2"],
-  2: ["flower3"],
-  3: ["flower4"],
+  0: ["yellowflowers"], //Sanctuary level
+  1: ["grass1"], //Vine level
+  2: ["whitemushrooms", "bluemushroom"], //Mushroom level
+  3: ["blueflower", "pinkflower", "blueflower", "grass1"]  //Tree level
 }
 
 export class NormalFlower extends Entity {
@@ -23,7 +31,7 @@ export class NormalFlower extends Entity {
   constructor(level?: number) {
     super({
       name   : "Flower",
-      texture: Assets.getResource("flower1")[0],
+      texture: Assets.getResource("blueflower")[0],
     });
 
     if (level != undefined && level in flowersRate) {

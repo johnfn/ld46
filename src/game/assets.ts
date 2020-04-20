@@ -117,10 +117,10 @@ export type AssetPath =
   | "flower3 (3).png"
   | "flower3 (4).png"
   | "flower3 (5).png"
-  | "flower4 (1).png"
-  | "flower4 (2).png"
-  | "flower4 (3).png"
-  | "flower4 (4).png"
+  | "grass1 (1).png"
+  | "grass1 (2).png"
+  | "grass1 (3).png"
+  | "grass1 (4).png"
   | "flowey (1).png"
   | "flowey (2).png"
   | "flowey (3).png"
@@ -137,6 +137,14 @@ export type AssetPath =
   | "mushroom1 (4).png"
   | "mushroom1 (5).png"
   | "mushroom1 (6).png"
+  | "shroom1 (1).png"
+  | "shroom1 (2).png"
+  | "shroom1 (3).png"
+  | "shroom1 (4).png"
+  | "shroom2 (1).png"
+  | "shroom2 (2).png"
+  | "shroom2 (3).png"
+  | "shroom2 (4).png"
   | "vine_flower_live (1).png"
   | "vine_flower_live (2).png"
   | "vine_flower_live (3).png"
@@ -277,7 +285,7 @@ export const AssetsToLoad = {
       "char_walk (11).png",
     ],
   },
-  "flower1": {
+  "blueflower": {
     type: "Animation" as const,
     paths: [
       "flower1 (1).png",
@@ -288,7 +296,7 @@ export const AssetsToLoad = {
       "flower1 (6).png",
     ],
   },
-  "flower2": {
+  "pinkflower": {
     type: "Animation" as const,
     paths: [
       "flower2 (1).png",
@@ -299,7 +307,7 @@ export const AssetsToLoad = {
       "flower2 (6).png",
     ],
   },
-  "flower3": {
+  "yellowflowers": {
     type: "Animation" as const,
     paths: [
       "flower3 (1).png",
@@ -309,13 +317,31 @@ export const AssetsToLoad = {
       "flower3 (5).png",
     ],
   },
-  "flower4": {
+  "grass1": {
     type: "Animation" as const,
     paths: [
-      "flower4 (1).png",
-      "flower4 (2).png",
-      "flower4 (3).png",
-      "flower4 (4).png",
+      "grass1 (1).png",
+      "grass1 (2).png",
+      "grass1 (3).png",
+      "grass1 (4).png",
+    ],
+  },
+  "whitemushrooms": {
+    type: "Animation" as const,
+    paths: [
+      "shroom1 (1).png",
+      "shroom1 (2).png",
+      "shroom1 (3).png",
+      "shroom1 (4).png",
+    ],
+  },
+  "bluemushroom": {
+    type: "Animation" as const,
+    paths: [
+      "shroom2 (1).png",
+      "shroom2 (2).png",
+      "shroom2 (3).png",
+      "shroom2 (4).png",
     ],
   },
   "flowey": {
