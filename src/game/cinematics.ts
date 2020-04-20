@@ -159,7 +159,7 @@ export class Cinematics {
       { speaker: "???", text: "...I sure do hope he wakes up someday, though.", },
       { speaker: "???", text: "Huh? What’s that?", },
       { speaker: "???", text: "You want me to turn around?", },
-      { speaker: "???", text: "What a silly book! Why would I want to do that?", },
+      { speaker: "???", text: "Silly book! Why would I want to do that?", },
     ]);
 
     state.mode = "Normal";
@@ -226,26 +226,46 @@ export class Cinematics {
   
     yield* DialogBox.StartDialog([
       { speaker: "???", text: "Yeah... it really doesn't look too good out here.", },
-      { speaker: "???", text: "Those Tinker Men really did a number on the forest. It's almost all gone now.", },
-      { speaker: "???", text: "All these artificial structures everywhere...", },
-      { speaker: "???", text: "But you're here! The secret weapon of the dryads!", },
-      { speaker: "???", text: "You've got a plan to bring the forest back, right?", },
-        // yes or no choice here
-      { text: "(this is gonna be a yes or no choice. imagine player picks no.)", },
-      { speaker: "???", text: "...huh?", },
-      { speaker: "???", text: "You're staring at me pretty blankly, dude.", },
-      { speaker: "???", text: "Everything okay?", },
-        // another yes no choice
-      { text: "(another yes or no. imagine player picks no.)", },
-      { speaker: "???", text: "Oh no, this is awful... You don't even recognize me?", },
-      { speaker: "???", text: "I was your spirit partner. It's me, Bud.", },
-      { speaker: "Bud", text: "Nothing??", },
-      { speaker: "Bud", text: "That's not good.", },
+      { speaker: "???", text: "Those Tinker Men really did a number on the forest. It's almost all gone...", },
+      { speaker: "???", text: "But now you're here! The secret weapon of the dryads!", },
+      {
+        speaker: "???",
+        text: "You've got a plan to bring the forest back, right?",
+        branches: [
+          { text: "Yes?", next: [
+            { speaker: "???", text: "HELL YEAH!! I'm all ears!! Mostly because I'm missing a couple of other appendages.", },
+            { speaker: "???", text: `What's the plan, ${ this.name }? I'm listening...`},
+            { speaker: "???", text: "..."},
+            { speaker: "???", text: "..."},
+            { speaker: "???", text: "You're... not saying anything."},
+          ] },
+          { text: "No?", next: [
+            { speaker: "???", text: "...huh? What do you mean?", },
+            { speaker: "???", text: "I thought that was the whole point of putting you to sleep for so long...", },
+            { speaker: "???", text: "You're staring at me pretty blankly, dude.", },
+          ] },
+        ]
+      },
+      {
+        speaker: "???",
+        text: "Everything okay?",
+        branches: [
+          { text: "No.", next: [
+            { speaker: "???", text: "Oh no... I can see it in your eyes. You don't know anything that's going on, do you?", },
+          ] },
+          { text: "No?", next: [
+            { speaker: "???", text: "I should've known... I can see it in your eyes. You don't understand anything that's going on, do you?", },
+          ] },
+        ]
+      },
+      { speaker: "???", text: "This is awful... You don't even recognize me?", },
+      { speaker: "???", text: "I was your spirit partner, long ago. It's me, Bud!", },
+      { speaker: "Bud", text: "Nothing????? C'mon, jog that memory!", },
       { speaker: "Bud", text: `You're ${ this.name }! Hero of the Pastoria Forest!`, },
       { speaker: "Bud", text: "...Well, I guess the forest has been long, long gone. And so have you. For about five hundred years.", },
-      { speaker: "Bud", text: `There's a reason you're here, ${ this.name }. You were sent here to the future to take down Withers, the leader of the Tinker Men.`, },
+      { speaker: "Bud", text: `There's a reason you're here, ${ this.name }. You were sent here to the future to take down Withers, the leader of the Tinker Men who destroyed our home.`, },
       { speaker: "Bud", text: "And if you don't remember anything... then it's up to me, Bud, to help you!", },
-      { speaker: "Bud", text: `C'mon, ${ this.name }! Withers' Lair is in the Tree of Sprights, which is the only remaining big tree left. Let's go!`, },
+      { speaker: "Bud", text: `C'mon, ${ this.name }! Withers' Lair is in the Tree of Sprights, which is the only remaining big tree left. Let's go find him!!`, },
     ]);
   
     state.budFollowing = true;
@@ -254,7 +274,7 @@ export class Cinematics {
   }
  
 
-  public *outdoorBud1(): GameCoroutine {
+  public *outdoorBud1(): GameCoroutine { // functionally replaced by openingBud3
     let state = yield "next";
 
     state.mode = "Dialog";
@@ -263,8 +283,6 @@ export class Cinematics {
       { speaker: "Bud", text: "Yeah. Not too pretty.", },
       { speaker: "Bud", text: "So much metal, and so little nature. It’s really kind of horrifying.", },
       { speaker: "Bud", text: `But that’s why you were sent here, ${ this.name }! You can help us make things better!`, },
-      // branching dialogue happens here
-      // we'll wait for grant to figure that one out
     ]);
 
     state.mode = "Normal";
@@ -276,9 +294,25 @@ export class Cinematics {
     state.mode = "Dialog";
 
     yield* DialogBox.StartDialog([
-      { speaker: "Bud", text: "What’s up? You look startled.", },
-      // MORE branching dialogue
-      { speaker: "Bud", text: "What? Don’t be weird, heh. That’s impossible.", },
+      { speaker: " ", text: "The softly trickling water in the fountain is calming to you.", },
+      { speaker: " ", text: "As you walk near it, you can feel it radiating natural energy.", },
+      { speaker: " ", text: "The fountain replenishes your spirit.", },
+        // GHOSTS AND FLOWERS APPEAR!
+      {
+        speaker: "Bud",
+        text: "What’s up? You look startled.",
+        branches: [
+          { text: "There's another person...", next: [
+            { speaker: "Bud", text: "What? Don’t be weird, heh. That’s impossible.", },
+          ] },
+          { text: "I think I see dead people?", next: [
+            { speaker: "Bud", text: "What? Don’t be paranoid, heh. That’s impossible.", },
+          ] },
+          { text: "AAAAAAAA GHOST", next: [
+            { speaker: "Bud", text: "What? Don’t be scared, heh. That’s impossible.", },
+          ] },
+        ]
+      },
     ]);
 
     state.mode = "Normal";
