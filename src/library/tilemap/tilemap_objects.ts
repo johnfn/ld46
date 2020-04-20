@@ -142,7 +142,7 @@ export class TiledTilemapObjects {
           }
         }
 
-        throw new Error(`on layer ${ layer.name } you have a rect region that's not being processed`);
+        throw new Error(`on layer ${ layer.name } at position x: ${ obj.x } and y: ${ obj.y } you have a rect region that's not being processed`);
       }
 
       const { spritesheet, tileProperties } = this._map._data.gidInfo(obj.gid);
