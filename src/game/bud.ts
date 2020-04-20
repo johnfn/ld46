@@ -2,7 +2,6 @@ import { Entity } from "../library/entity";
 import { Assets } from "./assets";
 import { IGameState } from "Library";
 import { GameCoroutine } from "../library/coroutine_manager";
-import { DebugFlags } from "./debug";
 import { Vector2 } from "../library/geometry/vector2";
 import { Cinematics } from "./cinematics";
 

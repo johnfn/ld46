@@ -124,19 +124,35 @@ export class Npc extends Entity {
   interactionDistance = C.InteractionDistance;
   dialogName: string = "";
 
-  constructor(
-    tempTex: Texture, // need better 1
-    props: { [key: string]: unknown }
-  ) {
+  graphic: Entity;
+
+  constructor(props: { [key: string]: unknown }) {
     super({ 
       name      : "Npc",
-      texture   : tempTex,
       collidable: true,
     });
 
+    let tex: Texture;
+
+    if (String(props["npctype"]) === "1") {
+      tex = Assets.getResource("npc1");
+    } else if (String(props["npctype"]) === "2") {
+      tex = Assets.getResource("npc2");
+    } else if (String(props["npctype"]) === "3") {
+      tex = Assets.getResource("npc3");
+    } else {
+      console.error("npc without type", this);
+
+      tex = Assets.getResource("npc1");
+    }
+
+    this.graphic = new Entity({ name: "NpcName", texture: tex });
+    this.graphic.y = -512;
+    this.addChild(this.graphic);
+
     this.dialogName = props["dialog"] as string;
 
-    this.addChild(this.hoverText = new HoverText("x: interact"), 0, -80);
+    this.addChild(this.hoverText = new HoverText("x: interact"), 0, -550);
     this.hoverText.visible = false;
   }
 
