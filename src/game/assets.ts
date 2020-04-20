@@ -13,6 +13,7 @@ export type AssetType =
 
 export type AssetName = keyof typeof AssetsToLoad
 export type AssetPath = 
+  | "bigfruit.png"
   | "dialog_box.png"
   | "dialog_tip.png"
   | "fountain_nowater.png"
@@ -25,6 +26,7 @@ export type AssetPath =
   | "music/Maybe Tomorrow.mp3"
   | "music/Sanctuary.mp3"
   | "music/The Hub.mp3"
+  | "music/Vines.mp3"
   | "music/Withers.mp3"
   | "music.json"
   | "npc1.png"
@@ -68,6 +70,7 @@ export type AssetPath =
   | "sound effects/voices/voice 3.mp3"
   | "sound effects/voices/voice 4.mp3"
   | "sound effects/voices/voice withers.mp3"
+  | "sound effects/waterfall.mp3"
   | "sound effects/withers chuckle.mp3"
   | "spirit_empty_hud.png"
   | "spirit_full_hud.png"
@@ -223,6 +226,7 @@ export type AssetPath =
 
 
 export const AssetsToLoad = {
+  "bigfruit"                          : { type: "Image"       as const, path: "bigfruit.png"                           },
   "dialog_box"                        : { type: "Image"       as const, path: "dialog_box.png"                         },
   "dialog_tip"                        : { type: "Image"       as const, path: "dialog_tip.png"                         },
   "fountain_nowater"                  : { type: "Image"       as const, path: "fountain_nowater.png"                   },
@@ -235,6 +239,7 @@ export const AssetsToLoad = {
   "music/Maybe Tomorrow"              : { type: "Audio"       as const, path: "music/Maybe Tomorrow.mp3"               },
   "music/Sanctuary"                   : { type: "Audio"       as const, path: "music/Sanctuary.mp3"                    },
   "music/The Hub"                     : { type: "Audio"       as const, path: "music/The Hub.mp3"                      },
+  "music/Vines"                       : { type: "Audio"       as const, path: "music/Vines.mp3"                        },
   "music/Withers"                     : { type: "Audio"       as const, path: "music/Withers.mp3"                      },
   "music"                             : { type: "TileMap"     as const, path: "music.json"                             },
   "npc1"                              : { type: "Image"       as const, path: "npc1.png"                               },
@@ -278,6 +283,7 @@ export const AssetsToLoad = {
   "sound effects/voices/voice 3"      : { type: "Audio"       as const, path: "sound effects/voices/voice 3.mp3"       },
   "sound effects/voices/voice 4"      : { type: "Audio"       as const, path: "sound effects/voices/voice 4.mp3"       },
   "sound effects/voices/voice withers": { type: "Audio"       as const, path: "sound effects/voices/voice withers.mp3" },
+  "sound effects/waterfall"           : { type: "Audio"       as const, path: "sound effects/waterfall.mp3"            },
   "sound effects/withers chuckle"     : { type: "Audio"       as const, path: "sound effects/withers chuckle.mp3"      },
   "spirit_empty_hud"                  : { type: "Image"       as const, path: "spirit_empty_hud.png"                   },
   "spirit_full_hud"                   : { type: "Image"       as const, path: "spirit_full_hud.png"                    },

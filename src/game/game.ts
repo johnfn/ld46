@@ -10,6 +10,7 @@ import { Cinematics } from "./cinematics";
 import { DialogOverlay } from "./dialog_overlay";
 import { Hud } from "./hud";
 import { NpcDialog } from "./npc";
+import { Sfx } from "./sfx";
 
 export class Game extends BaseGame<typeof AssetsToLoad> {
   public static Instance: Game;
@@ -32,6 +33,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
         budFollowing : DebugFlags["Fairy Follows You Immediately"],
 
         // These are set later.
+        sfx          : undefined as any,
         player       : undefined as any,
         overlay      : undefined as any,
         map          : undefined as any,
@@ -49,6 +51,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
   initialize() {
     this.stage.addChild(this.state.map = new GameMap());
     this.stage.addChild(this.state.player = new Player());
+    this.stage.addChild(this.state.sfx = new Sfx());
 
     this.fixedCameraStage.addChild(this.state.overlay = new Overlay());
     this.fixedCameraStage.addChild(new DialogBox());

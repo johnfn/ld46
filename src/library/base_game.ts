@@ -143,7 +143,7 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     this.app.ticker.add(() => this.gameLoop());
   };
 
-  gameLoop = () => {
+  gameLoop() {
     Debug.Clear();
 
     const { entities } = this.state;
