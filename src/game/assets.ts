@@ -185,6 +185,9 @@ export type AssetPath =
   | "wisteria (5).png"
   | "wisteria (6).png"
   | "wisteria (7).png"
+  | "withers/withers_idle_0000.png"
+  | "withers/withers_idle_0001.png"
+  | "withers/withers_idle_0002.png"
 
 
 
@@ -452,6 +455,14 @@ export const AssetsToLoad = {
       "wisteria (5).png",
       "wisteria (6).png",
       "wisteria (7).png",
+    ],
+  },
+  "withers/withers_idle": {
+    type: "Animation" as const,
+    paths: [
+      "withers/withers_idle_0000.png",
+      "withers/withers_idle_0001.png",
+      "withers/withers_idle_0002.png",
     ],
   },
 };
