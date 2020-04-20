@@ -75,6 +75,8 @@ export type AssetPath =
   | "spirit_empty_hud.png"
   | "spirit_full_hud.png"
   | "tileset.png"
+  | "tileset2.png"
+  | "transparent.png"
   | "vine_flower_source.png"
   | "world.json"
   | "bigshroom (1).png"
@@ -288,6 +290,8 @@ export const AssetsToLoad = {
   "spirit_empty_hud"                  : { type: "Image"       as const, path: "spirit_empty_hud.png"                   },
   "spirit_full_hud"                   : { type: "Image"       as const, path: "spirit_full_hud.png"                    },
   "tileset"                           : { type: "Image"       as const, path: "tileset.png"                            },
+  "tileset2"                          : { type: "Image"       as const, path: "tileset2.png"                           },
+  "transparent"                       : { type: "Image"       as const, path: "transparent.png"                        },
   "vine_flower_source"                : { type: "Image"       as const, path: "vine_flower_source.png"                 },
   "world"                             : { type: "TileWorld"   as const, path: "world.json"                             },
 
