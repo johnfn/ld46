@@ -167,26 +167,33 @@ export class Cinematics {
       { speaker: "???", text: "Huh? What was that sound?", },
     ]);
       
-      bud.sprite.scale.x = bud.sprite.scale.x * -1;
+    bud.sprite.scale.x = bud.sprite.scale.x * -1;
   
-      yield { frames: 15 };
-      
+    yield { frames: 15 };
+        
       // bud goes !
-      state.sfx.climaxSweep.play();
+    state.sfx.alertNoise.play();
 
-      yield { frames: 30 };
-      
-      for (let i = 0; i < 6; i++) {
-        bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 2);
-        yield { frames: 4 };
-      }
+    yield { frames: 30 };
+        
+    for (let i = 0; i < 6; i++) {
+      bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 2);
+      yield { frames: 4 };
+    }
 
     yield* DialogBox.StartDialog([
       { speaker: "???", text: "HOLY CANOPIES!", },
       { speaker: "???", text: "AM I DREAMING??? I WISH I COULD PINCH MYSELF!", },
       { speaker: "???", text: "I’VE BEEN WAITING FOR THIS MOMENT FOR SO LONG!", },
       { speaker: "???", text: "HIHIHIHIHIHIHI", },
-        // bud rushes over to herald
+    ]);
+      
+    for (let i = 0; i < 15; i++) {
+      bud.x = startX - 100;
+      yield { frames: 2 };
+    }
+
+    yield* DialogBox.StartDialog([
       {
         speaker: "???",
         text: `So... this is real? You’re really awake, ${ this.name }?`,
