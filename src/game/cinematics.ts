@@ -195,7 +195,7 @@ export class Cinematics {
         // bud rushes over to herald
       {
         speaker: "???",
-        text: "So... this is real? You’re really awake, ${ this.name }?",
+        text: `So... this is real? You’re really awake, ${ this.name }?`,
         branches: [
           { text: "Yes", next: [
             { speaker: "???", text: "YESS!!! Oh my gosh, there’s so much to show you!", },
@@ -241,11 +241,11 @@ export class Cinematics {
       { speaker: "???", text: "I was your spirit partner. It's me, Bud.", },
       { speaker: "Bud", text: "Nothing??", },
       { speaker: "Bud", text: "That's not good.", },
-      { speaker: "Bud", text: "You're ${ this.name }! Hero of the Pastoria Forest!"},
+      { speaker: "Bud", text: `You're ${ this.name }! Hero of the Pastoria Forest!`, },
       { speaker: "Bud", text: "...Well, I guess the forest has been long, long gone. And so have you. For about five hundred years.", },
-      { speaker: "Bud", text: "There's a reason you're here, ${ this.name }. You were sent here to the future to take down Withers, the leader of the Tinker Men.", },
+      { speaker: "Bud", text: `There's a reason you're here, ${ this.name }. You were sent here to the future to take down Withers, the leader of the Tinker Men.`, },
       { speaker: "Bud", text: "And if you don't remember anything... then it's up to me, Bud, to help you!", },
-      { speaker: "Bud", text: "C'mon, ${ this.name }! Withers' Lair is in the Tree of Sprights, which is the only remaining big tree left. Let's go!", },
+      { speaker: "Bud", text: `C'mon, ${ this.name }! Withers' Lair is in the Tree of Sprights, which is the only remaining big tree left. Let's go!`, },
     ]);
   
     state.budFollowing = true;
