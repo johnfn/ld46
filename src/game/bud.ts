@@ -20,6 +20,8 @@ export class Bud extends Entity {
     this.frames = Assets.getResource("bud/bud_idle");
 
     Bud.Instance = this;
+
+    this.scale = new Vector2(0.5, 0.5);
   }
 
   *budFollow(): GameCoroutine {
