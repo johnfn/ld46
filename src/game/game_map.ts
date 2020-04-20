@@ -190,7 +190,7 @@ export class GameMap extends Entity {
 
   loadMap(position: Vector2) {
     const newBounds = this.getCameraRegion(position).rect;
-    const layers = this.artMap.loadLayersInRect(newBounds);
+    const layers = this.artMap.loadLayersInRectCached(newBounds);
 
     this.loadFlowers()
 

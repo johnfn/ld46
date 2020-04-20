@@ -60,7 +60,19 @@ export class TiledTilemap {
     throw new Error("Not a rect layer");
   }
 
-  public loadLayersInRect(region: Rect): MapLayer[] {
+  private cache: { [key: string]: MapLayer[] } = {};
+
+  public loadLayersInRectCached(region: Rect): MapLayer[] {
+    const hash = region.toString();
+
+    if (!this.cache[hash]) {
+      this.cache[hash] = this.loadLayersInRect(region);
+    }
+
+    return this.cache[hash];
+  }
+
+  private loadLayersInRect(region: Rect): MapLayer[] {
     let tileLayers: MapLayer[] = [];
 
     // Load tile layers
