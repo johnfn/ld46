@@ -2,6 +2,7 @@ import { Rectangle, Texture } from 'pixi.js'
 import { AssetName } from '../game/assets';
 import { Tile } from './tilemap/tilemap_types';
 import { TypesafeLoader } from './typesafe_loader';
+import { C } from '../game/constants';
 
 export class TextureCache {
   static Cache: { [key: string]: Texture } = {};
@@ -44,7 +45,7 @@ export class TextureCache {
       resourceName: imageUrlRelativeToGame.slice(0, imageUrlRelativeToGame.lastIndexOf(".")) as AssetName,
       x          : spritesheetx, 
       y          : spritesheety, 
-      tilewidth  : tile.tile.tilewidth, 
+      tilewidth  : tile.tile.tilewidth ,
       tileheight : tile.tile.tileheight,
       assets     : assets,
     });
