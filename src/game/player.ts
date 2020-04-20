@@ -7,7 +7,7 @@ import { Rect } from "../library/geometry/rect";
 import { Vine } from "./vine_flower";
 import { Vector2 } from "../library/geometry/vector2";
 import { BouncyShroom } from "./bouncy_shroom";
-import { Debug } from "../library/debug";
+
 
 export class Player extends Entity {
   public static StartPosition = new Vector2(800, 600);

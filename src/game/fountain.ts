@@ -3,8 +3,11 @@ import { IGameState } from "Library";
 import { C } from "./constants";
 import { Texture } from "pixi.js";
 import { Assets } from "./assets";
+import { Mode } from "Library";
 
 export class Fountain extends Entity {
+  activeModes: Mode[] = ["Normal", "Dialog"];
+
   rechargeRate = 60;
   interactionDistance = C.InteractionDistance;
 
@@ -21,7 +24,7 @@ export class Fountain extends Entity {
         texture: Assets.getResource("fountain")[0],
         name: "FountainGraphic"
       }),
-      0, -256
+      0, -this.graphic.height + 256
     );
 
     this.frames = Assets.getResource("fountain");

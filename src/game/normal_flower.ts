@@ -4,6 +4,7 @@ import { Assets, AssetsToLoad } from "./assets";
 import { Entity } from "../library/entity";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { C } from "./constants";
+import { Vector2 } from "../library/geometry/vector2";
 
 let flowers = 0;
 
@@ -28,7 +29,7 @@ export class NormalFlower extends Entity {
   frame = 0;
   frames: Texture[];
 
-  constructor(level?: number) {
+  constructor(position: Vector2, level?: number) {
     super({
       name   : "Flower",
       texture: Assets.getResource("blueflower")[0],
@@ -43,8 +44,12 @@ export class NormalFlower extends Entity {
     }
 
     this.sprite.anchor.set(0.5, 0);
-    if (Math.random() > 0.5) this.sprite.scale.x *= -1;
 
+    // Vary flowers size/rotation
+    if (Math.random() > 0.5) this.sprite.scale.x *= -1;
+    let r = Math.random() + 0.5;
+    this.sprite.scale.set(r);
+    this.position = position.addY(256*(1-r));
     this.startCoroutine(`flower-update-${ ++flowers }`, this.flowerUpdate());
   }
 
