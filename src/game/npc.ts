@@ -29,7 +29,7 @@ export class NpcDialog extends Entity {
     this.text = new TextEntity({
       text    : "",
       fontSize: 80,
-      width   : 5000,
+      width   : 2000,
     });
 
     const yOffset = 200;
@@ -52,7 +52,14 @@ export class NpcDialog extends Entity {
   }
 
   private drawDialogBox(text: string): void {
-    const wid = this.text.calculateTextWidth(text);
+    let wid = this.text.calculateTextWidth(text);
+
+    if (wid > 2000) {
+      wid = 2000;
+      this.dialogHeight = 120 * 4;
+    } else {
+      this.dialogHeight = 120;
+    }
 
     this.graphic.clear();
     this.graphic.beginFill(0x0);
@@ -68,29 +75,42 @@ export class NpcDialog extends Entity {
     yield* this.writeDialog(dialog);
   }
 
-  *writeDialog(dialog: NpcDialogType): GameCoroutine {
+  *writeDialog(dialogs: NpcDialogType): GameCoroutine {
     let state = yield "next";
 
-    let textSoFar = "";
-    let fullText = dialog[0].text;
-
-    state.mode = "Dialog";
-
-    this.drawDialogBox(fullText);
     this.visible = true;
-    this.x = dialog[0].speaker.x;
-    this.y = dialog[0].speaker.y;
 
-    while (textSoFar.length < fullText.length) {
-      textSoFar += fullText[textSoFar.length];
+    for (const dialog of dialogs) {
+      let textSoFar = "";
+      let fullText = dialog.text;
+
+      state.mode = "Dialog";
+
+      this.drawDialogBox(fullText);
+      this.visible = true;
+      this.x = dialog.speaker.x;
+      this.y = dialog.speaker.y - 512;
+
+      while (textSoFar.length < fullText.length) {
+        textSoFar += fullText[textSoFar.length];
+        this.text.setText(textSoFar);
+
+        state = yield "next";
+
+        if (state.keys.justDown.X) {
+          break;
+        }
+      }
+
+      textSoFar = fullText;
       this.text.setText(textSoFar);
 
-      state = yield "next";
+      yield { untilKeyPress: "X" };
     }
 
-    yield { untilKeyPress: "X" };
-
     state.mode = "Normal";
+
+    this.visible = false;
   }
 
   update(state: IGameState) {

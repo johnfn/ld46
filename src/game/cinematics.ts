@@ -595,7 +595,7 @@ export class Cinematics {
 
     if (this.npc01CheckCount === 1) {
       yield* NpcDialog.StartDialog([
-        { speaker, text: "Huh? I sense something...", },
+        { speaker, text: "Huh? I sense something... la la lasdfas f sdaf dsf adslfjasdlf lkadsj flkdasf klaflkas flkjsflkadlskjf ", },
         { speaker, text: "Something weak... but new!", },
         { speaker, text: "Time Warrior, is that you?", },
         { speaker, text: "If you’re trying to talk to me, I’m sorry, but I can’t hear you.", },
@@ -604,16 +604,13 @@ export class Cinematics {
         { speaker, text: "You might even just be a random flower. In which case, howdy!", },
         { speaker, text: "...But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
       ]);
-
     } else {
-
       yield* NpcDialog.StartDialog([ 
         { speaker, text: "Time Warrior, is that you?", },
         { speaker, text: "As dryad ghosts, all we can really sense is sources of natural energy, and those are so scarce these days.", },
         { speaker, text: "In fact, I’m only sensing a tiny bit of energy right now. Other ghosts might not even be able to sense you at all.", },
         { speaker, text: "...But if you are the Time Warrior, I’m rooting for you! Go and make Withers rot!", },
       ]);
-
     }
 
     state.mode = "Normal"; 
