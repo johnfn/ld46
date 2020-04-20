@@ -289,22 +289,31 @@ export class Cinematics {
     state.mode = "Normal";
   }
 
+  public *outdoorOneHalf(): GameCoroutine { // functionally replaced by openingBud3
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* DialogBox.StartDialog([
+      { speaker: " ", text: "Passing by the fountain, you feel a change in the atmosphere.", },
+      { speaker: " ", text: "It radiates a spirit-replenshing energy.", },
+      { speaker: " ", text: "As you set foot in the soil beyond, your feet begin to tingle...", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
   public *outdoorBud2(): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog";
 
     yield* DialogBox.StartDialog([
-      { speaker: " ", text: "The softly trickling water in the fountain is calming to you.", },
-      { speaker: " ", text: "As you walk near it, you can feel it radiating natural energy.", },
-      { speaker: " ", text: "The fountain replenishes your spirit.", },
-      { speaker: " ", text: "Suddenly...", },
-        // GHOSTS AND FLOWERS APPEAR!
       {
         speaker: "Bud",
         text: "What’s up? You look startled.",
         branches: [
-          { text: "There's another person...", next: [
+          { text: "There's another person there...", next: [
             { speaker: "Bud", text: "What? Don’t be weird, heh. That’s impossible.", },
           ] },
           { text: "I think I see dead people?", next: [
@@ -530,8 +539,10 @@ export class Cinematics {
       { speaker: "Bud", text: "Kinda spooky!", },
     ]);
 
-    Withers.Instance.x = state.player.x - 6900;
-    Withers.Instance.y = state.player.y - 6900;
+    
+    Withers.Instance.x = state.player.x - 5000;
+    Withers.Instance.y = state.player.y - 5000;
+    
 
     state.mode = "Normal";
   }
