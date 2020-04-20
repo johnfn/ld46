@@ -12,6 +12,7 @@ import { Hud } from "./hud";
 import { NpcDialog } from "./npc";
 import { Sfx } from "./sfx";
 import { ParallaxLayers } from "./parallax_layers";
+import { Withers } from "./withers";
 
 export class Game extends BaseGame<typeof AssetsToLoad> {
   public static Instance: Game;
@@ -62,6 +63,8 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
     this.fixedCameraStage.addChild(new DialogOverlay());
     this.stage.addChild(new NpcDialog());
     this.fixedCameraStage.addChild(new Hud(this.state.spiritTotal));
+
+    this.stage.addChild(new Withers());
 
     if (DebugFlags["Show Initial Cinematic"]) {
       this.coroutineManager.startCoroutine(
