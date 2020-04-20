@@ -4,15 +4,24 @@ import { Assets, AssetsToLoad } from "./assets";
 import { Entity } from "../library/entity";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { C } from "./constants";
+import { Vector2 } from "../library/geometry/vector2";
 
 let flowers = 0;
 
-let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {1: "flower1", 2: "flower2", 3: "flower3", 4: "flower4"}
+let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {
+  1: "blueflower",
+  2: "pinkflower",
+  3: "yellowflowers",
+  4: "grass1",
+  5: "whitemushrooms",
+  6: "bluemushroom",
+}
+
 let flowersRate: {[key: number]: string[]} = {
-  0: ["flower1"],
-  1: ["flower2"],
-  2: ["flower3"],
-  3: ["flower4"],
+  0: ["yellowflowers"], //Sanctuary level
+  1: ["grass1"], //Vine level
+  2: ["whitemushrooms", "bluemushroom"], //Mushroom level
+  3: ["blueflower", "pinkflower", "blueflower", "grass1"]  //Tree level
 }
 
 export class NormalFlower extends Entity {
@@ -20,10 +29,10 @@ export class NormalFlower extends Entity {
   frame = 0;
   frames: Texture[];
 
-  constructor(level?: number) {
+  constructor(position: Vector2, level?: number) {
     super({
       name   : "Flower",
-      texture: Assets.getResource("flower1")[0],
+      texture: Assets.getResource("blueflower")[0],
     });
 
     if (level != undefined && level in flowersRate) {
@@ -35,8 +44,12 @@ export class NormalFlower extends Entity {
     }
 
     this.sprite.anchor.set(0.5, 0);
-    if (Math.random() > 0.5) this.sprite.scale.x *= -1;
 
+    // Vary flowers size/rotation
+    if (Math.random() > 0.5) this.sprite.scale.x *= -1;
+    let r = Math.random() + 0.5;
+    this.sprite.scale.set(r);
+    this.position = position.addY(256*(1-r));
     this.startCoroutine(`flower-update-${ ++flowers }`, this.flowerUpdate());
   }
 

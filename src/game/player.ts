@@ -7,9 +7,11 @@ import { Rect } from "../library/geometry/rect";
 import { Vine } from "./vine_flower";
 import { Vector2 } from "../library/geometry/vector2";
 import { BouncyShroom } from "./bouncy_shroom";
-import { Debug } from "../library/debug";
+import { Mode } from "Library";
+
 
 export class Player extends Entity {
+  activeModes: Mode[] = ["Normal", "Dialog"];
   public static StartPosition = new Vector2(800, 600);
   public static Instance: Player;
 
@@ -92,6 +94,7 @@ export class Player extends Entity {
     if (state.tick % 6 === 0) {
       this.frame = (this.frame + 1) % this.animState.length;
     }
+    this.graphic.texture = this.animState[this.frame];
   }
 
   public collisionBounds(): Rect {
@@ -220,10 +223,13 @@ export class Player extends Entity {
   }
 
   update(state: IGameState): void {
-    const touchingVine = this.hitInfo.interactions.find(x => x.otherEntity instanceof Vine) !== undefined;
 
     this.animate(state);
+
+    if (state.mode === "Dialog") {this.velocity = Vector2.Zero; return;}
     this.checkForDialogTriggers(state);
+
+    const touchingVine = this.hitInfo.interactions.find(x => x.otherEntity instanceof Vine) !== undefined;
     this.calculateVelocity(state, touchingVine);
 
     if (this.grounded) {
@@ -240,7 +246,6 @@ export class Player extends Entity {
       }
     }
 
-    this.graphic.texture = this.animState[this.frame];
     
     Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)));
 

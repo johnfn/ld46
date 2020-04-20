@@ -49,7 +49,6 @@ export class GameMap extends Entity {
           name     : "flower",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
             return null;
-            return new NormalFlower();
           }
         },
 
@@ -142,8 +141,6 @@ export class GameMap extends Entity {
     ],
       assets: Assets
     });
-
-    console.log(this.artMap);
     
     this.loadMap(Player.StartPosition);
 
@@ -184,12 +181,12 @@ export class GameMap extends Entity {
 
       for (let i = 0; i < numFlowers; i++) {
         let f: NormalFlower;
+        const position = region.rect.topLeft.addX(128).addX(Math.random()*(region.rect.width-256));
         if (region.properties["level"]) {
-          f = new NormalFlower(parseInt(region.properties["level"]))
+          f = new NormalFlower(position, parseInt(region.properties["level"]))
         } else {
-          f = new NormalFlower()
+          f = new NormalFlower(position)
         }
-        f.position = region.rect.topLeft.addX(128).addX(Math.random()*(region.rect.width-256))
         this.addChild(f)
       }
       
