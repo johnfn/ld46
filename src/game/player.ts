@@ -223,9 +223,11 @@ export class Player extends Entity {
     this.animate(state);
 
     if (state.mode === "Dialog") {
+      
+      // BUG: If you're in the air while entering dialog, you'll just stay there for the duration of dialog. 
+      
       this.velocity = Vector2.Zero;
       this.animState = this.idle;
-
       return;
     }
 
@@ -245,6 +247,8 @@ export class Player extends Entity {
     } else {
       if (touchingVine) {
         this.animState = this.climb;
+      } else {
+        this.animState = this.jump;
       }
     }
 

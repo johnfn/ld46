@@ -15,6 +15,7 @@ export class ParallaxLayers extends Entity {
     { speed: -0.15, texture: Assets.getResource("parallax bg/05 - forest back"), },
     { speed: -0.25 , texture: Assets.getResource("parallax bg/06 - city"), },
     { speed: -0.6 , texture: Assets.getResource("parallax bg/07 - forest"), },
+    { speed: -0.3 , texture: Assets.getResource("hub bg/hub_bg1"), },
   ];
 
   sprites: TilingSprite[] = [];
@@ -50,9 +51,7 @@ export class ParallaxLayers extends Entity {
       layer.y = C.CanvasHeight * this.scaleFactor - layer.height * this.scaleFactor;
     }
     
-
-
-    // this.sprites[6].alpha = 0;
+    this.changeBackground(0);
 
     // 00 - sky
     // 01 - skyline back
@@ -87,5 +86,21 @@ export class ParallaxLayers extends Entity {
     this.sprites[0].tilePosition.x += state.tick * -0.5;
     this.sprites[5].tilePosition.x += state.tick * -0.05;
     this.sprites[7].tilePosition.x += state.tick * -0.4;
+
+    // hub
+    this.sprites[8].tilePosition.y = state.camera.cameraFrame().y * this.layers[8].speed / 6;
+  }
+
+  changeBackground(backgroundIndex: number) {
+    // city
+    if (backgroundIndex === 0) {
+      this.sprites.forEach(spr => spr.visible = true);
+      this.sprites[8].visible = false;
+    }
+    // hub
+    else if (backgroundIndex === 1) {
+      this.sprites.forEach(spr => spr.visible = false);
+      this.sprites[8].visible = true;
+    }
   }
 }

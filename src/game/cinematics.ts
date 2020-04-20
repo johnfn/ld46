@@ -12,6 +12,7 @@ import { Vector2 } from "../library/geometry/vector2";
 import { NpcDialog } from "./npc";
 import { Entity } from "../library/entity";
 import { HubLocation } from "./hub_location";
+import { Withers } from "./withers";
 
 export type Tweenable =
   | number
@@ -177,7 +178,7 @@ export class Cinematics {
     yield { frames: 50 };
         
     for (let i = 0; i < 8; i++) {
-      bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 2);
+      bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 4);
       yield { frames: 2 };
     }
 
@@ -289,22 +290,31 @@ export class Cinematics {
     state.mode = "Normal";
   }
 
+  public *outdoorOneHalf(): GameCoroutine { // functionally replaced by openingBud3
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* DialogBox.StartDialog([
+      { speaker: " ", text: "Passing by the fountain, you feel a change in the atmosphere.", },
+      { speaker: " ", text: "It radiates a spirit-replenshing energy.", },
+      { speaker: " ", text: "As you set foot in the soil beyond, your feet begin to tingle...", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
   public *outdoorBud2(): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog";
 
     yield* DialogBox.StartDialog([
-      { speaker: " ", text: "The softly trickling water in the fountain is calming to you.", },
-      { speaker: " ", text: "As you walk near it, you can feel it radiating natural energy.", },
-      { speaker: " ", text: "The fountain replenishes your spirit.", },
-      { speaker: " ", text: "Suddenly...", },
-        // GHOSTS AND FLOWERS APPEAR!
       {
         speaker: "Bud",
         text: "What’s up? You look startled.",
         branches: [
-          { text: "There's another person...", next: [
+          { text: "There's another person there...", next: [
             { speaker: "Bud", text: "What? Don’t be weird, heh. That’s impossible.", },
           ] },
           { text: "I think I see dead people?", next: [
@@ -516,6 +526,24 @@ export class Cinematics {
       { speaker: "Bud", text: "YES! We can get to Withers' Lair now!", },
       { speaker: "Bud", text: `C’mon, ${ this.name }! Let’s go!`, },
     ]);
+
+    state.mode = "Normal";
+  }
+
+  public *lair01(): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* DialogBox.StartDialog([
+      { speaker: "Bud", text: "So this is Withers' Lair...", },
+      { speaker: "Bud", text: "Kinda spooky!", },
+    ]);
+
+    
+    Withers.Instance.x = state.player.x - 5000;
+    Withers.Instance.y = state.player.y - 5000;
+    
 
     state.mode = "Normal";
   }

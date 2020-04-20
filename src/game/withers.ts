@@ -19,10 +19,14 @@ export class Withers extends Entity {
     Withers.Instance = this;
   }
 
+  /*
+  
   update(state: IGameState) {
     this.texture = this.frames[Math.floor(state.tick / 8) % this.frames.length];
 
     this.x = state.player.x - 2000;
     this.y = state.player.y - 2000;
   }
+
+  */
 }
