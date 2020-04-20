@@ -27,6 +27,15 @@ export class Sfx extends Entity {
   public useSpirit   = Assets.getResource("sound effects/use spirit");
   public waterfall   = Assets.getResource("sound effects/waterfall");
 
+  public stepGrass1   = Assets.getResource("sound effects/step grass 1")
+  public stepGrass2  = Assets.getResource("sound effects/step grass 2")
+  public stepGrass3   = Assets.getResource("sound effects/step grass 3")
+  public stepStone1   = Assets.getResource("sound effects/step stone 1")
+  public stepStone2   = Assets.getResource("sound effects/step stone 2")
+  public stepStone3   = Assets.getResource("sound effects/step stone 3")
+  public stepWood1   = Assets.getResource("sound effects/step wood 1")
+  public stepWood2   = Assets.getResource("sound effects/step wood 2")
+  public stepWood3   = Assets.getResource("sound effects/step wood 3")
   constructor() {
     super({ name: "Sfx" });
 

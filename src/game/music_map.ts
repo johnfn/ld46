@@ -14,7 +14,7 @@ type AudioNames = {
 
 export class MusicMap extends Entity {
   musicRegionsMap: TiledTilemap;
-  musicRegions   : TilemapRegion[] = [];
+  static musicRegions   : TilemapRegion[] = [];
 
   constructor() {
     super({
@@ -29,7 +29,7 @@ export class MusicMap extends Entity {
         type     : "rect",
         layerName: "Music Regions",
         process  : (rect: TilemapRegion) => {
-          this.musicRegions.push(rect);
+          MusicMap.musicRegions.push(rect);
         }
       }],
       assets: Assets,
@@ -56,7 +56,7 @@ export class MusicMap extends Entity {
   }
 
   update(state: IGameState) {
-    const songPathsToPlay = this.musicRegions.filter(r => r.rect.contains(state.player.position)).map(k => k.properties["file"]);
+    const songPathsToPlay = MusicMap.musicRegions.filter(r => r.rect.contains(state.player.position)).map(k => k.properties["file"]);
 
     for (const musicPath of Object.keys(this.allMusic)) {
       const songObj = this.allMusic[musicPath];

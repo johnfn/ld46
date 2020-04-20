@@ -11,6 +11,7 @@ import { Bud } from "./bud";
 import { Vector2 } from "../library/geometry/vector2";
 import { NpcDialog } from "./npc";
 import { Entity } from "../library/entity";
+import { HubLocation } from "./hub_location";
 import { Withers } from "./withers";
 
 export type Tweenable =
@@ -1291,6 +1292,26 @@ export class Cinematics {
       }
     }
 
+  public *teleportBackToHub(): GameCoroutine {
+    let state = yield "next";
+
+    yield* this.fadeScreenToPercentage({ percentage: 100, time: 90, state });
+
+    state.player.x = HubLocation.Instance.x;
+    state.player.y = HubLocation.Instance.y;
+
+    yield* DialogOverlay.StartDialog([
+      { speaker: "Herald", text: "...A mysterious force returns you to the Hub...", },
+    ]);
+
+    state.mode = "Normal"; // let player fall
+
+    state.camera.centerOn(state.player, true);
+    state.camera.update(state);
+
+    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state });
+  }
+
   wisteriaCheckCount = 0;
   public *wisteria(): GameCoroutine {
     this.wisteriaCheckCount = this.wisteriaCheckCount + 1;
@@ -1305,17 +1326,14 @@ export class Cinematics {
       yield* DialogBox.StartDialog([
         { text: "You reach out to the wisteria. It seems to grow stronger in your presence.", },
         { text: "Verdant energy starts to flow through you.", },
-        // the wisteria GROWS POWERFUL
-        // spirit slots increase!
         { text: "Your number of Spirit Slots increased!", },
       ]);
 
+      yield* this.teleportBackToHub();
     } else {
-
       yield* DialogBox.StartDialog([
         { text: "The wisteria stands majestically before you. It blooms with vigor.", },
       ]);
-
     }
 
     state.mode = "Normal";
@@ -1338,6 +1356,7 @@ export class Cinematics {
         { text: "Your number of Spirit Slots increased!", },
       ]);
 
+      this.teleportBackToHub();
     } else {
 
       yield* DialogBox.StartDialog([
