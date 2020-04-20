@@ -149,7 +149,7 @@ export class Cinematics {
     }
     */
 
-    yield* this.openingBud2(); // comment this out later
+    // yield* this.openingBud2(); // comment this out later
   }
 
   public *openingBud2(): GameCoroutine {
@@ -167,26 +167,33 @@ export class Cinematics {
       { speaker: "???", text: "Huh? What was that sound?", },
     ]);
       
-      bud.sprite.scale.x = bud.sprite.scale.x * -1;
+    bud.sprite.scale.x = bud.sprite.scale.x * -1;
   
-      yield { frames: 15 };
-      
-      // bud goes !
-      state.sfx.climaxSweep.play();
+    yield { frames: 40 };
+        
+    //new Entity({ texture: Assets.getResource(exclamation) })
+    state.sfx.alertNoise.play();
 
-      yield { frames: 30 };
-      
-      for (let i = 0; i < 6; i++) {
-        bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 2);
-        yield { frames: 4 };
-      }
+    yield { frames: 50 };
+        
+    for (let i = 0; i < 8; i++) {
+      bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 2);
+      yield { frames: 2 };
+    }
 
     yield* DialogBox.StartDialog([
       { speaker: "???", text: "HOLY CANOPIES!", },
       { speaker: "???", text: "AM I DREAMING??? I WISH I COULD PINCH MYSELF!", },
       { speaker: "???", text: "I’VE BEEN WAITING FOR THIS MOMENT FOR SO LONG!", },
       { speaker: "???", text: "HIHIHIHIHIHIHI", },
-        // bud rushes over to herald
+    ]);
+      
+    for (let i = 0; i < 10; i++) {
+      bud.x = bud.x - 100;
+      yield { frames: 1 };
+    }
+
+    yield* DialogBox.StartDialog([
       {
         speaker: "???",
         text: `So... this is real? You’re really awake, ${ this.name }?`,
@@ -202,10 +209,10 @@ export class Cinematics {
           ] },
         ]
       },
-      { speaker: "???", text: "Follow me!!! I’ll show you to the forest!", },
+      { speaker: "???", text: "C'mon! Let's go to the forest!", },
       { speaker: "???", text: "Or... what used to be the forest...", },
       { speaker: "???", text: "...but that doesn’t matter! You’re awake now! You'll make things better!", },
-      { speaker: "???", text: "C’MON!!!!", },
+      { speaker: "???", text: "C’MON!!!! It's just over to the right!", },
     ]);
   
     state.budFollowing = true;
