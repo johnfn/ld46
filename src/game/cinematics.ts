@@ -158,35 +158,21 @@ export class Cinematics {
 
     yield* DialogBox.StartDialog([ 
       { speaker: "Bud", text: "Huh? What was that stepping sound?", },
-      { text: "ok so bud turns around here but we'll animate this in later maybe", },
+      { text: "(ok so bud turns around here but we'll animate this in later maybe)", },
         // AT LEAST I HOPE SO
-      { speaker: "Bud", text: "HOLY CANOPIES! AM I DREAMING???", },
-      { speaker: "Bud", text: "I WISH I COULD PINCH MYSELF!! I’VE BEEN WAITING FOR THIS MOMENT FOR SO LONG!", },
+      { speaker: "Bud", text: "HOLY CANOPIES!", },
+      { speaker: "Bud", text: "AM I DREAMING??? I WISH I COULD PINCH MYSELF!", },
+      { speaker: "Bud", text: "I’VE BEEN WAITING FOR THIS MOMENT FOR SO LONG!", },
+      { speaker: "Bud", text: "HIHIHIHIHIHIHI", },
+        // bud rushes over to herald
       { speaker: "Bud", text: "So... this is real? You’re really awake?", },
         // here there’s a yes or no choice. we can program that in later
-      { speaker: "Bud", text: "Wait... you don’t look as excited as I am.", },
-      { speaker: "Bud", text: "Could it be...? Nah, that’s impossible.", },
-      { speaker: "Bud", text: "You remember me, right?", },
-      { speaker: "Bud", text: "...", },
-      { speaker: "Bud", text: "...You really don’t remember? No way.", },
-      { speaker: "Bud", text: "We were friends for life! From the battlefield to the dinner table!", },
-      { speaker: "Bud", text: "...Nothing, huh?", },
-      { speaker: "Bud", text: "Wow. This really sucks.", },
-      { speaker: "Bud", text: "Do you even remember who you are?", },
-        // heres’s another yes or no choice except both choices yield the same thing
-      { speaker: "Bud", text: "Whoa. That’s kinda trippy.", },
-      { speaker: "Bud", text: "Well, let me be of assistance!", },
-      { speaker: "Bud", text: "I’m Bud, your spirit partner! We’ve had a spirit link for... gosh, as long as I can remember.", },
-      { speaker: "Bud", text: "People from all over knew us and loved us. But you were the main guy, of course.", },
-      { speaker: "Bud", text: "Your name was one that the world remembered fondly...", },
-        // player enters name! idk how to do that
-      { speaker: "Bud", text: "$NAME, savior of the Pastoria Forest!", },
-      { speaker: "Bud", text: "But... heh. I guess the Pastoria Forest is long, long gone.", },
-      { speaker: "Bud", text: "It’s been gone for about five hundred years, in fact.", },
-      { speaker: "Bud", text: "But that’s why you’re here! You’ll make things right again!", },
-        // another choice where both options lead to the same thing
-      { speaker: "Bud", text: "Well...", },
-      { speaker: "Bud", text: "Actually, let’s take a look around. You can see it for yourself.", },
+      { text: "(there’s a yes or no choice here, assume player says yes for now)", }, 
+      { speaker: "Bud", text: "YESS!!! Oh my gosh, there’s so much to show you!", },
+      { speaker: "Bud", text: "Follow me!!! I’ll show you the forest!", },
+      { speaker: "Bud", text: "Or… what used to be the forest…", },
+      { speaker: "Bud", text: "…but that doesn’t matter! You’re awake now! Things will become better!", },
+      { speaker: "Bud", text: "C’MON!!!!", },
     ]);
 
     state.budFollowing = true;
