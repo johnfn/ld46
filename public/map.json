@@ -1,12 +1,4 @@
-{ "compressionlevel":-1,
- "editorsettings":
-    {
-     "export":
-        {
-         "target":"."
-        }
-    },
- "height":32,
+{ "height":32,
  "infinite":true,
  "layers":[
         {
@@ -173,7 +165,7 @@
                  "y":-16
                 }, 
                 {
-                 "data":[2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2684354569, 0, 0, 0, 0, 0, 0, 2684354569, 0, 0, 0, 0, 2, 0, 0, 0, 2684354569, 0, 0, 0, 0, 0, 0, 2684354569, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2684354569, 0, 0, 0, 0, 2684354569, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2684354569, 2684354569, 2684354569, 2684354569, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 "data":[2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  "height":16,
                  "width":16,
                  "x":48,
@@ -1613,9 +1605,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -1631,9 +1633,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -1649,9 +1661,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -1667,9 +1689,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -1685,9 +1717,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -1775,9 +1817,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -1829,9 +1881,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -1919,9 +1981,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -1955,9 +2027,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2009,9 +2091,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2045,9 +2137,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2117,9 +2219,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2171,9 +2283,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2225,9 +2347,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2279,9 +2411,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2297,9 +2439,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2387,9 +2539,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2423,9 +2585,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2441,9 +2613,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2513,9 +2695,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -2567,9 +2759,19 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"npc01"
+                        }, 
+                        {
+                         "name":"imagepath",
+                         "type":"string",
+                         "value":"npc1"
+                        }, 
+                        {
                          "name":"name",
                          "type":"string",
-                         "value":"npc"
+                         "value":"interactable"
                         }],
                  "rotation":0,
                  "type":"",
@@ -3258,7 +3460,7 @@
  "nextobjectid":309,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.3.3",
+ "tiledversion":"1.2.3",
  "tileheight":256,
  "tilesets":[
         {
