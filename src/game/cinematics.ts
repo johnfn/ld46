@@ -974,10 +974,11 @@ export class Cinematics {
     state.mode = "Dialog";
 
     yield* NpcDialog.StartDialog([
-      { speaker, text: "I'm so scared...", },
-      { speaker, text: "I can't sense anything anymore.", },
-      { speaker, text: "I miss my friends and my family...", },
-      { speaker, text: "Mom? Is that you?", },
+      { speaker, text: "We wisps do talk a lot, but that's because we're so faded away!", },
+      { speaker, text: "If we don't talk randomly, how would we remember our history?", },
+      { speaker, text: "Like our tradition of rooting for people by rooting into the ground!", },
+      { speaker, text: "Or the escapades our intrepid President, Grower Leafland!", },
+      { speaker, text: "I'm so excited for the Time Warrior to wake up. So I can have another person to talk to.", },
     ]);
 
     state.mode = "Normal";
