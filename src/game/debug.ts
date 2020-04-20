@@ -8,4 +8,6 @@ export const DebugFlags = ReadDebugFlagsFromLocalStorage({
   "Show Flowers in Hierarchy"    : false,
   "Fairy Follows You Immediately": false,
   "High Performance"             : false,
+  "Have Vine Perma"          : false,
+  "Have Shroom Perma"            : false,
 });

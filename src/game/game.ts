@@ -31,7 +31,9 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
         tick         : 0,
         spiritTotal  : 3,
         spiritUnused : 3,
-        budFollowing : DebugFlags["Fairy Follows You Immediately"],
+        budFollowing   : DebugFlags["Fairy Follows You Immediately"],
+        haveVinePerma  : DebugFlags["Have Vine Perma"],
+        haveShroomPerma: DebugFlags["Have Shroom Perma"],
 
         // These are set later.
         sfx          : undefined as any,

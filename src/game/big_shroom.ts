@@ -36,13 +36,14 @@ export class BigShroom extends Entity {
     if (state.player.position.distance(this.position) < this.interactionDistance) {
       this.hoverText.visible = true;
 
-      if (state.keys.justDown.X && !this.interacted && state.spiritUnused >= 1) {
-        state.spiritTotal += 1;
-        state.spiritUnused = state.spiritTotal;
+      if (state.keys.justDown.X) {
+        if (!this.interacted) {
+          state.sfx.useSpirit.play();
 
-        this.interacted = true;
-        state.sfx.useSpirit.play();
-        this.startCoroutine("animateAlive", this.animateAlive())
+          this.startCoroutine("animateAlive", this.animateAlive());
+        } else {
+          this.startCoroutine("shroomtalk", state.cinematics.bigMush());
+        }
       }
     } else {
       this.hoverText.visible = false;
@@ -55,5 +56,15 @@ export class BigShroom extends Entity {
 
       yield { frames: 8 };
     }
+
+    const state = yield "next";
+
+    state.spiritTotal += 1;
+    state.spiritUnused = state.spiritTotal;
+    state.haveShroomPerma = true;
+
+    this.interacted = true;
+
+    yield* state.cinematics.wisteria();
   }
 }
