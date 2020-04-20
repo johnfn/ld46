@@ -7,7 +7,7 @@ import { Assets } from "./assets";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { Rect } from "../library/geometry/rect";
 import { Vector2 } from "../library/geometry/vector2";
-import { Debug } from "../library/debug";
+import { Sfx } from "./sfx";
 
 class VineComponent extends Entity {
   public frame = 0;
@@ -42,7 +42,7 @@ export class Vine extends Entity {
 
     this.visible = true;
 
-    for (let i = 0; true; i++) {
+    for (let i = 1; true; i++) {
       const ent = new VineComponent();
       ent.setFrame(0);
 
@@ -113,12 +113,15 @@ export class VineFlower extends Entity {
   interacted = false;
 
   vine: Vine;
+  frames: Texture[];
 
   constructor(tex: Texture) {
     super({
       name   : "VineFlower",
-      texture: tex,
+      texture: Assets.getResource("vine_flower_live")[0],
     });
+
+    this.frames = Assets.getResource("vine_flower_live");
 
     this.addChild(this.hoverText = new HoverText("x: interact"), 0, -80);
     this.hoverText.visible = false;
@@ -130,6 +133,14 @@ export class VineFlower extends Entity {
     this.vine.visible = false;
   }
 
+  *animateAlive(): GameCoroutine {
+    for (let i = 0; i < this.frames.length; i++) {
+      this.texture = this.frames[i];
+
+      yield { frames: 8 };
+    }
+  }
+
   update(state: IGameState) {
     if (state.player.position.distance(this.position) < this.interactionDistance) {
       this.hoverText.visible = true;
@@ -138,6 +149,10 @@ export class VineFlower extends Entity {
         state.spiritUnused -= 1;
 
         this.interacted = true;
+
+        Sfx.UseSpirit.play();
+
+        this.startCoroutine("animateAlive", this.animateAlive())
         this.startCoroutine("growVine", this.vine.growVine());
       }
     } else {

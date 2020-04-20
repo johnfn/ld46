@@ -138,6 +138,35 @@ export type AssetPath =
   | "flower3 (3).png"
   | "flower3 (4).png"
   | "flower3 (5).png"
+  | "flowers/blueflower (1).png"
+  | "flowers/blueflower (2).png"
+  | "flowers/blueflower (3).png"
+  | "flowers/blueflower (4).png"
+  | "flowers/blueflower (5).png"
+  | "flowers/blueflower (6).png"
+  | "flowers/grass1 (1).png"
+  | "flowers/grass1 (2).png"
+  | "flowers/grass1 (3).png"
+  | "flowers/grass1 (4).png"
+  | "flowers/pinkflower (1).png"
+  | "flowers/pinkflower (2).png"
+  | "flowers/pinkflower (3).png"
+  | "flowers/pinkflower (4).png"
+  | "flowers/pinkflower (5).png"
+  | "flowers/pinkflower (6).png"
+  | "flowers/shroom1 (1).png"
+  | "flowers/shroom1 (2).png"
+  | "flowers/shroom1 (3).png"
+  | "flowers/shroom1 (4).png"
+  | "flowers/shroom2 (1).png"
+  | "flowers/shroom2 (2).png"
+  | "flowers/shroom2 (3).png"
+  | "flowers/shroom2 (4).png"
+  | "flowers/yellowflowers (1).png"
+  | "flowers/yellowflowers (2).png"
+  | "flowers/yellowflowers (3).png"
+  | "flowers/yellowflowers (4).png"
+  | "flowers/yellowflowers (5).png"
   | "flowey (1).png"
   | "flowey (2).png"
   | "flowey (3).png"
@@ -365,6 +394,65 @@ export const AssetsToLoad = {
       "flower3 (3).png",
       "flower3 (4).png",
       "flower3 (5).png",
+    ],
+  },
+  "flowers/blueflower": {
+    type: "Animation" as const,
+    paths: [
+      "flowers/blueflower (1).png",
+      "flowers/blueflower (2).png",
+      "flowers/blueflower (3).png",
+      "flowers/blueflower (4).png",
+      "flowers/blueflower (5).png",
+      "flowers/blueflower (6).png",
+    ],
+  },
+  "flowers/grass1": {
+    type: "Animation" as const,
+    paths: [
+      "flowers/grass1 (1).png",
+      "flowers/grass1 (2).png",
+      "flowers/grass1 (3).png",
+      "flowers/grass1 (4).png",
+    ],
+  },
+  "flowers/pinkflower": {
+    type: "Animation" as const,
+    paths: [
+      "flowers/pinkflower (1).png",
+      "flowers/pinkflower (2).png",
+      "flowers/pinkflower (3).png",
+      "flowers/pinkflower (4).png",
+      "flowers/pinkflower (5).png",
+      "flowers/pinkflower (6).png",
+    ],
+  },
+  "flowers/shroom1": {
+    type: "Animation" as const,
+    paths: [
+      "flowers/shroom1 (1).png",
+      "flowers/shroom1 (2).png",
+      "flowers/shroom1 (3).png",
+      "flowers/shroom1 (4).png",
+    ],
+  },
+  "flowers/shroom2": {
+    type: "Animation" as const,
+    paths: [
+      "flowers/shroom2 (1).png",
+      "flowers/shroom2 (2).png",
+      "flowers/shroom2 (3).png",
+      "flowers/shroom2 (4).png",
+    ],
+  },
+  "flowers/yellowflowers": {
+    type: "Animation" as const,
+    paths: [
+      "flowers/yellowflowers (1).png",
+      "flowers/yellowflowers (2).png",
+      "flowers/yellowflowers (3).png",
+      "flowers/yellowflowers (4).png",
+      "flowers/yellowflowers (5).png",
     ],
   },
   "flowey": {
