@@ -1029,14 +1029,15 @@ export class Cinematics {
       yield* DialogBox.StartDialog([ 
         { text: "You reach out to the wisteria. It seems to grow stronger in your presence.", },
         { text: "Verdant energy starts to flow through you.", },
-        // spirit slots increase! 
+        // the wisteria GROWS POWERFUL
+        // spirit slots increase!
         { text: "Your number of Spirit Slots increased!", },
       ]);
     
     } else {
 
       yield* DialogBox.StartDialog([ 
-        { text: "The wisteria stands majestically before you. Its trunk is straighter than it was when you first saw it.", },  
+        { text: "The wisteria stands majestically before you. It blooms with vigor.", },  
       ]);
 
     }
@@ -1058,6 +1059,7 @@ export class Cinematics {
       yield* DialogBox.StartDialog([ 
         { text: "The giant mushroom is cool to the touch.", },
         { text: "Buoyant energy starts to flow through you.", },
+        // the mushroom HEALS
         // spirit slots increase! 
         { text: "Your number of Spirit Slots increased!", },
       ]);
