@@ -2941,24 +2941,6 @@
                  "y":-1792
                 }, 
                 {
-                 "gid":41,
-                 "height":256,
-                 "id":439,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"name",
-                         "type":"string",
-                         "value":"start"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":256,
-                 "x":10741.5652173913,
-                 "y":1761.63210702341
-                }, 
-                {
                  "gid":50,
                  "height":256,
                  "id":439,
@@ -2989,7 +2971,25 @@
                 {
                  "gid":42,
                  "height":256,
-                 "id":443,
+                 "id":445,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"start"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":10752,
+                 "y":2048
+                }, 
+                {
+                 "gid":43,
+                 "height":256,
+                 "id":446,
                  "name":"",
                  "properties":[
                         {
@@ -3001,8 +3001,8 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":39680,
-                 "y":-21760
+                 "x":13568,
+                 "y":2168.3007518797
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -3669,7 +3669,7 @@
          "name":"Dialog Trigger Layer",
          "objects":[
                 {
-                 "height":2816,
+                 "height":2304,
                  "id":79,
                  "name":"",
                  "properties":[
@@ -3681,9 +3681,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":512,
-                 "x":11776,
-                 "y":0
+                 "width":256,
+                 "x":11520,
+                 "y":256
                 }, 
                 {
                  "height":2816,
@@ -3905,6 +3905,23 @@
                  "width":256,
                  "x":41216,
                  "y":-22784
+                }, 
+                {
+                 "height":2304,
+                 "id":447,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"dialog",
+                         "type":"string",
+                         "value":"openingBud2"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":11776,
+                 "y":256
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -4067,7 +4084,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":444,
+ "nextobjectid":448,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",
