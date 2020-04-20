@@ -7,6 +7,8 @@ export class Sfx {
   public static VoiceSound4 = Assets.getResource("sound effects/voices/voice 4");
   public static VoiceWithers= Assets.getResource("sound effects/voices/voice withers");
 
+  public static UseSpirit   = Assets.getResource("sound effects/use spirit");
+
   public static PlayVoiceSound1(tick: number) {
     if (tick % 5 === 0) {
       Sfx.VoiceSound1.currentTime = 0;
