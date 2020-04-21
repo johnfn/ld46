@@ -235,7 +235,7 @@ export class Cinematics {
       { speaker: "???", text: "C’MON!!!! It's just over to the right!", },
     ]);
 
-    bud.scale = new Vector2(-1, 1);
+    bud.scale = new Vector2(0.5, 0.5);
 
     state.budFollowing = true;
 
@@ -604,9 +604,18 @@ export class Cinematics {
     yield { frames: 20};
 
     yield* DialogBox.StartDialog([
-      
       { speaker: "Withers", text: `Hello, ${ this.name }.`, },
       { speaker: "Withers", text: "I’ve been expecting you.", },
+    ]);
+
+    state.budFollowing = false;
+
+    for (let i = 0; i < 10; i++) {
+      Bud.Instance.x = Bud.Instance.x - 100;
+      yield { frames: 1 };
+    }
+
+    yield* DialogBox.StartDialog([
       { speaker: "Bud", text: "Master! Master! I’ve done as you asked!", },
       { speaker: "Withers", text: "Very good, Bud.", },
       { speaker: "Bud", text: "I’ve brought you the dirty dryad!", },

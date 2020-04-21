@@ -67,22 +67,23 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
 
     this.stage.addChild(new Withers());
 
-    if (DebugFlags["Show Initial Cinematic"]) {
-      this.coroutineManager.startCoroutine(
-        "Initial Cinematic",
-        this.cinematics.openingCinematic(),
-        this
-      );
-    }
+    if (DebugFlags["Show Menu"]) {
+      this.state.mode = "Menu";
+      const titlescreen = new TitleScreen({
+        fontSize: 40,
+        width   : 700,
+      });
 
-    // this.state.mode = "Menu";
-    
-    // const titlescreen = new TitleScreen({
-    //   fontSize: 40,
-    //   width   : 700,
-    // })
-    // titlescreen.sprite.scale.set(8/3)
-    // this.fixedCameraStage.addChild(titlescreen)
-  
+      titlescreen.sprite.scale.set(8/3)
+      this.fixedCameraStage.addChild(titlescreen)
+    } else {
+      if (DebugFlags["Show Initial Cinematic"]) {
+        this.coroutineManager.startCoroutine(
+          "Initial Cinematic",
+          this.cinematics.openingCinematic(),
+          this
+        );
+      }
+    }
   }
 }

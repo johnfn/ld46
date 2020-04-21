@@ -95,6 +95,9 @@ export type AssetPath =
   | "bud/bud_idle_0000.png"
   | "bud/bud_idle_0001.png"
   | "bud/bud_idle_0002.png"
+  | "bud/bud_idle_angery_0000.png"
+  | "bud/bud_idle_angery_0001.png"
+  | "bud/bud_idle_angery_0002.png"
   | "char_climb (1).png"
   | "char_climb (2).png"
   | "char_climb (3).png"
@@ -331,6 +334,14 @@ export const AssetsToLoad = {
       "bud/bud_idle_0000.png",
       "bud/bud_idle_0001.png",
       "bud/bud_idle_0002.png",
+    ],
+  },
+  "bud/bud_idle_angery": {
+    type: "Animation" as const,
+    paths: [
+      "bud/bud_idle_angery_0000.png",
+      "bud/bud_idle_angery_0001.png",
+      "bud/bud_idle_angery_0002.png",
     ],
   },
   "char_climb": {
