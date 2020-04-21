@@ -3234,7 +3234,7 @@
                 {
                  "gid":42,
                  "height":256,
-                 "id":482,
+                 "id":522,
                  "name":"",
                  "properties":[
                         {
@@ -3246,8 +3246,8 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":37632,
-                 "y":-21248
+                 "x":48128,
+                 "y":-8448
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -4306,7 +4306,7 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":47616,
+                 "x":47104,
                  "y":-9984
                 }, 
                 {
@@ -4521,7 +4521,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":521,
+ "nextobjectid":524,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",
