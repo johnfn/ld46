@@ -36,5 +36,4 @@ export class Withers extends Entity {
       this.sprite.y += yOffset;
     }
   }
-  */
 }
