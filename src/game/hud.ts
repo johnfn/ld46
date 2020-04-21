@@ -16,12 +16,12 @@ class SpiritMeter extends Entity {
     })
     this.addChild(this.blackBackground);
     this.blackBackground.sprite.alpha = 0.8
-    this.blackBackground.sprite.scale.x = 2.5 / 1.1;
+    this.blackBackground.sprite.scale.x = 3.7;
     this.blackBackground.sprite.scale.y = 2 / 1.1;
     this.blackBackground.sprite.pivot.x = 0.5;
     this.blackBackground.sprite.pivot.y = 0.5;
     this.blackBackground.sprite.rotation = -0.07;
-    this.blackBackground.x = -140;
+    this.blackBackground.x = -260;
     this.blackBackground.y = -20;
 
     for (let i = 0; i < 10; i++) {

@@ -178,14 +178,27 @@ export class Cinematics {
 
     yield { frames: 40 };
 
-    //new Entity({ texture: Assets.getResource(exclamation) })
+    const exclamation = new Entity({
+      name: "exclamation",
+      texture: Assets.getResource("exclamation"),
+    })
+
+    state.stage.addChild(exclamation);
+
+    exclamation.scale = new Vector2(0.5, 0.5);
+
+    exclamation.x = bud.x - 180;
+    exclamation.y = bud.y - 200;
+
     state.sfx.alertNoise.play();
 
     yield { frames: 50 };
 
+    exclamation.alpha = 0;
+
     for (let i = 0; i < 8; i++) {
       bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 4);
-      yield { frames: 2 };
+      yield { frames: 1 };
     }
 
     yield* DialogBox.StartDialog([
@@ -221,6 +234,8 @@ export class Cinematics {
       { speaker: "???", text: "...but that doesn’t matter! You’re awake now! You'll make things better!", },
       { speaker: "???", text: "C’MON!!!! It's just over to the right!", },
     ]);
+
+    bud.scale = new Vector2(-1, 1);
 
     state.budFollowing = true;
 
@@ -551,45 +566,6 @@ export class Cinematics {
     Withers.Instance.y = state.player.y - 200;
     Withers.Instance.sprite.scale.x = Withers.Instance.sprite.scale.x * -1;
 
-    const newNPC1 = new Entity({
-      name: "NewNPC1",
-      texture: Assets.getResource("npc1"),
-    });
-
-    state.stage.addChild(newNPC1);
-
-    const newNPC2 = new Entity({
-      name: "NewNPC2",
-      texture: Assets.getResource("npc2"),
-    });
-
-    const newNPC3 = new Entity({
-      name: "NewNPC3",
-      texture: Assets.getResource("npc3"),
-    });
-
-    const newNPC4 = new Entity({
-      name: "NewNPC4",
-      texture: Assets.getResource("npc5"),
-    });
-
-    state.stage.addChild(newNPC1);
-    state.stage.addChild(newNPC2);
-    state.stage.addChild(newNPC3);
-    state.stage.addChild(newNPC4);
-
-    newNPC1.x = state.player.x - 4500;
-    newNPC1.y = state.player.y - 200;
-
-    newNPC2.x = state.player.x - 4200;
-    newNPC2.y = state.player.y - 200;
-
-    newNPC3.x = state.player.x - 4000;
-    newNPC3.y = state.player.y - 200;
-
-    newNPC4.x = state.player.x - 4700;
-    newNPC4.y = state.player.y - 200;
-
     state.mode = "Normal";
   }
 
@@ -620,6 +596,7 @@ export class Cinematics {
       { speaker: "Withers", text: "Unless, of course...", },
       { speaker: "Withers", text: "There happened to be one left.", },
     ]);
+    
 
     yield { frames: 10 };
     Withers.Instance.sprite.scale.x = Withers.Instance.sprite.scale.x * -1;
@@ -627,6 +604,7 @@ export class Cinematics {
     yield { frames: 20};
 
     yield* DialogBox.StartDialog([
+      
       { speaker: "Withers", text: `Hello, ${ this.name }.`, },
       { speaker: "Withers", text: "I’ve been expecting you.", },
       { speaker: "Bud", text: "Master! Master! I’ve done as you asked!", },
@@ -689,10 +667,28 @@ export class Cinematics {
           ] },
         ]
       },
+      
       { speaker: "Withers", text: "DARK BLAST HAH", },
     ]);
 
-        // ball of darkness shoots at herald
+    const notBeam = new Entity({
+      name: "notBeam",
+      texture: Assets.getResource("notbeam/notbeam")[0],
+    })
+
+    state.stage.addChild(notBeam);
+
+    notBeam.scale = new Vector2(-0.1, 0.1);
+
+    notBeam.x = Withers.Instance.x + 600;
+    notBeam.y = Withers.Instance.y + 300;
+
+    for (let i = 0; i < 17; i++) {
+      notBeam.x = notBeam.x + 110;
+      yield { frames: 1 };
+    }
+
+    notBeam.alpha = 0;
 
     yield* DialogBox.StartDialog([
       { speaker: " ", text: "(You feel a burning in your chest.)", },
@@ -706,7 +702,58 @@ export class Cinematics {
       { speaker: "Withers", text: "What’s going on?", },
     ]);
 
-        // npc ghosts appear
+    const newNPC1 = new Entity({
+      name: "NewNPC1",
+      texture: Assets.getResource("npc1"),
+    });
+
+    state.stage.addChild(newNPC1);
+
+    const newNPC2 = new Entity({
+      name: "NewNPC2",
+      texture: Assets.getResource("npc2"),
+    });
+
+    const newNPC3 = new Entity({
+      name: "NewNPC3",
+      texture: Assets.getResource("npc3"),
+    });
+
+    const newNPC4 = new Entity({
+      name: "NewNPC4",
+      texture: Assets.getResource("npc5"),
+    });
+
+    state.stage.addChild(newNPC1);
+    state.stage.addChild(newNPC2);
+    state.stage.addChild(newNPC3);
+    state.stage.addChild(newNPC4);
+
+    newNPC1.x = state.player.x + 200;
+    newNPC1.y = state.player.y - 200;
+
+    newNPC2.x = state.player.x + 300;
+    newNPC2.y = state.player.y - 200;
+
+    newNPC3.x = state.player.x - 300;
+    newNPC3.y = state.player.y - 200;
+
+    newNPC4.x = state.player.x - 100;
+    newNPC4.y = state.player.y - 200;
+
+    newNPC1.alpha = 0;
+    newNPC2.alpha = 0;
+    newNPC3.alpha = 0;
+    newNPC4.alpha = 0;
+
+    for (let i = 0; i < 10; i++) {
+      newNPC1.alpha = newNPC1.alpha + 0.1;
+      newNPC2.alpha = newNPC2.alpha + 0.1;
+      newNPC3.alpha = newNPC3.alpha + 0.1;
+      newNPC4.alpha = newNPC3.alpha + 0.1;
+
+      yield { frames: 1 };
+    }
 
     yield* DialogBox.StartDialog([
       { speaker: "Bud", text: "Uh... Master...", },
@@ -722,7 +769,23 @@ export class Cinematics {
       { speaker: "Withers", text: "What. The hell.", },
     ]);
 
-        // tries to shoot dark blast a few more times
+    notBeam.alpha = 1; 
+
+    notBeam.x = Withers.Instance.x + 600;
+
+    for (let i = 0; i < 10; i++) {
+      notBeam.x = notBeam.x + 200;
+      yield { frames: 1 };
+    }
+
+    notBeam.x = Withers.Instance.x + 600;
+
+    for (let i = 0; i < 10; i++) {
+      notBeam.x = notBeam.x + 200;
+      yield { frames: 1 };
+    }
+
+    notBeam.alpha = 0;
 
     yield* DialogBox.StartDialog([
       { speaker: "Wisps", text: "ATTACK HIM NOT.", },
@@ -1381,6 +1444,11 @@ export class Cinematics {
       ]);
 
       yield* this.teleportBackToHub();
+
+      yield* DialogBox.StartDialog([
+        { text: "Your nature healing ability has extended! Now when you heal vines, they will permanently stay alive!", },
+      ]);
+
     } else {
       yield* DialogBox.StartDialog([
         { text: "The wisteria stands majestically before you. It blooms with vigor.", },
@@ -1402,18 +1470,20 @@ export class Cinematics {
       this.bigMushCheckCount = this.bigMushCheckCount + 1;
 
       yield* DialogBox.StartDialog([
-        { text: "The giant mushroom is cool to the touch.", },
-        { text: "Buoyant energy starts to flow through you.", },
-        { text: "Your number of Spirit Slots increased!", },
+        { speaker: "", text: "The giant mushroom is cool to the touch.", },
+        { speaker: "", text: "Buoyant energy starts to flow through you.", },
+        { speaker: "", text: "Your number of Spirit Slots increased!", },
       ]);
 
       this.teleportBackToHub();
-    } else {
 
+      yield* DialogOverlay.StartDialog([
+        { speaker: "Herald", text: "Your nature healing ability has extended! Now when you heal shrooms, they will permanently stay alive!", },
+      ]);
+    } else {
       yield* DialogBox.StartDialog([
         { text: "The mushroom has grown plumper. It seems pleased with itself.", },
       ]);
-
     }
 
     state.mode = "Normal";
