@@ -9,6 +9,7 @@ import { Mode } from "Library";
 import { Assets } from "./assets";
 import { Vector2 } from "../library/geometry/vector2";
 import { GameCoroutine } from "../library/coroutine_manager";
+import { Game } from "./game";
 
 export type NpcDialogType = { speaker: Entity; text: string }[];
 
@@ -65,6 +66,14 @@ export class NpcDialog extends Entity {
     this.graphic.beginFill(0x0);
     this.graphic.drawRoundedRect(0, 0, wid + 100, this.dialogHeight, 40);
     this.graphic.endFill();
+
+    if (wid + this.x > Game.Instance.camera.cameraFrame().right) {
+      this.graphic.x = -1000;
+      this.text.x = -1000;
+    } else {
+      this.graphic.x = 0;
+      this.text.x = 0;
+    }
   }
 
   public static *StartDialog(dialog: NpcDialogType): GameCoroutine {

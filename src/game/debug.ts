@@ -7,7 +7,7 @@ export const DebugFlags = ReadDebugFlagsFromLocalStorage({
   "Show Bud Text"                : true,
   "Show Flowers in Hierarchy"    : false,
   "Fairy Follows You Immediately": false,
-  "High Performance"             : false,
+  "High Performance"             : true,
   "Have Vine Perma"              : false,
   "Have Shroom Perma"            : false,
   "SKIP ALL DIALOG"              : false,

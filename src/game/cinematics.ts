@@ -13,6 +13,8 @@ import { NpcDialog } from "./npc";
 import { Entity } from "../library/entity";
 import { HubLocation } from "./hub_location";
 import { Withers } from "./withers";
+import { Assets } from "./assets";
+import { Hud } from "./hud";
 
 export type Tweenable =
   | number
@@ -93,6 +95,8 @@ export class Cinematics {
   public *openingCinematic(): GameCoroutine {
     let state = yield "next"; // Wait for one frame.
 
+    Hud.Instance.visible = false;
+
     state.mode = "Dialog"; // Set game mode to dialog. This means that the player can't move etc
 
     yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state }); // Fade the screen to 100% faded, taking 0 frames (time). state always has to be there
@@ -112,6 +116,8 @@ export class Cinematics {
 
     yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); // Fade the screen to 0% faded over 90 frames.
 
+    Hud.Instance.visible = true;
+
     state.mode = "Normal"; // Set game state back to normal so the player can play the game
   }
 
@@ -124,7 +130,7 @@ export class Cinematics {
 
     state.mode = "Dialog";
 
-    // SPEECH 
+    // SPEECH
 
     yield* DialogBox.StartDialog([
       { speaker: "???", text: "Sigh... Another day, another lonely diary entry.", },
@@ -156,27 +162,27 @@ export class Cinematics {
 
   public *openingBud2(): GameCoroutine {
     let state = yield "next";
-  
+
     state.mode = "Dialog";
 
     const bud = Bud.Instance;
 
       let startX = bud.x;
       let startY = bud.y;
-  
+
     yield* DialogBox.StartDialog([
       { speaker: "???", text: "Huh? What was that sound?", },
     ]);
-      
+
     bud.sprite.scale.x = bud.sprite.scale.x * -1;
-  
+
     yield { frames: 40 };
-        
+
     //new Entity({ texture: Assets.getResource(exclamation) })
     state.sfx.alertNoise.play();
 
     yield { frames: 50 };
-        
+
     for (let i = 0; i < 8; i++) {
       bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 4);
       yield { frames: 2 };
@@ -188,7 +194,7 @@ export class Cinematics {
       { speaker: "???", text: "I’VE BEEN WAITING FOR THIS MOMENT FOR SO LONG!", },
       { speaker: "???", text: "HIHIHIHIHIHIHI", },
     ]);
-      
+
     for (let i = 0; i < 10; i++) {
       bud.x = bud.x - 100;
       yield { frames: 1 };
@@ -215,17 +221,17 @@ export class Cinematics {
       { speaker: "???", text: "...but that doesn’t matter! You’re awake now! You'll make things better!", },
       { speaker: "???", text: "C’MON!!!! It's just over to the right!", },
     ]);
-  
+
     state.budFollowing = true;
-  
+
     state.mode = "Normal";
   }
 
   public *openingBud3(): GameCoroutine {
     let state = yield "next";
-  
+
     state.mode = "Dialog";
-  
+
     yield* DialogBox.StartDialog([
       { speaker: "???", text: "Yeah... it really doesn't look too good out here.", },
       { speaker: "???", text: "Those Tinker Men really did a number on the forest. It's almost all gone...", },
@@ -269,12 +275,12 @@ export class Cinematics {
       { speaker: "Bud", text: "And if you don't remember anything... then it's up to me, Bud, to help you!", },
       { speaker: "Bud", text: `C'mon, ${ this.name }! Withers' Lair is in the Tree of Sprights, which is the only remaining big tree left. Let's go find him!!`, },
     ]);
-  
+
     state.budFollowing = true;
-  
+
     state.mode = "Normal";
   }
- 
+
 
   public *outdoorBud1(): GameCoroutine { // functionally replaced by openingBud3
     let state = yield "next";
@@ -314,7 +320,7 @@ export class Cinematics {
         speaker: "Bud",
         text: "What’s up? You look startled.",
         branches: [
-          { text: "There's another person there...", next: [
+          { text: "There's a person there...", next: [
             { speaker: "Bud", text: "What? Don’t be weird, heh. That’s impossible.", },
           ] },
           { text: "I think I see dead people?", next: [
@@ -540,10 +546,49 @@ export class Cinematics {
       { speaker: "Bud", text: "Kinda spooky!", },
     ]);
 
-    
-    Withers.Instance.x = state.player.x - 10;
-    Withers.Instance.y = state.player.y - 10;
-    
+
+    Withers.Instance.x = state.player.x - 6500;
+    Withers.Instance.y = state.player.y - 200;
+    Withers.Instance.sprite.scale.x = Withers.Instance.sprite.scale.x * -1;
+
+    const newNPC1 = new Entity({
+      name: "NewNPC1",
+      texture: Assets.getResource("npc1"),
+    });
+
+    state.stage.addChild(newNPC1);
+
+    const newNPC2 = new Entity({
+      name: "NewNPC2",
+      texture: Assets.getResource("npc2"),
+    });
+
+    const newNPC3 = new Entity({
+      name: "NewNPC3",
+      texture: Assets.getResource("npc3"),
+    });
+
+    const newNPC4 = new Entity({
+      name: "NewNPC4",
+      texture: Assets.getResource("npc5"),
+    });
+
+    state.stage.addChild(newNPC1);
+    state.stage.addChild(newNPC2);
+    state.stage.addChild(newNPC3);
+    state.stage.addChild(newNPC4);
+
+    newNPC1.x = state.player.x - 4500;
+    newNPC1.y = state.player.y - 200;
+
+    newNPC2.x = state.player.x - 4200;
+    newNPC2.y = state.player.y - 200;
+
+    newNPC3.x = state.player.x - 4000;
+    newNPC3.y = state.player.y - 200;
+
+    newNPC4.x = state.player.x - 4700;
+    newNPC4.y = state.player.y - 200;
 
     state.mode = "Normal";
   }
@@ -554,7 +599,6 @@ export class Cinematics {
     state.mode = "Dialog";
 
     yield* DialogBox.StartDialog([
-        // withers, alone, facing away from the entrance of his lair
       { speaker: "Withers", text: "♫ Doo de doo~ ♫", },
       { speaker: "Withers", text: "♫ Toss a coin to your Withers~ ♫", },
       { speaker: "Withers", text: "♫ Oh, factory of plenty~ ♫", },
@@ -577,8 +621,11 @@ export class Cinematics {
       { speaker: "Withers", text: "There happened to be one left.", },
     ]);
 
-        // withers turns around to look at herald
-    
+    yield { frames: 10 };
+    Withers.Instance.sprite.scale.x = Withers.Instance.sprite.scale.x * -1;
+    Withers.Instance.x = Withers.Instance.x - 450;
+    yield { frames: 20};
+
     yield* DialogBox.StartDialog([
       { speaker: "Withers", text: `Hello, ${ this.name }.`, },
       { speaker: "Withers", text: "I’ve been expecting you.", },
@@ -646,7 +693,7 @@ export class Cinematics {
     ]);
 
         // ball of darkness shoots at herald
-    
+
     yield* DialogBox.StartDialog([
       { speaker: " ", text: "(You feel a burning in your chest.)", },
       { speaker: "Withers", text: "Hah...", },
@@ -689,7 +736,7 @@ export class Cinematics {
       { speaker: "Withers", text: "I WILL GO DESTROY IT MYSELF.", },
     ]);
 
-        // withers flees 
+        // withers flees
 
     yield* DialogBox.StartDialog([
       { speaker: "Bud", text: "Oh dear. Oh dear, dear, dear.", },
@@ -1293,6 +1340,8 @@ export class Cinematics {
     }
 
   public *teleportBackToHub(): GameCoroutine {
+    Hud.Instance.visible = false;
+
     let state = yield "next";
 
     yield* this.fadeScreenToPercentage({ percentage: 100, time: 90, state });
@@ -1301,7 +1350,7 @@ export class Cinematics {
     state.player.y = HubLocation.Instance.y;
 
     yield* DialogOverlay.StartDialog([
-      { speaker: "Herald", text: "...A mysterious force returns you to the Hub...", },
+      { speaker: "Herald", text: "...A mysterious force returns you to the bottom of the Tree of Sprights...", },
     ]);
 
     state.mode = "Normal"; // let player fall
@@ -1310,6 +1359,8 @@ export class Cinematics {
     state.camera.update(state);
 
     yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state });
+
+    Hud.Instance.visible = true;
   }
 
   wisteriaCheckCount = 0;
