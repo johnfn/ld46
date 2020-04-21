@@ -1479,15 +1479,15 @@ export class Cinematics {
       this.bigMushCheckCount = this.bigMushCheckCount + 1;
 
       yield* DialogBox.StartDialog([
-        { text: "The giant mushroom is cool to the touch.", },
-        { text: "Buoyant energy starts to flow through you.", },
-        { text: "Your number of Spirit Slots increased!", },
+        { speaker: "", text: "The giant mushroom is cool to the touch.", },
+        { speaker: "", text: "Buoyant energy starts to flow through you.", },
+        { speaker: "", text: "Your number of Spirit Slots increased!", },
       ]);
 
       this.teleportBackToHub();
 
-      yield* DialogBox.StartDialog([
-        { text: "Your nature healing ability has extended! Now when you heal shrooms, they will permanently stay alive!", },
+      yield* DialogOverlay.StartDialog([
+        { speaker: "Herald", text: "Your nature healing ability has extended! Now when you heal shrooms, they will permanently stay alive!", },
       ]);
     } else {
       yield* DialogBox.StartDialog([

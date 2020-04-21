@@ -7,6 +7,7 @@ export class Withers extends Entity {
   public static Instance: Withers;
 
   frames: Texture[];
+  followPlayer: boolean = false;
 
   constructor() {
     super({
@@ -16,6 +17,7 @@ export class Withers extends Entity {
 
     this.frames = Assets.getResource("withers/withers_idle");
 
+    this.followPlayer = false;
     Withers.Instance = this;
   }
 
@@ -23,13 +25,17 @@ export class Withers extends Entity {
   y = -10000;
 
   /*
-  
+
   update(state: IGameState) {
-    this.texture = this.frames[Math.floor(state.tick / 8) % this.frames.length];
+    this.texture = this.frames[Math.floor(state.tick / 9) % this.frames.length];
 
-    this.x = state.player.x - 2000;
-    this.y = state.player.y - 2000;
+    const yOffset = Math.sin(state.tick / 20) * 35;
+    if (this.followPlayer) {
+      this.x = state.player.x - 2000;
+      this.y = state.player.y - 2000 + yOffset;
+    }
+    else {
+      this.sprite.y += yOffset;
+    }
   }
-
-  */
 }
