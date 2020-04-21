@@ -5,7 +5,7 @@ import { Debug } from "./debug";
 import { IGameState } from "Library";
 
 export class Camera {
-  private static LERP_SPEED = 0.09;
+  private static LERP_SPEED = 0.03;
 
   /**
    * Top left coordinate of the camera.
