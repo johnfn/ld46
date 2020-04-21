@@ -608,6 +608,10 @@ export class Cinematics {
       { speaker: "Withers", text: "I’ve been expecting you.", },
     ]);
 
+   // Bud.Instance.texture = Assets.getResource("evil bud");
+
+    Bud.Instance.scale = new Vector2(-0.5, 0.5);
+
     state.budFollowing = false;
 
     for (let i = 0; i < 10; i++) {
@@ -796,6 +800,7 @@ export class Cinematics {
 
     notBeam.alpha = 0;
 
+    /*
     yield* DialogBox.StartDialog([
       { speaker: "Wisps", text: "ATTACK HIM NOT.", },
       { speaker: "Withers", text: "Grr...", },
@@ -807,12 +812,33 @@ export class Cinematics {
       { speaker: "Withers", text: "You cannot be allowed to come near the Energy Fruit.", },
       { speaker: "Withers", text: "I WILL GO DESTROY IT MYSELF.", },
     ]);
-
-        // withers flees
+    */
 
     yield* DialogBox.StartDialog([
-      { speaker: "Bud", text: "Oh dear. Oh dear, dear, dear.", },
+      { speaker: "Wisps", text: "ATTACK HIM NOT.", },
+      { speaker: "Withers", text: "Grr...", },
+      { speaker: "Withers", text: "You know what?", },
+      { speaker: "Withers", text: "Fine.", },
+      { speaker: "Withers", text: "I didn’t want to do this.", },
+      { speaker: "Withers", text: "But it looks like I can't hurt you. You've given me no choice", },
+      { speaker: "Withers", text: "And you know what?", },
+      { speaker: "Withers", text: "An evil villain like myself NEVER leaves home without a Plan B.", },
+      { speaker: "Withers", text: "See what happens when I press this button?", },
+      { speaker: "TREE_OF_SPRIGHTS.trexe", text: "SELF-DESTRUCT ACTIVATED. EXPLOSION IN FIVE MINUTES.", },
+      { speaker: "Withers", text: "HAHAHAHA! JUST YOU TRY AND REACH THE ENERGY FRUIT NOW!", },
+      { speaker: "Withers", text: "I may not have won this round...", },
+      { speaker: "Withers", text: "But mark my words.", },
+      { speaker: "Withers", text: "This is not the last you have seen of Withers.", },
+      { speaker: "Withers", text: "HEH HEH HEH HEH", },
+    ]);
 
+    for (let i = 0; i < 10; i++) {
+      Withers.Instance.alpha = Withers.Instance.alpha - 0.1;
+      yield { frames: 1 };
+    }
+
+    yield* DialogBox.StartDialog([
+      { speaker: "Bud", text: "M... Master? Where did you go?", },
     ]);
 
     state.mode = "Normal";
@@ -883,7 +909,7 @@ export class Cinematics {
 
     state.sfx.climaxSweep.play();
 
-    // simultaneous climax_sweep.mp3 and fade to white
+    yield* this.fadeScreenToPercentage({ percentage: 100, time: 90, state });
 
     state.mode = "Normal";
   }
