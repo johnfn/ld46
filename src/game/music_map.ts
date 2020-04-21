@@ -5,7 +5,6 @@ import { Assets, AssetsToLoad } from "./assets";
 import { Game } from "./game";
 import { IGameState } from "Library";
 import { SetAudioToLoop } from "./sfx";
-import { GameCoroutine } from "../library/coroutine_manager";
 
 type AllKeys = keyof typeof AssetsToLoad;
 type AudioNames = {
