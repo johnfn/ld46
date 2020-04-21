@@ -103,7 +103,7 @@ export class Vine extends Entity {
 
     state.sfx.tickSound2.play();
 
-    for (let i = 2; i < this.finishedVineComponents.length; i++) {
+    for (let i = 0; i < this.finishedVineComponents.length; i++) {
       const comp = this.finishedVineComponents[i];
 
       comp.parent?.removeChild(comp);
@@ -112,9 +112,11 @@ export class Vine extends Entity {
       yield { frames: 8 };
     }
 
+    this.finishedVineComponents = [];
+
     yield* this.parentFlower.die()
 
-    this.isActivated = false;
+    this.parentFlower.interacted = false;
   }
 
   update(state: IGameState) {
