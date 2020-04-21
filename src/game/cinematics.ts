@@ -1430,6 +1430,11 @@ export class Cinematics {
       ]);
 
       yield* this.teleportBackToHub();
+
+      yield* DialogBox.StartDialog([
+        { text: "Your nature healing ability has extended! Now when you heal vines, they will permanently stay alive!", },
+      ]);
+
     } else {
       yield* DialogBox.StartDialog([
         { text: "The wisteria stands majestically before you. It blooms with vigor.", },
@@ -1457,12 +1462,14 @@ export class Cinematics {
       ]);
 
       this.teleportBackToHub();
-    } else {
 
+      yield* DialogBox.StartDialog([
+        { text: "Your nature healing ability has extended! Now when you heal shrooms, they will permanently stay alive!", },
+      ]);
+    } else {
       yield* DialogBox.StartDialog([
         { text: "The mushroom has grown plumper. It seems pleased with itself.", },
       ]);
-
     }
 
     state.mode = "Normal";
