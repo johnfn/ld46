@@ -19,9 +19,9 @@ let flowersMap: {[key: number]: keyof typeof AssetsToLoad} = {
 
 let flowersRate: {[key: number]: string[]} = {
   0: ["flower3"], //Sanctuary level
-  1: ["grass1"], //Vine level
-  2: ["shroom1", "shroom1"], //Mushroom level
-  3: ["flower1", "flower2", "flower3", "grass1"]  //Tree level
+  1: ["grass1", "flower1"], //Vine level
+  2: ["shroom1", "shroom1", "flower2"], //Mushroom level
+  3: ["flower1", "flower2", "flower3", "grass1", "shroom1", "shroom1"]  //Tree level
 }
 
 export class NormalFlower extends Entity {
