@@ -13,10 +13,6 @@ import { NpcDialog } from "./npc";
 import { Sfx } from "./sfx";
 import { ParallaxLayers } from "./parallax_layers";
 import { Withers } from "./withers";
-import { Entity } from "../library/entity";
-import { TextEntity } from "../library/text_entity";
-import { Vector2 } from "../library/geometry/vector2";
-import { GameCoroutine } from "../library/coroutine_manager";
 import { TitleScreen } from "../library/title_screen";
 
 export class Game extends BaseGame<typeof AssetsToLoad> {
@@ -79,15 +75,14 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
       );
     }
 
-    this.state.mode = "Menu";
+    // this.state.mode = "Menu";
     
-    const titlescreen = new TitleScreen({
-      text    : "(press enter)",
-      fontSize: 100,
-      width   : 700,
-    })
-    titlescreen.sprite.scale.set(8/3)
-    this.fixedCameraStage.addChild(titlescreen)
+    // const titlescreen = new TitleScreen({
+    //   fontSize: 40,
+    //   width   : 700,
+    // })
+    // titlescreen.sprite.scale.set(8/3)
+    // this.fixedCameraStage.addChild(titlescreen)
   
   }
 }
