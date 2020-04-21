@@ -32,9 +32,9 @@ export class DialogOverlay extends Entity {
 
     DialogOverlay.Instance = this;
 
-    this.dialogText = new TextEntity({ text: "Dialog overlay text", width: 900, height: 400, fontSize: 15 * 4 });
+    this.dialogText = new TextEntity({ text: "", width: 2000, height: 400, fontSize: 30 * 4 });
     this.dialogText.y = 120 * 4;
-    this.dialogText.x = 380 * 4;
+    this.dialogText.x = 200 * 4;
 
     this.addChild(this.dialogText);
   }
@@ -57,6 +57,8 @@ export class DialogOverlay extends Entity {
       while (textToShow.length < fullText.text.length) {
         textToShow += fullText.text[textToShow.length];
         this.displayDialogContents(textToShow);
+
+        state.sfx.playVoiceSound3(state.tick);
 
         if (state.keys.justDown.X) {
           textToShow = fullText.text;

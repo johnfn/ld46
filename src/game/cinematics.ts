@@ -11,6 +11,7 @@ import { Bud } from "./bud";
 import { Vector2 } from "../library/geometry/vector2";
 import { NpcDialog } from "./npc";
 import { Entity } from "../library/entity";
+import { HubLocation } from "./hub_location";
 import { Withers } from "./withers";
 
 export type Tweenable =
@@ -289,22 +290,31 @@ export class Cinematics {
     state.mode = "Normal";
   }
 
+  public *outdoorOneHalf(): GameCoroutine { // functionally replaced by openingBud3
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* DialogBox.StartDialog([
+      { speaker: " ", text: "Passing by the fountain, you feel a change in the atmosphere.", },
+      { speaker: " ", text: "It radiates a spirit-replenshing energy.", },
+      { speaker: " ", text: "As you set foot in the soil beyond, your feet begin to tingle...", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
   public *outdoorBud2(): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog";
 
     yield* DialogBox.StartDialog([
-      { speaker: " ", text: "The softly trickling water in the fountain is calming to you.", },
-      { speaker: " ", text: "As you walk near it, you can feel it radiating natural energy.", },
-      { speaker: " ", text: "The fountain replenishes your spirit.", },
-      { speaker: " ", text: "Suddenly...", },
-        // GHOSTS AND FLOWERS APPEAR!
       {
         speaker: "Bud",
         text: "What’s up? You look startled.",
         branches: [
-          { text: "There's another person...", next: [
+          { text: "There's another person there...", next: [
             { speaker: "Bud", text: "What? Don’t be weird, heh. That’s impossible.", },
           ] },
           { text: "I think I see dead people?", next: [
@@ -345,10 +355,10 @@ export class Cinematics {
     yield* DialogBox.StartDialog([
       { speaker: "Bud", text: "Welcome to the bottom of the Tree of Sprights!", },
       { speaker: "Bud", text: "Huh... That's odd.", },
-      { speaker: "Bud", text: "The entrance to Withers' Lair is above here, but it looks the way to get up there has eroded.", },
-      { speaker: "Bud", text: "That’s... actually a little disappointing.", },
-      { speaker: "Bud", text: "I’m sorry I couldn’t help more.", },
+      { speaker: "Bud", text: "The entrance to Withers' Lair is above here, but getting up there will be tough.", },
+      { speaker: "Bud", text: "You just woke up, and it doesn't look like you're strong enough yet...", },
       { speaker: "Bud", text: "I wonder if there's anything else we could explore, though?", },
+      { speaker: "Bud", text: "Hey, what's that area all the way to the right?", },
     ]);
 
     state.mode = "Normal";
@@ -530,8 +540,10 @@ export class Cinematics {
       { speaker: "Bud", text: "Kinda spooky!", },
     ]);
 
-    Withers.Instance.x = state.player.x - 6900;
-    Withers.Instance.y = state.player.y - 6900;
+    
+    Withers.Instance.x = state.player.x - 10;
+    Withers.Instance.y = state.player.y - 10;
+    
 
     state.mode = "Normal";
   }
@@ -1280,6 +1292,26 @@ export class Cinematics {
       }
     }
 
+  public *teleportBackToHub(): GameCoroutine {
+    let state = yield "next";
+
+    yield* this.fadeScreenToPercentage({ percentage: 100, time: 90, state });
+
+    state.player.x = HubLocation.Instance.x;
+    state.player.y = HubLocation.Instance.y;
+
+    yield* DialogOverlay.StartDialog([
+      { speaker: "Herald", text: "...A mysterious force returns you to the Hub...", },
+    ]);
+
+    state.mode = "Normal"; // let player fall
+
+    state.camera.centerOn(state.player, true);
+    state.camera.update(state);
+
+    yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state });
+  }
+
   wisteriaCheckCount = 0;
   public *wisteria(): GameCoroutine {
     this.wisteriaCheckCount = this.wisteriaCheckCount + 1;
@@ -1294,17 +1326,14 @@ export class Cinematics {
       yield* DialogBox.StartDialog([
         { text: "You reach out to the wisteria. It seems to grow stronger in your presence.", },
         { text: "Verdant energy starts to flow through you.", },
-        // the wisteria GROWS POWERFUL
-        // spirit slots increase!
         { text: "Your number of Spirit Slots increased!", },
       ]);
 
+      yield* this.teleportBackToHub();
     } else {
-
       yield* DialogBox.StartDialog([
         { text: "The wisteria stands majestically before you. It blooms with vigor.", },
       ]);
-
     }
 
     state.mode = "Normal";
@@ -1327,6 +1356,7 @@ export class Cinematics {
         { text: "Your number of Spirit Slots increased!", },
       ]);
 
+      this.teleportBackToHub();
     } else {
 
       yield* DialogBox.StartDialog([
@@ -1494,7 +1524,20 @@ export class Cinematics {
     state.mode = "Normal";
   }
 
-  public *fountainboss(speaker: Entity): GameCoroutine {
+  public *fountainPrep(speaker: Entity): GameCoroutine {
+    let state = yield "next";
+
+    state.mode = "Dialog";
+
+    yield* NpcDialog.StartDialog([
+      { speaker, text: "Standing near the fountain, you feel a sense of preparation.", },
+      { speaker, text: "You're getting ready to do something great.", },
+    ]);
+
+    state.mode = "Normal";
+  }
+
+  public *fountainBoss(speaker: Entity): GameCoroutine {
     let state = yield "next";
 
     state.mode = "Dialog";

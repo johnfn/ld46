@@ -19,12 +19,15 @@ import { BouncyShroom } from "./bouncy_shroom";
 import { Npc } from "./npc";
 import { Wisteria } from "./wisteria";
 import { BigShroom } from "./big_shroom";
+import { HubLocation } from "./hub_location";
+import { Mode } from "Library";
 
 type FlowerRegion = {
   tilemapRegion: TilemapRegion,
   level?:        number,
 }
 export class GameMap extends Entity {
+  activeModes: Mode[] = ["Dialog", "Normal"];
   artMap         : TiledTilemap;
   flowers        : NormalFlower[] = [];
   cameraRegions  : TilemapRegion[] = [];
@@ -140,6 +143,14 @@ export class GameMap extends Entity {
           name     : "bud-start",
           getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
             return new Bud();
+          }
+        },
+
+        {
+          type     : "single",
+          name     : "hub-location",
+          getInstanceType: (tex: Texture, tileProperties: { [key: string]: unknown }, props: GetInstanceTypeProps) => {
+            return new HubLocation();
           }
         },
 

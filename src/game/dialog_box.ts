@@ -51,8 +51,8 @@ export class DialogBox extends Entity {
 
     DialogBox.Instance = this;
 
-    this.speakerText = new TextEntity({ text: "Name test", width: 900, height: 400, fontSize: 60, color: "orange" });
-    this.speakerText.y = 30;
+    this.speakerText = new TextEntity({ text: "Name test", width: 900, height: 400, fontSize: 80, color: "orange" });
+    this.speakerText.y = 20;
     this.speakerText.x = 90;
 
     this.addChild(this.speakerText);
@@ -115,6 +115,8 @@ export class DialogBox extends Entity {
       while (textToShow.length < fullText.text.length) {
         textToShow += fullText.text[textToShow.length];
         this.displayDialogContents(fullText.speaker || "", textToShow);
+
+        state.sfx.playVoiceSound2(state.tick);
 
         if (state.keys.justDown.X) {
           textToShow = fullText.text;

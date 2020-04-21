@@ -31,6 +31,7 @@ const KeyInfo = () => ({
   Right   : false,
   Shift   : false,
   Spacebar: false,
+  Enter   : false,
 });
 
 export type KeyInfoType = ReturnType<typeof KeyInfo>;
@@ -78,6 +79,7 @@ export class KeyboardState {
     let str: string;
 
     switch (number) {
+      case 13: str = "Enter"; break;
       case 16: str = "Shift"; break;
       case 37: str = "Left" ; break;
       case 38: str = "Up"   ; break;
