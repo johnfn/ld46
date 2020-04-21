@@ -100,6 +100,7 @@ export class NpcDialog extends Entity {
 
       if (dialog.speaker) {
         // Dunno how tis happened but i saw this bug once
+        // i think it was bc bud didnt exist in retrospect
         this.x = dialog.speaker.x;
         this.y = dialog.speaker.y - 512;
       }

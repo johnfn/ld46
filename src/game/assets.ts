@@ -74,7 +74,6 @@ export type AssetPath =
   | "spirit_bg_hud.png"
   | "spirit_empty_hud.png"
   | "spirit_full_hud.png"
-  | "spirit_full_hud.png"
   | "tileset.png"
   | "tileset2.png"
   | "titlescreen.png"
