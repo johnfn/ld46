@@ -71,7 +71,7 @@ export class DialogBox extends Entity {
     this.addChild(this.profilePic);
 
     for (let i = 0; i < 4; i++) {
-      let branchText = new TextEntity({ text: "", width: 900, fontSize: 80 });
+      let branchText = new TextEntity({ text: "", width: 2000, fontSize: 80 });
 
       this.branches.push(branchText);
       branchText.x = 100;
