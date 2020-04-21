@@ -115,7 +115,7 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
       <div style={{
         display: "flex",
         flexDirection: "row",
-        borderLeft: "1px solid lightgray",
+        borderLeft: IS_DEBUG ? "1px solid lightgray" : 0,
         marginLeft: '16px',
         paddingLeft: '8px',
       }}>

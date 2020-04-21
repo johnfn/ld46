@@ -20,7 +20,7 @@ export class TitleScreen extends Entity {
     enterYourNameText: TextEntity;
     startedGlowing: boolean = false;
     frame: number = 0;
-    waitFrames: number = 120;
+    waitFrames: number = 60;
 
     menuAudio = SetAudioToLoop(Assets.getResource("music/Maybe Tomorrow"));
     graphic: Sprite;
@@ -81,8 +81,8 @@ export class TitleScreen extends Entity {
                         border: 0,
                         backgroundColor: "transparent",
                         color: "white",
-                        left: "220px",
-                        top: "300px",
+                        left: "calc(50vw - 300px)",
+                        top: "calc(50vh)",
                         width: "600px",
                         height: "200px",
                         fontSize: "40px",
@@ -106,7 +106,7 @@ export class TitleScreen extends Entity {
         if (this.pressEnterText.alpha > 0.5) this.startedGlowing = true;
 
         if (!this.startedGlowing) {
-            this.pressEnterText.alpha = Math.sin((this.frame - this.waitFrames) / 200)
+            this.pressEnterText.alpha = Math.sin((this.frame - this.waitFrames) / 120)
         } else {
             this.pressEnterText.alpha = 0.5 + (1 - Math.sin((this.frame - this.waitFrames) / 30))/4
         }
