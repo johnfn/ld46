@@ -198,7 +198,7 @@ export class Cinematics {
 
     for (let i = 0; i < 8; i++) {
       bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 4);
-      yield { frames: 2 };
+      yield { frames: 1 };
     }
 
     yield* DialogBox.StartDialog([
