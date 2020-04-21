@@ -116,6 +116,8 @@ export class DialogBox extends Entity {
         textToShow += fullText.text[textToShow.length];
         this.displayDialogContents(fullText.speaker || "", textToShow);
 
+        state.sfx.playVoiceSound2(state.tick);
+
         if (state.keys.justDown.X) {
           textToShow = fullText.text;
           this.displayDialogContents(fullText.speaker || "", textToShow);

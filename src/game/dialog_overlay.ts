@@ -58,6 +58,8 @@ export class DialogOverlay extends Entity {
         textToShow += fullText.text[textToShow.length];
         this.displayDialogContents(textToShow);
 
+        state.sfx.playVoiceSound3(state.tick);
+
         if (state.keys.justDown.X) {
           textToShow = fullText.text;
           this.displayDialogContents(textToShow);
