@@ -19,6 +19,9 @@ export class Withers extends Entity {
     Withers.Instance = this;
   }
 
+  x = -10000;
+  y = -10000;
+
   /*
   
   update(state: IGameState) {
