@@ -909,7 +909,7 @@ export class Cinematics {
 
     state.sfx.climaxSweep.play();
 
-    // simultaneous climax_sweep.mp3 and fade to white
+    yield* this.fadeScreenToPercentage({ percentage: 100, time: 90, state });
 
     state.mode = "Normal";
   }
