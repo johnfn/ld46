@@ -87,8 +87,6 @@ export class TitleScreen extends Entity {
         } else {
             this.pressEnterText.alpha = 0.5 + (1 - Math.sin((this.frame - this.waitFrames) / 30))/4
         }
-      
-        
     }
 }
 
