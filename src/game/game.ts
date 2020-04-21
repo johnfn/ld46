@@ -66,8 +66,8 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
     this.fixedCameraStage.addChild(this.state.overlay = new Overlay());
     this.fixedCameraStage.addChild(new DialogBox());
     this.fixedCameraStage.addChild(new DialogOverlay());
-    this.stage.addChild(new NpcDialog());
     this.fixedCameraStage.addChild(new Hud(this.state.spiritTotal));
+    this.stage.addChild(new NpcDialog());
 
     this.stage.addChild(new Withers());
 
