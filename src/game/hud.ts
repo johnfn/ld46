@@ -47,6 +47,8 @@ class SpiritMeter extends Entity {
 }
 
 export class Hud extends Entity {
+  public static Instance: Hud;
+
   constructor(spiritTotal: number) {
     super({
       name: "HUD",
@@ -58,5 +60,7 @@ export class Hud extends Entity {
     sm.position = sm.position.add({x:70, y:30})
     
     this.addChild(sm);
+
+    Hud.Instance = this;
   }
 }

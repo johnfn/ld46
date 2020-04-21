@@ -9,12 +9,10 @@ import { Vector2 } from "../library/geometry/vector2";
 import { BouncyShroom } from "./bouncy_shroom";
 import { Mode } from "Library";
 import { GabbysGlowThing } from "./gabbys_glow_thing";
-import { MusicMap } from "./music_map";
-
 
 export class Player extends Entity {
   activeModes: Mode[] = ["Normal", "Dialog"];
-  public static StartPosition = new Vector2(800, 600);
+  public static StartPosition = new Vector2(-12000, 500);
   public static Instance: Player;
 
   speed      = 30;

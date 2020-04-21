@@ -13,6 +13,7 @@ import { NpcDialog } from "./npc";
 import { Entity } from "../library/entity";
 import { HubLocation } from "./hub_location";
 import { Withers } from "./withers";
+import { Hud } from "./hud";
 
 export type Tweenable =
   | number
@@ -93,6 +94,8 @@ export class Cinematics {
   public *openingCinematic(): GameCoroutine {
     let state = yield "next"; // Wait for one frame.
 
+    Hud.Instance.visible = false;
+
     state.mode = "Dialog"; // Set game mode to dialog. This means that the player can't move etc
 
     yield* this.fadeScreenToPercentage({ percentage: 100, time: 0, state }); // Fade the screen to 100% faded, taking 0 frames (time). state always has to be there
@@ -111,6 +114,8 @@ export class Cinematics {
     this.spaceToContinueText.visible = false; // hide space to continue text
 
     yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state }); // Fade the screen to 0% faded over 90 frames.
+
+    Hud.Instance.visible = true;
 
     state.mode = "Normal"; // Set game state back to normal so the player can play the game
   }
@@ -314,7 +319,7 @@ export class Cinematics {
         speaker: "Bud",
         text: "What’s up? You look startled.",
         branches: [
-          { text: "There's another person there...", next: [
+          { text: "There's a person there...", next: [
             { speaker: "Bud", text: "What? Don’t be weird, heh. That’s impossible.", },
           ] },
           { text: "I think I see dead people?", next: [
@@ -1293,6 +1298,8 @@ export class Cinematics {
     }
 
   public *teleportBackToHub(): GameCoroutine {
+    Hud.Instance.visible = false;
+
     let state = yield "next";
 
     yield* this.fadeScreenToPercentage({ percentage: 100, time: 90, state });
@@ -1301,7 +1308,7 @@ export class Cinematics {
     state.player.y = HubLocation.Instance.y;
 
     yield* DialogOverlay.StartDialog([
-      { speaker: "Herald", text: "...A mysterious force returns you to the Hub...", },
+      { speaker: "Herald", text: "...A mysterious force returns you to the bottom of the Tree of Sprights...", },
     ]);
 
     state.mode = "Normal"; // let player fall
@@ -1310,6 +1317,8 @@ export class Cinematics {
     state.camera.update(state);
 
     yield* this.fadeScreenToPercentage({ percentage: 0, time: 90, state });
+
+    Hud.Instance.visible = true;
   }
 
   wisteriaCheckCount = 0;
