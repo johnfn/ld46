@@ -551,45 +551,6 @@ export class Cinematics {
     Withers.Instance.y = state.player.y - 200;
     Withers.Instance.sprite.scale.x = Withers.Instance.sprite.scale.x * -1;
 
-    const newNPC1 = new Entity({
-      name: "NewNPC1",
-      texture: Assets.getResource("npc1"),
-    });
-
-    state.stage.addChild(newNPC1);
-
-    const newNPC2 = new Entity({
-      name: "NewNPC2",
-      texture: Assets.getResource("npc2"),
-    });
-
-    const newNPC3 = new Entity({
-      name: "NewNPC3",
-      texture: Assets.getResource("npc3"),
-    });
-
-    const newNPC4 = new Entity({
-      name: "NewNPC4",
-      texture: Assets.getResource("npc5"),
-    });
-
-    state.stage.addChild(newNPC1);
-    state.stage.addChild(newNPC2);
-    state.stage.addChild(newNPC3);
-    state.stage.addChild(newNPC4);
-
-    newNPC1.x = state.player.x - 4500;
-    newNPC1.y = state.player.y - 200;
-
-    newNPC2.x = state.player.x - 4200;
-    newNPC2.y = state.player.y - 200;
-
-    newNPC3.x = state.player.x - 4000;
-    newNPC3.y = state.player.y - 200;
-
-    newNPC4.x = state.player.x - 4700;
-    newNPC4.y = state.player.y - 200;
-
     state.mode = "Normal";
   }
 
@@ -598,6 +559,7 @@ export class Cinematics {
 
     state.mode = "Dialog";
 
+    /*
     yield* DialogBox.StartDialog([
       { speaker: "Withers", text: "♫ Doo de doo~ ♫", },
       { speaker: "Withers", text: "♫ Toss a coin to your Withers~ ♫", },
@@ -620,6 +582,7 @@ export class Cinematics {
       { speaker: "Withers", text: "Unless, of course...", },
       { speaker: "Withers", text: "There happened to be one left.", },
     ]);
+    */
 
     yield { frames: 10 };
     Withers.Instance.sprite.scale.x = Withers.Instance.sprite.scale.x * -1;
@@ -627,6 +590,7 @@ export class Cinematics {
     yield { frames: 20};
 
     yield* DialogBox.StartDialog([
+      /*
       { speaker: "Withers", text: `Hello, ${ this.name }.`, },
       { speaker: "Withers", text: "I’ve been expecting you.", },
       { speaker: "Bud", text: "Master! Master! I’ve done as you asked!", },
@@ -689,10 +653,28 @@ export class Cinematics {
           ] },
         ]
       },
+      */
       { speaker: "Withers", text: "DARK BLAST HAH", },
     ]);
 
-        // ball of darkness shoots at herald
+    const notBeam = new Entity({
+      name: "notBeam",
+      texture: Assets.getResource("notbeam/notbeam")[0],
+    })
+
+    state.stage.addChild(notBeam);
+
+    notBeam.scale = new Vector2(-0.1, 0.1);
+
+    notBeam.x = Withers.Instance.x + 600;
+    notBeam.y = Withers.Instance.y + 300;
+
+    for (let i = 0; i < 17; i++) {
+      notBeam.x = notBeam.x + 110;
+      yield { frames: 1 };
+    }
+
+    notBeam.alpha = 0;
 
     yield* DialogBox.StartDialog([
       { speaker: " ", text: "(You feel a burning in your chest.)", },
@@ -706,7 +688,58 @@ export class Cinematics {
       { speaker: "Withers", text: "What’s going on?", },
     ]);
 
-        // npc ghosts appear
+    const newNPC1 = new Entity({
+      name: "NewNPC1",
+      texture: Assets.getResource("npc1"),
+    });
+
+    state.stage.addChild(newNPC1);
+
+    const newNPC2 = new Entity({
+      name: "NewNPC2",
+      texture: Assets.getResource("npc2"),
+    });
+
+    const newNPC3 = new Entity({
+      name: "NewNPC3",
+      texture: Assets.getResource("npc3"),
+    });
+
+    const newNPC4 = new Entity({
+      name: "NewNPC4",
+      texture: Assets.getResource("npc5"),
+    });
+
+    state.stage.addChild(newNPC1);
+    state.stage.addChild(newNPC2);
+    state.stage.addChild(newNPC3);
+    state.stage.addChild(newNPC4);
+
+    newNPC1.x = state.player.x + 200;
+    newNPC1.y = state.player.y - 200;
+
+    newNPC2.x = state.player.x + 300;
+    newNPC2.y = state.player.y - 200;
+
+    newNPC3.x = state.player.x - 100;
+    newNPC3.y = state.player.y - 200;
+
+    newNPC4.x = state.player.x - 100;
+    newNPC4.y = state.player.y - 200;
+
+    newNPC1.alpha = 0;
+    newNPC2.alpha = 0;
+    newNPC3.alpha = 0;
+    newNPC4.alpha = 0;
+
+    for (let i = 0; i < 10; i++) {
+      newNPC1.alpha = newNPC1.alpha + 0.1;
+      newNPC2.alpha = newNPC2.alpha + 0.1;
+      newNPC3.alpha = newNPC3.alpha + 0.1;
+      newNPC4.alpha = newNPC3.alpha + 0.1;
+
+      yield { frames: 1 };
+    }
 
     yield* DialogBox.StartDialog([
       { speaker: "Bud", text: "Uh... Master...", },
@@ -722,7 +755,23 @@ export class Cinematics {
       { speaker: "Withers", text: "What. The hell.", },
     ]);
 
-        // tries to shoot dark blast a few more times
+    notBeam.x = Withers.Instance.x;
+
+    notBeam.alpha = 1; 
+
+    for (let i = 0; i < 10; i++) {
+      notBeam.x = notBeam.x + 200;
+      yield { frames: 1 };
+    }
+
+    notBeam.x = Withers.Instance.x;
+
+    for (let i = 0; i < 10; i++) {
+      notBeam.x = notBeam.x + 200;
+      yield { frames: 1 };
+    }
+
+    notBeam.alpha = 0;
 
     yield* DialogBox.StartDialog([
       { speaker: "Wisps", text: "ATTACK HIM NOT.", },

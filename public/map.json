@@ -2445,34 +2445,6 @@
                  "y":2048
                 }, 
                 {
-                 "gid":51,
-                 "height":256,
-                 "id":408,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"dialog",
-                         "type":"string",
-                         "value":"npcWithers"
-                        }, 
-                        {
-                         "name":"imagepath",
-                         "type":"string",
-                         "value":"npc3"
-                        }, 
-                        {
-                         "name":"name",
-                         "type":"string",
-                         "value":"interactable"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":256,
-                 "x":40704,
-                 "y":-8192
-                }, 
-                {
                  "gid":49,
                  "height":256,
                  "id":416,
@@ -3175,24 +3147,6 @@
                  "y":1280
                 }, 
                 {
-                 "gid":42,
-                 "height":256,
-                 "id":474,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"name",
-                         "type":"string",
-                         "value":"start"
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":256,
-                 "x":26112,
-                 "y":1536
-                }, 
-                {
                  "gid":43,
                  "height":256,
                  "id":475,
@@ -3255,6 +3209,24 @@
                  "width":256,
                  "x":2816,
                  "y":2560
+                }, 
+                {
+                 "gid":42,
+                 "height":256,
+                 "id":481,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"start"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":256,
+                 "x":48164.3076923077,
+                 "y":-9189.53846153846
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -4200,7 +4172,7 @@
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":481,
+ "nextobjectid":482,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.4",
