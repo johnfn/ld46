@@ -178,10 +178,23 @@ export class Cinematics {
 
     yield { frames: 40 };
 
-    //new Entity({ texture: Assets.getResource(exclamation) })
+    const exclamation = new Entity({
+      name: "exclamation",
+      texture: Assets.getResource("exclamation"),
+    })
+
+    state.stage.addChild(exclamation);
+
+    exclamation.scale = new Vector2(0.5, 0.5);
+
+    exclamation.x = bud.x - 180;
+    exclamation.y = bud.y - 200;
+
     state.sfx.alertNoise.play();
 
     yield { frames: 50 };
+
+    exclamation.alpha = 0;
 
     for (let i = 0; i < 8; i++) {
       bud.sprite.rotation = bud.sprite.rotation - (Math.PI / 4);
@@ -221,6 +234,8 @@ export class Cinematics {
       { speaker: "???", text: "...but that doesn’t matter! You’re awake now! You'll make things better!", },
       { speaker: "???", text: "C’MON!!!! It's just over to the right!", },
     ]);
+
+    bud.scale = new Vector2(-1, 1);
 
     state.budFollowing = true;
 
@@ -559,7 +574,6 @@ export class Cinematics {
 
     state.mode = "Dialog";
 
-    /*
     yield* DialogBox.StartDialog([
       { speaker: "Withers", text: "♫ Doo de doo~ ♫", },
       { speaker: "Withers", text: "♫ Toss a coin to your Withers~ ♫", },
@@ -582,7 +596,7 @@ export class Cinematics {
       { speaker: "Withers", text: "Unless, of course...", },
       { speaker: "Withers", text: "There happened to be one left.", },
     ]);
-    */
+    
 
     yield { frames: 10 };
     Withers.Instance.sprite.scale.x = Withers.Instance.sprite.scale.x * -1;
@@ -590,7 +604,7 @@ export class Cinematics {
     yield { frames: 20};
 
     yield* DialogBox.StartDialog([
-      /*
+      
       { speaker: "Withers", text: `Hello, ${ this.name }.`, },
       { speaker: "Withers", text: "I’ve been expecting you.", },
       { speaker: "Bud", text: "Master! Master! I’ve done as you asked!", },
@@ -653,7 +667,7 @@ export class Cinematics {
           ] },
         ]
       },
-      */
+      
       { speaker: "Withers", text: "DARK BLAST HAH", },
     ]);
 
@@ -721,7 +735,7 @@ export class Cinematics {
     newNPC2.x = state.player.x + 300;
     newNPC2.y = state.player.y - 200;
 
-    newNPC3.x = state.player.x - 100;
+    newNPC3.x = state.player.x - 300;
     newNPC3.y = state.player.y - 200;
 
     newNPC4.x = state.player.x - 100;
@@ -755,16 +769,16 @@ export class Cinematics {
       { speaker: "Withers", text: "What. The hell.", },
     ]);
 
-    notBeam.x = Withers.Instance.x;
-
     notBeam.alpha = 1; 
+
+    notBeam.x = Withers.Instance.x + 600;
 
     for (let i = 0; i < 10; i++) {
       notBeam.x = notBeam.x + 200;
       yield { frames: 1 };
     }
 
-    notBeam.x = Withers.Instance.x;
+    notBeam.x = Withers.Instance.x + 600;
 
     for (let i = 0; i < 10; i++) {
       notBeam.x = notBeam.x + 200;
