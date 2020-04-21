@@ -65,17 +65,17 @@ export class TiledTilemap {
   private cache: { [key: string]: MapLayer[] } = {};
 
   public loadLayersInRectCached(region: Rect): MapLayer[] {
-    for (const k of Object.keys(this.cache)) {
-      const obj = this.cache[k]
+    // for (const k of Object.keys(this.cache)) {
+    //   const obj = this.cache[k]
 
-      for (const l of obj) {
-        if (l.entity.texture) {
-          l.entity.texture.destroy();
-        }
+    //   for (const l of obj) {
+    //     if (l.entity.texture) {
+    //       l.entity.texture.destroy();
+    //     }
 
-        l.entity.parent?.removeChild(l.entity);
-      }
-    }
+    //     l.entity.parent?.removeChild(l.entity);
+    //   }
+    // }
 
     this.cache = {};
 
