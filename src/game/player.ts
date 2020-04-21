@@ -12,7 +12,7 @@ import { GabbysGlowThing } from "./gabbys_glow_thing";
 
 export class Player extends Entity {
   activeModes: Mode[] = ["Normal", "Dialog"];
-  public static StartPosition = new Vector2(-12000, 500);
+  public static StartPosition = new Vector2(-12000, 900);
   public static Instance: Player;
 
   speed      = 30;
@@ -214,7 +214,7 @@ export class Player extends Entity {
   }
 
   firstUpdate(state: IGameState) {
-    Game.Instance.camera.centerOn(this.position.add(new Vector2(0, -400)), true);
+    Game.Instance.camera.centerOn(this.position.add(new Vector2(0, 0)), true);
   }
 
   update(state: IGameState): void {

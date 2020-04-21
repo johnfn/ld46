@@ -1454,8 +1454,8 @@ export class Cinematics {
 
       yield* this.teleportBackToHub();
 
-      yield* DialogBox.StartDialog([
-        { text: "Your nature healing ability has extended! Now when you heal vines, they will permanently stay alive!", },
+      yield* DialogOverlay.StartDialog([
+        { speaker: "Herald", text: "Your nature healing ability has extended! Now when you heal vines, they will permanently stay alive!", },
       ]);
 
     } else {
@@ -1484,7 +1484,7 @@ export class Cinematics {
         { speaker: "", text: "Your number of Spirit Slots increased!", },
       ]);
 
-      this.teleportBackToHub();
+      yield* this.teleportBackToHub();
 
       yield* DialogOverlay.StartDialog([
         { speaker: "Herald", text: "Your nature healing ability has extended! Now when you heal shrooms, they will permanently stay alive!", },

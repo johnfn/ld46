@@ -37,7 +37,7 @@ export class TitleScreen extends Entity {
         this.addChild(new Entity({name: "MenuBackground", texture: Assets.getResource("titlescreen")}))
 
         this.pressEnterText = new TextEntity({text: "(press enter)", ...textProps});
-        this.pressEnterText.position = new Vector2(C.CanvasWidth-480, C.CanvasHeight + 250)
+        this.pressEnterText.position = new Vector2(C.CanvasWidth-380, C.CanvasHeight + 250)
         this.pressEnterText.alpha = 0;
         this.addChild(this.pressEnterText);
 

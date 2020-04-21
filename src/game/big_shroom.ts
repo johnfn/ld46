@@ -74,6 +74,6 @@ export class BigShroom extends Entity {
 
     this.interacted = true;
 
-    yield* state.cinematics.wisteria();
+    yield* state.cinematics.bigMush();
   }
 }

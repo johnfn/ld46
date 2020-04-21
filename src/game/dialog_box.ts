@@ -37,7 +37,7 @@ export class DialogBox extends Entity {
     this.visible = false;
     
     this.x = 100;
-    this.y = 550;
+    this.y = 850;
 
     this.graphic = new Entity({ 
       texture: Assets.getResource("dialog_box"),
