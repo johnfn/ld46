@@ -113,9 +113,7 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
           onMouseLeave={this.mouseOut}
           onClick={this.click}
         >
-          
           {this.renderLeaf(root)}
-          
         </div>
         {
           root instanceof Entity &&
