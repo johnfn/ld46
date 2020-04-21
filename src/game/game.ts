@@ -78,14 +78,16 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
         this
       );
     }
+
+    this.state.mode = "Menu";
     
-    // const titlescreen = new TitleScreen({
-    //   text    : "(press enter)",
-    //   fontSize: 100,
-    //   width   : 700,
-    // })
-    // titlescreen.sprite.scale.set(8/3)
-    // this.fixedCameraStage.addChild(titlescreen)
+    const titlescreen = new TitleScreen({
+      text    : "(press enter)",
+      fontSize: 100,
+      width   : 700,
+    })
+    titlescreen.sprite.scale.set(8/3)
+    this.fixedCameraStage.addChild(titlescreen)
   
   }
 }

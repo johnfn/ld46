@@ -8,6 +8,7 @@ import { Sfx } from "./sfx";
 declare module "Library" {
   export interface ModeList {
     Dialog: never;
+    Menu: never;
   }
 
   export interface IGameState {
