@@ -923,6 +923,10 @@ export class Cinematics {
       { speaker: "Herald", text: "..................................................", },
       { speaker: "Herald", text: "..................................................", },
       { speaker: "Herald", text: "That's the real end. You can stop playing now.", },
+      { speaker: "Herald", text: "..................................................", },
+      { speaker: "Herald", text: "..................................................", },
+      { speaker: "Herald", text: ".......................................................", },
+      { speaker: "Herald", text: "P.S. EVERYONE DIED!!!!!", },
     ]);
 
     // state.mode = "Normal";
