@@ -38,6 +38,10 @@ export class Fountain extends Entity {
     if (this.distance(state.player) < this.interactionDistance) {
       // Animation?
 
+      if (state.spiritUnused < state.spiritTotal) {
+        Assets.getResource("sound effects/refill spirit").play();
+      }
+
       state.spiritUnused = Math.min(state.spiritUnused + 1, state.spiritTotal);
     }
   }

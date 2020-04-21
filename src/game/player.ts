@@ -256,7 +256,7 @@ export class Player extends Entity {
       }
     }
 
-    Game.Instance.camera.centerOn(this.position.add(new Vector2(this.scale.x > 0 ? 1500 : -1500, -400)));
+    Game.Instance.camera.centerOn(this.position.add(new Vector2(this.scale.x > 0 ? 1000 : -1000, -400)));
 
     if (this.velocity.x > 0 && this.scale.x < 0) {
       this.scale = this.scale.invertX();
