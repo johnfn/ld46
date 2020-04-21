@@ -911,7 +911,21 @@ export class Cinematics {
 
     yield* this.fadeScreenToPercentage({ percentage: 100, time: 90, state });
 
-    state.mode = "Normal";
+    yield* DialogOverlay.StartDialog([ // Start the following dialog
+      { speaker: "Herald", text: "...", }, // First dialog: speaker name is Herald, text is "..."
+      { speaker: "Herald", text: "The End." }, // second dialog
+      { speaker: "Herald", text: "..." }, // second dialog
+      { speaker: "Herald", text: "...Or is it???", }, // etc
+      { speaker: "Herald", text: "...", },
+      { speaker: "Herald", text: ".......", },
+      { speaker: "Herald", text: "..................................................", },
+      { speaker: "Herald", text: "Withers will return in WILL OF THE WISP II: EVEN WISPIER", },
+      { speaker: "Herald", text: "..................................................", },
+      { speaker: "Herald", text: "..................................................", },
+      { speaker: "Herald", text: "That's the real end. You can stop playing now.", },
+    ]);
+
+    // state.mode = "Normal";
   }
 
 
