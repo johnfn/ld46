@@ -13,6 +13,7 @@ import { NpcDialog } from "./npc";
 import { Entity } from "../library/entity";
 import { HubLocation } from "./hub_location";
 import { Withers } from "./withers";
+import { Assets } from "./assets";
 
 export type Tweenable =
   | number
@@ -541,9 +542,48 @@ export class Cinematics {
     ]);
 
     
-    Withers.Instance.x = state.player.x - 10;
-    Withers.Instance.y = state.player.y - 10;
+    Withers.Instance.x = state.player.x - 6500;
+    Withers.Instance.y = state.player.y - 200;
+    Withers.Instance.sprite.scale.x = Withers.Instance.sprite.scale.x * -1;
+
+    const newNPC1 = new Entity({ 
+      name: "NewNPC1",
+      texture: Assets.getResource("npc1"),
+    });
     
+    state.stage.addChild(newNPC1);
+
+    const newNPC2 = new Entity({ 
+      name: "NewNPC2",
+      texture: Assets.getResource("npc2"),
+    });
+
+    const newNPC3 = new Entity({ 
+      name: "NewNPC3",
+      texture: Assets.getResource("npc3"),
+    });
+
+    const newNPC4 = new Entity({ 
+      name: "NewNPC4",
+      texture: Assets.getResource("npc5"),
+    });
+    
+    state.stage.addChild(newNPC1);
+    state.stage.addChild(newNPC2);
+    state.stage.addChild(newNPC3);
+    state.stage.addChild(newNPC4);
+
+    newNPC1.x = state.player.x - 4500;
+    newNPC1.y = state.player.y - 200;
+
+    newNPC2.x = state.player.x - 4200;
+    newNPC2.y = state.player.y - 200;
+
+    newNPC3.x = state.player.x - 4000;
+    newNPC3.y = state.player.y - 200;
+
+    newNPC4.x = state.player.x - 4700;
+    newNPC4.y = state.player.y - 200;
 
     state.mode = "Normal";
   }
@@ -554,7 +594,6 @@ export class Cinematics {
     state.mode = "Dialog";
 
     yield* DialogBox.StartDialog([
-        // withers, alone, facing away from the entrance of his lair
       { speaker: "Withers", text: "♫ Doo de doo~ ♫", },
       { speaker: "Withers", text: "♫ Toss a coin to your Withers~ ♫", },
       { speaker: "Withers", text: "♫ Oh, factory of plenty~ ♫", },
@@ -577,7 +616,10 @@ export class Cinematics {
       { speaker: "Withers", text: "There happened to be one left.", },
     ]);
 
-        // withers turns around to look at herald
+    yield { frames: 10 };
+    Withers.Instance.sprite.scale.x = Withers.Instance.sprite.scale.x * -1;
+    Withers.Instance.x = Withers.Instance.x - 450;
+    yield { frames: 20}; 
     
     yield* DialogBox.StartDialog([
       { speaker: "Withers", text: `Hello, ${ this.name }.`, },
