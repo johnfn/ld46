@@ -10,7 +10,7 @@ export class Withers extends Entity {
 
   constructor() {
     super({
-      name: "Bud",
+      name: "Withers",
       texture: Assets.getResource("withers/withers_idle")[0],
     });
 
