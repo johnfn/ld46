@@ -26,17 +26,17 @@ type FlowerRegion = {
   tilemapRegion: TilemapRegion,
   level?:        number,
 }
+
 export class GameMap extends Entity {
   activeModes: Mode[] = ["Dialog", "Normal"];
   artMap         : TiledTilemap;
-  flowers        : NormalFlower[] = [];
   cameraRegions  : TilemapRegion[] = [];
   flowerRegions  : TilemapRegion[] = [];
 
   public static Instance: GameMap;
   public dialogTriggers: { region: TilemapRegion, triggered: boolean }[] = [];
 
-  constructor() {
+  constructor(state: IGameState) {
     super({ 
       collidable: true,
       name: "Map",
@@ -181,7 +181,7 @@ export class GameMap extends Entity {
       assets: Assets
     });
     
-    this.loadMap(Player.StartPosition);
+    this.loadMap(Player.StartPosition, state);
 
     if (DebugFlags["Play Music"]) {
       const musicMap = new MusicMap();
@@ -199,34 +199,46 @@ export class GameMap extends Entity {
     throw new Error("No camera region for that location. Halp!")
   }
 
-  loadMap(position: Vector2) {
+  loadMap(position: Vector2, state: IGameState) {
     const newBounds = this.getCameraRegion(position).rect;
     const layers = this.artMap.loadLayersInRectCached(newBounds);
 
-    this.loadFlowers()
+    this.loadFlowers(state);
 
     for (const layer of layers) {
       this.addChild(layer.entity);
     }
   }
 
-  loadFlowers() {
+  flowers: NormalFlower[] = [];
+
+  loadFlowers(state: IGameState) {
+    for (const flower of this.flowers) {
+      flower.parent?.removeChild(flower);
+      flower.destroy(state);
+    }
+
     let frequency = 2;
     for (const region of this.flowerRegions) {
       if (region.properties["frequency"]) {
         frequency = parseInt(region.properties["frequency"])
       }
+
       let numFlowers = Math.round(frequency * region.rect.width / 256 / 2); // 2 is just because the lowest frequency was still too many flowers
 
       for (let i = 0; i < numFlowers; i++) {
         let f: NormalFlower;
+
         const position = region.rect.topLeft.addX(128).addX(Math.random()*(region.rect.width-256));
+
         if (region.properties["level"]) {
           f = new NormalFlower(position, parseInt(region.properties["level"]))
         } else {
-          f = new NormalFlower(position)
+          f = new NormalFlower(position, undefined)
         }
-        this.addChild(f)
+
+        this.addChild(f);
+        this.flowers.push(f);
       }
     } 
   }
@@ -252,7 +264,7 @@ export class GameMap extends Entity {
     const cameraRegion = state.map.getCameraRegion(state.player.position).rect;
 
     if (!oldRegion.equals(cameraRegion)) {
-      this.loadMap(state.player.position);
+      this.loadMap(state.player.position, state);
     }
 
     state.camera.setBounds(cameraRegion);

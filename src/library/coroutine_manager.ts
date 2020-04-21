@@ -3,6 +3,7 @@ import { IGameState } from "Library";
 import { Entity } from "./entity";
 import { Game } from "../game/game";
 import { BaseGame } from "./base_game";
+import { IS_DEBUG } from "./environment";
 
 /**
  * const state: GameState = yield CoroutineResult;
@@ -35,7 +36,11 @@ export class CoroutineManager {
   startCoroutine(name: string, co: GameCoroutine, owner: Entity | Game): CoroutineId {
     for (const activeCo of Object.values(this._activeCoroutines)) {
       if (activeCo.name === name) {
-        throw new Error(`Two coroutines with the name ${ name }. Tell grant about this!!!`);
+        if (IS_DEBUG) {
+          throw new Error(`Two coroutines with the name ${ name }. Tell grant about this!!!`);
+        } else {
+          return 0;
+        }
       }
     }
 

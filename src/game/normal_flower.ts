@@ -27,17 +27,28 @@ let flowersRate: {[key: number]: string[]} = {
 export class NormalFlower extends Entity {
   interactionDistance = C.InteractionDistance;
   frame = 0;
-  frames: Texture[];
+  frames!: Texture[];
 
-  constructor(position: Vector2, level?: number) {
+  initialPosition: Vector2;
+  level   : number | undefined;
+
+  constructor(initialPosition: Vector2, level: number | undefined) {
     super({
       name   : "Flower",
       texture: Assets.getResource("flower1")[0],
     });
 
-    if (level != undefined && level in flowersRate) {
-      let flowers = flowersRate[level];
-      let r = Math.floor(Math.random()*flowers.length);
+    this.level           = level;
+    this.initialPosition = initialPosition;
+
+    this.init();
+  }
+
+  init() {
+    if (this.level != undefined && this.level in flowersRate) {
+      let flowers = flowersRate[this.level];
+      let r = Math.floor(Math.random() * flowers.length);
+
       this.frames = Assets.getResource(flowers[r] as keyof typeof AssetsToLoad) as Texture[];
     } else {
       this.frames = Assets.getResource(flowersMap[Math.floor(Math.random()*Object.keys(flowersMap).length) + 1]) as Texture[];
@@ -49,7 +60,7 @@ export class NormalFlower extends Entity {
     if (Math.random() > 0.5) this.sprite.scale.x *= -1;
     let r = Math.random() + 0.5;
     this.sprite.scale.set(r);
-    this.position = position.addY(256*(1-r));
+    this.position = this.initialPosition.addY(256*(1 - r));
     this.startCoroutine(`flower-update-${ ++flowers }`, this.flowerUpdate());
   }
 

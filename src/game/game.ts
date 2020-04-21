@@ -54,7 +54,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
   }
 
   initialize() {
-    this.stage.addChild(this.state.map = new GameMap());
+    this.stage.addChild(this.state.map = new GameMap(this.state));
     this.stage.addChild(this.state.player = new Player());
     this.stage.addChild(this.state.sfx = new Sfx());
 

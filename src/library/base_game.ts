@@ -84,7 +84,7 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     this.app = new Application({
       width          : props.canvasWidth,
       height         : props.canvasHeight,
-      antialias      : true,
+      antialias      : false,
       transparent    : false,
       resolution     : DebugFlags["High Performance"] ? window.devicePixelRatio/2 : window.devicePixelRatio,
       autoDensity    : true,

@@ -9,6 +9,7 @@ import { Entity } from '../entity';
 import { Container } from 'pixi.js';
 import { TextEntity } from '../text_entity';
 import { DebugFlags } from '../../game/debug';
+import { Debug } from '../debug';
 
 type ReactWrapperProps = {
   game      : BaseGame<{}>;
@@ -132,6 +133,9 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
               <div style={{ fontWeight: 600, fontFamily: 'arial', paddingBottom: '8px', fontSize: '18px' }}>Debug Options</div>
               <DebugFlagButtons flags={ this.props.debugFlags } />
 
+              <div>
+                Draw Count: { Debug.GetDrawCount() }
+              </div>
               { this.renderSelected() }
 
               <div style={{ fontWeight: 600, fontFamily: 'arial', paddingTop: '8px', paddingBottom: '8px', fontSize: '18px' }}>Debug Hierarchy</div>
