@@ -7,7 +7,6 @@ import { DebugFlagButtons, DebugFlagsType } from './debug_flag_buttons';
 import { IS_DEBUG } from '../environment';
 import { Entity } from '../entity';
 import { Container } from 'pixi.js';
-import { BaseTextEntity } from '../base_text_entity';
 import { TextEntity } from '../text_entity';
 import { DebugFlags } from '../../game/debug';
 

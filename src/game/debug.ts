@@ -4,6 +4,7 @@ export const DebugFlags = ReadDebugFlagsFromLocalStorage({
   "Play Music"                   : true,
   "Set Position To Start Object" : false,
   "Show Initial Cinematic"       : true,
+  "Show Menu"                    : true,
   "Show Bud Text"                : true,
   "Show Flowers in Hierarchy"    : false,
   "Fairy Follows You Immediately": false,

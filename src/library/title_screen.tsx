@@ -8,12 +8,13 @@ import { C } from "../game/constants";
 import { Mode } from "Library";
 import ReactDOM from 'react-dom';
 import React from 'react';
+import { SetAudioToLoop } from "../game/sfx";
 
 
 export class TitleScreen extends Entity {
     activeModes: Mode[] = ["Menu"]
     state: "main" | "entername" = "main";
-    graphic: Sprite;
+    // graphic: Sprite;
     blackScreen: Entity;
     pressEnterText: TextEntity;
     enterYourNameText: TextEntity;
@@ -21,16 +22,21 @@ export class TitleScreen extends Entity {
     frame: number = 0;
     waitFrames: number = 120;
 
+    menuAudio = SetAudioToLoop(Assets.getResource("music/Maybe Tomorrow"));
+    graphic: Sprite;
+
     constructor(textProps: {
         fontSize: number,
         width   : number,
       }) {
         super({name: "TitleScreen"});
+
+        this.menuAudio.play();
         
         this.graphic = new Sprite()
         this.addChild(new Entity({name: "MenuBackground", texture: Assets.getResource("titlescreen")}))
 
-        this.pressEnterText = new TextEntity({text: "(press enter you fool)", ... textProps});
+        this.pressEnterText = new TextEntity({text: "(press enter you fool)", ...textProps});
         this.pressEnterText.position = new Vector2(C.CanvasWidth-480, C.CanvasHeight + 250)
         this.pressEnterText.alpha = 0;
         this.addChild(this.pressEnterText);
@@ -47,10 +53,9 @@ export class TitleScreen extends Entity {
         this.enterYourNameText.visible = false;
         this.addChild(this.enterYourNameText);
 
-        
-
     }
 
+    ref!: HTMLInputElement;
     update(state: IGameState) {
         if (state.keys.justDown.Enter) {
             if (this.state === "main") {
@@ -60,13 +65,32 @@ export class TitleScreen extends Entity {
                     <input 
                     type="text" 
                     size={4}
-                    //autofocus="true"
+                    autoFocus
+                    ref={ref => {this.ref = ref! }}
+                    onKeyDown={k => {
+                        if (k.keyCode === 13) {
+                            state.mode = "Normal";
+                            state.cinematics.name = k.currentTarget.value;
+                            this.visible = false;
+                            this.menuAudio.pause();
+                            this.ref.remove();
+                        }
+                    }}
                     style={{
-                        "position": "absolute",
-                        "border": "solid white 1px",
-                        "left": C.CanvasWidth/2,
-                        "top": C.CanvasHeight/2,
-                    }}/>, 
+                        position: "absolute",
+                        border: 0,
+                        backgroundColor: "transparent",
+                        color: "white",
+                        left: "220px",
+                        top: "300px",
+                        width: "600px",
+                        height: "200px",
+                        fontSize: "40px",
+                        fontFamily: "FreePixel",
+                        textAlign: "center",
+                        outline: 0,
+                    }}
+                    />, 
                     document.getElementById('root')
                   );
             } else {
@@ -76,8 +100,7 @@ export class TitleScreen extends Entity {
         }
 
         // Text glow
-        this.frame += 1
-        console.log(this.alpha)
+        this.frame += 1;
         if (this.frame < this.waitFrames) return;
 
         if (this.pressEnterText.alpha > 0.5) this.startedGlowing = true;
@@ -87,8 +110,6 @@ export class TitleScreen extends Entity {
         } else {
             this.pressEnterText.alpha = 0.5 + (1 - Math.sin((this.frame - this.waitFrames) / 30))/4
         }
-      
-        
     }
 }
 
