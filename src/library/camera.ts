@@ -126,6 +126,11 @@ export class Camera {
 
     this._position = this._position.lerp(desiredPosition, Camera.LERP_SPEED);
 
+    this._position = new Vector2(
+      Math.floor(this._position.x / 4) * 4, 
+      Math.floor(this._position.y / 4) * 4
+    );
+
     this._stage.x = Math.floor(-this._position.x);
     this._stage.y = Math.floor(-this._position.y);
   };
