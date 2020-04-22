@@ -29,7 +29,7 @@ export class NpcDialog extends Entity {
 
     this.text = new TextEntity({
       text    : "",
-      fontSize: 80,
+      fontSize: 90,
       width   : 2000,
     });
 

@@ -83,7 +83,11 @@ export class Player extends Entity {
 
   animate(state: IGameState) {
     if (state.tick % 6 === 0) {
-      this.frame = (this.frame + 1) % this.animState.length;
+      if (this.animState === this.jump && this.frame >= this.animState.length - 3) {
+        this.frame = this.animState.length - 3 + (state.tick % 12) / 6;
+      } else {
+        this.frame = (this.frame + 1) % this.animState.length;
+      }
     }
     this.graphic.texture = this.animState[this.frame];  
   }
