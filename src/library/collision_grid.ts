@@ -128,8 +128,16 @@ export class CollisionGrid {
   };
 
   getRectGroupCollisions = (group: RectGroup, entity?: Entity): CollisionResultRect[] => {
-    return group.getRects()
-      .flatMap(rect => this.getRectCollisions(rect, entity));
+    let collisions: CollisionResultRect[] = [];
+
+    for (const rect of group.getRects()) {
+      collisions = [
+        ...collisions,
+        ...this.getRectCollisions(rect, entity),
+      ];
+    }
+
+    return collisions;
   }
 
   /** 

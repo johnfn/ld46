@@ -105,6 +105,8 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
     // if (DebugFlags["High Performance"]) return null;
     // return null;
 
+    return null;
+
     return (<div>
       <Hierarchy 
         selectedEntity={ this.state.selected }

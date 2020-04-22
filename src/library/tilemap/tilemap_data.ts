@@ -4,6 +4,7 @@ import { Rect } from "../geometry/rect";
 import { RectGroup } from "../geometry/rect_group";
 import { Vector2 } from "../geometry/vector2";
 import { TiledTilemap } from "./tilemap";
+import { Util } from "../util";
 
 export type TilemapRegion = {
   rect      : Rect;
@@ -318,9 +319,7 @@ export class TilemapData {
   }
 
   getCollidersInRegion(region: Rect): Rect[] {
-    return this.getLayerNames()
-      .map(layerName => this.getCollidersInRegionForLayer(region, layerName))
-      .flat();
+    return Util.FlattenByOne(this.getLayerNames().map(layerName => this.getCollidersInRegionForLayer(region, layerName).getRects()));
   }
 
   getCollidersInRegionForLayer(region: Rect, layerName: string): RectGroup {
