@@ -562,8 +562,8 @@ export class Cinematics {
     ]);
 
 
-    Withers.Instance.x = state.player.x - 6500;
-    Withers.Instance.y = state.player.y - 200;
+    Withers.Instance.x = 41320;
+    Withers.Instance.y = -8670;
     Withers.Instance.sprite.scale.x = Withers.Instance.sprite.scale.x * -1;
 
     state.mode = "Normal";
@@ -596,7 +596,6 @@ export class Cinematics {
       { speaker: "Withers", text: "Unless, of course...", },
       { speaker: "Withers", text: "There happened to be one left.", },
     ]);
-    
 
     yield { frames: 10 };
     Withers.Instance.sprite.scale.x = Withers.Instance.sprite.scale.x * -1;
@@ -680,7 +679,7 @@ export class Cinematics {
           ] },
         ]
       },
-      
+
       { speaker: "Withers", text: "DARK BLAST HAH", },
     ]);
 

@@ -105,7 +105,7 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
           paddingLeft: "10px", 
           fontFamily: 'Arial',
           fontSize: '14px',
-          backgroundColor: this.state.hover ? "#eee" : "#fff" 
+          backgroundColor: this.state.hover ? "darkgray" : "black" 
         }}
       >
         <div

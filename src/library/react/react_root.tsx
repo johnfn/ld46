@@ -115,7 +115,7 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
       <div style={{
         display: "flex",
         flexDirection: "row",
-        borderLeft: "1px solid lightgray",
+        borderLeft: IS_DEBUG ? "1px solid lightgray" : 0,
         marginLeft: '16px',
         paddingLeft: '8px',
       }}>
@@ -127,7 +127,7 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
         }}>
           { this.props.game && this.props.game.stage && IS_DEBUG &&
             <div style={{ paddingLeft: '8px', }}>
-              <div style={{ fontFamily: "arial", marginBottom: '8px', fontSize: '14px', width: '300px', backgroundColor: '#eee', padding: '8px' }}>
+              <div style={{ fontFamily: "arial", marginBottom: '8px', fontSize: '14px', width: '300px', padding: '8px' }}>
                 Note: This debugging panel is only shown in development, or production with ?debug=true.
               </div>
               <div style={{ fontWeight: 600, fontFamily: 'arial', paddingBottom: '8px', fontSize: '18px' }}>Debug Options</div>
