@@ -6,7 +6,7 @@ import { Rect } from "./geometry/rect";
 import { RectGroup } from "./geometry/rect_group";
 import { GameReference } from "./base_game";
 import { BaseGameState } from "./base_state";
-import { Player } from "../game/player";
+import { IS_DEBUG, IS_PRODUCTION } from "./environment";
 
 const MAX_DEBUGGING_GRAPHICS_COUNT = 500;
 
@@ -34,6 +34,10 @@ export class Debug {
    * If that's not what you want, pass persistent = true.
    */
   public static DrawPoint(point: IVector2, color = 0xff0000, persistent = false): Graphics {
+    if (IS_PRODUCTION) {
+      console.error("SHOULD NOT HAPPEN")
+    }
+
     const graphics = new Graphics();
 
     new Line({
@@ -77,6 +81,10 @@ export class Debug {
    * If that's not what you want, pass persistent = true.
    */
   public static DrawLineV2(start: Vector2, end: Vector2, color = 0xff0000, persistent = false): Graphics {
+    if (IS_PRODUCTION) {
+      console.error("SHOULD NOT HAPPEN")
+    }
+
     return Debug.DrawLine(new Line({ start, end }), color, persistent);
   }
 
@@ -89,6 +97,10 @@ export class Debug {
    * If that's not what you want, pass persistent = true.
    */
   public static DrawLine(line: Line, color = 0xff0000, persistent = false, target: "stage" | "fixed" = "fixed"): Graphics {
+    if (IS_PRODUCTION) {
+      console.error("SHOULD NOT HAPPEN")
+    }
+
     const graphics = new Graphics();
 
     line.drawOnto(graphics, color);
@@ -122,6 +134,10 @@ export class Debug {
    * If that's not what you want, pass persistent = true.
    */
   public static DrawRect(rect: Rect, color = 0xff0000, persistent = false, target: "stage" | "fixed" = "fixed"): Graphics[] {
+    if (IS_PRODUCTION) {
+      console.error("SHOULD NOT HAPPEN")
+    }
+
     const lines: Graphics[] = [];
 
     for (const line of rect.getLinesFromRect()) {
@@ -145,6 +161,10 @@ export class Debug {
     persistent = false,
     target: "stage" | "fixed" = "stage"
   ): Graphics[] {
+    if (IS_PRODUCTION) {
+      console.error("SHOULD NOT HAPPEN")
+    }
+
     if (entity instanceof Entity) {
       entity = entity.collisionBounds()
         .add(entity.positionAbsolute())
