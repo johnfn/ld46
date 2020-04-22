@@ -4,6 +4,7 @@ import { CollisionGrid, CollisionResultRect } from "./collision_grid";
 import { HashSet } from "./data_structures/hash";
 import { Rect } from "./geometry/rect";
 import { BouncyShroom } from "../game/bouncy_shroom";
+import { RectGroup } from "./geometry/rect_group";
 
 export type HitInfo = { 
   hit         : boolean; 
@@ -66,6 +67,21 @@ export class CollisionHandler {
     return grid;
   };
 
+  getHitsAt = (grid: CollisionGrid, bounds: Rect | RectGroup, entity: Entity): { hits: CollisionResultRect[]; interactions: CollisionResultRect[] } => {
+    const xHits =
+      bounds instanceof Rect 
+        ? grid.getRectCollisions(bounds, entity) 
+        : grid.getRectGroupCollisions(bounds, entity);
+
+    const hits         = xHits.filter(x => !x.otherEntity || (x.otherEntity && !x.otherEntity.isInteractable()));
+    const interactions = xHits.filter(x => (x.otherEntity && x.otherEntity.isInteractable()));
+
+    return { 
+      hits,
+      interactions,
+    };
+  }
+
   resolveCollisions = (props: {
     entities: HashSet<Entity>;
     grid    : CollisionGrid;
@@ -93,22 +109,30 @@ export class CollisionHandler {
       delta = delta.add(xVelocity);
       updatedBounds = updatedBounds.add(xVelocity);
 
-      const xHits =
-        updatedBounds instanceof Rect 
-          ? grid.getRectCollisions(updatedBounds, entity) 
-          : grid.getRectGroupCollisions(updatedBounds, entity);
+      const { hits: xHits, interactions: xInteractions } = this.getHitsAt(grid, updatedBounds, entity);
 
-      const xCollisions   = xHits.filter(x => !x.otherEntity || (x.otherEntity && !x.otherEntity.isInteractable()));
-      const xInteractions = xHits.filter(x => (x.otherEntity && x.otherEntity.isInteractable()));
-
-      if (xCollisions.length > 0) {
+      if (xHits.length > 0) {
         hitInfo.hit        = true;
         hitInfo.right      = entity.velocity.x > 0;
         hitInfo.left       = entity.velocity.x < 0;
-        hitInfo.collisions = [...hitInfo.collisions, ...xCollisions];
+        hitInfo.collisions = [...hitInfo.collisions, ...xHits];
 
         delta = delta.subtract(xVelocity);
         updatedBounds = updatedBounds.subtract(xVelocity);
+
+        for (let x = 0; x < xVelocity.x; x++) {
+          updatedBounds = updatedBounds.add(new Vector2(1, 0));
+          delta         = delta.add(new Vector2(1, 0));
+
+          const { hits: newXHits } = this.getHitsAt(grid, updatedBounds, entity);
+
+          if (newXHits.length > 0) {
+            updatedBounds = updatedBounds.add(new Vector2(-1, 0));
+            delta         = delta.add(new Vector2(-1, 0));
+
+            break;
+          }
+        }
       }
 
       if (xInteractions.length > 0) {
@@ -120,22 +144,30 @@ export class CollisionHandler {
       delta = delta.add(yVelocity);
       updatedBounds = updatedBounds.add(yVelocity);
 
-      const yHits =
-        updatedBounds instanceof Rect 
-          ? grid.getRectCollisions(updatedBounds, entity) 
-          : grid.getRectGroupCollisions(updatedBounds, entity);
+      const { hits: yHits, interactions: yInteractions } = this.getHitsAt(grid, updatedBounds, entity);
 
-      const yCollisions = yHits.filter(x => !x.otherEntity || (x.otherEntity && !x.otherEntity.isInteractable()));
-      const yInteractions = yHits.filter(x => (x.otherEntity && x.otherEntity.isInteractable()));
-
-      if (yCollisions.length > 0) {
+      if (yHits.length > 0) {
         hitInfo.hit        = true;
         hitInfo.up         = entity.velocity.y < 0;
         hitInfo.down       = entity.velocity.y > 0;
-        hitInfo.collisions = [...hitInfo.collisions, ...yCollisions];
+        hitInfo.collisions = [...hitInfo.collisions, ...yHits];
 
         delta = delta.subtract(yVelocity);
         updatedBounds = updatedBounds.subtract(yVelocity);
+
+        for (let y = 0; y < yVelocity.y; y++) {
+          updatedBounds = updatedBounds.add(new Vector2(0, 1));
+          delta         = delta.add(new Vector2(0, 1));
+
+          const { hits: newYHits } = this.getHitsAt(grid, updatedBounds, entity);
+
+          if (newYHits.length > 0) {
+            updatedBounds = updatedBounds.add(new Vector2(0, -1));
+            delta         = delta.add(new Vector2(0, -1));
+
+            break;
+          }
+        }
       }
 
       if (yInteractions.length > 0) {
