@@ -121,7 +121,9 @@ export class TypesafeLoader<Resources extends AllResourcesType> {
 
   onLoadComplete(callback: () => void) {
     if (this.loadComplete) {
-      callback();
+      setTimeout(() => {
+        callback();
+      }, 0);
     } else {
       this.loadCompleteCallbacks.push(callback);
     }
