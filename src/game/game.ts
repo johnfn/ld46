@@ -59,6 +59,7 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
     this.stage.addChild(this.state.sfx = new Sfx());
 
     this.parallaxStage.addChild(new ParallaxLayers());
+
     this.fixedCameraStage.addChild(this.state.overlay = new Overlay());
     this.fixedCameraStage.addChild(new DialogBox());
     this.fixedCameraStage.addChild(new DialogOverlay());
