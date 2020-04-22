@@ -9,6 +9,7 @@ import { Mode } from "Library";
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { SetAudioToLoop } from "../game/sfx";
+import { Game } from "../game/game";
 
 
 export class TitleScreen extends Entity {
@@ -74,6 +75,11 @@ export class TitleScreen extends Entity {
                             this.visible = false;
                             this.menuAudio.pause();
                             this.ref.remove();
+
+                            this.startCoroutine(
+                                "Initial Cinematic",
+                                Game.Instance.state.cinematics.openingCinematic()
+                              );
                         }
                     }}
                     style={{
