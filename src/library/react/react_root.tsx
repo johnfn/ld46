@@ -8,7 +8,6 @@ import { IS_DEBUG } from '../environment';
 import { Entity } from '../entity';
 import { Container } from 'pixi.js';
 import { TextEntity } from '../text_entity';
-import { DebugFlags } from '../../game/debug';
 import { Debug } from '../debug';
 
 type ReactWrapperProps = {
@@ -103,10 +102,24 @@ export class GameReactWrapper extends React.Component<ReactWrapperProps, ReactWr
   };
 
   renderHierarchy() {
-    if (DebugFlags["High Performance"]) return null;
+    // if (DebugFlags["High Performance"]) return null;
+    // return null;
+
     return (<div>
-      <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.stage} gameState={this.props.game.state} /> 
-      <Hierarchy setMoused={ this.setMoused } setSelected={ this.setSelected } root={this.props.game.fixedCameraStage}  gameState={this.props.game.state} />
+      <Hierarchy 
+        selectedEntity={ this.state.selected }
+        setMoused={ this.setMoused } 
+        setSelected={ this.setSelected } 
+        root={this.props.game.stage} 
+        gameState={this.props.game.state} 
+      /> 
+      <Hierarchy 
+        selectedEntity={ this.state.selected }
+        setMoused={ this.setMoused } 
+        setSelected={ this.setSelected } 
+        root={this.props.game.fixedCameraStage} 
+        gameState={this.props.game.state} 
+      />
       </div>)
   }
 

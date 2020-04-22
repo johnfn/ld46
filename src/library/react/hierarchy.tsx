@@ -12,6 +12,7 @@ type HierarchyProps = {
   setSelected: (obj: Entity | Container) => void;
   setMoused  : (obj: Entity | Container | null) => void;
   gameState  : IGameState;
+  selectedEntity   : Entity | Container | null;
 };
 
 export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean }> {
@@ -43,10 +44,23 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
     this.hoverGraphics = [];
 
     if (this.hoverTarget !== null) {
-      this.hoverGraphics = Debug.DrawBounds(this.props.root, 0xff0000, true, "stage");
+      this.hoverGraphics = [...Debug.DrawBounds(this.props.root, 0xff0000, true, "stage")];
 
       if (this.props.root instanceof Entity) {
         const point = Debug.DrawPoint(this.props.root.position, 0xff0000, true);
+
+        this.hoverGraphics = [
+          ...this.hoverGraphics,
+          point,
+        ];
+      }
+    }
+
+    if (this.props.selectedEntity === this.props.root) {
+      this.hoverGraphics = [...this.hoverGraphics, ...Debug.DrawBounds(this.props.selectedEntity, 0xff0000, true, "stage")];
+
+      if (this.props.root instanceof Entity) {
+        const point = Debug.DrawPoint(this.props.selectedEntity.position, 0xff0000, true);
 
         this.hoverGraphics = [
           ...this.hoverGraphics,
@@ -90,7 +104,7 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
     if (!DebugFlags["Show Flowers in Hierarchy"] && root instanceof NormalFlower) { return null };
 
     return (<div>
-      { root.name } (depth: { root.zIndex }) { root instanceof Entity && (
+      { this.props.selectedEntity === this.props.root ? <strong>{ root.name }</strong> : root.name } (depth: { root.zIndex }) { root instanceof Entity && (
           root.activeModes.includes(this.props.gameState.mode) ? "Active" : "Inactive"
       )}
     </div>)
@@ -119,7 +133,7 @@ export class Hierarchy extends React.Component<HierarchyProps, { hover: boolean 
           root instanceof Entity &&
           root.children().length > 0 && 
             root.children().map(child => {
-              return <Hierarchy setMoused={this.props.setMoused} setSelected={this.props.setSelected } root={ child } gameState={ this.props.gameState } />
+              return <Hierarchy selectedEntity={this.props.selectedEntity} setMoused={this.props.setMoused} setSelected={this.props.setSelected } root={ child } gameState={ this.props.gameState } />
             })
         }
       </div>

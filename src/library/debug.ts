@@ -148,7 +148,6 @@ export class Debug {
     if (entity instanceof Entity) {
       entity = entity.collisionBounds()
         .add(entity.positionAbsolute())
-        .add(GameReference.stage.position)
         ;
     } 
     

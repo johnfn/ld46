@@ -218,8 +218,6 @@ export class Player extends Entity {
   }
 
   update(state: IGameState): void {
-    console.log(state.mode);
-
     this.animate(state);
 
     if (state.mode === "Dialog") {

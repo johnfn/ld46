@@ -11,9 +11,9 @@ import { DialogOverlay } from "./dialog_overlay";
 import { Hud } from "./hud";
 import { NpcDialog } from "./npc";
 import { Sfx } from "./sfx";
-import { ParallaxLayers } from "./parallax_layers";
 import { Withers } from "./withers";
 import { TitleScreen } from "../library/title_screen";
+import { ParallaxLayers } from "./parallax_layers";
 
 export class Game extends BaseGame<typeof AssetsToLoad> {
   public static Instance: Game;

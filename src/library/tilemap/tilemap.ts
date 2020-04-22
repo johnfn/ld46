@@ -126,8 +126,8 @@ export class TiledTilemap {
 
           sprite.x = (tile.x - region.x - layer.offset.x) * C.Scale.x;
           sprite.y = (tile.y - region.y - layer.offset.y) * C.Scale.y;
-          sprite.width *= C.Scale.x;
-          sprite.height *= C.Scale.y;
+          sprite.width                                   *= C.Scale.x;
+          sprite.height                                  *= C.Scale.y;
 
           this._renderer.render(sprite, renderTexture, false);
         }

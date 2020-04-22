@@ -5,6 +5,7 @@ import { Vector2 } from "./geometry/vector2";
 import { DefaultGrid } from "./data_structures/default_grid";
 import { RectGroup } from "./geometry/rect_group";
 import { Debug } from "./debug";
+import { Vine } from "../game/vine_flower";
 
 export type CollisionResultRect = {
   firstRect    : Rect;
@@ -243,12 +244,14 @@ export class CollisionGrid {
   // Add a rect to the hash grid.
   // Checks each corner, to handle entities that span multiply grid cells.
   add = (rect: Rect, associatedEntity?: Entity) => {
-    for (let x = rect.x; x < rect.right; x += this._cellSize) {
-      for (let y = rect.y; y < rect.bottom; y += this._cellSize) {
-        this._cells.get(
-          Math.floor(x / this._cellSize),
-          Math.floor(y / this._cellSize),
-        ).add(rect, associatedEntity);
+    const startX = Math.floor(rect.x      / this._cellSize);
+    const stopX  = Math.floor(rect.right  / this._cellSize);
+    const startY = Math.floor(rect.y      / this._cellSize);
+    const stopY  = Math.floor(rect.bottom / this._cellSize);
+
+    for (let x = startX; x <= stopX; x++) {
+      for (let y = startY; y <= stopY; y++) {
+        this._cells.get(x, y).add(rect, associatedEntity);
       }
     }
   };
