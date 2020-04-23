@@ -19,6 +19,8 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
   public static Instance: Game;
 
   public cinematics: Cinematics;
+  public startSpeedrunTick: number = 0;
+  public endSpeedrunTick: number = 0;
 
   constructor() {
     super({
@@ -51,6 +53,12 @@ export class Game extends BaseGame<typeof AssetsToLoad> {
     this.cinematics = new Cinematics(this.coroutineManager, this);
 
     this.state.cinematics = this.cinematics;
+  }
+
+  getSpeedrunTimeInS():number {
+    if (this.endSpeedrunTick === 0) return ((this.state.tick - this.startSpeedrunTick)/60);
+    return ((this.endSpeedrunTick - this.startSpeedrunTick)/60);
+
   }
 
   initialize() {

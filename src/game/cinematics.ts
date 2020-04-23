@@ -119,6 +119,8 @@ export class Cinematics {
     Hud.Instance.visible = true;
 
     state.mode = "Normal"; // Set game state back to normal so the player can play the game
+    this.game.startSpeedrunTick = this.game.state.tick;
+
   }
 
   public *openingBud1(): GameCoroutine {
@@ -910,9 +912,19 @@ export class Cinematics {
 
     yield* this.fadeScreenToPercentage({ percentage: 100, time: 90, state });
 
+    this.game.endSpeedrunTick = this.game.state.tick;
+
+    const tx = Game.Instance.getSpeedrunTimeInS();
+    const minutes = Math.floor(tx/60);
+    const seconds = `${Math.round(tx) % 60}`.padStart(2, '0');
+    const ms = (tx % 1).toFixed(1).slice(2);
+    const speedRunTime = `${minutes}:${seconds}.${ms}`;
+
     yield* DialogOverlay.StartDialog([ // Start the following dialog
       { speaker: "Herald", text: "...", }, // First dialog: speaker name is Herald, text is "..."
-      { speaker: "Herald", text: "The End." }, // second dialog
+      { speaker: "Herald", text: `The time is ${speedRunTime} PM.`}, // second dialog
+      { speaker: "Herald", text: "And it looks like..." }, // second dialog
+      { speaker: "Herald", text: "That's the end of things." }, // second dialog
       { speaker: "Herald", text: "..." }, // second dialog
       { speaker: "Herald", text: "...Or is it???", }, // etc
       { speaker: "Herald", text: "...", },
@@ -926,6 +938,7 @@ export class Cinematics {
       { speaker: "Herald", text: "..................................................", },
       { speaker: "Herald", text: ".......................................................", },
       { speaker: "Herald", text: "P.S. EVERYONE DIED!!!!!", },
+      
     ]);
 
     // state.mode = "Normal";
@@ -981,6 +994,7 @@ export class Cinematics {
     ]);
 
     state.mode = "Normal";
+
   }
 
   public *npc03(speaker: Entity): GameCoroutine {
