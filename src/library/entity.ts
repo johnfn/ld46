@@ -19,7 +19,7 @@ export enum EntityType {
   MovingEntity,
 }
 
-class AugmentedSprite extends Sprite {
+export class AugmentedSprite extends Sprite {
   entity!: Entity;
 }
 

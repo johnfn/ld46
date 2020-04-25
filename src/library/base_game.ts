@@ -1,5 +1,5 @@
-import { Application, Renderer, Point } from "pixi.js";
-import { Entity } from "./entity";
+import { Application, Renderer, Point, Container } from "pixi.js";
+import { Entity, AugmentedSprite } from "./entity";
 import { Debug } from "./debug";
 import { HashSet } from "./data_structures/hash";
 import { TypesafeLoader, AllResourcesType } from "./typesafe_loader";
@@ -11,7 +11,6 @@ import { Rect } from "./geometry/rect";
 import { CoroutineManager } from "./coroutine_manager";
 import { IGameState } from 'Library';
 import { BaseGameState } from "./base_state";
-import { DebugFlags } from "../game/debug";
 
 export let GameReference: BaseGame<any>;
 
@@ -84,9 +83,10 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     this.app = new Application({
       width          : props.canvasWidth,
       height         : props.canvasHeight,
+      powerPreference: "low-power",
       antialias      : false,
       transparent    : false,
-      resolution     : DebugFlags["High Performance"] ? window.devicePixelRatio / 2 : window.devicePixelRatio,
+      resolution     : window.devicePixelRatio,
       autoDensity    : true,
       backgroundColor: 0x4e5759,
       view           : view as HTMLCanvasElement,
@@ -192,6 +192,18 @@ export class BaseGame<TResources extends AllResourcesType = {}> {
     this.camera.update(this.state);
 
     this.coroutineManager.updateCoroutines(this.state);
+
+    // let foo = Debug.GetDrawnObjects();
+
+    // for (const f of Debug.GetDrawnObjects()) {
+    //   if (f instanceof AugmentedSprite) {
+    //     if (f.width > 1024) { 
+    //       f.visible = false; 
+    //     }
+    //   }
+    // }
+
+    // let foo = Debug.GetDrawn();
 
     Debug.ResetDrawCount();
   };

@@ -77,7 +77,7 @@ export class TiledTilemap {
     //   }
     // }
 
-    this.cache = {};
+    // this.cache = {};
 
     const hash = region.toString();
 

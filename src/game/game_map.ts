@@ -218,6 +218,8 @@ export class GameMap extends Entity {
       flower.destroy(state);
     }
 
+    this.flowers = [];
+
     let frequency = 2;
     for (const region of this.flowerRegions) {
       if (region.properties["frequency"]) {

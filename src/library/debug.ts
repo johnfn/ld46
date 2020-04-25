@@ -215,13 +215,18 @@ export class Debug {
 
       Debug.profiles[name] = [];
 
-      console.log(`${ name }: ${ rounded }ms`)
+      console.log(`${ name }: ${ rounded }ms`);
     }
   }
 
   static ResetDrawCount() {
     (Sprite as any).drawCount = 0;
     (Container as any).drawCount = 0;
+    drawn = [];
+  }
+
+  static GetDrawnObjects() {
+    return drawn;
   }
 
   static GetDrawCount() {
@@ -271,35 +276,43 @@ export class Debug {
   }
 }
 
-(Sprite as any).drawCount = 0;
+let drawn: any[] = [];
 
-(Sprite.prototype as any).__render = (Sprite.prototype as any)._render;
-(Sprite.prototype as any)._render = function (renderer: any) {
-  (Sprite as any).drawCount++;
-  this.__render(renderer);
-};
+if (IS_DEBUG) {
+  (Sprite as any).drawCount = 0;
 
-
-(Sprite.prototype as any).__renderCanvas = (Sprite.prototype as any)._renderCanvas;
-(Sprite.prototype as any)._renderCanvas = function (renderer: any) {
-  (Sprite as any).drawCount++;
-  this.__renderCanvas(renderer);
-};
+  (Sprite.prototype as any).__render = (Sprite.prototype as any)._render;
+  (Sprite.prototype as any)._render = function (renderer: any) {
+    (Sprite as any).drawCount++;
+    this.__render(renderer);
+    drawn.push(this);
+  };
 
 
-// PIXI.Container
-
-(Container as any).drawCount = 0;
-
-(Container.prototype as any).__render = (Container.prototype as any)._render;
-(Container.prototype as any)._render = function (renderer: any) {
-  (Container as any).drawCount++;
-  this.__render(renderer);
-};
+  (Sprite.prototype as any).__renderCanvas = (Sprite.prototype as any)._renderCanvas;
+  (Sprite.prototype as any)._renderCanvas = function (renderer: any) {
+    (Sprite as any).drawCount++;
+    this.__renderCanvas(renderer);
+    drawn.push(this);
+  };
 
 
-(Container.prototype as any).__renderCanvas = (Container.prototype as any)._renderCanvas;
-(Container.prototype as any)._renderCanvas = function (renderer: any) {
-  (Container as any).drawCount++;
-  this.__renderCanvas(renderer);
-};
+  // PIXI.Container
+
+  (Container as any).drawCount = 0;
+
+  (Container.prototype as any).__render = (Container.prototype as any)._render;
+  (Container.prototype as any)._render = function (renderer: any) {
+    (Container as any).drawCount++;
+    this.__render(renderer);
+    drawn.push(this);
+  };
+
+
+  (Container.prototype as any).__renderCanvas = (Container.prototype as any)._renderCanvas;
+  (Container.prototype as any)._renderCanvas = function (renderer: any) {
+    (Container as any).drawCount++;
+    this.__renderCanvas(renderer);
+    drawn.push(this);
+  };
+}

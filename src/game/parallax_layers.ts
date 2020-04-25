@@ -83,6 +83,7 @@ export class ParallaxLayers extends Entity {
 
       sprite.tilePosition.x = state.camera.cameraFrame().x * layer.speed / 4;
     }
+
     this.sprites[0].tilePosition.x += state.tick * -0.5;
     this.sprites[5].tilePosition.x += state.tick * -0.05;
     this.sprites[7].tilePosition.x += state.tick * -0.4;
