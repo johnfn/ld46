@@ -1,4 +1,4 @@
-import { Texture } from "pixi.js";
+import { Texture, Container } from "pixi.js";
 import { Entity } from "../library/entity";
 import { C } from "./constants";
 import { IGameState } from "Library";
@@ -7,7 +7,6 @@ import { Assets } from "./assets";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { Rect } from "../library/geometry/rect";
 import { Vector2 } from "../library/geometry/vector2";
-import { Sfx } from "./sfx";
 import { GabbysGlowThing } from "./gabbys_glow_thing";
 
 class VineComponent extends Entity {
@@ -16,6 +15,7 @@ class VineComponent extends Entity {
 
   constructor() {
     super({ name: "VineComponent" });
+    this.sprite.anchor.set(0,1)
   }
 
   setFrame(frame: number) {
@@ -48,21 +48,22 @@ export class Vine extends Entity {
     this.visible = true;
     this.isActivated = true;
 
-    for (let i = 1; true; i++) {
+    for (let i = 0; true; i++) {
       const ent = new VineComponent();
       ent.setFrame(0);
 
       const nextPosition = new Vector2(
         (ent.width / 2),
-        (ent.height / 2 + this.y - ent.height * i)
+        (this.y - ent.height * (i-1))
       ).add(this.positionAbsolute());
 
       // Are we about to hit a wall?
       if (state.lastCollisionGrid.collidesPoint(nextPosition).length > 0) {
+        this.finishedVineComponents[this.finishedVineComponents.length - 1].scale = new Vector2(1, 1);
         break;
       }
 
-      this.addChild(ent, 0, this.y - ent.height * i);
+      this.addChild(ent, 0, this.y - ent.height * (i-1));
 
       for (let frame = 0; frame < this.deadFrame; frame++) {
         ent.setFrame(frame);
@@ -178,6 +179,7 @@ export class VineFlower extends Entity {
     this.hoverText.visible = false;
 
     this.addChild(this.vine = new Vine(this));
+    this.vine.position = this.vine.position.addY(-52); //offset so vine grows out of flower
 
     this.vine.sprite.anchor.set(0, 1); // grow upwards
     this.vine.height = 256;
