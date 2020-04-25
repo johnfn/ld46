@@ -87,12 +87,17 @@ export class DialogOverlay extends Entity {
 
   public static *StartDialog(dialog: DialogText): GameCoroutine {
     if (DebugFlags["SKIP ALL DIALOG"]) { return; }
-
+    DialogOverlay.Instance.clearDialogContents();
+    yield {frames: 20}
     yield* DialogOverlay.Instance.startDialog(dialog.slice(0));
   }
 
   displayDialogContents(textToShow: string) {
     this.dialogText.setText(textToShow);
+  }
+
+  clearDialogContents() {
+    this.dialogText.setText(" ");
   }
 
   update(state: BaseGameState): void { }

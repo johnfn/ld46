@@ -5,6 +5,7 @@ import { HoverText } from "./hover_text";
 import { Assets } from "./assets";
 import { IGameState } from "Library";
 import { GameCoroutine } from "../library/coroutine_manager";
+import { Vector2 } from "../library/geometry/vector2";
 
 export class BigShroom extends Entity {
   public interactionDistance = C.InteractionDistance;
@@ -13,6 +14,7 @@ export class BigShroom extends Entity {
 
   hoverText: HoverText;
   graphic: Entity;
+  maxScale: number = 1;
 
   constructor() {
     super({ 
@@ -23,11 +25,13 @@ export class BigShroom extends Entity {
       name: "BigShroomGraphic",
       texture: Assets.getResource("bigshroom")[0],
     });
-    this.addChild(this.graphic, 0, -Assets.getResource("bigshroom")[0].height + 256)
+    this.addChild(this.graphic, 0, 256)
+    this.graphic.sprite.anchor.set(0.5, 1);
+    this.maxScale = 2.5;
 
     this.frames = Assets.getResource("bigshroom");
 
-    this.addChild(this.hoverText = new HoverText("x: interact"), 200, -100);
+    this.addChild(this.hoverText = new HoverText("x: interact"), -this.graphic.width/2, 0);
     this.hoverText.visible = false;
   }
 
@@ -62,6 +66,7 @@ export class BigShroom extends Entity {
   *animateAlive(): GameCoroutine {
     for (let i = 0; i < this.frames.length; i++) {
       this.graphic.texture = this.frames[i];
+      this.graphic.scale = this.graphic.scale.add({x: this.maxScale/this.frames.length, y: this.maxScale/this.frames.length})
 
       yield { frames: 8 };
     }
@@ -73,6 +78,8 @@ export class BigShroom extends Entity {
     state.haveShroomPerma = true;
 
     this.interacted = true;
+
+    yield { frames: 100 };
 
     yield* state.cinematics.bigMush();
   }

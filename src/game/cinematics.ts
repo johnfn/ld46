@@ -1468,7 +1468,7 @@ export class Cinematics {
       }
     }
 
-  public *teleportBackToHub(): GameCoroutine {
+  public *teleportBackToHub(plantType: string): GameCoroutine {
     Hud.Instance.visible = false;
 
     let state = yield "next";
@@ -1480,6 +1480,7 @@ export class Cinematics {
 
     yield* DialogOverlay.StartDialog([
       { speaker: "Herald", text: "...A mysterious force returns you to the bottom of the Tree of Sprights...", },
+      { speaker: "Herald", text: `Your nature healing ability has extended! Now when you heal ${plantType}, they will permanently stay alive!`, },
     ]);
 
     state.mode = "Normal"; // let player fall
@@ -1509,10 +1510,10 @@ export class Cinematics {
         { text: "Your number of Spirit Slots increased!", },
       ]);
 
-      yield* this.teleportBackToHub();
+      yield* this.teleportBackToHub("vines");
 
       yield* DialogOverlay.StartDialog([
-        { speaker: "Herald", text: "Your nature healing ability has extended! Now when you heal vines, they will permanently stay alive!", },
+        
       ]);
 
     } else {
@@ -1541,11 +1542,8 @@ export class Cinematics {
         { speaker: "", text: "Your number of Spirit Slots increased!", },
       ]);
 
-      yield* this.teleportBackToHub();
-
-      yield* DialogOverlay.StartDialog([
-        { speaker: "Herald", text: "Your nature healing ability has extended! Now when you heal shrooms, they will permanently stay alive!", },
-      ]);
+      yield* this.teleportBackToHub("mushrooms");
+      
     } else {
       yield* DialogBox.StartDialog([
         { text: "The mushroom has grown plumper. It seems pleased with itself.", },

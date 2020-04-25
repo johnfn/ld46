@@ -1,4 +1,5 @@
 import { Entity } from "../library/entity";import { C } from "./constants";import { Texture } from "pixi.js";import { HoverText } from "./hover_text";import { Assets } from "./assets";import { Rect } from "../library/geometry/rect";import { IGameState } from "Library";import { GameCoroutine } from "../library/coroutine_manager";
+import { Vector2 } from "../library/geometry/vector2";
 
 export class Wisteria extends Entity {
   public interactionDistance = C.InteractionDistance;
@@ -7,6 +8,7 @@ export class Wisteria extends Entity {
 
   hoverText: HoverText;
   graphic: Entity;
+  maxScale: number = 1;
 
   constructor() {
     super({ 
@@ -17,7 +19,10 @@ export class Wisteria extends Entity {
       name: "WistGraphic",
       texture: Assets.getResource("wisteria")[0],
     });
-    this.addChild(this.graphic, 0, -Assets.getResource("wisteria")[0].height + 256)
+    this.addChild(this.graphic, 0, 256)
+    this.graphic.sprite.anchor.set(0.5, 1);
+    this.graphic.scale = new Vector2(1.5, 1.5)
+    this.maxScale = 3 - 1.5;
 
     this.frames = Assets.getResource("wisteria");
 
@@ -55,6 +60,7 @@ export class Wisteria extends Entity {
   *animateAlive(): GameCoroutine {
     for (let i = 0; i < this.frames.length; i++) {
       this.graphic.texture = this.frames[i];
+      this.graphic.scale = this.graphic.scale.add({x: this.maxScale/this.frames.length, y: this.maxScale/this.frames.length})
 
       yield { frames: 8 };
     }
@@ -64,6 +70,9 @@ export class Wisteria extends Entity {
     state.spiritTotal += 1;
     state.spiritUnused = state.spiritTotal;
     state.haveVinePerma = true;
+
+    yield { frames: 100 };
+
 
     yield* state.cinematics.wisteria();
   }

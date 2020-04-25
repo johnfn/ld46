@@ -82,6 +82,7 @@ export class DialogBox extends Entity {
   }
 
   *startDialog(dialog: DialogText): GameCoroutine {
+
     let state: IGameState;
 
     if (DebugFlags["SKIP ALL DIALOG"]) { return; }
@@ -95,6 +96,7 @@ export class DialogBox extends Entity {
     let activeDialogText = dialog.slice();
 
     state.mode = "Dialog";
+
 
     while (activeDialogText.length > 0) {
       const fullText = activeDialogText[0];
@@ -164,6 +166,7 @@ export class DialogBox extends Entity {
   }
 
   public static *StartDialog(dialog: DialogText): GameCoroutine {
+    DialogBox.Instance.clearDialogContents();
     yield* DialogBox.Instance.startDialog(dialog.slice(0));
   }
 
@@ -181,6 +184,11 @@ export class DialogBox extends Entity {
     // } else if (speaker === "Tasukete") {
     //   this.profilePic.texture = Assets.getResource("tasukete_portrait");
     // }
+  }
+
+  clearDialogContents() {
+    this.dialogText.setText(" ");
+    this.speakerText.setText(" ");
   }
 
   update(state: BaseGameState): void { }
