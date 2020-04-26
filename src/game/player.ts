@@ -85,7 +85,7 @@ export class Player extends Entity {
   audio: HTMLAudioElement | null = null;
 
   get grounded() {
-    return this.hitInfo.down !== undefined
+    return this.hitInfo.down === true
   }
 
   animate(state: IGameState) {
@@ -207,7 +207,7 @@ export class Player extends Entity {
 
       // Continue a jump
     } else if (state.keys.down.Z) {
-      if  (this.jumpFrames < this.maxJumpFrames) {
+      if (this.jumpFrames < this.maxJumpFrames) {
         this.jumpFrames += 1;
         this.velocity = this.velocity.addY(-this.jumpDelta/this.jumpFrames);
       } else {
