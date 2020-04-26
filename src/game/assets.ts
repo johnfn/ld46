@@ -42,8 +42,8 @@ export type AssetPath =
   | "parallax bg/04 - city back.png"
   | "parallax bg/05 - forest back.png"
   | "parallax bg/06 - city.png"
-  | "parallax bg/06 - city_01.png"
-  | "parallax bg/06 - city_02.png"
+  | "parallax bg/06 - city_one.png"
+  | "parallax bg/06 - city_two.png"
   | "parallax bg/07 - forest.png"
   | "parallax bg/bigcloud01.png"
   | "parallax bg/bigcloud02.png"
@@ -81,6 +81,7 @@ export type AssetPath =
   | "titlescreen.png"
   | "transparent.png"
   | "tree_bg.png"
+  | "tree_bg_1x.png"
   | "tree_bg_bottom_left.png"
   | "tree_bg_bottom_right.png"
   | "tree_bg_top_left.png"
@@ -272,8 +273,8 @@ export const AssetsToLoad = {
   "parallax bg/04 - city back"        : { type: "Image"       as const, path: "parallax bg/04 - city back.png"         },
   "parallax bg/05 - forest back"      : { type: "Image"       as const, path: "parallax bg/05 - forest back.png"       },
   "parallax bg/06 - city"             : { type: "Image"       as const, path: "parallax bg/06 - city.png"              },
-  "parallax bg/06 - city_01"          : { type: "Image"       as const, path: "parallax bg/06 - city_01.png"           },
-  "parallax bg/06 - city_02"          : { type: "Image"       as const, path: "parallax bg/06 - city_02.png"           },
+  "parallax bg/06 - city_one"         : { type: "Image"       as const, path: "parallax bg/06 - city_one.png"          },
+  "parallax bg/06 - city_two"         : { type: "Image"       as const, path: "parallax bg/06 - city_two.png"          },
   "parallax bg/07 - forest"           : { type: "Image"       as const, path: "parallax bg/07 - forest.png"            },
   "parallax bg/bigcloud01"            : { type: "Image"       as const, path: "parallax bg/bigcloud01.png"             },
   "parallax bg/bigcloud02"            : { type: "Image"       as const, path: "parallax bg/bigcloud02.png"             },
@@ -311,6 +312,7 @@ export const AssetsToLoad = {
   "titlescreen"                       : { type: "Image"       as const, path: "titlescreen.png"                        },
   "transparent"                       : { type: "Image"       as const, path: "transparent.png"                        },
   "tree_bg"                           : { type: "Image"       as const, path: "tree_bg.png"                            },
+  "tree_bg_1x"                        : { type: "Image"       as const, path: "tree_bg_1x.png"                         },
   "tree_bg_bottom_left"               : { type: "Image"       as const, path: "tree_bg_bottom_left.png"                },
   "tree_bg_bottom_right"              : { type: "Image"       as const, path: "tree_bg_bottom_right.png"               },
   "tree_bg_top_left"                  : { type: "Image"       as const, path: "tree_bg_top_left.png"                   },
