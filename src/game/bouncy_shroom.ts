@@ -28,8 +28,7 @@ export class BouncyShroom extends Entity {
 
     this.addChild(this.hoverText = new HoverText("x: interact"), 0, -80);
     this.hoverText.visible = false;
-
-    this.addChild(new GabbysGlowThing(0x3cda61));
+    this.addChild(new GabbysGlowThing(0xe38fb5, this));
   }
 
   public collisionBounds(): Rect {

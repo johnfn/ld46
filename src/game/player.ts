@@ -15,11 +15,19 @@ export class Player extends Entity {
   public static StartPosition = new Vector2(-12000, 900);
   public static Instance: Player;
 
-  speed      = 30;
-  jumpHeight = 60;
-  gravity    = 2;
+  // Physics
+  speed         = 30;
+  climbSpeed    = 20;
+  vineJumpDelta = 30;
+  jumpDelta     = 15;
+  jumpFrames    = 0;
+  maxJumpFrames = 20;
+  gravity       = 2;
+
   colliderSize = new Vector2(100, 530);
 
+
+  // Animation state
   idle:  Texture[];
   walk:  Texture[];
   jump:  Texture[];
@@ -30,7 +38,6 @@ export class Player extends Entity {
 
   frame = 0;
   facing: "left" | "right" = "right";
-  climbSpeed = 20;
 
   /** 
    * If the character is climbing a ladder, we cap abs(velocity.y) at
@@ -57,7 +64,7 @@ export class Player extends Entity {
     this.graphic = new Entity({ name: "PlayerGraphic" });
     this.addChild(this.graphic);
 
-    this.graphic.x = -300;
+    this.graphic.x = -100;
     this.graphic.y = -100;
 
     Player.Instance = this;
@@ -72,7 +79,7 @@ export class Player extends Entity {
     this.x = Player.StartPosition.x;
     this.y = Player.StartPosition.y;
 
-    this.addChild(new GabbysGlowThing(0xfccad1));
+    this.addChild(new GabbysGlowThing(0xffe16b, this));
   }
 
   audio: HTMLAudioElement | null = null;
@@ -121,9 +128,7 @@ export class Player extends Entity {
   }
 
   calculateVelocity(state: IGameState, touchingVine: boolean) {
-    //const touchingBouncyBoi = this.hitInfo.collisions.find(x => x.otherEntity instanceof BouncyShroom && x.otherEntity.isActivated) !== undefined;
     const touchingBouncyBoi = this.hitInfo.interactions.find(x => x.otherEntity instanceof BouncyShroom && x.otherEntity.isActivated) !== undefined;
-    console.log(touchingBouncyBoi);
 
     const prevVelocity = this.velocity;
     this.velocity = this.velocity.withX(0);
@@ -137,8 +142,8 @@ export class Player extends Entity {
       this.hasBouncedOnShroomThisJump = false;
     }
 
+    // Climb ladder
     if (touchingVine) {
-      // Climb ladder
 
       this.hasBouncedOnShroomThisJump = false;
 
@@ -174,9 +179,9 @@ export class Player extends Entity {
       } else {
         this.velocity = this.velocity.clampY(-this.climbSpeed, this.climbSpeed);
       }
-    } else {
+    } else { //Not climbing ladder
+      
       // gravity
-
       this.velocity = this.velocity.addY(this.gravity);
 
       if (state.keys.down.Left) {
@@ -188,23 +193,37 @@ export class Player extends Entity {
       }
     }
 
+    // Begin a jump
     if (state.keys.justDown.Z && (this.hitInfo.down || (touchingVine && this.velocity.y >= -this.climbSpeed))) {
-      this.velocity = this.velocity.withY(-this.jumpHeight);
+      this.velocity = this.velocity.withY(-this.jumpDelta);
       this.animState = this.jump;
-      this.frame = 0;
+      this.frame = 0; //Reset jump animation
+      this.jumpFrames = 1;
 
       if (touchingVine) {
         this.jumpingOnLadder = true;
+        this.velocity = this.velocity.withY(-this.vineJumpDelta); //A little boost so that jumping off a vine feels snappy
+      }
+
+      // Continue a jump
+    } else if (state.keys.down.Z) {
+      if  (this.jumpFrames < this.maxJumpFrames) {
+        this.jumpFrames += 1;
+        this.velocity = this.velocity.addY(-this.jumpDelta/this.jumpFrames);
+      } else {
+        
       }
     }
 
+    // Bouncy shroom
     if (touchingBouncyBoi) {
+      this.frame = 0; //Reset jump animation
       let newVelocity: number;
       
       if (!this.hasBouncedOnShroomThisJump) {
-        let addition = Math.abs(prevVelocity.y) * 0.5;
+        let addition = Math.abs(prevVelocity.y) * 0.6;
 
-        if (addition > 30) { addition = 30; }
+        if (addition > 40) { addition = 40; }
 
         newVelocity = Math.abs(prevVelocity.y) + addition;
       } else {
@@ -245,6 +264,7 @@ export class Player extends Entity {
     this.calculateVelocity(state, touchingVine);
 
     if (this.grounded) {
+      this.jumpFrames = 0; // Reset jump so you can jump again
       if (touchingVine) {
         this.animState = this.climb;
       } else if (this.velocity.x === 0) {

@@ -3302,8 +3302,8 @@
                  "type":"",
                  "visible":true,
                  "width":256,
-                 "x":51968,
-                 "y":-2816
+                 "x":50432,
+                 "y":-2560
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -6090,7 +6090,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {
@@ -6116,7 +6115,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {
@@ -6142,7 +6140,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":3,
                      "name":"",
                      "objects":[
                             {

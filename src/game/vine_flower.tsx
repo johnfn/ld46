@@ -184,8 +184,7 @@ export class VineFlower extends Entity {
     this.vine.sprite.anchor.set(0, 1); // grow upwards
     this.vine.height = 256;
     this.vine.visible = false;
-
-    this.addChild(new GabbysGlowThing(0x3c6ad1));
+    this.addChild(new GabbysGlowThing(0x96bd6f, this));
   }
 
   *animateAlive(): GameCoroutine {
