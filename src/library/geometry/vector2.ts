@@ -246,6 +246,11 @@ export class Vector2 {
 
     return this.scale({ x: 0, y: 0 }, { x: 1 - t, y: 1 - t }).add(other.scale({ x: 0, y: 0}, { x: t, y: t }))
   }
+  
+  lerp2D(other: Vector2, tx: number, ty: number): Vector2 {
+    if (tx > 1 || tx < 0 || ty > 1 || ty < 0) { console.error("Lerp t must be between 0 and 1."); }    
+    return this.scale({ x: 0, y: 0 }, { x: 1 - tx, y: 1 - ty }).add(other.scale({ x: 0, y: 0}, { x: tx, y: ty }))
+  }
 
   coserp(other: Vector2, t: number): Vector2 {
     t = 0.5 * (1 + Math.cos(2 * t * Math.PI));

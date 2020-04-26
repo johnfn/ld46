@@ -6,6 +6,8 @@ import { Entity } from "../library/entity";
 import { IGameState } from "Library";
 import { Mode } from "Library";
 import { DebugFlags } from "./debug";
+import { Point } from "pixi.js";
+import { C } from "./constants";
 
 export type DialogText = (
   | { speaker?: string; text: string; }
@@ -29,6 +31,15 @@ export class DialogBox extends Entity {
   private branches: TextEntity[] = [];
   private graphic: Entity;
 
+  private otherSpeakerPos: Point;
+  private budSpeakerPos: Point;
+
+  private speakerColors: {[key: string]: string}= {
+    "Bud"    : "blue",
+    "???"    : "blue",
+    "Withers": "purple",
+  }
+
   constructor() {
     super({
       name: "DialogBox",
@@ -36,13 +47,16 @@ export class DialogBox extends Entity {
 
     this.visible = false;
     
-    this.x = 100;
-    this.y = 850;
-
     this.graphic = new Entity({ 
       texture: Assets.getResource("dialog_box"),
       name: "Dialog Graphic",
     });
+
+    this.otherSpeakerPos = new Point(C.CanvasWidth + this.graphic.width, 850);
+    this.budSpeakerPos = new Point(100, 850);
+    
+    this.x = this.budSpeakerPos.x;
+    this.y = this.budSpeakerPos.y;
 
     this.graphic.width = 1200 * 2;
     this.graphic.height = 300 * 2;
@@ -79,6 +93,8 @@ export class DialogBox extends Entity {
 
       this.addChild(branchText);
     }
+
+    
   }
 
   *startDialog(dialog: DialogText): GameCoroutine {
@@ -97,10 +113,14 @@ export class DialogBox extends Entity {
 
     state.mode = "Dialog";
 
-
     while (activeDialogText.length > 0) {
       const fullText = activeDialogText[0];
+      const speaker = fullText.speaker;
 
+      this.x = (speaker === "Bud" || speaker === "???") ? this.budSpeakerPos.x : this.otherSpeakerPos.x;
+      this.y = (speaker === "Bud" || speaker === "???") ? this.budSpeakerPos.y : this.otherSpeakerPos.y;
+
+      
       if ('branches' in fullText) {
         this.graphic.height = 1000;
       } else {
@@ -116,13 +136,13 @@ export class DialogBox extends Entity {
 
       while (textToShow.length < fullText.text.length) {
         textToShow += fullText.text[textToShow.length];
-        this.displayDialogContents(fullText.speaker || "", textToShow);
+        this.displayDialogContents(speaker || "", textToShow);
 
         state.sfx.playVoiceSound2(state.tick);
 
         if (state.keys.justDown.X) {
           textToShow = fullText.text;
-          this.displayDialogContents(fullText.speaker || "", textToShow);
+          this.displayDialogContents(speaker || "", textToShow);
 
           state = yield "next";
       
@@ -174,6 +194,7 @@ export class DialogBox extends Entity {
     this.dialogText.setText(textToShow);
 
     if (speaker) {
+      this.setSpeakerColor(speaker);
       this.speakerText.setText(speaker);
     }
 
@@ -189,6 +210,17 @@ export class DialogBox extends Entity {
   clearDialogContents() {
     this.dialogText.setText(" ");
     this.speakerText.setText(" ");
+  }
+
+  setSpeakerColor(speaker: string) {
+    let color;
+    if (speaker in this.speakerColors) {
+      color = this.speakerColors[speaker];
+    } else {
+      const colors = ["red", "cyan", "yellow", "brown", "green", "magenta"]
+      color = colors[Math.floor(Math.random() * colors.length)]
+    }
+    this.speakerText.color = color;
   }
 
   update(state: BaseGameState): void { }

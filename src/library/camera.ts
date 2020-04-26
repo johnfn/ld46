@@ -5,7 +5,9 @@ import { Debug } from "./debug";
 import { IGameState } from "Library";
 
 export class Camera {
-  private static LERP_SPEED = 0.08;
+  private static LERP_SPEED_X = 0.03;
+  private static LERP_SPEED_Y = 0.4;
+
 
   /**
    * Top left coordinate of the camera.
@@ -124,7 +126,7 @@ export class Camera {
 
     const desiredPosition = this.calculateDesiredPosition();
 
-    this._position = this._position.lerp(desiredPosition, Camera.LERP_SPEED);
+    this._position = this._position.lerp2D(desiredPosition, Camera.LERP_SPEED_X, Camera.LERP_SPEED_Y);
 
     this._position = new Vector2(
       Math.floor(this._position.x / 4) * 4, 

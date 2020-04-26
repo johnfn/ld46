@@ -77,7 +77,6 @@ export class TextEntity extends BaseTextEntity<BaseGameState> {
 
       return;
     }
-
     const textSegments = this.buildTextSegments(text);
 
     const html = textSegments.map(segment => {
@@ -93,6 +92,10 @@ export class TextEntity extends BaseTextEntity<BaseGameState> {
     }).join("").replace(/\n/g, "");
 
     this.html = html;
+  }
+
+  set color(color: string) {
+    this.defaultStyle = {color: color, ...this.defaultStyle}
   }
 
   // TODO: This is a hard function to write properly.

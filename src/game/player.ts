@@ -85,7 +85,7 @@ export class Player extends Entity {
   audio: HTMLAudioElement | null = null;
 
   get grounded() {
-    return this.hitInfo.down !== undefined
+    return this.hitInfo.down === true;
   }
 
   animate(state: IGameState) {
@@ -192,7 +192,7 @@ export class Player extends Entity {
         this.velocity = this.velocity.addX(this.speed);
       }
     }
-
+    console.log(this.jumpFrames);
     // Begin a jump
     if (state.keys.justDown.Z && (this.hitInfo.down || (touchingVine && this.velocity.y >= -this.climbSpeed))) {
       this.velocity = this.velocity.withY(-this.jumpDelta);
@@ -211,7 +211,6 @@ export class Player extends Entity {
         this.jumpFrames += 1;
         this.velocity = this.velocity.addY(-this.jumpDelta/this.jumpFrames);
       } else {
-        
       }
     }
 
@@ -264,6 +263,7 @@ export class Player extends Entity {
     this.calculateVelocity(state, touchingVine);
 
     if (this.grounded) {
+      console.log("grounded")
       this.jumpFrames = 0; // Reset jump so you can jump again
       if (touchingVine) {
         this.animState = this.climb;
@@ -282,14 +282,17 @@ export class Player extends Entity {
 
     Game.Instance.camera.centerOn(this.position.add(new Vector2(this.scale.x > 0 ? 1000 : -1000, -400)));
 
-    if (this.velocity.x > 0 && this.scale.x < 0) {
-      this.scale = this.scale.invertX();
-      this.graphic.x = -300;
-    }
+    // When climbing, don't flip sprites
+    if (this.animState !== this.climb) {
+      if (this.velocity.x > 0 && this.scale.x < 0) {
+        this.scale = this.scale.invertX();
+        this.graphic.x = -300;
+      }
 
-    if (this.velocity.x < 0 && this.scale.x > 0) {
-      this.scale = this.scale.invertX();
-      this.graphic.x = -500;
+      if (this.velocity.x < 0 && this.scale.x > 0) {
+        this.scale = this.scale.invertX();
+        this.graphic.x = -500;
+      }
     }
   }
 }
