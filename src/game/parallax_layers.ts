@@ -89,7 +89,7 @@ export class ParallaxLayers extends Entity {
     new Layer(-0.10, [Assets.getResource("parallax bg/03 - mist")]),
     new Layer(-0.12, [Assets.getResource("parallax bg/04 - city back")]),
     new Layer(-0.15, [Assets.getResource("parallax bg/05 - forest back")]),
-    new Layer(-0.25, [Assets.getResource("parallax bg/06 - city"), Assets.getResource("parallax bg/06 - city_01"), Assets.getResource("parallax bg/06 - city_02")]),
+    new Layer(-0.25, [Assets.getResource("parallax bg/06 - city"), Assets.getResource("parallax bg/06 - city_one"), Assets.getResource("parallax bg/06 - city_two")]),
     new Layer(-0.60, [Assets.getResource("parallax bg/07 - forest")]),
     new Layer(-0.30, [Assets.getResource("hub bg/hub_bg1")]),
   ]
