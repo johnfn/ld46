@@ -1494,6 +1494,7 @@ export class Cinematics {
   }
 
   wisteriaCheckCount = 0;
+
   public *wisteria(): GameCoroutine {
     this.wisteriaCheckCount = this.wisteriaCheckCount + 1;
 
@@ -1511,10 +1512,6 @@ export class Cinematics {
       ]);
 
       yield* this.teleportBackToHub("vines");
-
-      yield* DialogOverlay.StartDialog([
-        
-      ]);
 
     } else {
       yield* DialogBox.StartDialog([
@@ -1543,7 +1540,7 @@ export class Cinematics {
       ]);
 
       yield* this.teleportBackToHub("mushrooms");
-      
+
     } else {
       yield* DialogBox.StartDialog([
         { text: "The mushroom has grown plumper. It seems pleased with itself.", },

@@ -7,6 +7,7 @@ import { HoverText } from "./hover_text";
 import { C } from "./constants";
 import { GameCoroutine } from "../library/coroutine_manager";
 import { GabbysGlowThing } from "./gabbys_glow_thing";
+import { Vector2 } from "../library/geometry/vector2";
 
 export class BouncyShroom extends Entity {
   public interactionDistance = C.InteractionDistance;
@@ -19,7 +20,8 @@ export class BouncyShroom extends Entity {
     super({ 
       name      : "BouncyShroom",
       texture   : Assets.getResource("mushroom1")[0],
-      collidable: true,
+      collidable: false,
+      interactable: true,
     });
 
     this.frames = Assets.getResource("mushroom1");
@@ -31,6 +33,14 @@ export class BouncyShroom extends Entity {
   }
 
   public collisionBounds(): Rect {
+    if (!this.isActivated) {
+      return new Rect({
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0
+      })
+    }
     return new Rect({
       x     : 0,
       y     : 0,

@@ -73,14 +73,15 @@ export class BigShroom extends Entity {
 
     const state = yield "next";
 
+    this.interacted = true;
+
+    yield* state.cinematics.bigMush();
+
     state.spiritTotal += 1;
     state.spiritUnused = state.spiritTotal;
     state.haveShroomPerma = true;
-
-    this.interacted = true;
-
+    
     yield { frames: 100 };
 
-    yield* state.cinematics.bigMush();
   }
 }

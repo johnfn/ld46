@@ -1,9 +1,11 @@
 import { Entity } from "../library/entity";
 import { Assets } from "./assets";
 import { IGameState } from "Library";
+import { Mode } from "Library";
 
 
 class SpiritMeter extends Entity {
+  activeModes: Mode[] = ["Normal", "Dialog"];
   icons: Entity[] = [];
   blackBackground: Entity;
 

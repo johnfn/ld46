@@ -143,7 +143,7 @@ export class Vine extends Entity {
       // tiny offsets make vine climbing more forgiving
       return new Rect({
         x     : -this.width*(1/14),
-        y     : -height,
+        y     : -height + 128,
         width : this.width*(7/6),
         height: height,
       });

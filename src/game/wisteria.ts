@@ -66,14 +66,12 @@ export class Wisteria extends Entity {
     }
 
     let state = yield "next";
-
     state.spiritTotal += 1;
     state.spiritUnused = state.spiritTotal;
     state.haveVinePerma = true;
-
     yield { frames: 100 };
 
-
     yield* state.cinematics.wisteria();
+
   }
 }
