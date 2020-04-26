@@ -82,7 +82,7 @@ class Layer extends Entity {
 
 export class ParallaxLayers extends Entity {
 
-  layers2 = [
+  layers = [
     new Layer(-0.03, [Assets.getResource("parallax bg/00 - sky")]),
     new Layer(-0.04, [Assets.getResource("parallax bg/01 - skyline back")]),
     new Layer(-0.08, [Assets.getResource("parallax bg/02 - skyline")]),
@@ -93,8 +93,6 @@ export class ParallaxLayers extends Entity {
     new Layer(-0.60, [Assets.getResource("parallax bg/07 - forest")]),
     new Layer(-0.30, [Assets.getResource("hub bg/hub_bg1")]),
   ]
-
-  sprites: TilingSprite[] = [];
 
   clouds = [
     Assets.getResource("parallax bg/bigcloud01"),
@@ -109,73 +107,57 @@ export class ParallaxLayers extends Entity {
       name: "ParallaxLayers",
     });
 
-    for (const layer of this.layers2) {
+    for (const layer of this.layers) {
       this.addChild(layer);
     }
-
-    // for (const { texture, type } of this.layers) {
-    //   const sprite = new TilingSprite(texture, texture.width, texture.height);
-    //   sprite.scale = new PixiPoint(4, 4);
-    //   sprite.visible = !!type;
-    //   this.sprites.push(sprite);
-    // }
-
-    // for (const layer of this.sprites) {
-    //   this.sprite.addChild(layer);
-    // }
   }
 
   firstUpdate(state: IGameState) {
-    // for (const layer of this.sprites) {
-    //   layer.x = 0;
-    //   layer.y = C.CanvasHeight * this.scaleFactor - layer.height * this.scaleFactor;
-    // }
-    
+  
     this.changeBackground(0);
 
-    //TODO: change sprites array to a map so this isn't hard to maintain
     // 00 - sky
     // 01 - skyline back
-    this.layers2[1].y -= 500;
+    this.layers[1].y -= 500;
     // 02 - skyline
-    this.layers2[2].y -= 20;
+    this.layers[2].y -= 20;
     // 03 - mist
     // 04 - city back
-    this.layers2[4].y -= 200;
-    this.layers2[4].tint = 0xBDBDBD;
+    this.layers[4].y -= 200;
+    this.layers[4].tint = 0xBDBDBD;
     // 05 - forest back
-    this.layers2[5].y += 300;
-    this.layers2[5].tileScale = new PixiPoint(2, 2);
+    this.layers[5].y += 300;
+    this.layers[5].tileScale = new PixiPoint(2, 2);
     // 06 - city
-    this.layers2[6].tileScale = new PixiPoint(1, 1);
-    this.layers2[6].y += 450;
-    this.layers2[6].tint = 0xBDBDBD;
+    this.layers[6].tileScale = new PixiPoint(1, 1);
+    this.layers[6].y += 450;
+    this.layers[6].tint = 0xBDBDBD;
     // 07 - forest
-    this.layers2[7].tileScale = new PixiPoint(2.2, 2.2);
-    this.layers2[7].y += 1400;
-    this.layers2[7].alpha = 0.9;
+    this.layers[7].tileScale = new PixiPoint(2.2, 2.2);
+    this.layers[7].y += 1400;
+    this.layers[7].alpha = 0.9;
   
   }
 
   update(state: IGameState) {
-    this.layers2[0].tilePosition.x += state.tick * -0.5;
-    this.layers2[5].tilePosition.x += state.tick * -0.05;
-    this.layers2[8].tilePosition.x += state.tick * -0.4;
+    this.layers[0].tilePosition.x += state.tick * -0.5;
+    this.layers[5].tilePosition.x += state.tick * -0.05;
+    this.layers[8].tilePosition.x += state.tick * -0.4;
 
     // hub
-    this.layers2[8].tilePosition.y = state.camera.cameraFrame().y * this.layers2[8].speed / 6;
+    this.layers[8].tilePosition.y = state.camera.cameraFrame().y * this.layers[8].speed / 6;
   }
 
   changeBackground(backgroundIndex: number) {
     // city
     if (backgroundIndex === 0) {
-      this.layers2.forEach(layer => layer.visible = true);
-      this.layers2[8].visible = false;
+      this.layers.forEach(layer => layer.visible = true);
+      this.layers[8].visible = false;
     }
-    // // hub
-    // else if (backgroundIndex === 1) {
-    //   this.sprites.forEach(spr => spr.visible = false);
-    //   this.sprites[8].visible = true;
-    // }
+    // hub
+    else if (backgroundIndex === 1) {
+      this.layers.forEach(layer => layer.visible = false);
+      this.layers[8].visible = true;
+    }
   }
 }
